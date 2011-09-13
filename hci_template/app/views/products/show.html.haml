@@ -1,0 +1,27 @@
+.box.product_show{ :id => "product-#{@product.id}"}
+  %h3 
+    = @product.name
+  .image
+  %p.attribute
+    %span.label
+      Rank:
+    %span.price
+      ="#{@product.price}"  
+  %p.attribute
+    %span.label
+      User Rating:
+    %span.price
+      ="#{@product.price}$"
+  %p.attribute
+    %span.label
+      Precio:
+    %span.price
+      ="#{@product.price}$"
+  .clear
+%br
+%h3 Otros productos recomendados...
+- @top_products.each_with_index do |p,index|
+  .grid_3.box{ :class => "#{ (index % 3 == 2) ? "omega" : (index % 3 == 0) ? "alpha" : ""}"}
+    = render :partial => "products/product_item", :locals => { :product => p }
+  - if (index % 3 == 2 || index == @top_products.size - 1)
+    .clear

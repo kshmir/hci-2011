@@ -1,0 +1,7 @@
+#categories.box
+  %h3
+    Categories
+  %ul 
+    - ["books", "music", "electronics", "movies"].each do |item|
+      %li 
+        = link_to item.titleize, "#!/#{item.downcase}"

@@ -4,4 +4,4 @@
 # If you change this key, all old signed cookies will become invalid!
 # Make sure the secret is at least 30 characters and all random,
 # no regular words or you'll be exposed to dictionary attacks.
-HciTemplate::Application.config.secret_token = '530db8f4a5069c467260adef2f39dfa30f32d5c78fe192c710c7ac1a05465ac95d549c6b30ba1bc0980e5441ba8212e87aada4ac8d20026b2ce8eac01db75780'
+HciTemplate::Application.config.secret_token = '0ae3545b6509aa1dde72a77660638f0f78c3854faf2962fe397b9db57c055497a6e776a915b3c3d2de45ee77a59ddd74984ea3a1c540cde19736ce804bde6864'

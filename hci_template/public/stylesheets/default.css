@@ -1,0 +1,283 @@
+/**
+	text-color: 		#592C2B
+	link-color:			#301817
+	border-color: 		#61634F
+	bg-color:			#F7E5C3
+	primary-color:		#fff6e8
+
+*/
+
+/************  GLOBAL DEFINES **************/
+
+body {
+	background-color: #61634F;
+	text-align:center;
+	color: #592C2B!important;
+}
+
+body a {
+	color: #592C2B;
+}
+
+.clear {
+	clear:both;
+}
+
+.clear-left {
+	clear:left;
+}
+
+.clear-right {
+	clear:right;
+}
+
+/************  PAGE STRUCTURE **************/
+#main-container {
+	background-color: #F7E5C3;
+	text-align:left;
+	margin: 0 auto;
+}
+
+#container {
+	padding: 15px 0;
+}
+
+#header {
+	background-color: #fff6e8;
+}
+
+#main-content{
+	margin-bottom:10px;
+}
+
+#content, #guide {
+	margin-top: 10px;
+	background-color: #fff6e8;
+}
+
+#footer {
+	text-align:left;
+	color: #F7E5C3;
+	margin: 15px auto;
+	height: 100px;
+	width:960px;
+}
+
+/************  HEADER **************/
+
+#header .logo {
+
+}
+
+#header .search {
+
+}
+
+#header .search input {	
+	width: 320px;
+}
+
+#header .login {
+	padding-top:10px;
+}
+
+#header .login form input {
+
+}
+
+#header .right {
+
+}
+
+#header .second_line {
+	padding-bottom: 10px;
+}
+
+#header .localization {
+	padding: 5px 0;
+}
+
+#header .localization span {
+	float:left;
+}
+
+#header .localization ul li{
+	float:left;
+	padding: 0 5px;
+}
+
+#header .login-label {
+	text-align:right;
+	padding: 6px 0;
+}
+
+#header .login input {
+	border: 1px solid #C4BCA0;
+	padding: 5px;
+	width: 135px;
+}
+
+#header .search input {
+	border: 1px solid #C4BCA0;
+	padding: 5px 5px;
+	width:96%;
+	margin: 0 auto;
+}
+
+/************  COMMON **************/
+
+h1,h2,h3,h4,h5,h6 {
+	margin:0;
+}
+
+.box, .box_1, .box_2, .box_3, .box_4 {
+	background:white;
+	margin-top:10px;
+}
+
+.box {
+	min-height: 60px;
+}
+
+.box_1 {
+	min-height: 60px;
+}
+
+.box_2 {
+	min-height:120px;
+}
+
+.box_3 {
+	min-height:180px;
+}
+
+.box_4 {
+	min-height:240px;
+}
+
+.box h3, .box_1 h3, .box_2 h3, .box_3 h3, .box_4 h3 {
+	padding: 5px;
+	border-bottom: 1px dashed #ddd;
+}
+
+.box p, .box_1 p, .box_2 p, .box_3 p, .box_4 p {
+	margin: 0;
+	padding: 5px;
+
+}
+
+/************  PRODUCT ITEM **************/
+
+.product_item .image {
+	width: 	78px;
+	height:	78px;
+	border: 1px solid black;
+	margin: 5px 5px 5px 5px;
+	float:right;
+	display:block;
+
+}
+.product_item .attribute .label {
+	font-weight: bold;
+}
+
+
+
+/************  PRODUCT SHOW **************/
+
+.product_show .image {
+	width: 	308px;
+	height:	168px;
+	border: 1px solid black;
+	margin: 5px 5px 5px 5px;
+	float:left;
+	display:block;
+
+}
+.product_show .attribute .label {
+	font-weight: bold;
+}
+
+
+
+
+/*************** FOOTER ***********/
+
+#footer ul {
+	margin-top: 10px;
+}
+
+#footer a {
+	color: white;
+}
+
+#footer a:hover {
+	color: white;
+	font-weight:bold;
+}
+
+#footer a:visited {
+	color: silver;
+	font-weight:bold;
+}
+#footer ul li {
+	padding: 10px 0px;
+	margin-left: 30px;
+}
+
+/******************* FORM ******************/ 
+
+
+.form .form_item {
+	margin: 5px auto;
+	text-align:right;
+	width: 400px;
+	height: 30px;
+}
+
+.form .form_item .label {
+	width: 33%;
+	margin-top: 4px;
+}
+
+.form hr {
+	border-top: 1px dashed #ccc;
+	margin: 10px 0;
+	height: 0px;
+}
+
+.form .form_item .form_text, .form .form_item .input {
+	width: 65%;
+}
+
+.form .form_item .form_text{
+	border: 1px solid #C4BCA0;
+	padding: 5px;
+}
+
+.form .form_item .form_button {
+	margin: 5px;
+}
+
+/******************* CATEGORIES SIDEBAR ******************/ 
+
+#categories p {
+	padding: 0;
+	margin: 0;
+}
+
+#categories a {
+	color: ;
+}
+
+#categories ul li {
+	margin: 0px;
+	padding: 10px;
+}
+
+/******************* Guide               ******************/ 
+
+#guide {
+	padding: 10px 0;
+}
+

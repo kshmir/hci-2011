@@ -1,0 +1,25 @@
+!!!
+%html
+  %head
+    %title Quick-E-Mart
+    = stylesheet_link_tag :all
+    = javascript_include_tag :all
+    = csrf_meta_tag
+  %body
+    #main-container
+      #container
+        #header.container_12
+          = render :partial => "shared/header"          
+        #guide.container_12
+          = render :partial => "shared/guide"
+        #content.container_12
+          #sidebar.grid_3
+            - if not content_for?(:sidebar)
+              = render :partial => "shared/categories"
+            - else
+              = yield :sidebar
+          #main-content.grid_9
+            = yield
+          .clear
+    #footer
+      = render :partial => "shared/footer"
