@@ -1,0 +1,11 @@
+<% category = this.category %>
+<li>
+    <a href="#categories/show&id=<%=category.id%>"><%=category.name%></a>
+    <ul>
+    <% if (category.subcategories != undefined && category.subcategories.length > 0) {%>
+        <% for(var j = 0; j < category.subcategories.length; j++) { %>
+            <%= $.View('/views/sidebar_subcats.ejs', {category:category.subcategories[j]}) %>
+        <% } %>
+    <% } %>
+    </ul>
+</li>

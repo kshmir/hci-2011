@@ -1,6 +1,13 @@
 source 'http://rubygems.org'
 
 gem 'rails', '3.0.9'
+gem 'haml'
+gem 'guard'
+gem "haml-rails"
+gem "jquery-rails", "1.0.12"
+gem "will_paginate"
+gem "faker", :git => "https://github.com/stympy/faker.git"
+gem "populator"
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

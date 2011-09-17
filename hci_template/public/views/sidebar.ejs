@@ -1,0 +1,17 @@
+<div class="box" id="categories">
+    <h3>
+        Categories
+    </h3>
+    <% for(var i = 0; i < this.categories.length; i++) { %>
+        <ul>
+            <li id="category-<%=this.categories[i].id%>">
+                <a href="#categories/show&id=<%=this.categories[i].id%>"><%=this.categories[i].name%></a>
+            </li>
+            <ul id="category-<%=this.categories[i].id%>-subcats">
+            <% for(var j = 0; j < this.categories[i].subcategories.length; j++) { %>
+                <%= $.View('/views/sidebar_subcats.ejs', {category: this.categories[i].subcategories[j]}) %>
+            <% } %>
+            </ul>
+        </ul>
+    <% } %>
+</div>

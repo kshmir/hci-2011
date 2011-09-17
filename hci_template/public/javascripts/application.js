@@ -1,2 +1,7 @@
-// Place your application-specific JavaScript functions and classes here
-// This file is automatically included by javascript_include_tag :defaults
+head.js("/javascripts/qck.user.js",
+        "/javascripts/qck.category.js",
+        "/javascripts/qck.product.js",
+        "/javascripts/qck.cart.js", function() {
+            $("#sidebar").categories({});
+            $("#main-content").products({});
+        });

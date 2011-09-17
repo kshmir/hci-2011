@@ -1,9 +1,11 @@
-!!!
-%html
+!!! Transitional
+%html{ :xmlns => "http://www.w3.org/1999/xhtml"}
   %head
     %title Quick-E-Mart
+    %meta{ :content => "text/html; charset=utf-8", "http-equiv" => "Content-type" }
+    %link{ :href => "hola"}
     = stylesheet_link_tag :all
-    = javascript_include_tag :all
+    = javascript_include_tag 'head.min'
     = csrf_meta_tag
   %body
     #main-container
@@ -14,12 +16,12 @@
           = render :partial => "shared/guide"
         #content.container_12
           #sidebar.grid_3
-            - if not content_for?(:sidebar)
-              = render :partial => "shared/categories"
-            - else
-              = yield :sidebar
+
           #main-content.grid_9
-            = yield
+            %noscript.box
+              %h3 Atención!
+              %p
+                Necesita Javascript para poder ver este sitio!
           .clear
     #footer
       = render :partial => "shared/footer"

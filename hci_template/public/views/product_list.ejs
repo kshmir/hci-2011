@@ -1,0 +1,14 @@
+<div class="product_list">
+    <div class="header">
+        <!-- Filter space -->
+        <!-- Pagination space -->
+    </div>
+    <div class="content">
+        <% for (var i = 0; i < this.products.length; i++) { %>
+            <%= $.View('/views/product_item.ejs', {product: this.products[i], index: i}) %>
+        <% } %>
+    </div>
+    <div class="footer">
+        <!-- Pagination space -->
+    </div>
+</div>

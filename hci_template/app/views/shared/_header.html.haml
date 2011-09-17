@@ -3,13 +3,13 @@
 .login.prefix_4.grid_5
   .login-label.grid_1
     Ingreso:
-  %form.login-form
+  %form.login-form{:action => "/", :method => "post"}
     %input{ :type => :text, :value => "Usuario"}
     %input{ :type => :text, :value => "Contraseña"}    
 .clear
 .second_line
   .search.prefix_3.grid_5
-    %form.search-form
+    %form.search-form{:action => "/", :method => "post"}
       %input{ :type => :text, :value => "Búsqueda rápida"}
   .localization.grid_4
     %span.language-text Seleccione su Idioma:
