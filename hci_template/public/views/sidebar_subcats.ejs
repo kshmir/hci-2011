@@ -1,7 +1,7 @@
 <% category = this.category %>
-<li>
+<li id="category-<%=this.category.id%>">
     <a href="#categories/show&id=<%=category.id%>"><%=category.name%></a>
-    <ul>
+    <ul class="subcat">
     <% if (category.subcategories != undefined && category.subcategories.length > 0) {%>
         <% for(var j = 0; j < category.subcategories.length; j++) { %>
             <%= $.View('/views/sidebar_subcats.ejs', {category:category.subcategories[j]}) %>

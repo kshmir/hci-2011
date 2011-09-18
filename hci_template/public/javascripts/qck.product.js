@@ -3,24 +3,30 @@ $.Controller("ProductsController", {
     init: function() {
         this.index();
     },
-    index : function(){
+    index : function() {
         var self = this;
-        Product.findAll({}, function(data)
-        {
+        Product.findAll({}, function(data) {
             self.list(data);
         });
     },
     list: function(products_list) {
         $(this.element).html($.View("/views/product_list.ejs", {products : products_list}));
     },
-    "history.products.show subscribe" : function(called, data){
+    "history.products.show subscribe" : function(called, data) {
         this.show(data);
     },
     show: function(product) {
         var self = this;
-        Product.findOne({id: product.id}, function(data) {
-            $(self.element).html($.View("/views/product_show.ejs", {product: data}));
+        // Eye candy
+        $(self.element).fadeOut("slow", function() {
+            Product.findOne({id: product.id}, function(data) {
+                $(self.element).html($.View("/views/product_show.ejs", {product: data}));
+
+                $(self.element).fadeIn("slow");
+            });
+            // TODO: Catch error.
         });
+        // TODO: Poner cartelito ajax.
     }
 });
 

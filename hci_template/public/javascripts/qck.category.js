@@ -1,37 +1,59 @@
-$.Controller("CategoriesController",{
+$.Controller("CategoriesController", {
     init: function() {
         var self = this;
+        // Starts by rendering all the categories.
+        // We should cache this to speed this up.
         Category.findAll({}, function(data) {
             self.render_list(data);
         });
-
     },
+    // We should cache this to speed this up.
     render_list: function(data) {
         $(this.element).html($.View("/views/sidebar.ejs", {categories: data}));
     },
-    "history.index subscribe" : function(called, data){
-        $(this.element).find("ul ul").hide("slow");
+    // We should cache this to speed this up.
+    "history.index subscribe" : function(called, data) {
+        // Hides all categories expanded.
+        $(this.element).find("ul ul.subcat").hide("slow");
         $("#main-content").controller().index();
     },
-    "history.categories.show subscribe" : function(called, data){
+
+    // Hashchange subscription to show.
+    "history.categories.show subscribe" : function(called, data) {
         this.show(data);
     },
     show: function(data) {
         var self = this;
         var _id = data.id;
-        Category.findProducts({category:data.id}, function(list){
-           var products = $.map(list, function(el) {
-              return new Product(el.product);
-           });
-           $("#main-content").controller().list(products);
-           $("#category-" + _id.toString() + "-subcats").show("slow");
+        $("#main-content").fadeOut("slow", function() {
+            // Fetches all products as JSON.
+            Category.findProducts({category:data.id}, function(list) {
+                // Instanciates them as a Product object.
+                var products = $.map(list, function(el) {
+                    return new Product(el.product);
+                });
+                // Uses the product controller to render them.
+                $("#main-content").controller().list(products);
+                $("#main-content").fadeIn("slow");
+            });
+            // TODO: Catch error.
         });
+        // TODO: Poner cartelito ajax.
+    },
+    // Renders toggle of category. We should add a button for this.
+    "ul li a click": function(ev) {
+        var _id = parseInt($(ev).parents("li:first").attr("id").split("-")[1]);
+        // Calls a toggle function since we might call it from other events.
+        this.item_toggle(_id);
+    },
+    item_toggle : function(id) {
+        // Hides all categories expanded.
+        $("#category-" + id.toString() + "-subcats").toggle("slow");
     }
 });
 
 $.Model("Category", {
     // Static Methods
-
     init : function() {
         this.hasMany("Product", "products");
     },
@@ -46,6 +68,6 @@ $.Model("Category", {
 }, {
     // Instance methods
     toString: function() {
-        this.name
+        return this.name;
     }
 });

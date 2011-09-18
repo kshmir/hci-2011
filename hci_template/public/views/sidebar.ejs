@@ -7,7 +7,7 @@
             <li id="category-<%=this.categories[i].id%>">
                 <a href="#categories/show&id=<%=this.categories[i].id%>"><%=this.categories[i].name%></a>
             </li>
-            <ul id="category-<%=this.categories[i].id%>-subcats">
+            <ul id="category-<%=this.categories[i].id%>-subcats" class="subcat">
             <% for(var j = 0; j < this.categories[i].subcategories.length; j++) { %>
                 <%= $.View('/views/sidebar_subcats.ejs', {category: this.categories[i].subcategories[j]}) %>
             <% } %>
