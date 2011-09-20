@@ -1,6 +1,4 @@
 namespace :populate do
-  # Ideas: add categories!
-
   task :products => :environment do
     require 'populator'
     require 'faker'

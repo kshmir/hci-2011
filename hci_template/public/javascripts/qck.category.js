@@ -3,9 +3,15 @@ $.Controller("CategoriesController", {
         var self = this;
         // Starts by rendering all the categories.
         // We should cache this to speed this up.
-        Category.findAll({}, function(data) {
-            self.render_list(data);
-        });
+
+        var _callback = function(call) {
+            Category.findAll({}, function(data) {
+                self.render_list(data);
+                call();
+            });
+        };
+
+        Qck.app_controller.change_view(this.element, _callback);
     },
     // We should cache this to speed this up.
     render_list: function(data) {
@@ -17,7 +23,6 @@ $.Controller("CategoriesController", {
         $(this.element).find("ul ul.subcat").hide("slow");
         $("#main-content").controller().index();
     },
-
     // Hashchange subscription to show.
     "history.categories.show subscribe" : function(called, data) {
         this.show(data);
@@ -25,7 +30,8 @@ $.Controller("CategoriesController", {
     show: function(data) {
         var self = this;
         var _id = data.id;
-        $("#main-content").fadeOut("slow", function() {
+
+        var _param = function(callback) {
             // Fetches all products as JSON.
             Category.findProducts({category:data.id}, function(list) {
                 // Instanciates them as a Product object.
@@ -34,11 +40,13 @@ $.Controller("CategoriesController", {
                 });
                 // Uses the product controller to render them.
                 $("#main-content").controller().list(products);
-                $("#main-content").fadeIn("slow");
+                callback();
             });
             // TODO: Catch error.
-        });
-        // TODO: Poner cartelito ajax.
+        };
+
+        $("body").controller().change_view("#main-content", _param);
+
     },
     // Renders toggle of category. We should add a button for this.
     "ul li a click": function(ev) {
@@ -55,7 +63,7 @@ $.Controller("CategoriesController", {
 $.Model("Category", {
     // Static Methods
     init : function() {
-        this.hasMany("Product", "products");
+        this.hasMany("Product", "products"); // Medio de adorno.
     },
 
     // !!!!!! These ones are declared just for the JSON API of the Rails prototype app.
@@ -71,3 +79,20 @@ $.Model("Category", {
         return this.name;
     }
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

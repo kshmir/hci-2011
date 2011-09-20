@@ -1,9 +1,9 @@
 <div class="box" id="categories">
     <h3>
         Categories
-    </h3>
+    </h3>        
+    <ul>
     <% for(var i = 0; i < this.categories.length; i++) { %>
-        <ul>
             <li id="category-<%=this.categories[i].id%>">
                 <a href="#categories/show&id=<%=this.categories[i].id%>"><%=this.categories[i].name%></a>
             </li>
@@ -12,6 +12,6 @@
                 <%= $.View('/views/sidebar_subcats.ejs', {category: this.categories[i].subcategories[j]}) %>
             <% } %>
             </ul>
-        </ul>
     <% } %>
+    </ul>
 </div>

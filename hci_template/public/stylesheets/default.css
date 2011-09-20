@@ -280,6 +280,10 @@ h1,h2,h3,h4,h5,h6 {
     margin-left: 10px;
 }
 
+#categories li a.selected {
+    font-weight:bold;
+}
+
 
 /******************* Guide               ******************/ 
 
@@ -287,3 +291,9 @@ h1,h2,h3,h4,h5,h6 {
 	padding: 10px 0;
 }
 
+/******************* LOADER               ******************/ 
+
+.loading {
+	min-height: 500px;
+	background: transparent url('/images/ajax-loader.gif') no-repeat center center;
+}
