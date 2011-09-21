@@ -32,8 +32,10 @@ $.Controller("ApplicationController", {
                         guide.slideUp("fast", function() {
                             guide.css("position", "fixed");
                             guide.css("top", "0");
-                            guide.css("width", "100%");
+                           // guide.css("width", "100%");
                             guide.css("margin-top", "0");
+                            guide.css("margin-left", "240px");
+                            guide.css("margin-right", "240px");
                             guide.slideDown("fast", function() {
                                 _onScroll = false;
                             });
