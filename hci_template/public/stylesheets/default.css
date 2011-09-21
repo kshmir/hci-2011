@@ -44,6 +44,7 @@ body a {
 
 #header {
 	background-color: #fff6e8;
+	height:94px;
 }
 
 #main-content{
@@ -79,6 +80,7 @@ body a {
 
 #header .login {
 	padding-top:10px;
+	padding-bottom:10px;
 }
 
 #header .login form input {
@@ -90,7 +92,17 @@ body a {
 }
 
 #header .second_line {
-	padding-bottom: 10px;
+	padding: 10px 0;
+}
+
+#header .language-select{
+	width: 147px;
+}
+
+#header .language-text{
+	padding: 1px 5px 0px;
+	width: 141px;
+	margin: 0 auto;
 }
 
 #header .localization {
