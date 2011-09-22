@@ -273,26 +273,26 @@ h1,h2,h3,h4,h5,h6 {
 
 /******************* CATEGORIES SIDEBAR ******************/ 
 
-#categories p {
+#categories-sidebar p {
 	padding: 0;
 	margin: 0;
 }
 
-#categories a {
+#categories-sidebar a {
 
 }
 
-#categories ul li {
+#categories-sidebar ul li {
 	margin: 0;
 	padding: 10px;
 }
 
-#categories ul ul {
+#categories-sidebar ul ul {
     display:none;
     margin-left: 10px;
 }
 
-#categories li a.selected {
+#categories-sidebar li a.selected {
     font-weight:bold;
 }
 
@@ -300,7 +300,13 @@ h1,h2,h3,h4,h5,h6 {
 /******************* Guide               ******************/ 
 
 #guide {
-	padding: 10px 0;
+	padding: 5px 0;
+	z-index: 1000;
+}
+
+#guide-inner {
+	margin: 0 auto;
+	width: 960px;
 }
 
 /******************* LOADER               ******************/ 

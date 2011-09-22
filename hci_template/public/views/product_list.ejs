@@ -4,9 +4,11 @@
         <!-- Pagination space -->
     </div>
     <div class="content">
+        <div class="items">
         <% for (var i = 0; i < this.products.length; i++) { %>
             <%= $.View('/views/product_item.ejs', {product: this.products[i], index: i}) %>
         <% } %>
+        </div>
     </div>
     <div class="footer">
         <!-- Pagination space -->

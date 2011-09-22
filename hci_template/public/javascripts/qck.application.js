@@ -5,7 +5,7 @@ $.Controller("ApplicationController", {
     guide_animation: function() {
         // Scroll Animation of guide... TODO: Put on application controller
         var guide = $("#guide");
-
+        var guideBottom = guide.offset().top + guide.height();
         var didScroll = false;
         $(window).scroll(function() {
             didScroll = true;
@@ -17,8 +17,8 @@ $.Controller("ApplicationController", {
             var currentScroll = $(this).scrollTop();
             if (didScroll && !_onScroll) {
                 _onScroll = true;
-                if (currentScroll != lastScroll || currentScroll == 0) {
-                    if (currentScroll == 0 && guide.css("position") == "fixed") {
+                if (currentScroll != lastScroll || currentScroll < guideBottom) {
+                    if (currentScroll < guideBottom && guide.css("position") == "fixed") {
                         guide.slideUp("fast", function() {
                             guide.css("position", "relative");
                             guide.css("width", "960px");
@@ -32,10 +32,9 @@ $.Controller("ApplicationController", {
                         guide.slideUp("fast", function() {
                             guide.css("position", "fixed");
                             guide.css("top", "0");
-                           // guide.css("width", "100%");
+                            guide.css("width", "100%");
                             guide.css("margin-top", "0");
-                            guide.css("margin-left", "240px");
-                            guide.css("margin-right", "240px");
+														guide.css("z-index", "1000");
                             guide.slideDown("fast", function() {
                                 _onScroll = false;
                             });

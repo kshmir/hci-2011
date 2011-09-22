@@ -2,9 +2,7 @@ $.Controller("BreadcrumbController", {
     init: function() {
 		this.loadArray([
 			{ url: "#", refname : "Home" },
-			{ url: "#categories", refname : "Categorias" },
-			{ url: "#ref", refname : "DVDs1" },
-			{ url: "#ref", refname : "DVDs2" },
+			{ url: "#", refname : "Home" }
 		]);
     },
 	loadArray: function(array) { 
@@ -14,20 +12,15 @@ $.Controller("BreadcrumbController", {
 							.jBreadCrumb()
 							.fadeIn("slow");
 		});
-
+	},
+	loadHashes: function(hash_array) {
+		var array = hash_array.reverse()
+		array.push({ url: "#", refname : "Home" });
+		array.push({ url: "#", refname : "Home" });
+		this.loadArray(array.reverse());
 	}
 });
-// 
-// function makeBreadCrumbs(address){
-// 	var res="<div class='breadCrumbHolder module'>"
-//                 <div id="breadCrumb0" class="breadCrumb module">";
-// 	res = res + "<ul>";
-// 	for (var i = 0; i < address.length; i++) {
-// 		res=res+"<li><a href='"+address[i].url + "'>" + address.refname + "</a></li>";
-// 	} 
-// 	res=res+"</ul></div></div>";
-// 	return res;
-// }
+
 
 /**
  * @author Jason Roy for CompareNetworks Inc.
@@ -256,16 +249,16 @@ $.Controller("BreadcrumbController", {
     jQuery.fn.jBreadCrumb.defaults = 
     {
         maxFinalElementLength: 400,
-        minFinalElementLength: 200,
-        minimumCompressionElements: 4,
-        endElementsToLeaveOpen: 1,
-        beginingElementsToLeaveOpen: 1,
+        minFinalElementLength: 100,
+        minimumCompressionElements: 1,
+        endElementsToLeaveOpen: 100,					// Nifty hack... doesn't shrink elements...
+        beginingElementsToLeaveOpen: 100,			// Nifty hack... doesn't shrink elements...
         timeExpansionAnimation: 800,
         timeCompressionAnimation: 500,
         timeInitialCollapse: 600,
         easing: _easingEquation,
         overlayClass: 'chevronOverlay',
-        previewWidth: 5
+        previewWidth: 10
     };
     
 })(jQuery);
