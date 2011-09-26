@@ -1,5 +1,0 @@
-- @top_products.each_with_index do |p,index|
-  .grid_3.box{ :class => "#{ (index % 3 == 2) ? "omega" : (index % 3 == 0) ? "alpha" : ""}"}
-    = render :partial => "products/product_item", :locals => { :product => p }
-  - if index % 3 == 2
-    .clear

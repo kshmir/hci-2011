@@ -1,7 +1,0 @@
-#categories.box
-  %h3
-    Categories
-  %ul 
-    - Category.where(:parent_id => nil).each do |item|
-      %li 
-        = link_to item.name.titleize, "#!/products/by/category/#{item.name.downcase}"

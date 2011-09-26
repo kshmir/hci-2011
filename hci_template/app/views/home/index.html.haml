@@ -1,9 +1,0 @@
-.grid_9.alpha.omega.box_4
-  %h3
-    Destacados
-  %p 
-    Contenido
-.clear
-- @top_products.each_with_index do |p,index|
-  .grid_3.box{ :class => "#{ (index % 3 == 2) ? "omega" : (index % 3 == 0) ? "alpha" : ""}"}
-    = render :partial => "products/product_item", :locals => { :product => p }
