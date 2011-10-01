@@ -8,7 +8,7 @@ $.Controller("BreadcrumbController", {
 	loadArray: function(array) { 
 		var self = this;
 		$(self.element).fadeOut("slow", function() {
-			$(self.element).html($.View("/views/breadcrumb.ejs", { data: array }))
+			$(self.element).html($.View("views/breadcrumb.ejs", { data: array }))
 							.jBreadCrumb()
 							.fadeIn("slow");
 		});

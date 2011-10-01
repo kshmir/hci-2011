@@ -16,7 +16,7 @@ $.Controller("CategoriesController", {
     },
     // We should cache this to speed this up.
     render_list: function(data) {
-        $(this.element).html($.View("/views/sidebar.ejs", {categories: data}));
+        $(this.element).html($.View("views/sidebar.ejs", {categories: data}));
     },
     // We should cache this to speed this up.
     "history.index subscribe" : function(called, data) {

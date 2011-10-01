@@ -9,7 +9,7 @@
             </li>
             <ul id="category-<%=this.categories[i].id%>-subcats" class="subcat">
             <% for(var j = 0; j < this.categories[i].subcategories.length; j++) { %>
-                <%= $.View('/views/sidebar_subcats.ejs', {category: this.categories[i].subcategories[j]}) %>
+                <%= $.View('views/sidebar_subcats.ejs', {category: this.categories[i].subcategories[j]}) %>
             <% } %>
             </ul>
     <% } %>

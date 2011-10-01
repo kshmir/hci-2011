@@ -14,7 +14,7 @@ $.Controller("ProductsController", {
         Qck.app_controller.change_view(this.element, _callback);
     },
     list: function(products_list) {
-        $(this.element).html($.View("/views/product_list.ejs", {products : products_list}));
+        $(this.element).html($.View("views/product_list.ejs", {products : products_list}));
     },
     "history.products.show subscribe" : function(called, data) {
         this.show(data);
@@ -24,7 +24,7 @@ $.Controller("ProductsController", {
         // Eye candy
         var _callback = function(call) {
             Product.findOne({id: product.id}, function(data) {
-                $(self.element).html($.View("/views/product_show.ejs", {product: data}));
+                $(self.element).html($.View("views/product_show.ejs", {product: data}));
                 call();
             });
 

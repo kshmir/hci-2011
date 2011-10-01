@@ -69,7 +69,7 @@ $.Controller("ApplicationController", {
     ,
     change_view: function(selector, f) {
         $(selector).fadeOut("slow", function() {
-            $(selector).show().html($.View("/views/loading.ejs"));
+            $(selector).show().html($.View("views/loading.ejs"));
             var callback = function() {
                 $(selector).hide().fadeIn("slow");
             };
