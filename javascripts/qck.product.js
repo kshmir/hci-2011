@@ -5,13 +5,13 @@ $.Controller("ProductsController", {
     },
     index : function() {
         var self = this;
-        var _callback = function(call) {
+        var ajax_callback = function(callback) {
             Product.findAll({}, function(data) {
                 self.list(data);
-                call();
+                callback();
             });
         };
-        Qck.app_controller.change_view(this.element, _callback);
+        Qck.app_controller.change_view(this.element, ajax_callback);
     },
     list: function(products_list) {
         $(this.element).html($.View("views/product_list.ejs", {products : products_list}));
@@ -21,18 +21,15 @@ $.Controller("ProductsController", {
     },
     show: function(product) {
         var self = this;
-        // Eye candy
-        var _callback = function(call) {
+
+        var ajax_callback = function(callback) {
             Product.findOne({id: product.id}, function(data) {
                 $(self.element).html($.View("views/product_show.ejs", {product: data}));
-                call();
+                callback();
             });
-
         };
 
-        Qck.app_controller.change_view(this.element, _callback);
-
-        // TODO: Poner cartelito ajax.
+        Qck.app_controller.change_view(this.element, ajax_callback);
     }
 });
 
@@ -92,8 +89,7 @@ $.Model("Product", {
     },
     // Instance methods
     toString: function() {
-        this.name
+        return this.name;
     }
 });
-
 

@@ -1,0 +1,9 @@
+HCI
+future features: * Themes : elegibles en la zona de administracion de los datos del ususario. Implementacion: lo guardaremos en Jstorage en la estuctura de datos del usuario
+					Poder cambiar el view de los productos en el main frame. (thumbnail vs lista)
+					Poder hacer drag and drop directamente desde el producto desde el main frame.
+					Poder elegir la cantidad de unidades del producto seleccionado en el carrito.
+					Poder eliminar productos desde el carrito
+					1 Login!!!
+					2 Register!!!
+					3 LAnguage!!!

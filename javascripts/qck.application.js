@@ -1,5 +1,5 @@
 $.Controller("ApplicationController", {
-    init: function() {
+    init: function(params) {
         this.guide_animation();
     },
     guide_animation: function() {
@@ -20,22 +20,22 @@ $.Controller("ApplicationController", {
                 if (currentScroll != lastScroll || currentScroll < guideBottom) {
                     if (currentScroll < guideBottom && guide.css("position") == "fixed") {
                         guide.slideUp("fast", function() {
-                            guide.css("position", "relative");
-                            guide.css("width", "960px");
-                            guide.css("margin-top", "10px");
-                            guide.slideDown("fast", function() {
+                            guide.css("position", "relative")
+                                .css("width", "960px")
+                                .css("margin-top", "10px")
+                                .slideDown("fast", function() {
                                 _onScroll = false;
                             });
                         });
                     }
                     else if (!isScrolledIntoView(guide)) {
                         guide.slideUp("fast", function() {
-                            guide.css("position", "fixed");
-                            guide.css("top", "0");
-                            guide.css("width", "100%");
-                            guide.css("margin-top", "0");
-														guide.css("z-index", "1000");
-                            guide.slideDown("fast", function() {
+                            guide.css("position", "fixed")
+                                .css("top", "0")
+                                .css("width", "100%")
+                                .css("margin-top", "0")
+                                .css("z-index", "1000")
+                                .slideDown("fast", function() {
                                 _onScroll = false;
                             });
                         });
@@ -67,13 +67,13 @@ $.Controller("ApplicationController", {
         }
     }
     ,
-    change_view: function(selector, f) {
+    change_view: function(selector, ajax) {
         $(selector).fadeOut("slow", function() {
             $(selector).show().html($.View("views/loading.ejs"));
-            var callback = function() {
+            var appear_callback = function() {
                 $(selector).hide().fadeIn("slow");
             };
-            f(callback);
+            ajax(appear_callback);
         });
     }
 });

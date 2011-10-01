@@ -1,18 +1,18 @@
 $.Controller("CategoriesController", {
     init: function() {
         var self = this;
+
         // Starts by rendering all the categories.
         // We should cache this to speed this up.
 
-        var _callback = function(call) {
+       var ajax_callback = function(show_callback) {
             Category.findAll({}, function(data) {
                 console.log(data);
                 self.render_list(data);
-                call();
+                show_callback();
             });
         };
-
-        Qck.app_controller.change_view(this.element, _callback);
+        Qck.app_controller.change_view(this.element, ajax_callback);
     },
     // We should cache this to speed this up.
     render_list: function(data) {
@@ -53,10 +53,9 @@ $.Controller("CategoriesController", {
                 $("#main-content").controller().list(products);
                 callback();
             });
-            // TODO: Catch error.
         };
 
-        $("body").controller().change_view("#main-content", _param);
+        Qck.app_controller.change_view("#main-content", _param);
 
     },
     // Renders toggle of category. We should add a button for this.
@@ -82,16 +81,16 @@ $.Model("Category", {
         console.log("Building category " + _ret.id.toString());
         if (depth == 0) {
             $.get(Qck.services.catalog, { language_id : 1, method : "GetSubcategoryList", category_id: _ret.id },
-                    function(data) {
-                        $("subcategory", data).each(function(index, el) {
-                            self.buildRecursively(el, 1, function(ret) {
-                                _ret.subcategories.push(ret);
-                                if (index == $("subcategory", data).length - 1) {
-                                    callback(_ret);
-                                }
-                            });
+                function(data) {
+                    $("subcategory", data).each(function(index, el) {
+                        self.buildRecursively(el, 1, function(ret) {
+                            _ret.subcategories.push(ret);
+                            if (index == $("subcategory", data).length - 1) {
+                                callback(_ret);
+                            }
                         });
                     });
+                });
         } else {
             callback(_ret);
         }
@@ -103,7 +102,8 @@ $.Model("Category", {
         var self = this;
         if (!self.cached_array) {
             self.cached_array = [];
-            $.get(Qck.services.catalog, { language_id : 1, method : "GetCategoryList" }, function(data) {
+            $.get(Qck.services.catalog, { language_id : 1, method : "GetCategoryList" },
+                function(data) {
                 var hits = $("category", data).length - 1;
                 $("category", data).each(function(index, el) {
                     self.buildRecursively(el, 0, function(ret) {
@@ -194,7 +194,6 @@ $.Model("Category", {
     }
     ,
 
-    // ESTE METODO APESTA, Hay que mejorarlo xD
     buildBreadCrumbsHash: function() {
         var current = this;
         var array = [];
@@ -202,8 +201,7 @@ $.Model("Category", {
             array.push({
                 url:"#categories/show&subcat_id=" + current.id.toString(),
                 refname:current.name
-            });
-        }
+            });                                              }
         else {
             array.push({
                 url:"#categories/show&cat_id=" + current.id.toString(),
