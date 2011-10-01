@@ -78,15 +78,24 @@ body a {
 	width: 320px;
 }
 
-#header .login {
+#header .login, #header .logout{
 	padding-top:10px;
 	padding-bottom:10px;
+}
+
+.logout{
+    height:28px;
+    float: right;
+
 }
 
 #header .login form input {
 
 }
 
+#header .login form input#pass{
+    display: none;
+}
 #header .right {
 
 }
@@ -118,15 +127,27 @@ body a {
 	padding: 0 5px;
 }
 
-#header .login-label {
+#header .login-label,#header .logout welcome {
 	text-align:right;
 	padding: 6px 0;
+
 }
 
-#header .login input {
+#header .login input,#header .logout logout-link {
 	border: 1px solid #C4BCA0;
 	padding: 5px;
 	width: 135px;
+
+}
+
+.logout .welcome, .logout .logout-link {
+    text-align: right;
+    margin-right:0;
+
+}
+
+.logout .logout-link {
+    float:right;
 }
 
 #header .search input {
