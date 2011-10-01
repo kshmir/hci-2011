@@ -51,14 +51,12 @@ $.Model("User", {
             }, error);
         },
 
-//getAccount method
-//getAccount params:
-//username : is a mandatory param
-//authentication_token : is a mandatory param
-//this method validates de user and token, and construct a User.
-        getAccount
-            :
-            function(params, success, error) {
+        //getAccount method
+        //getAccount params:
+        //username : is a mandatory param
+        //authentication_token : is a mandatory param
+        //this method validates de user and token, and construct a User.
+        getAccount : function(params, success, error) {
                 params.method = "getAccount";
                 $.get(Qck.services.security, params, function(data) {
                     var usr = $("user", data);
@@ -79,11 +77,11 @@ $.Model("User", {
     {
 // Instance methods
 
-        //UpdateAccount method
-        //UpdateAccount params:
-        //account: is a mandatory param
-        //this method receives an account and updates an User.
-        updateAccount : function(params, success, error) {
+    //UpdateAccount method
+    //UpdateAccount params:
+    //account: is a mandatory param
+    //this method receives an account and updates an User.
+     updateAccount : function(params, success, error) {
             params.method = "updateAccount";
             params.account = $.View("views/user.ejs", params.account);
 
@@ -100,12 +98,12 @@ $.Model("User", {
 
         }
         ,
-        //changePassword method
-        //changePassword params:
-        //password : is a mandatory param
-        //new_password : is a mandatory param
-        //this method validates de user and password, and modifies.
-        changePassword : function(params, success, error) {
+     //changePassword method
+     //changePassword params:
+     //password : is a mandatory param
+     //new_password : is a mandatory param
+     //this method validates de user and password, and modifies.
+     changePassword : function(params, success, error) {
             params.method = "ChangePassword";
             params.username = this.username;
             $.get(Qck.services.security, params, function(data) {
@@ -122,10 +120,10 @@ $.Model("User", {
         }
         ,
 
-        //signOut method
-        //signOut has no params
-        //this method logout user.
-        signOut : function(params, success, error) {
+     //signOut method
+     //signOut has no params
+     //this method logout user.
+     signOut : function(params, success, error) {
             params.method = "SignOut";
             params.username = this.username;
             params.authentication_token = this.token;
@@ -142,8 +140,8 @@ $.Model("User", {
         }
         ,
 
-        //Constructor
-        setup: function(data) {
+     //Constructor
+     setup: function(data) {
 
             this.token = data.param.authentication_token;
             this.id = $(data.user).find("category_id").text();
