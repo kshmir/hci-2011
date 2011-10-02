@@ -1,14 +1,15 @@
 // Model Definition.
 
-$.Model("Language", {
+$.Model("Country", {
         // Static Methods
 
-        //getLanguageList method
-        //getLanguageList params: this method does not receive any parameter
-        //this method retrieves an Language List
+        //getCountryList method
+        //getCountryList params:
+        //language_id : this is a mandatory param
+        //this method retrieves a Country List
 
-        getLanguageList : function(params, success, error) {
-            params.method = "GetLanguageList";
+        getCountryList : function(params, success, error) {
+            params.method = "GetCountryList";
             $.ajax({
                             url: Qck.common.order,
                             data: params,
@@ -16,11 +17,11 @@ $.Model("Language", {
 
                                 if ($("response", data).attr("status") == "ok") {
 
-                                    var language_list = [];
-                                    $('language', data).each(function(index, item) {
-                                            language_list.push(new Language(item));
+                                    var country_list = [];
+                                    $('country', data).each(function(index, item) {
+                                            country_list.push(new Country(item));
                                     });
-                                    success(language_list);
+                                    success(country_list);
                                 }
                                 else {
                                     error($("error", data).attr("code"));
@@ -41,7 +42,7 @@ $.Model("Language", {
      //Constructor
      setup: function(data) {
 
-            this.language_id = $(data).find("language").attr("id");
+            this.country_id = $(data).find("country").attr("id");
             this.code = $(data).find("code").text();
             this.name = $(data).find("name").text();
 
