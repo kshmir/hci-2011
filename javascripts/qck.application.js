@@ -44,10 +44,10 @@ $.Controller("ApplicationController", {
                 if (currentScroll != lastScroll || currentScroll < guideBottom) {
                     if (!isScrolledIntoView(guide)) {
                         guide.css("position", "fixed")
-                            .css("top", "0")
-                            .css("width", "100%")
-                            .css("z-index", "1000")
-                            .css("background-color", "transparent")
+                                .css("top", "0")
+                                .css("width", "100%")
+                                .css("z-index", "1000")
+                                .css("background-color", "transparent")
                         _onScroll = false;
                     }
                     else {
@@ -73,64 +73,116 @@ $.Controller("ApplicationController", {
             var elemBottom = elemTop + $(elem).height();
 
             return ((elemBottom >= docViewTop) && (elemTop <= docViewBottom) // 40: magic number
-                && (elemBottom <= docViewBottom) && (elemTop >= docViewTop) );
+                    && (elemBottom <= docViewBottom) && (elemTop >= docViewTop) );
         }
     }
     ,
     "history.users.sign_up subscribe" : function(called, data) {
-        $('#main-content').fadeOut("slow",function(){
-                 $('#main-content')
+        $('#main-content').fadeOut("slow", function() {
+            $('#main-content')
                     .html($.View("views/register.ejs"))
                     .fadeIn("slow");
         });
-        Qck.bread_controller.loadHashes([{ url: "#users/sign_up", refname : "Sign Up" }]);
+        Qck.bread_controller.loadHashes([
+            { url: "#users/sign_up", refname : "Sign Up" }
+        ]);
     },
     ".login-form #login_submit click": function(called, data) {
         this.login_submit($('.topbar'));
     },
-    "#sign_in click" : function(called, data) {
+    ".register-button-label.form_button click" : function () {
+        if ($('#reg-password').val() != $('#reg-password2').val) {
+            $('#reg-password').removeData('qtip')
+                    .qtip({
+                              content: {
+                                  text: 'Passwords are different',
+                                  title: {
+                                      text: 'Input error:',
+                                      button: true
+                                  }
+                              },
+                              position: {
+                                  my: 'top left', // Use the corner...
+                                  at: 'center right' // ...and opposite corner
+                              },
+                              show: {
+                                  event: false, // Don't specify a show event...
+                                  ready: true, // ... but show the tooltip when ready
+                                  effect: function(offset) {
+                                      $(this).slideDown(200); // "this" refers to the tooltip
+                                      $('#username').click();
+                                  }
+                              },
+                              hide: true, // Don't specify a hide event either!
+                              style: {
+                                  classes: 'ui-tooltip-shadow ui-tooltip-' + 'red'
+                              }
+                          });
+        } else {
 
-        $("#sign_in").removeData('qtip')
-            .qtip({
-                content: {
-                    text: $.View("views/login.ejs"),
-                    title: {
-                        text: 'Sign in:',
-                        button: true
-                    }
-                },
-                position: {
-                    my: 'top right', // Use the corner...
-                    at: 'bottom center' // ...and opposite corner
-                },
-                show: {
-                    event: false, // Don't specify a show event...
-                    ready: true, // ... but show the tooltip when ready
-                    effect: function(offset) {
-                        $(this).slideDown(200); // "this" refers to the tooltip
-                        $('#username').click();
-                    }
-                },
-                hide: true, // Don't specify a hide event either!
-                style: {
-                    classes: 'ui-tooltip-shadow ui-tooltip-' + 'dark'
-                }
+            User.createAccount({account: {
+                username: $('#reg-username').val(),
+                name:$('#reg-name').val(),
+                password:$('#reg-password').val(),
+                email:$('#reg-email').val(),
+                birth_date: $('#reg-birth-date').val()
+            }
+
+            }, function() {
+                alert('usuario creado');
+            }, function() {
+                alert('usuario no creado');
             });
+        }
         return false;
     },
-    "#sign_out click" : function(){
-           $('.topbar').fadeOut("slow", function(){
-                $('.topbar')
-                    .html($.View("views/sign_in.ejs"))
-                    .fadeIn("slow");
-           });
-            return false;
-    },
+    "#sign_in click": function(called, data) {
+
+        $("#sign_in").removeData('qtip')
+                .qtip({
+                          content: {
+                              text: $.View("views/login.ejs"),
+                              title: {
+                                  text: 'Sign in:',
+                                  button: true
+                              }
+                          },
+                          position: {
+                              my: 'top right', // Use the corner...
+                              at: 'bottom center' // ...and opposite corner
+                          },
+                          show: {
+                              event: false, // Don't specify a show event...
+                              ready: true, // ... but show the tooltip when ready
+                              effect: function(offset) {
+                                  $(this).slideDown(200); // "this" refers to the tooltip
+                                  $('#username').click();
+                              }
+                          },
+                          hide: true, // Don't specify a hide event either!
+                          style: {
+                              classes: 'ui-tooltip-shadow ui-tooltip-' + 'dark'
+                          }
+                      });
+        return false;
+    }
+    ,
+    "#sign_out click"
+            :
+            function() {
+                $('.topbar').fadeOut("slow", function() {
+                    $('.topbar')
+                            .html($.View("views/sign_in.ejs"))
+                            .fadeIn("slow");
+                });
+                return false;
+            }
+    ,
     change_view: function(selector, ajax) {
         $(selector).fadeOut("slow", function() {
             $(selector).show().html($.View("views/loading.ejs"));
             var appear_callback = function(post_callback) {
-                $(selector).hide().fadeIn("slow", function(){
+                $(selector).hide().fadeIn("slow", function() {
                     if (post_callback) {
                         post_callback();
                     }
@@ -141,41 +193,42 @@ $.Controller("ApplicationController", {
     }
     ,
     login_submit: function(el) {
-        $("#sign_in").qtip('hide');
+
         $(el).fadeOut("slow", function(callback) {
             var user = $(".login-form").find('#username').val();
             var password = $(".login-form").find('#pass').val();
             var success = function(user) {
-
+                $("#sign_in").qtip('hide');
                 $(el)
-                    .html($.View("views/logged.ejs", {username: user.name }))
-                    .fadeIn("slow");
+                        .html($.View("views/logged.ejs", {username: user.name }))
+                        .fadeIn("slow");
             };
             var error = function(error_number) {
+                $("#sign_in").qtip('show');
                 if (error_number) {
-                    $(el).parent(".login:first").fadeIn("slow", function() {
+                    $(el).fadeIn("slow", function() {
                         $(".login-form").removeData('qtip')
-                            .qtip({
-                                content: {
-                                    text: 'Por favor intente nuevamente.',
-                                    title: {
-                                        text: 'Usuario o Contraseña invalidos',
-                                        button: true
-                                    }
-                                },
-                                position: {
-                                    my: 'top right', // Use the corner...
-                                    at: 'bottom center' // ...and opposite corner
-                                },
-                                show: {
-                                    event: false, // Don't specify a show event...
-                                    ready: true // ... but show the tooltip when ready
-                                },
-                                hide: false, // Don't specify a hide event either!
-                                style: {
-                                    classes: 'ui-tooltip-shadow ui-tooltip-' + 'red'
-                                }
-                            });
+                                .qtip({
+                                          content: {
+                                              text: 'Por favor intente nuevamente.',
+                                              title: {
+                                                  text: 'Usuario o Contraseña invalidos',
+                                                  button: true
+                                              }
+                                          },
+                                          position: {
+                                              my: 'top right', // Use the corner...
+                                              at: 'center left' // ...and opposite corner
+                                          },
+                                          show: {
+                                              event: false, // Don't specify a show event...
+                                              ready: true // ... but show the tooltip when ready
+                                          },
+                                          hide: false, // Don't specify a hide event either!
+                                          style: {
+                                              classes: 'ui-tooltip-shadow ui-tooltip-' + 'red'
+                                          }
+                                      });
 
                     });
                 }
@@ -187,25 +240,24 @@ $.Controller("ApplicationController", {
             }, success, error);
         });
 
-    },
+    }
+    ,
     search_submit: function(el) {
         alert(
-            "HANDLER DEL ENTER :D"
-        );
-
+                "HANDLER DEL ENTER :D"
+                );
     },
     ".login-form input focus": function(el) {
         el = $(el);
         if (!(el.attr("id") == "pass")) {
             if (el.attr("id") == "password") {
                 el.hide()
-                    .parents(".login-form:first").find('#pass').show().focus();
+                        .parents(".login-form:first").find('#pass').show().focus();
             }
             if (!el.data("old") || el.data("old") == el.val()) {
                 el.data("old", el.val())
-                    .val("");
+                        .val("");
             }
-            el.removeClass("soft");
         }
     },
     ".login-form input blur": function(el) {
@@ -224,7 +276,7 @@ $.Controller("ApplicationController", {
         el = $(el);
         if (!el.data("old") || el.data("old") == el.val()) {
             el.data("old", el.val())
-                .val("");
+                    .val("");
         }
         el.removeClass("soft");
     },
@@ -232,7 +284,8 @@ $.Controller("ApplicationController", {
         el = $(el);
         if ($(el).val() == "") {
             $(el).val($(el).data("old"));
-            el.add§Class("soft");
+            el.addClass("soft");
         }
     }
 });
+

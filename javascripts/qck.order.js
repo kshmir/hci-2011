@@ -242,7 +242,7 @@ $.Model("Order", {
      //Constructor
      setup: function(data) {
 
-            this.order_id = $(data).find("order_id").text();
+            this.order_id = $(data).find("order").attr("id");
             this.address_id = $(data).find("address_id").text();
             this.status = $(data).find("status").text();
             this.created_date = new Data($(data).find("created_date").text());
