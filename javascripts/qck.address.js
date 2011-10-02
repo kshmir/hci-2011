@@ -132,7 +132,7 @@ $.Model("Address", {
      //Constructor
      setup: function(data) {
 
-            this.address_id = $(data).find("address_id").text();
+            this.address_id = $(data).find("address").attr("id");
             this.full_name = $(data).find("full_name").text();
             this.address_line_1 = $(data).find("address_line_1").text();
             this.address_line_2 = $(data).find("address_line_2").text();
