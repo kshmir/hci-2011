@@ -95,21 +95,50 @@ $.Controller("ApplicationController", {
     }
     ,
     login_submit: function(el) {
-	    $(el).parent(".login:first").fadeOut("slow", function(callback) {
-			var user          = $(el).find('#username').val();
-			var password      = $(el).find('#pass').val();
-	        var success = function(user) {
+
+        $(el).parent(".login:first").fadeOut("slow", function(callback) {
+            var user = $(el).find('#username').val();
+            var password = $(el).find('#pass').val();
+            var success = function(user) {
+
                 $(el).parent(".login:first")
                     .html($.View("views/logged.ejs", {username: user.name }))
                     .attr("class", "logout prefix_4 grid_5").fadeIn("slow");
-			};
+            };
+            var error = function(error_number) {
+                alert("asdf");
+                if (error_number) {
+                    alert("hola");
+                    $(".login").removeData('qtip')
+                        .qtip({
+                            content: {
+                                text: 'At its ' + 'bottom left',
+                                title: {
+                                    text: 'My ' + 'top left',
+                                    button: true
+                                }
+                            },
+                            position: {
+                                my: 'bottom left', // Use the corner...
+                                at: 'top left' // ...and opposite corner
+                            },
+                            show: {
+                                event: false, // Don't specify a show event...
+                                ready: true // ... but show the tooltip when ready
+                            },
+                            hide: false, // Don't specify a hide event either!
+                            style: {
+                                classes: 'ui-tooltip-shadow ui-tooltip-' + 'light'
+                            }
+                        });
+                }
+            };
 
-
-			User.signIn({
-				username: user,
-				password: password
-			}, success);
-		});
+            User.signIn({
+                username: user,
+                password: password
+            }, success, error);
+        });
 
     },
     search_submit: function(el) {
