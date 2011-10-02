@@ -128,7 +128,7 @@ body a {;
 }
 
 #ui-tooltip-0{
-    width: 311px;
+    width: 315px;
 }
 .login-form{
     height: 33px;
@@ -200,6 +200,10 @@ body a {;
 #guide input.search {
 	border: 1px solid silver;
 	padding: 7px 5px 6px;
+}
+
+.form_item .input{
+    border: 1px solid silver!important;
 }
 
 /************  COMMON **************/
