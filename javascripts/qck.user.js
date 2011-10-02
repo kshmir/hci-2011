@@ -75,7 +75,7 @@ $.Model("User", {
             $.ajax({
                 url: Qck.services.security,
                 data: params,
-                success: function (){
+                success: function (data){
                 var usr = $("account", data);
                 if (usr.length && $("response", data).attr("status") == "ok") {
                     var params2 = {
@@ -88,8 +88,7 @@ $.Model("User", {
                     error($("error", data).attr("code"));
                 }
             },
-            error : error,
-            type : XML
+            error : error
                 }
             );
         }
