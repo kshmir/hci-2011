@@ -95,13 +95,8 @@ $.Controller("ApplicationController", {
     }
     ,
     login_submit: function(el) {
+
         var success = function(callback) {
-            $(el).parent(".login:first")
-                .html($.View("views/logged.ejs", {username: ($(el).find('#username').val())}))
-                .attr("class", "logout prefix_4 grid_5").fadeIn("slow");
-            callback();
-        };
-        var todobien = function(callback) {
             $(el).parent(".login:first").fadeOut("slow", function(callback) {
                 $(el).parent(".login:first")
                     .html($.View("views/logged.ejs", {username: ($(el).find('#username').val())}))
@@ -109,7 +104,7 @@ $.Controller("ApplicationController", {
             });
              callback();
         };
-        todobien({});
+        success({});
         //Qck.app_controller.change_view($(el),success);
     },
     search_submit: function(el) {
