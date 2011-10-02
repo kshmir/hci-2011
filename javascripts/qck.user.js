@@ -1,6 +1,6 @@
 // Model Definition.
 
-$.Model("Order", {
+$.Model("User", {
         // Static Methods
 
         //signIn method
@@ -28,12 +28,111 @@ $.Model("Order", {
             }, error);
 
 
-        }
+        },
+
+        //CreateAccount method
+        //createAccount params:
+        //account: is a mandatory param
+        //this method receives an account and creates an User
+        createAccount : function(params, success, error) {
+            params.method = "CreateAccount";
+            params.account = $.View("views/user.ejs", params.account);
+
+            $.post(Qck.services.security, params, function(data) {
+
+                if ($("response",data).attr("status") == "ok") {
+                    success("OK"); // en caso de crear correctamente el usuario devuelve el string OK
+                }
+                else {
+                    error($("error",data).attr("code"));
+                }
+            }, error);
+        },
+
+        //getAccount method
+        //getAccount params:
+        //username : is a mandatory param
+        //authentication_token : is a mandatory param
+        //this method validates de user and token, and construct a User.
+        getAccount : function(params, success, error) {
+                params.method = "GetAccount";
+                $.get(Qck.services.security, params, function(data) {
+                    var usr = $("account", data);
+                    if (usr.length && $("response", data).attr("status") == "ok") {
+                        var params2 = {
+                            param : params,
+                            user : usr
+                        };
+                        success(new User(params2));
+                    }
+                    else {
+                    	error($("error",data).attr("code"));
+                    }
+                }, error);
+            }
 
     },
     {
 // Instance methods
 
+    //UpdateAccount method
+    //UpdateAccount params:
+    //account: is a mandatory param
+    //this method receives an account and updates an User.
+     updateAccount : function(params, success, error) {
+            params.method = "UpdateAccount";
+            params.account = $.View("views/user.ejs", params.account);
+
+            $.post(Qck.services.security, params, function(data) {
+                if ($("response",data).attr("status") == "ok") {
+                    success("OK"); // en caso de actualizar correctamente el usuario devuelve el string OK
+                }
+                else {
+                    error($("error",data).attr("code"));
+                }
+            }, error);
+
+        }
+        ,
+     //changePassword method
+     //changePassword params:
+     //password : is a mandatory param
+     //new_password : is a mandatory param
+     //this method validates de user and password, and modifies.
+     changePassword : function(params, success, error) {
+            params.method = "ChangePassword";
+            params.username = this.username;
+            $.get(Qck.services.security, params, function(data) {
+                if ($("response", data).attr("status") == "ok") {
+                    success("OK");  //en caso de modificar los datos correctamente se devuelve el string OK
+                }
+                else {
+                    error($("error",data).attr("code"));
+                }
+            }, error);
+
+
+        }
+        ,
+
+     //signOut method
+     //signOut has no params
+     //this method logout user.
+     signOut : function(params, success, error) {
+            params.method = "SignOut";
+            params.username = this.username;
+            params.authentication_token = this.token;
+            $.get(Qck.services.security, params, function(data) {
+                if ($("response",data).attr("status") == "ok") {
+                    success("OK"); //en caso de Desloguearse correctamente devuelve el string "OK"
+                }
+                else {
+                    error($("error",data).attr("code"));
+                }
+            }, error);
+
+        }
+        ,
 
      //Constructor
      setup: function(data) {
@@ -49,5 +148,6 @@ $.Model("Order", {
             this.last_password_change = $(data.user).find("last_password_change").text();
         }
     }
-);
+)
+    ;
 
