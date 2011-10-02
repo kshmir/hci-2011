@@ -18,7 +18,7 @@ $.Model("Order", {
                             success: function(data) {
 
                                 if ($("response", data).attr("status") == "ok") {
-                                    success("OK"); // en caso de crear correctamente el usuario devuelve el string OK
+                                    success("OK");
                                 }
                                 else {
                                     error($("error", data).attr("code"));
@@ -53,7 +53,7 @@ $.Model("Order", {
                             success: function(data) {
 
                                 if ($("response", data).attr("status") == "ok") {
-                                    success("OK"); // en caso de crear correctamente el usuario devuelve el string OK
+                                    success("OK");
                                 }
                                 else {
                                     error($("error", data).attr("code"));
@@ -81,7 +81,7 @@ $.Model("Order", {
                             success: function(data) {
 
                                 if ($("response", data).attr("status") == "ok") {
-                                    success("OK"); // en caso de crear correctamente el usuario devuelve el string OK
+                                    success("OK");
                                 }
                                 else {
                                     error($("error", data).attr("code"));
@@ -109,7 +109,36 @@ $.Model("Order", {
                             success: function(data) {
 
                                 if ($("response", data).attr("status") == "ok") {
-                                    success("OK"); // en caso de crear correctamente el usuario devuelve el string OK
+                                    success("OK");
+                                }
+                                else {
+                                    error($("error", data).attr("code"));
+                                }
+                            },
+                             error: error
+
+                        } );
+
+            },
+
+            //addOrderItem method
+            //addOrderItem params:
+            //username : is a mandatory param
+            //authentication_token : is a mandatory param
+            //order_item :is a mandatory param
+            //this method receives a product and creates an order item and adds it to the list
+            addOrderItem : function(params, success, error) {
+            params.method = "AddOrderItem";
+            params.order_id = this.order_id;
+
+            $.ajax({
+                            url: Qck.services.order,
+                            data: params,
+                            type : "POST",
+                            success: function(data) {
+
+                                if ($("response", data).attr("status") == "ok") {
+                                    success("OK");
                                 }
                                 else {
                                     error($("error", data).attr("code"));
