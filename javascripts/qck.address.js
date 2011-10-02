@@ -35,7 +35,7 @@ $.Model("Address", {
         //getAddressList params:
         //username : is a mandatory param
         //authentication_token : is a mandatory param
-        //this method retrieves all the address in an XML structure
+        //this method retrieves all the address in a  List of address structure
 
         getAddressList : function(params, success, error) {
                 params.method = "GetAddressList";
@@ -46,9 +46,39 @@ $.Model("Address", {
                     success: function(data) {
                            if ($("response", data).attr("status") == "ok") {
                                     //it retrieves de Address List
-                                     var addresslist = [];
+                                     var address_list = [];
+                                     $('address', data).each(function(index, item) {
+                                            address_list.push(new Item(item));
+                                     });
+                                     success(address_list);
+                                }
+                                else {
+                                    error();
+                                }
+                            },
+                             error: error
 
-                                     success(addresslist);
+                        } );
+
+            },
+
+        //getAddress method
+        //getAddress params:
+        //username : is a mandatory param
+        //authentication_token : is a mandatory param
+        //this method retrieves an specific address structure
+
+        getAddress : function(params, success, error) {
+                params.method = "GetAddress";
+                $.ajax({
+                    url: Qck.services.order,
+                    data: params,
+
+                    success: function(data) {
+                           if ($("response", data).attr("status") == "ok") {
+                                    //it retrieves an Address
+                                     var address = new Item(item);
+                                     success(address);
                                 }
                                 else {
                                     error();
