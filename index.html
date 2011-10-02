@@ -20,46 +20,28 @@
                     Kwik-E-Mart
                 </h1>
 
-                <div class='login prefix_4 grid_5'>
-                    <div class='login-label grid_1'>
-                        Ingreso:
-                    </div>
-                      <form action='/' class='login-form' method='post'>
-                        <input type='text' id='username' value='Usuario' />
-                        <input type='text' id='password' value='Contraseña' />
-                        <input type='password' id='pass' />
-                      </form>
-                    </div>
-                    <div class='clear'></div>
-                    <div class='second_line'>
-                      <div class='search prefix_3 grid_5'>
-                        <form action='/' class='search-form' method='post'>
-                          <input type='text' id='search-text' value='Búsqueda rápida' />
-                        </form>
-                    </div>
-                    <div class='localization grid_4'>
-                        <span class='language-text'>Seleccione su Idioma:</span>
-
-                        <form action="/" method="post">
-                            <select class="language-select">
-                                <option>English</option>
-                                <option>Español</option>
-                            </select>
-                        </form>
-                    </div>
-                    <div class='clear'></div>
+                <div class='topbar prefix_4 grid_5'>
+                    <a href="/sign_in">Sign in</a> or <a href="/sign_up">Sign up</a> | <a href="/languages">English ∆</a>
                 </div>
                 <div class='clear'></div>
+
             </div>
         </div>
         <div id='guide'>
             <div class='container_12'>
             <div id="guide-inner">
-                <div class='grid_6' id='navigation'>
+                <div class='grid_6 alpha' id='navigation'>
 
                 </div>
-                <div class='grid_6' id='cart'>
-                    Carrito #Div dropdown re copadin con JS ;)
+                <div class='grid_4' id='search'>
+                    <form action="/" method="get" class="form">
+                        <input type="text" class="search" value="Busqueda rápida" label="Busqueda rápida"/>
+                    </form>
+                </div>
+                <div class='grid_2 omega' id='cart'>
+                    <img src="images/cart_icon.gif" alt="Cart"/>
+                    <div class="text">10.000,00$ | 999</div>
+
                 </div>
             </div>
             </div>
