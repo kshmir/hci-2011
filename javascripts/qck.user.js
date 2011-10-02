@@ -56,8 +56,8 @@ $.Model("User", {
                         error($("error", data).attr("code"));
                     }
                 },
-                 error: error,
-                 dataType: "XML"
+                 error: error
+
             } );
 
         },
@@ -103,15 +103,22 @@ $.Model("User", {
         updateAccount : function(params, success, error) {
             params.method = "UpdateAccount";
             params.account = $.View("views/user.ejs", params.account);
+            $.ajax({
+                            url: Qck.services.security,
+                            data: params,
+                            type : "POST",
+                            success: function(data) {
 
-            $.post(Qck.services.security, params, function(data) {
-                if ($("response", data).attr("status") == "ok") {
-                    success("OK"); // en caso de actualizar correctamente el usuario devuelve el string OK
-                }
-                else {
-                    error($("error", data).attr("code"));
-                }
-            }, error);
+                                if ($("response", data).attr("status") == "ok") {
+                                    success("OK"); // en caso de crear correctamente el usuario devuelve el string OK
+                                }
+                                else {
+                                    error($("error", data).attr("code"));
+                                }
+                            },
+                             error: error
+
+                        } );
 
         }
         ,
@@ -123,15 +130,22 @@ $.Model("User", {
         changePassword : function(params, success, error) {
             params.method = "ChangePassword";
             params.username = this.username;
-            $.get(Qck.services.security, params, function(data) {
-                if ($("response", data).attr("status") == "ok") {
-                    success("OK");  //en caso de modificar los datos correctamente se devuelve el string OK
-                }
-                else {
-                    error($("error", data).attr("code"));
-                }
-            }, error);
+            $.ajax({
+                            url: Qck.services.security,
+                            data: params,
 
+                            success: function(data) {
+
+                                if ($("response", data).attr("status") == "ok") {
+                                    success("OK"); // en caso de crear correctamente el usuario devuelve el string OK
+                                }
+                                else {
+                                    error($("error", data).attr("code"));
+                                }
+                            },
+                             error: error
+
+                        } );
 
         }
         ,
@@ -143,14 +157,22 @@ $.Model("User", {
             params.method = "SignOut";
             params.username = this.username;
             params.authentication_token = this.token;
-            $.get(Qck.services.security, params, function(data) {
-                if ($("response", data).attr("status") == "ok") {
-                    success("OK"); //en caso de Desloguearse correctamente devuelve el string "OK"
-                }
-                else {
-                    error($("error", data).attr("code"));
-                }
-            }, error);
+            $.ajax({
+                            url: Qck.services.security,
+                            data: params,
+
+                            success: function(data) {
+
+                                if ($("response", data).attr("status") == "ok") {
+                                    success("OK"); // en caso de crear correctamente el usuario devuelve el string OK
+                                }
+                                else {
+                                    error($("error", data).attr("code"));
+                                }
+                            },
+                             error: error
+
+                        } );
 
         }
         ,

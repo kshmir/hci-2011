@@ -127,7 +127,20 @@ body a {;
     margin: 30px 0;
 }
 
-#header .login form input#pass{
+#ui-tooltip-0{
+    width: 311px;
+}
+.login-form{
+    height: 33px;
+
+}
+
+.login-form input{
+    height: 28px;
+    border: 1px solid silver;
+}
+
+.login-form input#pass{
     display: none;
 }
 #header .right {
