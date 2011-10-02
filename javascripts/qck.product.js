@@ -1,7 +1,7 @@
 // Controller Definition.
 $.Controller("ProductsController", {
     init: function() {
-        this.index();
+
     },
     index : function() {
         var self = this;

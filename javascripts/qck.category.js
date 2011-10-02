@@ -7,7 +7,6 @@ $.Controller("CategoriesController", {
 
        var ajax_callback = function(show_callback) {
             Category.findAll({}, function(data) {
-                console.log(data);
                 self.render_list(data);
                 show_callback();
             });
@@ -78,7 +77,6 @@ $.Model("Category", {
         var self = this;
         var _ret = new Category(node);
 
-        console.log("Building category " + _ret.id.toString());
         if (depth == 0) {
             $.get(Qck.services.catalog, { language_id : 1, method : "GetSubcategoryList", category_id: _ret.id },
                 function(data) {
@@ -109,7 +107,6 @@ $.Model("Category", {
                     self.buildRecursively(el, 0, function(ret) {
                         self.cached_array.push(ret);
                         if (hits == 0) {
-                            console.log("Got all the categories...");
                             success(self.cached_array);
                         } else {
                             hits--;

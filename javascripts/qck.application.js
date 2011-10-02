@@ -21,8 +21,6 @@ $.Controller("ApplicationController", {
                     if (currentScroll < guideBottom && guide.css("position") == "fixed") {
                         guide.slideUp("fast", function() {
                             guide.css("position", "relative")
-                                .css("width", "960px")
-                                .css("margin-top", "10px")
                                 .slideDown("fast", function() {
                                 _onScroll = false;
                             });

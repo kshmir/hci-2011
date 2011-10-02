@@ -1,3 +1,10 @@
+/* @override http://localhost/~cristian/hci/stylesheets/default.css?1316490955 */
+
+/* @override 
+	http://localhost/stylesheets/default.css?1316490955
+	http://localhost/~cristian/hci/stylesheets/default.css?1316490955
+*/
+
 /**
 	text-color: 		#592C2B
 	link-color:			#301817
@@ -9,14 +16,21 @@
 
 /************  GLOBAL DEFINES **************/
 
+*, input {
+	font-family: "Lucida Grande", Lucida, Verdana, sans-serif!important;
+}
+
+
+
 body {
-	background-color: #61634F;
+	background-color: #1b1b1b;
 	text-align:center;
-	color: #592C2B!important;
+	color: black!important;
 }
 
 body a {
-	color: #592C2B;
+	color: #000a47;
+	text-decoration: underline;
 }
 
 .clear {
@@ -33,27 +47,32 @@ body a {
 
 /************  PAGE STRUCTURE **************/
 #main-container {
-	background-color: #F7E5C3;
+	background-color:white;
 	text-align:left;
 	margin: 0 auto;
 }
 
-#container {
-	padding: 15px 0;
+#pre-footer {
+	height: 100px;
+	margin: 0 auto -100px;
+	background: transparent url(../images/footer_gradient.png) repeat-x 0 top;
 }
 
+#container {
+	padding: 0;
+}
 #header {
-	background-color: #fff6e8;
-	height:94px;
+ 	background: #00558e url(../images/top_gradient.png) repeat-x 0 bottom;
+ 	color: white;
 }
 
 #main-content{
 	margin-bottom:10px;
 }
 
-#content, #guide {
+#content, {
 	margin-top: 10px;
-	background-color: #fff6e8;
+	background-color:white;
 }
 
 #footer {
@@ -67,16 +86,13 @@ body a {
 /************  HEADER **************/
 
 #header .logo {
-
+	padding: 15px 0 0;
 }
 
 #header .search {
 
 }
 
-#header .search input {	
-	width: 320px;
-}
 
 #header .login {
 	padding-top:10px;
@@ -92,7 +108,7 @@ body a {
 }
 
 #header .second_line {
-	padding: 10px 0;
+	padding: 20px 0 10px;
 }
 
 #header .language-select{
@@ -100,7 +116,7 @@ body a {
 }
 
 #header .language-text{
-	padding: 1px 5px 0px;
+	padding: 1px 5px 0;
 	width: 141px;
 	margin: 0 auto;
 }
@@ -130,7 +146,7 @@ body a {
 }
 
 #header .search input {
-	border: 1px solid #C4BCA0;
+	border: none;
 	padding: 5px 5px;
 	width:96%;
 	margin: 0 auto;
@@ -170,6 +186,7 @@ h1,h2,h3,h4,h5,h6 {
 .box h3, .box_1 h3, .box_2 h3, .box_3 h3, .box_4 h3 {
 	padding: 5px;
 	border-bottom: 1px dashed #ddd;
+	color: black;
 }
 
 .box p, .box_1 p, .box_2 p, .box_3 p, .box_4 p {
@@ -223,6 +240,11 @@ h1,h2,h3,h4,h5,h6 {
 	color: white;
 }
 
+#footer h3{
+	color: white;
+	text-shadow: 0 1px 0 black;
+}
+
 #footer a:hover {
 	color: white;
 	font-weight:bold;
@@ -252,6 +274,10 @@ h1,h2,h3,h4,h5,h6 {
 	margin-top: 4px;
 }
 
+.form form {
+    padding: 5px 0;
+}
+
 .form hr {
 	border-top: 1px dashed #ccc;
 	margin: 10px 0;
@@ -260,6 +286,11 @@ h1,h2,h3,h4,h5,h6 {
 
 .form .form_item .form_text, .form .form_item .input {
 	width: 65%;
+}
+
+.form .form_item .input {
+    border: 1px solid #C4BCA0;
+	padding: 5px 5px;
 }
 
 .form .form_item .form_text{
@@ -300,14 +331,24 @@ h1,h2,h3,h4,h5,h6 {
 /******************* Guide               ******************/ 
 
 #guide {
-	padding: 5px 0;
 	z-index: 1000;
+	
 }
 
-#guide-inner {
-	margin: 0 auto;
-	width: 960px;
+#guide-bottom {
+	height: 10px;
+	background: transparent url(../images/guide_gradient.png) repeat-x scroll 0 0;	
 }
+#guide .container_12 {
+	padding: 5px 0;
+	background: white;
+}
+
+#guide-inner  {
+	margin: 0 auto;
+	background-color: #063d66;
+}
+
 
 /******************* LOADER               ******************/ 
 
