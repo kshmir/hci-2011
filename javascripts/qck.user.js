@@ -181,7 +181,7 @@ $.Model("User", {
         setup: function(data) {
 
             this.token = data.param.authentication_token;
-            this.id = $(data.user).find("category_id").text();
+            this.id = $(data.user).find("account").attr("id");
             this.username = $(data.user).find("username").text();
             this.name = $(data.user).find("name").text();
             this.email = $(data.user).find("email").text();
