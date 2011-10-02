@@ -93,6 +93,7 @@ $.Controller("ApplicationController", {
     }
     ,
     login_submit: function(el) {
+
         var success = function() {
             $(el).parent(".login:first").fadeOut("slow", function(callback) {
                 $(el).parent(".login:first")
