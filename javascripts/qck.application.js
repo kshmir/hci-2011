@@ -4,9 +4,9 @@ $.Controller("ApplicationController", {
         var self = this;
         $(this.element).find(".login-form input").live('keypress', function(e) {
             if (e.which == 13) {
-                alert('sigo aca vieja');
                 $(this).blur();
-                self.login_submit($(this).parent(".login-form:first"));
+
+                self.login_submit($('.topbar'));
                 e.preventDefault();
             }
 
@@ -79,14 +79,15 @@ $.Controller("ApplicationController", {
     }
     ,
     "history.users.sign_up subscribe" : function(called, data) {
-        // Hides all categories expanded.
-        $(this.element).find("ul ul.subcat").hide("slow");
-        $("#main-content").controller().index();
-        Qck.bread_controller.loadHashes([]);
+        $('#main-content').fadeOut("slow",function(){
+                 $('#main-content')
+                    .html($.View("views/register.ejs"))
+                    .fadeIn("slow");
+        });
+        Qck.bread_controller.loadHashes([{ url: "#users/sign_up", refname : "Sign Up" }]);
     },
     ".login-form #login_submit click": function(called, data) {
-        $('#sigin_in').click;
-        return false;
+        this.login_submit($('.topbar'));
     },
     "#sign_in click" : function(called, data) {
 
@@ -108,14 +109,23 @@ $.Controller("ApplicationController", {
                     ready: true, // ... but show the tooltip when ready
                     effect: function(offset) {
                         $(this).slideDown(200); // "this" refers to the tooltip
+                        $('#username').click();
                     }
                 },
-                hide: false, // Don't specify a hide event either!
+                hide: true, // Don't specify a hide event either!
                 style: {
                     classes: 'ui-tooltip-shadow ui-tooltip-' + 'dark'
                 }
             });
         return false;
+    },
+    "#sign_out click" : function(){
+           $('.topbar').fadeOut("slow", function(){
+                $('.topbar')
+                    .html($.View("views/sign_in.ejs"))
+                    .fadeIn("slow");
+           });
+            return false;
     },
     change_view: function(selector, ajax) {
         $(selector).fadeOut("slow", function() {
@@ -128,14 +138,15 @@ $.Controller("ApplicationController", {
     }
     ,
     login_submit: function(el) {
-        $(el).parent(".login:first").fadeOut("slow", function(callback) {
-            var user = $(el).find('#username').val();
-            var password = $(el).find('#pass').val();
+        $("#sign_in").qtip('hide');
+        $(el).fadeOut("slow", function(callback) {
+            var user = $(".login-form").find('#username').val();
+            var password = $(".login-form").find('#pass').val();
             var success = function(user) {
 
-                $(el).parent(".login:first")
+                $(el)
                     .html($.View("views/logged.ejs", {username: user.name }))
-                    .attr("class", "logout prefix_4 grid_5").fadeIn("slow");
+                    .fadeIn("slow");
             };
             var error = function(error_number) {
                 if (error_number) {
