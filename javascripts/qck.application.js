@@ -36,6 +36,7 @@ $.Controller("ApplicationController", {
                 _onScroll = true;
                 if (currentScroll != lastScroll || currentScroll < guideBottom) {
                     if (currentScroll < guideBottom && guide.css("position") == "fixed") {
+                        guide.css("background-color", "white");
                         guide.slideUp("fast", function() {
                             guide.css("position", "relative")
                                 .slideDown("fast", function() {
@@ -50,6 +51,7 @@ $.Controller("ApplicationController", {
                                 .css("width", "100%")
                                 .css("margin-top", "0")
                                 .css("z-index", "1000")
+                                .css("background-color", "transparent")
                                 .slideDown("fast", function() {
                                     _onScroll = false;
                                 });
@@ -94,14 +96,23 @@ $.Controller("ApplicationController", {
     ,
     login_submit: function(el) {
 
-        var success = function() {
-            $(el).parent(".login:first").fadeOut("slow", function(callback) {
+	    $(el).parent(".login:first").fadeOut("slow", function(callback) {
+			var user          = $(el).find('#username').val();
+			var password      = $(el).find('#pass').val();
+	        var success = function(user) {
+
                 $(el).parent(".login:first")
-                    .html($.View("views/logged.ejs", {username: ($(el).find('#username').val())}))
+                    .html($.View("views/logged.ejs", {username: user.name }))
                     .attr("class", "logout prefix_4 grid_5").fadeIn("slow");
-            });
-        };
-         success();
+			};
+
+
+			User.signIn({
+				username: user,
+				password: password
+			}, success);
+		});
+
     },
     search_submit: function(el) {
         alert(

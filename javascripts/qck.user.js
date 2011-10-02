@@ -13,8 +13,7 @@ $.Model("User", {
             params.method = "SignIn";
             self = this;
             $.get(Qck.services.security, params, function(data) {
-                var usr = $("user", data);
-                if (usr.length && $(data).attr("status") == "ok") {
+                if ($("response",data).attr("status") == "ok") {
 
                     var data2 = {
                         authentication_token : $("token", data).text(),
@@ -24,7 +23,7 @@ $.Model("User", {
                     self.getAccount(data2, success, error);
                 }
                 else {
-                    error($(data).attr("status"));
+                    error($("error",data).attr("code"));
                 }
             }, error);
 
@@ -41,12 +40,11 @@ $.Model("User", {
 
             $.post(Qck.services.security, params, function(data) {
 
-                var usr = $("user", data);
-                if (usr.length && $(data).attr("status") == "ok") {
+                if ($("response",data).attr("status") == "ok") {
                     success("OK"); // en caso de crear correctamente el usuario devuelve el string OK
                 }
                 else {
-                    error($(data).attr("status"));
+                    error($("error",data).attr("code"));
                 }
             }, error);
         },
@@ -57,10 +55,10 @@ $.Model("User", {
         //authentication_token : is a mandatory param
         //this method validates de user and token, and construct a User.
         getAccount : function(params, success, error) {
-                params.method = "getAccount";
+                params.method = "GetAccount";
                 $.get(Qck.services.security, params, function(data) {
-                    var usr = $("user", data);
-                    if (usr.length && $(data).attr("status") == "ok") {
+                    var usr = $("account", data);
+                    if (usr.length && $("response", data).attr("status") == "ok") {
                         var params2 = {
                             param : params,
                             user : usr
@@ -68,7 +66,7 @@ $.Model("User", {
                         success(new User(params2));
                     }
                     else {
-                        error($(data).attr("status"));
+                    	error($("error",data).attr("code"));
                     }
                 }, error);
             }
@@ -82,17 +80,15 @@ $.Model("User", {
     //account: is a mandatory param
     //this method receives an account and updates an User.
      updateAccount : function(params, success, error) {
-            params.method = "updateAccount";
+            params.method = "UpdateAccount";
             params.account = $.View("views/user.ejs", params.account);
 
             $.post(Qck.services.security, params, function(data) {
-
-                var usr = $("user", data);
-                if (usr.length && $(data).attr("status") == "ok") {
+                if ($("response",data).attr("status") == "ok") {
                     success("OK"); // en caso de actualizar correctamente el usuario devuelve el string OK
                 }
                 else {
-                    error($(data).attr("status"));
+                    error($("error",data).attr("code"));
                 }
             }, error);
 
@@ -107,12 +103,11 @@ $.Model("User", {
             params.method = "ChangePassword";
             params.username = this.username;
             $.get(Qck.services.security, params, function(data) {
-                var usr = $("user", data);
-                if (usr.length && $(data).attr("status") == "ok") {
+                if ($("response", data).attr("status") == "ok") {
                     success("OK");  //en caso de modificar los datos correctamente se devuelve el string OK
                 }
                 else {
-                    error($(data).attr("status"));
+                    error($("error",data).attr("code"));
                 }
             }, error);
 
@@ -128,12 +123,11 @@ $.Model("User", {
             params.username = this.username;
             params.authentication_token = this.token;
             $.get(Qck.services.security, params, function(data) {
-                var usr = $("user", data);
-                if (usr.length && $(data).attr("status") == "ok") {
+                if ($("response",data).attr("status") == "ok") {
                     success("OK"); //en caso de Desloguearse correctamente devuelve el string "OK"
                 }
                 else {
-                    error($(data).attr("status"));
+                    error($("error",data).attr("code"));
                 }
             }, error);
 
