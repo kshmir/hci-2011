@@ -49,8 +49,8 @@ $.Controller("CategoriesController", {
             // Fetches all products as JSON.
             Category.findProducts({cat_id:data.cat_id, subcat_id: data.subcat_id}, function(products) {
                 // Uses the product controller to render them.
-                $("#main-content").controller().list(products);
-                callback();
+                $("#main-content").controller().list(products, (self.current_category) ? 'Category: ' + self.current_category.name : undefined);
+                callback($("#main-content").controller().fix_heights());
             });
         };
 

@@ -1,15 +1,28 @@
-<div class="grid_3 box <%= (this.index % 3 == 0) ? 'alpha' : (this.index % 3 == 2) ? 'omega' : '' %>">
+<% if (this.index % 3 == 0) { %>
+    <div class="box-table">
+<% } %>
+<div class="grid_3 box-cell box <%= (this.index % 3 == 0) ? 'alpha' : (this.index % 3 == 2) ? 'omega' : '' %>">
   <div class="product_item" id="product-<%=this.product.id%>">
     <h3>
       <a href="#products/show&id=<%=this.product.id%>"><%=this.product.name%></a>
     </h3>
-    <div class="image"></div>
+
+    <img src="<%=this.product.image_url%>" alt=""/>
+
     <p class="attribute">
       <span class="label">
         Rank:
       </span>
-      <span class="price">
-        <%=this.product.price%>
+      <span class="sales_rank">
+        <%=this.product.sales_rank%>
+      </span>
+    </p>
+      <p class="attribute">
+      <span class="label">
+        Price:
+      </span>
+      <span class="sales_rank">
+        <%=this.product.price%>$
       </span>
     </p>
     <div class="clear"></div>
@@ -17,5 +30,6 @@
 </div>
 <% if (this.index % 3 == 2) { %>
        <div class="clear"></div>
+    </div>
 <% } %>
 

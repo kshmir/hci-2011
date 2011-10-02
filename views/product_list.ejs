@@ -1,6 +1,16 @@
 <div class="product_list">
     <div class="header">
-        <!-- Filter space -->
+        <% if (this.title) { %>
+        <div class="title">
+            <h2>
+              <%= this.title %>
+            </h2>
+        </div>
+        <% } %>
+        <div class="filter">
+            <a href="#">Activate Filters</a>
+        </div>
+        <div class="clear"></div>
         <!-- Pagination space -->
     </div>
     <div class="content">

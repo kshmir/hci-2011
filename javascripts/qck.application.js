@@ -29,7 +29,6 @@ $.Controller("ApplicationController", {
             didScroll = true;
 
             if (currentScroll < guideBottom && guide.css("position") == "fixed") {
-                console.log(currentScroll);
                 guide.css("position", "relative");
             }
 
@@ -80,8 +79,12 @@ $.Controller("ApplicationController", {
     change_view: function(selector, ajax) {
         $(selector).fadeOut("slow", function() {
             $(selector).show().html($.View("views/loading.ejs"));
-            var appear_callback = function() {
-                $(selector).hide().fadeIn("slow");
+            var appear_callback = function(post_callback) {
+                $(selector).hide().fadeIn("slow", function(){
+                    if (post_callback) {
+                        post_callback();
+                    }
+                });
             };
             ajax(appear_callback);
         });

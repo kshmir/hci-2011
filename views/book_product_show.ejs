@@ -1,0 +1,71 @@
+<div class="box product_show" id="product-<%=this.product.id%>">
+    <h2>
+        <%= this.product.name %>
+    </h2>
+    <img src="<%=this.product.image_url%>" alt=""/>
+    <p class="attribute">
+        <span class="sales-rank-label label">
+            Sales rank:
+        </span>
+        <span class="sales_rank">
+            <%= this.product.sales_rank %>
+        </span>
+    </p>
+    <p class="attribute">
+        <span class="price-label label">
+            Price:
+        </span>
+        <span class="price">
+            <%= this.product.price %>
+        </span>
+    </p>
+    <p class="attribute">
+        <span class="authors-label label">
+            Authors:
+        </span>
+        <span class="authors">
+            <%= this.product.authors %>
+        </span>
+    </p>
+    <p class="attribute">
+        <span class="publisher-label label">
+            Publisher:
+        </span>
+        <span class="publisher">
+            <%= this.product.authors %>
+        </span>
+    </p>
+    <p class="attribute">
+        <span class="publisher_date-label label">
+            Publisher Date:
+        </span>
+        <span class="publisher_date">
+            <%= this.product.publisher_date %>
+        </span>
+    </p>
+    <p class="attribute">
+        <span class="isbn10-label label">
+            ISBN 10:
+        </span>
+        <span class="isbn10">
+            <%= this.product.ISBN_10 %>
+        </span>
+    </p>
+    <p class="attribute">
+        <span class="isbn13-label label">
+            ISBN 13:
+        </span>
+        <span class="isbn13">
+            <%= this.product.ISBN_13 %>
+        </span>
+    </p>
+    <p class="attribute">
+        <span class="language-label label">
+            Language:
+        </span>
+        <span class="language">
+            <%= this.product.language %>
+        </span>
+    </p>
+    <div class="clear"></div>
+</div>

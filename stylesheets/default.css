@@ -23,7 +23,7 @@
 
 
 body {
-	background-color: #00558e;
+	background-color: #212121;
 	text-align:center;
 	color: black;
 }
@@ -234,10 +234,25 @@ h1,h2,h3,h4,h5,h6 {
 
 /************  PRODUCT ITEM **************/
 
-.product_item .image {
-	width: 	78px;
-	height:	78px;
-	border: 1px solid black;
+.product_list .title {
+    margin-top:15px;
+    float:left;
+}
+
+
+
+.product_list .filter {
+    margin-top:15px;
+    float:right;
+}
+
+.product_item {
+    border: 1px solid #eee;
+}
+
+.product_item img {
+	width: 	80px;
+	height:	auto;
 	margin: 5px 5px 5px 5px;
 	float:right;
 	display:block;
@@ -251,10 +266,18 @@ h1,h2,h3,h4,h5,h6 {
 
 /************  PRODUCT SHOW **************/
 
-.product_show .image {
-	width: 	308px;
-	height:	168px;
-	border: 1px solid black;
+.product_show {
+    border: 1px solid #eee;
+    padding: 5px
+}
+
+.product_show h2 {
+    border-bottom: 1px dashed #eee;
+}
+
+.product_show img {
+	width: 	310px;
+	height:	auto;
 	margin: 5px 5px 5px 5px;
 	float:left;
 	display:block;
