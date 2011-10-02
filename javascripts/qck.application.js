@@ -22,10 +22,17 @@ $.Controller("ApplicationController", {
     guide_animation: function() {
         // Scroll Animation of guide... TODO: Put on application controller
         var guide = $("#guide");
-        var guideBottom = guide.offset().top + guide.height();
+        var guideBottom = guide.offset().top;
         var didScroll = false;
         $(window).scroll(function() {
+            var currentScroll = $(this).scrollTop();
             didScroll = true;
+
+            if (currentScroll < guideBottom && guide.css("position") == "fixed") {
+                console.log(currentScroll);
+                guide.css("position", "relative");
+            }
+
         });
         var lastScroll = 0;
 
@@ -35,27 +42,13 @@ $.Controller("ApplicationController", {
             if (didScroll && !_onScroll) {
                 _onScroll = true;
                 if (currentScroll != lastScroll || currentScroll < guideBottom) {
-                    if (currentScroll < guideBottom && guide.css("position") == "fixed") {
-                        guide.css("background-color", "white");
-                        guide.slideUp("fast", function() {
-                            guide.css("position", "relative")
-                                .slideDown("fast", function() {
-                                    _onScroll = false;
-                                });
-                        });
-                    }
-                    else if (!isScrolledIntoView(guide)) {
-                        guide.slideUp("fast", function() {
-                            guide.css("position", "fixed")
+                    if (!isScrolledIntoView(guide)) {
+                        guide.css("position", "fixed")
                                 .css("top", "0")
                                 .css("width", "100%")
-                                .css("margin-top", "0")
                                 .css("z-index", "1000")
                                 .css("background-color", "transparent")
-                                .slideDown("fast", function() {
-                                    _onScroll = false;
-                                });
-                        });
+                        _onScroll = false;
                     }
                     else {
                         _onScroll = false;
@@ -79,8 +72,8 @@ $.Controller("ApplicationController", {
             var elemTop = $(elem).offset().top;
             var elemBottom = elemTop + $(elem).height();
 
-            return ((elemBottom >= docViewTop) && (elemTop <= docViewBottom)
-                && (elemBottom <= docViewBottom) && (elemTop >= docViewTop) );
+            return ((elemBottom >= docViewTop) && (elemTop <= docViewBottom) // 40: magic number
+                    && (elemBottom <= docViewBottom) && (elemTop >= docViewTop) );
         }
     }
     ,
@@ -95,27 +88,27 @@ $.Controller("ApplicationController", {
     }
     ,
     login_submit: function(el) {
-	    $(el).parent(".login:first").fadeOut("slow", function(callback) {
-			var user          = $(el).find('#username').val();
-			var password      = $(el).find('#pass').val();
-	        var success = function(user) {
+        $(el).parent(".login:first").fadeOut("slow", function(callback) {
+            var user = $(el).find('#username').val();
+            var password = $(el).find('#pass').val();
+            var success = function(user) {
                 $(el).parent(".login:first")
-                    .html($.View("views/logged.ejs", {username: user.name }))
-                    .attr("class", "logout prefix_4 grid_5").fadeIn("slow");
-			};
+                        .html($.View("views/logged.ejs", {username: user.name }))
+                        .attr("class", "logout prefix_4 grid_5").fadeIn("slow");
+            };
 
 
-			User.signIn({
-				username: user,
-				password: password
-			}, success);
-		});
+            User.signIn({
+                username: user,
+                password: password
+            }, success);
+        });
 
     },
     search_submit: function(el) {
         alert(
-            "HANDLER DEL ENTER :D"
-        );
+                "HANDLER DEL ENTER :D"
+                );
 
     },
     ".login-form input focus": function(el) {
@@ -123,11 +116,11 @@ $.Controller("ApplicationController", {
         if (!(el.attr("id") == "pass")) {
             if (el.attr("id") == "password") {
                 el.hide()
-                    .parent(".login-form:first").find('#pass').show().focus();
+                        .parent(".login-form:first").find('#pass').show().focus();
             }
             if (!el.data("old") || el.data("old") == el.val()) {
                 el.data("old", el.val())
-                    .val("");
+                        .val("");
             }
         }
     },
@@ -142,22 +135,16 @@ $.Controller("ApplicationController", {
             el.val(el.data("old"));
         }
     },
-    ".search-form input focus": function(el) {
+    ".search focus": function(el) {
         el = $(el);
-
         if (!el.data("old") || el.data("old") == el.val()) {
             el.data("old", el.val())
-                .val("");
+                    .val("");
         }
     },
-    ".search-form input blur": function(el) {
+    ".search blur": function(el) {
         el = $(el);
         if ($(el).val() == "") {
-            if ($(el).attr("id") == "pass") {
-                $(el).hide();
-                el = $(el).parent(".login-form:first").find('#password').show();
-
-            }
             $(el).val($(el).data("old"));
         }
     }

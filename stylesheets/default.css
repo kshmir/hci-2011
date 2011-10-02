@@ -23,7 +23,7 @@
 
 
 body {
-	background-color: #1b1b1b;
+	background-color: #00558e;
 	text-align:center;
 	color: black;
 }
@@ -76,7 +76,7 @@ body a {;
 	padding: 0;
 }
 #header {
- 	background: #00558e url(../images/top_gradient.png) repeat-x 0 bottom;
+ 	background: #0099f7 url(../images/top_gradient.png) repeat-x 0 bottom;
  	color: white;
 }
 #header a, #header a:visited, #header:a:hover {
@@ -103,7 +103,7 @@ body a {;
 /************  HEADER **************/
 
 #header .logo {
-	padding: 15px 0 0;
+	padding: 20px 0;
 }
 
 #header .search {
@@ -122,8 +122,9 @@ body a {;
 
 }
 
-#header .login form input {
-
+#header .topbar {
+    text-align:right;
+    margin: 30px 0;
 }
 
 #header .login form input#pass{
@@ -183,11 +184,9 @@ body a {;
     float:right;
 }
 
-#header .search input {
-	border: none;
-	padding: 5px 5px;
-	width:96%;
-	margin: 0 auto;
+#guide input.search {
+	border: 1px solid silver;
+	padding: 7px 5px 6px;
 }
 
 /************  COMMON **************/
@@ -297,6 +296,25 @@ h1,h2,h3,h4,h5,h6 {
 	margin-left: 30px;
 }
 
+/*************** CART ***********/
+
+#cart {
+    border-left: 1px silver solid;
+    height: 31px;
+    padding: 0 0 0 10px;
+}
+
+#cart .text {
+    float:right;
+    margin: 7px 0 0 0;
+    text-align:right;
+}
+#cart img {
+    padding:7px 0 0 5px;
+    float:right;
+}
+
+
 /******************* FORM ******************/ 
 
 
@@ -326,13 +344,13 @@ h1,h2,h3,h4,h5,h6 {
 	width: 65%;
 }
 
-.form .form_item .input {
-    border: 1px solid #C4BCA0;
+.form .form_item .input, form .input {
+    border: none;
 	padding: 5px 5px;
 }
 
 .form .form_item .form_text{
-	border: 1px solid #C4BCA0;
+	border: none;
 	padding: 5px;
 }
 
@@ -367,6 +385,15 @@ h1,h2,h3,h4,h5,h6 {
 
 
 /******************* Guide               ******************/ 
+
+#search{
+    padding:0 5px;
+    width:290px;
+}
+
+#search .search {
+    width:293px;
+}
 
 #guide {
 	z-index: 1000;

@@ -2,7 +2,7 @@ $.Controller("BreadcrumbController", {
     init: function() {
 		this.loadArray([
 			{ url: "#", refname : "Home" },
-			{ url: "#", refname : "Home" }
+                { url: "#", refname : "Home" }
 		]);
     },
 	loadArray: function(array) { 
@@ -15,7 +15,6 @@ $.Controller("BreadcrumbController", {
 	},
 	loadHashes: function(hash_array) {
 		var array = hash_array.reverse()
-		array.push({ url: "#", refname : "Home" });
 		array.push({ url: "#", refname : "Home" });
 		this.loadArray(array.reverse());
 	}
@@ -161,7 +160,7 @@ $.Controller("BreadcrumbController", {
                 var options = 
                 {
                     id: i,
-                    width: jQuery(listElement).width(),
+                    width: jQuery(listElement).width() | 100,
                     listElement: jQuery(listElement).find('span'),
                     isAnimating: false,
                     element: jQuery(listElement).find('span')
@@ -248,9 +247,9 @@ $.Controller("BreadcrumbController", {
     
     jQuery.fn.jBreadCrumb.defaults = 
     {
-        maxFinalElementLength: 400,
-        minFinalElementLength: 100,
-        minimumCompressionElements: 1,
+        maxFinalElementLength: 540,
+        minFinalElementLength: 400,
+        minimumCompressionElements: 4,
         endElementsToLeaveOpen: 100,					// Nifty hack... doesn't shrink elements...
         beginingElementsToLeaveOpen: 100,			// Nifty hack... doesn't shrink elements...
         timeExpansionAnimation: 800,
