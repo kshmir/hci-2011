@@ -1,5 +1,6 @@
 var Qck = (Qck == undefined) ? {} : Qck;
-
+var current_user = null;
+var sign_in_unique = false;
 if (window.location.toString().match(/eiffel/)) {
 	Qck.api_path = "/hci/service/{servicio}.groovy";
 }
