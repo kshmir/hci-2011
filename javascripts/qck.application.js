@@ -195,19 +195,20 @@ $.Controller("ApplicationController", {
     }
     ,
     login_submit: function(el) {
-        $("#sign_in").qtip('hide');
+
         $(el).fadeOut("slow", function(callback) {
             var user = $(".login-form").find('#username').val();
             var password = $(".login-form").find('#pass').val();
             var success = function(user) {
-
+                $("#sign_in").qtip('hide');
                 $(el)
                     .html($.View("views/logged.ejs", {username: user.name }))
                     .fadeIn("slow");
             };
             var error = function(error_number) {
+                $("#sign_in").qtip('show');
                 if (error_number) {
-                    $(el).parent(".login:first").fadeIn("slow", function() {
+                    $(el).fadeIn("slow", function() {
                         $(".login-form").removeData('qtip')
                             .qtip({
                                 content: {
@@ -219,7 +220,7 @@ $.Controller("ApplicationController", {
                                 },
                                 position: {
                                     my: 'top right', // Use the corner...
-                                    at: 'bottom center' // ...and opposite corner
+                                    at: 'center left' // ...and opposite corner
                                 },
                                 show: {
                                     event: false, // Don't specify a show event...
