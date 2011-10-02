@@ -12,7 +12,7 @@ $.Model("Address", {
 
         createAddress : function(params, success, error) {
                 params.method = "CreateAddress";
-                params.address = $.View("views/address.ejs", params.address);
+                params.address = $.View("xml_renders/address.ejs", params.address);
                 $.ajax({
                     url: Qck.services.order,
                     data: params,
@@ -107,7 +107,7 @@ $.Model("Address", {
 
         updateAddress : function(params, success, error) {
                 params.method = "UpdateAddress";
-                params.address = $.View("views/address.ejs", params.address);
+                params.address = $.View("xml_renders/address.ejs", params.address);
                 params.address_id = this.address_id;
                 $.ajax({
                     url: Qck.services.order,

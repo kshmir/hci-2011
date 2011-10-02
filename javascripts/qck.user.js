@@ -41,7 +41,7 @@ $.Model("User", {
         //this method receives an account and creates an User
         createAccount : function(params, success, error) {
             params.method = "CreateAccount";
-            params.account = $.View("views/user.ejs", params.account);
+            params.account = $.View("xml_renders/user.ejs", params.account);
 
             $.ajax({
                 url: Qck.services.security,
@@ -102,7 +102,7 @@ $.Model("User", {
         //this method receives an account and updates an User.
         updateAccount : function(params, success, error) {
             params.method = "UpdateAccount";
-            params.account = $.View("views/user.ejs", params.account);
+            params.account = $.View("xml_renders/user.ejs", params.account);
             $.ajax({
                             url: Qck.services.security,
                             data: params,
