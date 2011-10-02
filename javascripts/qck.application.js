@@ -107,8 +107,6 @@ $.Controller("ApplicationController", {
             };
             var error = function(error_number) {
                 if (error_number) {
-                    alert("hola");
-
                     $(el).parent(".login:first").fadeIn("slow",function(){
                         $(".login-form").removeData('qtip')
                         .qtip({
