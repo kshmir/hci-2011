@@ -1,6 +1,23 @@
 $.Controller("ApplicationController", {
     init: function(params) {
         this.guide_animation();
+        var self = this;
+        $(this.element).find(".login-form input").keypress(function(e) {
+            if (e.which == 13) {
+                $(this).blur();
+                self.login_submit($(this).parent(".login-form:first"));
+                e.preventDefault();
+            }
+
+        });
+        $(this.element).find(".search-form input").keypress(function(e) {
+            if (e.which == 13) {
+                $(this).blur();
+                self.search_submit($(this).parent(".search-form:first"));
+                e.preventDefault();
+            }
+
+        });
     },
     guide_animation: function() {
         // Scroll Animation of guide... TODO: Put on application controller
@@ -22,8 +39,8 @@ $.Controller("ApplicationController", {
                         guide.slideUp("fast", function() {
                             guide.css("position", "relative")
                                 .slideDown("fast", function() {
-                                _onScroll = false;
-                            });
+                                    _onScroll = false;
+                                });
                         });
                     }
                     else if (!isScrolledIntoView(guide)) {
@@ -34,8 +51,8 @@ $.Controller("ApplicationController", {
                                 .css("margin-top", "0")
                                 .css("z-index", "1000")
                                 .slideDown("fast", function() {
-                                _onScroll = false;
-                            });
+                                    _onScroll = false;
+                                });
                         });
                     }
                     else {
@@ -61,7 +78,7 @@ $.Controller("ApplicationController", {
             var elemBottom = elemTop + $(elem).height();
 
             return ((elemBottom >= docViewTop) && (elemTop <= docViewBottom)
-                    && (elemBottom <= docViewBottom) && (elemTop >= docViewTop) );
+                && (elemBottom <= docViewBottom) && (elemTop >= docViewTop) );
         }
     }
     ,
@@ -73,5 +90,65 @@ $.Controller("ApplicationController", {
             };
             ajax(appear_callback);
         });
+    }
+    ,
+    login_submit: function(el) {
+        var success = function() {
+            $(el).parent(".login:first").fadeOut("slow", function(callback) {
+                $(el).parent(".login:first")
+                    .html($.View("views/logged.ejs", {username: ($(el).find('#username').val())}))
+                    .attr("class", "logout prefix_4 grid_5").fadeIn("slow");
+            });
+        };
+         success();
+    },
+    search_submit: function(el) {
+        alert(
+            "HANDLER DEL ENTER :D"
+        );
+
+    },
+    ".login-form input focus": function(el) {
+        el = $(el);
+        if (!(el.attr("id") == "pass")) {
+            if (el.attr("id") == "password") {
+                el.hide()
+                    .parent(".login-form:first").find('#pass').show().focus();
+            }
+            if (!el.data("old") || el.data("old") == el.val()) {
+                el.data("old", el.val())
+                    .val("");
+            }
+        }
+    },
+    ".login-form input blur": function(el) {
+        el = $(el);
+        if (el.val() == "") {
+            if (el.attr("id") == "pass") {
+                el.hide();
+                el = el.parent(".login-form:first").find('#password').show();
+
+            }
+            el.val(el.data("old"));
+        }
+    },
+    ".search-form input focus": function(el) {
+        el = $(el);
+
+        if (!el.data("old") || el.data("old") == el.val()) {
+            el.data("old", el.val())
+                .val("");
+        }
+    },
+    ".search-form input blur": function(el) {
+        el = $(el);
+        if ($(el).val() == "") {
+            if ($(el).attr("id") == "pass") {
+                $(el).hide();
+                el = $(el).parent(".login-form:first").find('#password').show();
+
+            }
+            $(el).val($(el).data("old"));
+        }
     }
 });

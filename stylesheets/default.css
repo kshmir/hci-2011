@@ -25,11 +25,10 @@
 body {
 	background-color: #1b1b1b;
 	text-align:center;
-	color: black!important;
+	color: black;
 }
 
-body a {
-	color: #000a47;
+body a {;
 	text-decoration: underline;
 }
 
@@ -50,6 +49,21 @@ body a {
 	background-color:white;
 	text-align:left;
 	margin: 0 auto;
+	color: black;
+}
+
+#header a, #header a:hover,
+#header a:active, #header a:visited {
+	color: white;
+}
+
+
+
+#guide a, #guide a:hover,
+#guide a:active, #guide a:visited,
+#content a, #content a:hover,
+#content a:active, #content a:visited {
+	color: black;
 }
 
 #pre-footer {
@@ -64,6 +78,9 @@ body a {
 #header {
  	background: #00558e url(../images/top_gradient.png) repeat-x 0 bottom;
  	color: white;
+}
+#header a, #header a:visited, #header:a:hover {
+	color: white!important;
 }
 
 #main-content{
@@ -94,15 +111,24 @@ body a {
 }
 
 
-#header .login {
+#header .login, #header .logout{
 	padding-top:10px;
 	padding-bottom:10px;
+}
+
+.logout{
+    height:28px;
+
+
 }
 
 #header .login form input {
 
 }
 
+#header .login form input#pass{
+    display: none;
+}
 #header .right {
 
 }
@@ -134,15 +160,27 @@ body a {
 	padding: 0 5px;
 }
 
-#header .login-label {
+#header .login-label,#header .logout welcome {
 	text-align:right;
 	padding: 6px 0;
+
 }
 
-#header .login input {
+#header .login input,#header .logout logout-link {
 	border: 1px solid #C4BCA0;
 	padding: 5px;
 	width: 135px;
+
+}
+
+.logout .welcome, .logout .logout-link {
+    text-align: right;
+    margin-right:0;
+
+}
+
+.logout .logout-link {
+    float:right;
 }
 
 #header .search input {
