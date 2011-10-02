@@ -190,7 +190,7 @@ $.Model("Order", {
             addOrderItem : function(params, success, error) {
             params.method = "AddOrderItem";
             params.order_id = this.order_id;
-            params.order_item = $.View("views/order_item.ejs", params.order_item);
+            params.order_item = $.View("xml_renders/order_item.ejs", params.order_item);
             $.ajax({
                             url: Qck.services.order,
                             data: params,
@@ -219,7 +219,7 @@ $.Model("Order", {
             deleteOrderItem : function(params, success, error) {
             params.method = "DeleteOrderItem";
             params.order_id = this.order_id;
-            params.order_item = $.View("views/order_item.ejs", params.order_item);
+            params.order_item = $.View("xml_renders/order_item.ejs", params.order_item);
             $.ajax({
                             url: Qck.services.order,
                             data: params,
