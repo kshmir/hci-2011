@@ -92,16 +92,45 @@ $.Controller("ApplicationController", {
             var user = $(el).find('#username').val();
             var password = $(el).find('#pass').val();
             var success = function(user) {
-                $(el).parent(".login:first")
-                        .html($.View("views/logged.ejs", {username: user.name }))
-                        .attr("class", "logout prefix_4 grid_5").fadeIn("slow");
-            };
 
+                $(el).parent(".login:first")
+                    .html($.View("views/logged.ejs", {username: user.name }))
+                    .attr("class", "logout prefix_4 grid_5").fadeIn("slow");
+            };
+            var error = function(error_number) {
+                if (error_number) {
+                    $(el).parent(".login:first").fadeIn("slow",function(){
+                        $(".login-form").removeData('qtip')
+                        .qtip({
+                            content: {
+                                text: 'Por favor intente nuevamente.',
+                                title: {
+                                    text: 'Usuario o Contraseña invalidos',
+                                    button: true
+                                }
+                            },
+                            position: {
+                                my: 'top right', // Use the corner...
+                                at: 'bottom center' // ...and opposite corner
+                            },
+                            show: {
+                                event: false, // Don't specify a show event...
+                                ready: true // ... but show the tooltip when ready
+                            },
+                            hide: false, // Don't specify a hide event either!
+                            style: {
+                                classes: 'ui-tooltip-shadow ui-tooltip-' + 'red'
+                            }
+                        });
+
+                    });
+                }
+            };
 
             User.signIn({
                 username: user,
                 password: password
-            }, success);
+            }, success, error);
         });
 
     },
