@@ -128,16 +128,20 @@ body a {;
 }
 
 #ui-tooltip-0{
-    width: 315px;
-}
-.login-form{
-    height: 33px;
-
+    width: 180px;
 }
 
-.login-form input{
-    height: 28px;
+.login-form .input{
     border: 1px solid silver;
+    width:148px;
+}
+
+input.soft {
+    color:gray!important;
+}
+
+p.first {
+    margin-top:0;
 }
 
 .login-form input#pass{

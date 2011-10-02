@@ -23,6 +23,7 @@ $.Controller("ProductsController", {
             });
             $(this).find('.box-cell .product_item, .box-cell').height(max_height);
         });
+
     },
     list: function(products_list, title) {
         $(this.element).html($.View("views/product_list.ejs", {products : products_list, title:title}));

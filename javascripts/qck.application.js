@@ -199,12 +199,13 @@ $.Controller("ApplicationController", {
         if (!(el.attr("id") == "pass")) {
             if (el.attr("id") == "password") {
                 el.hide()
-                    .parent(".login-form:first").find('#pass').show().focus();
+                    .parents(".login-form:first").find('#pass').show().focus();
             }
             if (!el.data("old") || el.data("old") == el.val()) {
                 el.data("old", el.val())
                     .val("");
             }
+            el.removeClass("soft");
         }
     },
     ".login-form input blur": function(el) {
@@ -212,10 +213,11 @@ $.Controller("ApplicationController", {
         if (el.val() == "") {
             if (el.attr("id") == "pass") {
                 el.hide();
-                el = el.parent(".login-form:first").find('#password').show();
+                el = el.parents(".login-form:first").find('#password').show();
 
             }
             el.val(el.data("old"));
+            el.addClass("soft");
         }
     },
     ".search focus": function(el) {
@@ -224,11 +226,13 @@ $.Controller("ApplicationController", {
             el.data("old", el.val())
                 .val("");
         }
+        el.removeClass("soft");
     },
     ".search blur": function(el) {
         el = $(el);
         if ($(el).val() == "") {
             $(el).val($(el).data("old"));
+            el.add§Class("soft");
         }
     }
 });
