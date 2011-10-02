@@ -14,6 +14,7 @@ $.Model("Order", {
             $.ajax({
                             url: Qck.services.order,
                             data: params,
+                            type : "POST",
                             success: function(data) {
 
                                 if ($("response", data).attr("status") == "ok") {

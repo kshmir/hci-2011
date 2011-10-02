@@ -3,6 +3,33 @@
 $.Model("Address", {
         // Static Methods
 
+        //createAddress method
+        //createAddress params:
+        //username : is a mandatory param
+        //authentication_token : is a mandatory param
+        //this method validates de user and token, and then it instantiates a new .
+
+        createAddress : function(params, success, error) {
+            params.method = "CreateAddress";
+            $.ajax({
+                            url: Qck.services.order,
+                            data: params,
+                            type : "POST",
+                            success: function(data) {
+
+                                if ($("response", data).attr("status") == "ok") {
+                                    success("OK"); // en caso de crear correctamente el usuario devuelve el string OK
+                                }
+                                else {
+                                    error($("error", data).attr("code"));
+                                }
+                            },
+                             error: error
+
+                        } );
+
+            }
+
 
  }
 ,
