@@ -44,15 +44,23 @@ $.Model("User", {
             params.method = "CreateAccount";
             params.account = $.View("views/user.ejs", params.account);
 
-            $.post(Qck.services.security, params, function(data) {
+            $.ajax({
+                url: Qck.services.security,
+                data: params,
+                type : "POST",
+                success: function(data) {
 
-                if ($("response", data).attr("status") == "ok") {
-                    success("OK"); // en caso de crear correctamente el usuario devuelve el string OK
-                }
-                else {
-                    error($("error", data).attr("code"));
-                }
-            }, error);
+                    if ($("response", data).attr("status") == "ok") {
+                        success("OK"); // en caso de crear correctamente el usuario devuelve el string OK
+                    }
+                    else {
+                        error($("error", data).attr("code"));
+                    }
+                },
+                 error: error,
+                 dataType: "XML"
+            } );
+
         },
 
         //getAccount method
@@ -62,7 +70,12 @@ $.Model("User", {
         //this method validates de user and token, and construct a User.
         getAccount : function(params, success, error) {
             params.method = "GetAccount";
-            $.get(Qck.services.security, params, function(data) {
+
+
+            $.ajax({
+                url: Qck.services.security,
+                data: params,
+                success: function (){
                 var usr = $("account", data);
                 if (usr.length && $("response", data).attr("status") == "ok") {
                     var params2 = {
@@ -74,7 +87,11 @@ $.Model("User", {
                 else {
                     error($("error", data).attr("code"));
                 }
-            }, error);
+            },
+            error : error,
+            type : XML
+                }
+            );
         }
 
     },
