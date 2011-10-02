@@ -92,8 +92,11 @@ $.Controller("ApplicationController", {
         this.login_submit($('.topbar'));
     },
     ".register-button-label.form_button click" : function () {
-        if ($('#reg-password').val() != $('#reg-password2').val) {
-            $('#reg-password').removeData('qtip')
+        var no_error = true;
+        $('#reg-password').qtip('hide');
+        if ($('#reg-password').val() != $('#reg-password2').val()) {
+            no_error = false;
+            $('#reg-password').qtip('hide').removeData('qtip')
                 .qtip({
                     content: {
                         text: 'Passwords are different',
@@ -103,7 +106,7 @@ $.Controller("ApplicationController", {
                         }
                     },
                     position: {
-                        my: 'top left', // Use the corner...
+                        my: 'center left', // Use the corner...
                         at: 'center right' // ...and opposite corner
                     },
                     show: {
@@ -122,6 +125,72 @@ $.Controller("ApplicationController", {
                     }
                 });
         } else {
+            if ($('#reg-password').val() == "") {
+                no_error = false;
+                $('#reg-password').qtip('hide').removeData('qtip')
+                    .qtip({
+                        content: {
+                            text: 'You must write a password',
+                            title: {
+                                text: 'Input error:',
+                                button: true
+                            }
+                        },
+                        position: {
+                            my: 'center left', // Use the corner...
+                            at: 'center right' // ...and opposite corner
+                        },
+                        show: {
+                            event: false, // Don't specify a show event...
+                            ready: true, // ... but show the tooltip when ready
+                            effect: function(offset) {
+                                $(this).slideDown(200); // "this" refers to the tooltip
+                                $('#username').click();
+                            }
+                        },
+                        hide: function(event, api) {
+                            sign_in_unique = true;
+                        }, // Don't specify a hide event either!
+                        style: {
+                            classes: 'ui-tooltip-shadow ui-tooltip-' + 'red'
+                        }
+                    });
+            }
+        }
+        //var emailReg = "/^([\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4})?$/";
+        $('#reg-email').qtip('hide').removeData('qtip');
+        if ($('#reg-email').val() == "" || !emailReg.test($('#reg-email').val())) {
+            no_error = false;
+            $('#reg-email').qtip('hide').removeData('qtip')
+                .qtip({
+                    content: {
+                        text: 'You must write a valid email',
+                        title: {
+                            text: 'Input error:',
+                            button: true
+                        }
+                    },
+                    position: {
+                        my: 'center left', // Use the corner...
+                        at: 'center right' // ...and opposite corner
+                    },
+                    show: {
+                        event: false, // Don't specify a show event...
+                        ready: true, // ... but show the tooltip when ready
+                        effect: function(offset) {
+                            $(this).slideDown(200); // "this" refers to the tooltip
+                            $('#username').click();
+                        }
+                    },
+                    hide: function(event, api) {
+                        sign_in_unique = true;
+                    }, // Don't specify a hide event either!
+                    style: {
+                        classes: 'ui-tooltip-shadow ui-tooltip-' + 'red'
+                    }
+                });
+        }
+        if (no_error) {
 
             User.createAccount({account: {
                 username: $('#reg-username').val(),
@@ -139,9 +208,6 @@ $.Controller("ApplicationController", {
         }
         return false;
     },
-    ".ui-state-default .button click":function() {
-        sign_in_unique = false;
-    },
     "#sign_in click": function(called, data) {
         if (sign_in_unique == false) {
             sign_in_unique = true;
@@ -157,7 +223,7 @@ $.Controller("ApplicationController", {
                     },
                     events: {
                         hide: function(event, api) {
-                            sign_in_unique=false;
+                            sign_in_unique = false;
                         }
                     },
                     position: {
@@ -182,11 +248,14 @@ $.Controller("ApplicationController", {
     }
     ,
     "#sign_out click" : function() {
-
-        $('.topbar').fadeOut("slow", function() {
-            $('.topbar')
-                .html($.View("views/sign_in.ejs"))
-                .fadeIn("slow");
+        current_user.signOut(function() {
+            $('.topbar').fadeOut("slow", function() {
+                $('.topbar')
+                    .html($.View("views/sign_in.ejs"))
+                    .fadeIn("slow");
+            });
+            current_user = undefined;
+        }, function() {
         });
         return false;
     }
@@ -212,11 +281,13 @@ $.Controller("ApplicationController", {
             var user = $(".login-form").find('#username').val();
             var password = $(".login-form").find('#pass').val();
             var success = function(user) {
-                current_user=user;
+                current_user = user;
                 $("#sign_in").qtip('hide');
                 $(el)
                     .html($.View("views/logged.ejs", {username: user.name }))
                     .fadeIn("slow");
+                $(".login-form").remove();
+
             };
             var error = function(error_number) {
                 var msg = '';
@@ -260,7 +331,7 @@ $.Controller("ApplicationController", {
 
                 });
             };
-
+            console.log(user);
             User.signIn({
                 username: user,
                 password: password

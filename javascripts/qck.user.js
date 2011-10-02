@@ -153,7 +153,8 @@ $.Model("User", {
         //signOut method
         //signOut has no params
         //this method logout user.
-        signOut : function(params, success, error) {
+        signOut : function(success, error) {
+            var params = {};
             params.method = "SignOut";
             params.username = this.username;
             params.authentication_token = this.token;
