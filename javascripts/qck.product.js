@@ -101,7 +101,7 @@ $.Model("Product", {
         if ($(data).find("ISBN_10").length) {
             this.authors = $(data).find("authors").text();
             this.publisher = $(data).find("publisher").text();
-            this.publisher_date = $(data).find("publisher_date").text();
+            this.published_date = $(data).find("published_date").text();
             this.ISBN_10 = $(data).find("ISBN_10").text();
             this.ISBN_13 = $(data).find("ISBN_13").text();
             this.language = $(data).find("language").text();
