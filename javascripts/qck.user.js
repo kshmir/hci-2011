@@ -22,7 +22,6 @@ $.Model("User", {
                             authentication_token : $("token", data).text(),
                             username : params.username
                         };
-
                         self.getAccount(data2, success, error);
                     }
                     else {
@@ -70,26 +69,25 @@ $.Model("User", {
         //this method validates de user and token, and construct a User.
         getAccount : function(params, success, error) {
             params.method = "GetAccount";
-
-
-            $.ajax({
+           $.ajax({
                 url: Qck.services.security,
                 data: params,
-                success: function (){
+                success: function (data){
                 var usr = $("account", data);
-                if (usr.length && $("response", data).attr("status") == "ok") {
-                    var params2 = {
-                        param : params,
-                        user : usr
-                    };
-                    success(new User(params2));
-                }
-                else {
-                    error($("error", data).attr("code"));
-                }
+
+                    if (usr.length && $("response", data).attr("status") == "ok") {
+                         var params2 = {
+                             param : params,
+                             user : usr
+                        };
+                        success(new User(params2));
+                     }
+                    else {
+                        error($("error", data).attr("code"));
+                      }
             },
             error : error,
-            type : XML
+            type : "XML"
                 }
             );
         }
