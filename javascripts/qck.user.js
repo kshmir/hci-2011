@@ -57,7 +57,7 @@ $.Model("User", {
                     }
                 },
                  error: error,
-                 dataType: "XML"
+
             } );
 
         },
