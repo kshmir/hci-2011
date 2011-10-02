@@ -113,9 +113,9 @@ $.Controller("ApplicationController", {
                         $(".login-form").removeData('qtip')
                         .qtip({
                             content: {
-                                text: 'At its ' + 'bottom left',
+                                text: 'Por favor intente nuevamente.',
                                 title: {
-                                    text: 'My ' + 'top right',
+                                    text: 'Usuario o Contraseña invalidos',
                                     button: true
                                 }
                             },
