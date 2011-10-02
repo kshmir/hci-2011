@@ -1,14 +1,16 @@
 // Model Definition.
 
-$.Model("Language", {
+$.Model("State", {
         // Static Methods
 
-        //getLanguageList method
-        //getLanguageList params: this method does not receive any parameter
-        //this method retrieves an Language List
+        //getStateList method
+        //getStateList params:
+        //language_id: this is a mandatory param
+        //country_id: this is a mandatory param
+        //this method retrieves a State List
 
-        getLanguageList : function(params, success, error) {
-            params.method = "GetLanguageList";
+        getStateList : function(params, success, error) {
+            params.method = "GetStateList";
             $.ajax({
                             url: Qck.common.order,
                             data: params,
@@ -16,11 +18,11 @@ $.Model("Language", {
 
                                 if ($("response", data).attr("status") == "ok") {
 
-                                    var language_list = [];
-                                    $('language', data).each(function(index, item) {
-                                            language_list.push(new Language(item));
+                                    var state_list = [];
+                                    $('state', data).each(function(index, item) {
+                                            state_list.push(new State(item));
                                     });
-                                    success(language_list);
+                                    success(state_list);
                                 }
                                 else {
                                     error($("error", data).attr("code"));
@@ -41,7 +43,8 @@ $.Model("Language", {
      //Constructor
      setup: function(data) {
 
-            this.language_id = $(data).find("language").attr("id");
+            this.state_id = $(data).find("state").attr("id");
+            this.country_id = $(data).find("country_id").text();
             this.code = $(data).find("code").text();
             this.name = $(data).find("name").text();
 
