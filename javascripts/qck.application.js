@@ -106,21 +106,22 @@ $.Controller("ApplicationController", {
                     .attr("class", "logout prefix_4 grid_5").fadeIn("slow");
             };
             var error = function(error_number) {
-                alert("asdf");
                 if (error_number) {
                     alert("hola");
-                    $(".login").removeData('qtip')
+
+                    $(el).parent(".login:first").fadeIn("slow",function(){
+                        $(".login-form").removeData('qtip')
                         .qtip({
                             content: {
                                 text: 'At its ' + 'bottom left',
                                 title: {
-                                    text: 'My ' + 'top left',
+                                    text: 'My ' + 'top right',
                                     button: true
                                 }
                             },
                             position: {
-                                my: 'bottom left', // Use the corner...
-                                at: 'top left' // ...and opposite corner
+                                my: 'top right', // Use the corner...
+                                at: 'bottom center' // ...and opposite corner
                             },
                             show: {
                                 event: false, // Don't specify a show event...
@@ -128,9 +129,11 @@ $.Controller("ApplicationController", {
                             },
                             hide: false, // Don't specify a hide event either!
                             style: {
-                                classes: 'ui-tooltip-shadow ui-tooltip-' + 'light'
+                                classes: 'ui-tooltip-shadow ui-tooltip-' + 'red'
                             }
                         });
+
+                    });
                 }
             };
 
