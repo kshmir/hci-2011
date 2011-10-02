@@ -18,7 +18,67 @@ $.Model("Order", {
                             success: function(data) {
 
                                 if ($("response", data).attr("status") == "ok") {
-                                    success("OK");
+                                    success($("order", data).attr("id"));
+                                }
+                                else {
+                                    error($("error", data).attr("code"));
+                                }
+                            },
+                             error: error
+
+                        } );
+
+            },
+
+
+        //getOrder method
+        //getOrder params:
+        //username : is a mandatory param
+        //authentication_token : is a mandatory param
+        //order_id : is a mandatory param
+        //this method retrieves an Order searching it by order_id
+
+        getOrder : function(params, success, error) {
+            params.method = "GetOrder";
+            $.ajax({
+                            url: Qck.services.order,
+                            data: params,
+                            success: function(data) {
+
+                                if ($("response", data).attr("status") == "ok") {
+
+                                    success(new Order(data));
+                                }
+                                else {
+                                    error($("error", data).attr("code"));
+                                }
+                            },
+                             error: error
+
+                        } );
+
+            },
+
+        //getOrderList method
+        //getOrderList params:
+        //username : is a mandatory param
+        //authentication_token : is a mandatory param
+        //this method retrieves an Order List based on the user information
+
+        getOrderList : function(params, success, error) {
+            params.method = "GetOrderList";
+            $.ajax({
+                            url: Qck.services.order,
+                            data: params,
+                           success: function(data) {
+
+                                if ($("response", data).attr("status") == "ok") {
+
+                                    var order_list = [];
+                                    $('order', data).each(function(index, item) {
+                                            order_list.push(new Order(item));
+                                    });
+                                    success(order_list);
                                 }
                                 else {
                                     error($("error", data).attr("code"));
@@ -130,7 +190,36 @@ $.Model("Order", {
             addOrderItem : function(params, success, error) {
             params.method = "AddOrderItem";
             params.order_id = this.order_id;
+            params.order_item = $.View("views/order_item.ejs", params.order_item);
+            $.ajax({
+                            url: Qck.services.order,
+                            data: params,
+                            type : "POST",
+                            success: function(data) {
 
+                                if ($("response", data).attr("status") == "ok") {
+                                    success("OK");
+                                }
+                                else {
+                                    error($("error", data).attr("code"));
+                                }
+                            },
+                             error: error
+
+                        } );
+
+            },
+
+            //deleteOrderItem method
+            //deleteOrderItem params:
+            //username : is a mandatory param
+            //authentication_token : is a mandatory param
+            //order_item :is a mandatory param
+            //this method receives an item and deletes it from the order List
+            deleteOrderItem : function(params, success, error) {
+            params.method = "DeleteOrderItem";
+            params.order_id = this.order_id;
+            params.order_item = $.View("views/order_item.ejs", params.order_item);
             $.ajax({
                             url: Qck.services.order,
                             data: params,

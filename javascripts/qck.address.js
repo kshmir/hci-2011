@@ -20,7 +20,7 @@ $.Model("Address", {
                     success: function(data) {
                            if ($("response", data).attr("status") == "ok") {
                                     //if the address is correctly create it retrieves the address_id
-                                    success($("address_id", data).text());
+                                    success($("address", data).attr("id"));
                                 }
                                 else {
                                     error();
@@ -48,7 +48,7 @@ $.Model("Address", {
                                     //it retrieves de Address List
                                      var address_list = [];
                                      $('address', data).each(function(index, item) {
-                                            address_list.push(new Item(item));
+                                            address_list.push(new Address(item));
                                      });
                                      success(address_list);
                                 }
@@ -77,7 +77,7 @@ $.Model("Address", {
                     success: function(data) {
                            if ($("response", data).attr("status") == "ok") {
                                     //it retrieves an Address
-                                     var address = new Item(item);
+                                     var address = new Address(item);
                                      success(address);
                                 }
                                 else {
