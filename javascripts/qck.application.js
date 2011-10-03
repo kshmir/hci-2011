@@ -178,18 +178,32 @@ $.Controller("ApplicationController", {
                 return false;
             }
     ,
-    change_view: function(selector, ajax) {
-        $(selector).fadeOut("slow", function() {
-            $(selector).show().html($.View("views/loading.ejs"));
+    change_view: function(selector, ajax, method) {
+        if (!method || method == 'fade') {
+
+            $(selector).fadeOut("slow", function() {
+                $(".loader").show();
+                $(selector).show().html($.View("views/loading.ejs"));
+                var appear_callback = function(post_callback) {
+                    $(selector).hide().fadeIn("slow", function() {
+                        $(".loader").hide();
+                        if (post_callback) {
+                            post_callback();
+                        }
+                    });
+                };
+                ajax(appear_callback);
+            });
+        } else if (method == 'isotope') {
+            $(".loader").show();
             var appear_callback = function(post_callback) {
-                $(selector).hide().fadeIn("slow", function() {
-                    if (post_callback) {
-                        post_callback();
-                    }
-                });
+                $(".loader").hide();
+                if (post_callback) {
+                    post_callback();
+                }
             };
             ajax(appear_callback);
-        });
+        }
     }
     ,
     login_submit: function(el) {

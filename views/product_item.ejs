@@ -1,12 +1,9 @@
-<% if (this.index % 3 == 0) { %>
-    <div class="box-table">
-<% } %>
-<div class="grid_3 box-cell box <%= (this.index % 3 == 0) ? 'alpha' : (this.index % 3 == 2) ? 'omega' : '' %>">
+
+<div class="grid_3 isotope-item box-cell box alpha omega category-<%=this.product.category_id%> subcategory-<%=this.product.subcategory_id%>">
   <div class="product_item" id="product-<%=this.product.id%>">
     <h3>
       <a href="#products/show&id=<%=this.product.id%>"><%=this.product.name%></a>
     </h3>
-
     <a href="#products/show&id=<%=this.product.id%>">
       <img src="<%=this.product.image_url%>" alt=""/>
     </a>
@@ -22,15 +19,11 @@
       <span class="label">
         Price:
       </span>
-      <span class="sales_rank">
+      <span class="price">
         <%=this.product.price%>$
       </span>
     </p>
     <div class="clear"></div>
   </div>
 </div>
-<% if (this.index % 3 == 2) { %>
-       <div class="clear"></div>
-    </div>
-<% } %>
 

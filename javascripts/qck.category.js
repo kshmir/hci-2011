@@ -49,12 +49,18 @@ $.Controller("CategoriesController", {
             // Fetches all products as JSON.
             Category.findProducts({cat_id:data.cat_id, subcat_id: data.subcat_id}, function(products) {
                 // Uses the product controller to render them.
-                $("#main-content").controller().list(products, (self.current_category) ? 'Category: ' + self.current_category.name : undefined);
+				var filter;
+				if (data.cat_id) {
+					filter = ".category-" + data.cat_id;
+				} else if (data.subcat_id) {
+					filter = ".subcategory-" + data.subcat_id;					
+				}
+                $("#main-content").controller().list(products, (self.current_category) ? 'Category: ' + self.current_category.name : undefined, filter);
                 callback($("#main-content").controller().fix_heights());
             });
         };
 
-        Qck.app_controller.change_view("#main-content", _param);
+        Qck.app_controller.change_view("#main-content", _param, 'isotope');
 
     },
     // Renders toggle of category. We should add a button for this.
