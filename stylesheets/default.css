@@ -348,7 +348,7 @@ h1,h2,h3,h4,h5,h6 {
 	font-weight:bold;
 }
 #footer ul li {
-	padding: 10px 0px;
+	padding: 10px 0;
 	margin-left: 30px;
 }
 
@@ -427,12 +427,17 @@ h1,h2,h3,h4,h5,h6 {
 
 #categories-sidebar ul li {
 	margin: 0;
-	padding: 10px;
+	padding: 5px;
+}
+
+.category a{
+    text-decoration:none!important;
+    font-weight:bold;
 }
 
 #categories-sidebar ul ul {
     display:none;
-    margin-left: 10px;
+    margin-left: 18px;
 }
 
 #categories-sidebar li a.selected {
@@ -526,4 +531,47 @@ h1,h2,h3,h4,h5,h6 {
 
 .items{
     min-height:300px;
+}
+
+/******************ACCORDION*******************/
+.ui-accordion .ui-accordion-header {
+    padding: 5px 5px 5px 30px;
+}
+
+.ui-accordion .ui-accordion-content {
+    padding: 5px 10px!important;
+    height: 100%!important;
+}
+
+.ui-icon-float {
+    float:left;
+    margin-right:8px;
+    margin-left:-8px;
+}
+
+#sidebar {
+    margin: 20px 0;
+}
+
+.filter .filter-sel, .filter .filter-text {
+    float:left;
+    margin-bottom:5px;
+}
+
+.filter .filter-text{
+    margin-top: 7px;
+    margin-right:4px;
+}
+
+.filter .ui-button-text-only .ui-button-text {
+    padding: 4px 10px;
+}
+
+.ui-autocomplete{
+    z-index:1001!important;
+}
+
+.autocomplete-item img {
+    float:left;
+    margin-right:5px;
 }

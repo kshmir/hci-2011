@@ -1,10 +1,12 @@
+
 <div class="box" id="categories-sidebar">
     <h3>
-        Categories
-    </h3>        
+    Categories
+    </h3>
     <ul>
     <% for(var i = 0; i < this.categories.length; i++) { %>
-            <li id="category-<%=this.categories[i].id%>">
+            <li id="category-<%=this.categories[i].id%>" class="category">
+                <span class="ui-icon ui-icon-triangle-1-e ui-icon-float"></span>
                 <a href="#categories/show&cat_id=<%=this.categories[i].id%>"><%=this.categories[i].name%></a>
             </li>
             <ul id="category-<%=this.categories[i].id%>-subcats" class="subcat">

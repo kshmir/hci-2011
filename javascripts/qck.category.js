@@ -2,6 +2,7 @@ $.Controller("CategoriesController", {
     init: function() {
         var self = this;
 
+
         // Starts by rendering all the categories.
         // We should cache this to speed this up.
 
@@ -12,16 +13,18 @@ $.Controller("CategoriesController", {
             });
         };
         Qck.app_controller.change_view(this.element, ajax_callback);
+
     },
     // We should cache this to speed this up.
     render_list: function(data) {
+
         $(this.element).html($.View("views/sidebar.ejs", {categories: data}));
+
     },
     // We should cache this to speed this up.
     "history.index subscribe" : function(called, data) {
         // Hides all categories expanded.
-        $(this.element).find("ul ul.subcat").hide("slow");
-        $("#main-content").controller().index();
+        $("#main-content").controller().index(data);
         Qck.bread_controller.loadHashes([]);
     },
     // Hashchange subscription to show.
@@ -35,7 +38,7 @@ $.Controller("CategoriesController", {
                 refname:"Categorias"
             }
         ]);
-        $("#main-content").controller().index();
+        $("#main-content").controller().index(data);
     },
     show: function(data) {
         var self = this;
@@ -47,7 +50,7 @@ $.Controller("CategoriesController", {
         }
         var _param = function(callback) {
             // Fetches all products as JSON.
-            Category.findProducts({cat_id:data.cat_id, subcat_id: data.subcat_id}, function(products) {
+            Category.findProducts({cat_id:data.cat_id, subcat_id: data.subcat_id, order : data.order}, function(products) {
                 // Uses the product controller to render them.
 				var filter;
 				if (data.cat_id) {
@@ -64,15 +67,27 @@ $.Controller("CategoriesController", {
 
     },
     // Renders toggle of category. We should add a button for this.
-    "ul li a click": function(ev) {
+    'ul li[class="category"] a click': function(ev) {
         var _id = parseInt($(ev).parents("li:first").attr("id").split("-")[1]);
-        var self = this;
         // Calls a toggle function since we might call it from other events.
-        this.item_toggle(_id);
+        this.item_toggle(_id, ev);
+
     },
-    item_toggle : function(id) {
+    item_toggle : function(id, clickd) {
         // Hides all categories expanded.
-        $("#category-" + id.toString() + "-subcats").toggle("slow");
+
+        var el = $("#category-" + id.toString() + "-subcats");
+        if ($(el).css("display") != "none") {
+            $(el).hide("slow");
+            $(clickd).parent().find('.ui-icon').removeClass("ui-icon-triangle-1-s")
+                              .addClass("ui-icon-triangle-1-e");
+        }
+        else {
+            $(el).show("slow");
+            $(clickd).parent().find('.ui-icon').removeClass("ui-icon-triangle-1-e")
+                              .addClass("ui-icon-triangle-1-s");
+        }
+
     }
 });
 
@@ -167,6 +182,10 @@ $.Model("Category", {
             p.category_id = params.cat_id;
             p.language_id = 1;
         }
+
+        p.order = params.order;
+        p.items_per_page = params.items_per_page;
+        p.page = params.page;
         $.get(Qck.services.catalog, p, function(data) {
             var arr = [];
             var sel = $("product", data);

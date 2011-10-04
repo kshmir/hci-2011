@@ -3,9 +3,9 @@ $.Controller("ProductsController", {
     init: function() {
 
     },
-    index : function() {
+    index : function(data) {
         var self = this;
-        Product.findAll({}, function(data) {
+        Product.findAll(data || {}, function(data) {
             self.list(data);
         });
     },
@@ -25,50 +25,113 @@ $.Controller("ProductsController", {
     },
     list: function(products_list, title, filter) {
 
-        if (!$(".items").length) {
-            $(this.element).html($.View("views/product_list.ejs", {products : products_list, title:title}));
-            this.products = products_list;
-            this.title = title;
-            $('.items').isotope({
-            });
-        } else {
+        if (!$.browser.mozilla) {
+            if (!$(".items").length) {
+                $(this.element).html($.View("views/product_list.ejs", {products : products_list, title:title}));
+                $("#radio").buttonset();
+                this.products = products_list;
+                this.title = title;
 
-            var to_delete_products = ([].union(this.products, Product.comparer)).subtract(products_list, Product.comparer);
-            var to_add_products = ([].union(products_list, Product.comparer)).subtract(this.products, Product.comparer);
-            var remaining_products = ([].union(products_list, Product.comparer)).intersect(this.products, Product.comparer);
-            this.products = products_list;
+                var engine = 'best-available';
+
+                $('.items').isotope({
+                    getSortData : {
+                        name : function ($elem) {
+                            return $elem.find('h3 a').text();
+                        }
+                    },
+                    sortBy: 'name', sortAscending: true,
+                    animationEngine:engine
+                });
 
 
-            var to_delete_products_ids = $.map(to_delete_products, function(item) {
-                return item.id;
-            });
-            var dom_delete_items = [];
-            $(".items .product_item").each(function(index, item) {
-                if ($.inArray($(item).attr('id').split(/-/)[1], to_delete_products_ids) != -1) {
-                    dom_delete_items.push(item);
+            } else {
+
+                var to_delete_products = ([].union(this.products, Product.comparer)).subtract(products_list, Product.comparer);
+                var to_add_products = ([].union(products_list, Product.comparer)).subtract(this.products, Product.comparer);
+                var remaining_products = ([].union(products_list, Product.comparer)).intersect(this.products, Product.comparer);
+                this.products = products_list;
+
+
+                var to_delete_products_ids = $.map(to_delete_products, function(item) {
+                    return item.id;
+                });
+                var dom_delete_items = [];
+                $(".items .product_item").each(function(index, item) {
+                    if ($.inArray($(item).attr('id').split(/-/)[1], to_delete_products_ids) != -1) {
+                        dom_delete_items.push(item);
+                    }
+                });
+
+                var dom_add_items = "";
+                for (var i = 0; i < to_add_products.length; i++) {
+                    dom_add_items += $.View('views/product_item.ejs', {product:to_add_products[i]});
                 }
-            });
+                dom_add_items = $(dom_add_items);
 
-            var dom_add_items = "";
-            for (i in to_add_products) {
-                dom_add_items += $.View('views/product_item.ejs', {product:to_add_products[i]});
+                $('.items').isotope('remove', $(dom_delete_items).parent()).isotope('insert', dom_add_items, function() {
+                    $('.items').isotope({
+                        filter: filter
+                    }).isotope('reLayout');
+                });
             }
-            dom_add_items = $(dom_add_items);
 
-			$('.items').isotope('remove', $(dom_delete_items).parent()).isotope('insert', dom_add_items, function() {
-				$('.items').isotope({
-					filter: filter
-				});
-			});
+        } else {
+            if (!$(".items").length) {
+                $(this.element).html($.View("views/product_list.ejs", {products : products_list, title:title}));
+                $("#radio").buttonset();
+            }
+            else {
+                var items = "";
+                for (var i = 0; i < products_list.length; i++) {
+                    items += $.View('views/product_item.ejs', {product:products_list[i]});
+                }
+                $(".items").html(items);
+            }
 
         }
 
         this.fix_heights();
     },
+    "#name_asc click": function() {
+        var hash = window.location.hash.toString();
+        if (hash.indexOf("DESC") != -1) {
+            hash = hash.replace(/DESC/g, "ASC");
+        } else {
+            hash += "&order=ASC"
+        }
+        window.location.hash = hash;
+        if (!$.browser.mozilla) {
+            $('.items').isotope({ sortBy: 'name', sortAscending: true});
+        }
+
+    },
+    "#name_desc click": function() {
+        var hash = window.location.hash.toString();
+        if (hash.indexOf("ASC") != -1) {
+            hash = hash.replace(/ASC/g, "DESC");
+        } else {
+            hash += "&order=DESC"
+        }
+        window.location.hash = hash;
+        if (!$.browser.mozilla) {
+            $('.items').isotope({ sortBy: 'name', sortAscending: false });
+        }
+    },
 
 
-
-
+    // Show event
+    "history.products.search subscribe" : function(called, query) {
+        var self = this;
+        var ajax = function(callback) {
+            Product.findByName(query, function(data) {
+                self.list(data, '', '.box');
+                callback();
+            });
+        };
+        Qck.app_controller.change_view("#main-content", ajax, 'isotope');
+        $('.search').val(query.criteria);
+    },
 
     // Show event
     "history.products.show subscribe" : function(called, data) {

@@ -8,7 +8,13 @@
         </div>
         <% } %>
         <div class="filter">
-            <a href="/filters">Activate Filters</a>
+            <div class="filter-order-text filter-text">
+                Order:
+            </div>
+            <div id="radio" class="filter-sel">
+                <input type="radio" id="name_asc" name="radio" checked="checked"/><label for="name_asc">Ascending</label>
+                <input type="radio" id="name_desc" name="radio"/><label for="name_desc">Descending</label>
+            </div>
         </div>
         <div class="clear"></div>
         <!-- Pagination space -->
