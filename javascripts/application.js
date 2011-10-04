@@ -29,4 +29,6 @@ head.js("javascripts/qck.application.js",
 	$("#sidebar").categories({});
 	$("#main-content").products({});
     $("#cart").cart({});
+
+
 });
