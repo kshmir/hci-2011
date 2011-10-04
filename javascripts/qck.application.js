@@ -57,7 +57,6 @@ $.Controller("ApplicationController", {
             el.find("*").data('item', item);
             return  el;
         };
-        alert("alldone");
     },
     guide_animation: function() {
         // Scroll Animation of guide... TODO: Put on application controller
