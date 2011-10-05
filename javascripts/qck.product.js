@@ -88,8 +88,26 @@ $.Controller("ProductsController", {
                 }
                 $(".items").html(items);
             }
-
+            this.products = products_list;
         }
+
+
+
+        // Bind the product to the view for further use.
+        for (var i = 0; i < this.products.length; i++) {
+            var prod = this.products[i];
+            var item = $('.items #product-' + prod.id);
+            item.data("product", prod);
+
+            if (!item.data('loaded')) {
+                $(item.find('img').css('opacity', 0)[0]).load(function() {
+                    $('.items').isotope('reLayout');
+                    $(this).css('opacity', 1).hide().fadeIn("slow");
+                });
+            }
+            item.data("loaded", true);
+        }
+
 
         this.fix_heights();
     },
@@ -119,6 +137,11 @@ $.Controller("ProductsController", {
         }
     },
 
+    ".addcart click": function(e) {
+        prod = $(e).parents(".product_item:first").data('product');
+        Qck.cart_controller.add_product(prod);
+        return false;
+    },
 
     // Show event
     "history.products.search subscribe" : function(called, query) {

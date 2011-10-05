@@ -5,7 +5,7 @@
       <a href="#products/show&id=<%=this.product.id%>"><%=this.product.name%></a>
     </h3>
     <a href="#products/show&id=<%=this.product.id%>">
-      <img src="<%=this.product.image_url%>" alt=""/>
+      <img src="<%=this.product.image_url%>" alt="" height='100'/>
     </a>
     <p class="attribute">
       <span class="label">
@@ -15,13 +15,16 @@
         <%=this.product.sales_rank%>
       </span>
     </p>
-      <p class="attribute">
+    <p class="attribute">
       <span class="label">
         Price:
       </span>
       <span class="price">
         <%=this.product.price%>$
       </span>
+    </p>
+    <p class="attribute">
+      <a href="#" class="addcart">Add to cart</a> - <a href="#products/show&id=<%=this.product.id%>" class="addcart">More</a>
     </p>
     <div class="clear"></div>
   </div>

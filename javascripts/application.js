@@ -29,6 +29,18 @@ head.js("javascripts/qck.application.js",
 	$("#sidebar").categories({});
 	$("#main-content").products({});
     $("#cart").cart({});
-
-
+    Qck.cart_controller = $("#cart").controller();
 });
+
+$.fn.inArray = function(value, array, comparer) {
+    if(!comparer){
+        comparer = function(a,b) { return (a == b) ? 0 : 1; }
+    }
+    var i = 0;
+    for(; i < array.length; i++) {
+        if(comparer(value, array[i])) {
+            return i;
+        }
+    }
+    return -1;
+};
