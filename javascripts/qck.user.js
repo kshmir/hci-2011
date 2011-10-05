@@ -41,7 +41,7 @@ $.Model("User", {
         //this method receives an account and creates an User
         createAccount : function(params, success, error) {
             params.method = "CreateAccount";
-            params.account = $.View("xml_renders/user.ejs", params.account);
+            params.account = $.View("xml_renders/user.ejs", params);
 
             $.ajax({
                 url: Qck.services.security,

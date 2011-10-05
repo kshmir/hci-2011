@@ -78,7 +78,6 @@ $.Controller("CartController", {
         this.cart_items = aux_items - item.count;
     },
     update_total_label : function() {
-
         var total = 0.0;
         $.each((this.list_products), function(index, el) {
             total += el.amount * el.price;

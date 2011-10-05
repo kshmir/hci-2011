@@ -194,7 +194,7 @@ $.Controller("ApplicationController", {
                               });
             }
         }
-        //var emailReg = "/^([\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4})?$/";
+        /*var emailReg = "/^([\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4})?$/";
         $('#reg-email').qtip('hide').removeData('qtip');
         if ($('#reg-email').val() == "" || !emailReg.test($('#reg-email').val())) {
             no_error = false;
@@ -227,9 +227,10 @@ $.Controller("ApplicationController", {
                               }
                           });
         }
+*/
         if (no_error) {
 
-            User.createAccount({account: {
+            User.createAccount({
                 username: $('#reg-username').val(),
                 name:$('#reg-name').val(),
                 password:$('#reg-password').val(),
@@ -237,7 +238,7 @@ $.Controller("ApplicationController", {
                 birth_date: $('#reg-birth-date').val()
             }
 
-            }, function() {
+            , function() {
                 alert('usuario creado');
             }, function() {
                 alert('usuario no creado');
