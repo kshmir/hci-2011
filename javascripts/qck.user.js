@@ -102,6 +102,22 @@ $.Model("User", {
         //this method receives an account and updates an User.
         updateAccount : function(params, success, error) {
             params.method = "UpdateAccount";
+            //validates de amount of characters in the field name
+            if ($.Model.validateLengthOf(param.name, 1, 80)==='undifined')
+                {
+                  error:$("109");
+                }
+            //validates de amount of characters in the field email
+            if ($.Model.validateLengthOf(param.email, 1, 128)==='undifined')
+                            {
+                              error:$("110");
+                            }
+            //validates de Date format
+            if ($.Model.validateFormatOf(param.name,"^(19|20)[0-9][0-9]([-])(0[1-9]|1[012])\2(0[1-9]|[12][0-9]|3[01])$")==='undifined')
+                            {
+                              error:$("111");
+                            }
+            2009-08-18
             params.account = $.View("xml_renders/user.ejs", params.account);
             $.ajax({
                             url: Qck.services.security,
@@ -191,6 +207,10 @@ $.Model("User", {
             this.last_login_date = new Date($(data.user).find("last_login_date").text());
             this.last_password_change = $(data.user).find("last_password_change").text();
         }
+
+
+
+
     }
 )
     ;
