@@ -140,6 +140,9 @@ $.Controller("ProductsController", {
     ".addcart click": function(e) {
         prod = $(e).parents(".product_item:first").data('product');
         Qck.cart_controller.add_product(prod);
+        $(e).parents(".product_item:first").effect('transfer', {
+            to:'#cart', className:'cart-animation-box'
+        },200);
         return false;
     },
 

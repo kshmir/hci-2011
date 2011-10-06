@@ -32,6 +32,7 @@ head.js("javascripts/qck.application.js",
     Qck.cart_controller = $("#cart").controller();
 });
 
+// Override of inArray, it should have a comparer!!!
 $.fn.inArray = function(value, array, comparer) {
     if(!comparer){
         comparer = function(a,b) { return (a == b) ? 0 : 1; }
@@ -43,4 +44,11 @@ $.fn.inArray = function(value, array, comparer) {
         }
     }
     return -1;
+};
+
+// Array Remove - By John Resig (MIT Licensed)
+Array.prototype.remove = function(from, to) {
+  var rest = this.slice((to || from) + 1 || this.length);
+  this.length = from < 0 ? array.length + from : from;
+  return this.push.apply(this, rest);
 };
