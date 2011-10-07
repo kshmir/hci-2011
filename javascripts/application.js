@@ -24,22 +24,28 @@ head.js("javascripts/qck.application.js",
 "javascripts/qck.breadcrumb.js", function() {
     $("body").application({});
 	Qck.app_controller = $("body").controller();
+    $("html").user({});
+    Qck.user_controller = $("html").controller();
 	$("#navigation").breadcrumb({});
 	Qck.bread_controller = $("#navigation").controller();
 	$("#sidebar").categories({});
 	$("#main-content").products({});
     $("#cart").cart({});
     Qck.cart_controller = $("#cart").controller();
+
+    $(window).hashchange();
 });
 
+
+
 // Override of inArray, it should have a comparer!!!
-$.fn.inArray = function(value, array, comparer) {
+$.inArrayCust = function(value, array, comparer) {
     if(!comparer){
         comparer = function(a,b) { return (a == b) ? 0 : 1; }
     }
     var i = 0;
     for(; i < array.length; i++) {
-        if(comparer(value, array[i])) {
+        if(!comparer(value, array[i])) {
             return i;
         }
     }

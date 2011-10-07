@@ -4,8 +4,10 @@ $.Controller("CartController", {
         this.list_products = [];
         this.cart_price = 0.0;         // Cache...
         this.cart_items = 0;
-        this.update_total_label(this.cart_price);
-        this.update_items_label(this.cart_items);
+        this.update_total_label(false);
+        this.update_items_label(false);
+
+
         setInterval(function() {
             if (!self.inside) {
                 $(self.element).removeClass('hovered');
@@ -38,18 +40,19 @@ $.Controller("CartController", {
         }
         this.update_labels();
     },
-    '.cart-item .remove-btn click': function(el){
+    '.cart-item .remove-btn click': function(el) {
         el = $(el).parents(".cart-item:first");
         var product = el.data('product');
-        var i = $.inArray(product, this.list_products, Product.comparer);
+        var i = $.inArrayCust(product, this.list_products, Product.comparer);
         this.list_products.remove(i);
-        el.slideUp('slow', function(){
+        el.slideUp('slow', function() {
             el.remove();
         });
         this.update_labels();
     },
     add_product : function(product) {
-        if ($.inArray(product, this.list_products, Product.comparer) == -1) {
+        var i;
+        if ((i = $.inArrayCust(product, this.list_products, Product.comparer)) == -1) {
             $('.list ul', this.element).prepend(
                     $.View('views/cart_item.ejs', {item:product, amount:1})
                     ).find('li:first').data('product', product);
@@ -75,13 +78,16 @@ $.Controller("CartController", {
             product.amount = 1;
             this.list_products.push(product);
         } else {
+            product = this.list_products[i];
             product.amount++;
             $('.cart-item-' + product.id + ' .cart-n-value').text(product.amount);
         }
+
+
         this.update_labels();
     },
     remove_product : function(item) {
-        var prod = $.inArray(item, this.list_products, Product.comparer);
+        var prod = $.inArrayCust(item, this.list_products, Product.comparer);
         if (prod != -1) {
             prod = this.list_products[prod];
         }
@@ -89,28 +95,36 @@ $.Controller("CartController", {
         prod.amount--;
         this.update_labels();
     },
-    update_labels : function(){
+    update_labels : function() {
         this.update_total_label();
         this.update_items_label();
     },
-    update_total_label : function() {
+    update_total_label : function(anim) {
         var total = 0.0;
         $.each(this.list_products, function(index, el) {
             total += el.amount * el.price;
         });
-        $('.cart-total', this.element).stop(true, true).fadeOut('fast', function() {
-            $(this).text(total.toFixed(2));
-            $(this).fadeIn('fast');
-        });
+        if (anim || anim == undefined) {
+            $('.cart-total', this.element).stop(true, true).fadeOut('fast', function() {
+                $(this).text(total.toFixed(2));
+                $(this).fadeIn('fast');
+            });
+        } else {
+            $('.cart-total').text(total.toFixed(2));
+        }
     },
-    update_items_label : function() {
+    update_items_label : function(anim) {
         var total = 0;
         $.each(this.list_products, function(index, el) {
             total += el.amount;
         });
-        $('.cart-items-n', this.element).stop(true, true).fadeOut('fast', function() {
-            $(this).text(total);
-            $(this).fadeIn('fast');
-        });
+        if (anim || anim == undefined) {
+            $('.cart-items-n', this.element).stop(true, true).fadeOut('fast', function() {
+                $(this).text(total);
+                $(this).fadeIn('fast');
+            });
+        } else {
+            $('.cart-items-n').text(total.toFixed(2));
+        }
     }
 });

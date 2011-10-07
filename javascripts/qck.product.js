@@ -58,7 +58,7 @@ $.Controller("ProductsController", {
                 });
                 var dom_delete_items = [];
                 $(".items .product_item").each(function(index, item) {
-                    if ($.inArray($(item).attr('id').split(/-/)[1], to_delete_products_ids) != -1) {
+                    if ($.inArrayCust($(item).attr('id').split(/-/)[1], to_delete_products_ids) != -1) {
                         dom_delete_items.push(item);
                     }
                 });
@@ -92,7 +92,6 @@ $.Controller("ProductsController", {
         }
 
 
-
         // Bind the product to the view for further use.
         for (var i = 0; i < this.products.length; i++) {
             var prod = this.products[i];
@@ -101,7 +100,6 @@ $.Controller("ProductsController", {
 
             if (!item.data('loaded')) {
                 $(item.find('img').css('opacity', 0)[0]).load(function() {
-                    $('.items').isotope('reLayout');
                     $(this).css('opacity', 1).hide().fadeIn("slow");
                 });
             }
@@ -138,11 +136,12 @@ $.Controller("ProductsController", {
     },
 
     ".addcart click": function(e) {
-        prod = $(e).parents(".product_item:first").data('product');
+        var el = $(e).parents(".product_item:first,.product_show:first");
+        prod = el.data('product');
         Qck.cart_controller.add_product(prod);
-        $(e).parents(".product_item:first").effect('transfer', {
+        el.effect('transfer', {
             to:'#cart', className:'cart-animation-box'
-        },200);
+        }, 200);
         return false;
     },
 
@@ -156,6 +155,11 @@ $.Controller("ProductsController", {
             });
         };
         Qck.app_controller.change_view("#main-content", ajax, 'isotope');
+        Qck.bread_controller.loadHashes([
+            {
+                url:window.location.hash, refname:'Busqueda rápida'
+            }
+        ]);
         $('.search').val(query.criteria);
     },
 
@@ -169,6 +173,15 @@ $.Controller("ProductsController", {
         var ajax_callback = function(callback) {
             Product.findOne({id: product.id}, function(data) {
                 $(self.element).html($.View(data.showView(), {product: data}));
+                $('.product_show', self.element).data('product', data);
+                var cat;
+                Category.findOne({subcat_id:data.subcategory_id}, function(data) {
+                    cat = data;
+                });
+                Qck.bread_controller.loadHashes([
+                    { refname:cat.name, url:'#categories/show&subcat_id=' + cat.id  },
+                    { refname:data.name, url:'#products/show&id=' + data.id  }
+                ]);
                 callback();
             });
         };

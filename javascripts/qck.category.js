@@ -2,11 +2,12 @@ $.Controller("CategoriesController", {
     init: function() {
         var self = this;
 
+        Category.init();
 
         // Starts by rendering all the categories.
         // We should cache this to speed this up.
 
-       var ajax_callback = function(show_callback) {
+        var ajax_callback = function(show_callback) {
             Category.findAll({}, function(data) {
                 self.render_list(data);
                 show_callback();
@@ -31,15 +32,6 @@ $.Controller("CategoriesController", {
     "history.categories.show subscribe" : function(called, data) {
         this.show(data);
     },
-    "history.categories.index subscribe" : function(called, data) {
-        Qck.bread_controller.loadHashes([
-            {
-                url:"#categories",
-                refname:"Categorias"
-            }
-        ]);
-        $("#main-content").controller().index(data);
-    },
     show: function(data) {
         var self = this;
         Category.findOne({cat_id : data.cat_id, subcat_id : data.subcat_id}, function(cat) {
@@ -52,12 +44,12 @@ $.Controller("CategoriesController", {
             // Fetches all products as JSON.
             Category.findProducts({cat_id:data.cat_id, subcat_id: data.subcat_id, order : data.order}, function(products) {
                 // Uses the product controller to render them.
-				var filter;
-				if (data.cat_id) {
-					filter = ".category-" + data.cat_id;
-				} else if (data.subcat_id) {
-					filter = ".subcategory-" + data.subcat_id;					
-				}
+                var filter;
+                if (data.cat_id) {
+                    filter = ".category-" + data.cat_id;
+                } else if (data.subcat_id) {
+                    filter = ".subcategory-" + data.subcat_id;
+                }
                 $("#main-content").controller().list(products, (self.current_category) ? 'Category: ' + self.current_category.name : undefined, filter);
                 callback($("#main-content").controller().fix_heights());
             });
@@ -80,12 +72,12 @@ $.Controller("CategoriesController", {
         if ($(el).css("display") != "none") {
             $(el).hide("slow");
             $(clickd).parent().find('.ui-icon').removeClass("ui-icon-triangle-1-s")
-                              .addClass("ui-icon-triangle-1-e");
+                    .addClass("ui-icon-triangle-1-e");
         }
         else {
             $(el).show("slow");
             $(clickd).parent().find('.ui-icon').removeClass("ui-icon-triangle-1-e")
-                              .addClass("ui-icon-triangle-1-s");
+                    .addClass("ui-icon-triangle-1-s");
         }
 
     }
@@ -93,6 +85,17 @@ $.Controller("CategoriesController", {
 
 
 $.Model("Category", {
+
+    init: function() {
+        if ($.jStorage.get('cached_categories')) {
+            var array = $.jStorage.get('cached_categories');
+            this.cached_array = $.map(array, function(e) {
+                return new Category(e, true);
+            })
+            this.got_array = true;
+        }
+    },
+
     // Static Methods
     buildRecursively: function(node, depth, callback) {
         var self = this;
@@ -100,16 +103,16 @@ $.Model("Category", {
 
         if (depth == 0) {
             $.get(Qck.services.catalog, { language_id : 1, method : "GetSubcategoryList", category_id: _ret.id },
-                function(data) {
-                    $("subcategory", data).each(function(index, el) {
-                        self.buildRecursively(el, 1, function(ret) {
-                            _ret.subcategories.push(ret);
-                            if (index == $("subcategory", data).length - 1) {
-                                callback(_ret);
-                            }
+                    function(data) {
+                        $("subcategory", data).each(function(index, el) {
+                            self.buildRecursively(el, 1, function(ret) {
+                                _ret.subcategories.push(ret);
+                                if (index == $("subcategory", data).length - 1) {
+                                    callback(_ret);
+                                }
+                            });
                         });
                     });
-                });
         } else {
             callback(_ret);
         }
@@ -119,51 +122,92 @@ $.Model("Category", {
     // Look for encapsulation in http://javascriptmvc.com/docs.html#&who=jQuery.Model for XML compatibility
     findAll : function(params, success, error) {
         var self = this;
+
         if (!self.cached_array) {
+            self.got_array = false;
+
             self.cached_array = [];
             $.get(Qck.services.catalog, { language_id : 1, method : "GetCategoryList" },
-                function(data) {
-                var hits = $("category", data).length - 1;
-                $("category", data).each(function(index, el) {
-                    self.buildRecursively(el, 0, function(ret) {
-                        self.cached_array.push(ret);
-                        if (hits == 0) {
-                            success(self.cached_array);
-                        } else {
-                            hits--;
-                        }
-                    });
-                });
-            }, error);
+                    function(data) {
+                        var hits = $("category", data).length - 1;
+                        $("category", data).each(function(index, el) {
+                            self.buildRecursively(el, 0, function(ret) {
+                                self.cached_array.push(ret);
+                                if (hits == 0) {
+                                    $.jStorage.set('cached_categories', self.cached_array);
+                                    self.got_array = true;
+                                    success(self.cached_array);
+                                } else {
+                                    hits--;
+                                }
+                            });
+                        });
+                    }, error);
         } else {
-            success(self.cached_array);
+            if (self.got_array) {
+                success(self.cached_array);
+            } else {
+                var wait_id = setInterval(function() {
+                    if (self.got_array) {
+                        success(self.cached_array);
+                        clearInterval(wait_id);
+                    }
+                }, 50);
+
+
+            }
         }
     },
     findOne : function(params, success, error) {
         var self = this;
-        if (params.cat_id) {
-            this.findAll({}, function() {
-                for (i in self.cached_array) {
-                    var cat = self.cached_array[i];
-                    if (cat.id == params.cat_id) {
-                        success(cat);
-                        return;
-                    }
-                }
-            }, error);
-        } else if (params.subcat_id) {
-            this.findAll({}, function() {
-                for (i in self.cached_array) {
-                    var cat = self.cached_array[i];
-                    for (j in cat.subcategories) {
-                        var subcat = cat.subcategories[j];
-                        if (subcat.id == params.subcat_id) {
-                            success(subcat);
+        var wait_id = -1;
+        var back = function() {
+            clearInterval(wait_id);
+        };
+        var run = function(callback) {
+            if (params.cat_id) {
+                self.findAll({}, function() {
+                    for (i in self.cached_array) {
+                        var cat = self.cached_array[i];
+                        if (cat.id == params.cat_id) {
+                            success(cat);
+                            if (callback) {
+                                callback();
+                            }
+
                             return;
                         }
                     }
-                }
-            }, error);
+                    if (callback) {
+                        callback();
+                    }
+                }, error);
+            } else if (params.subcat_id) {
+                self.findAll({}, function() {
+                    for (i in self.cached_array) {
+                        var cat = self.cached_array[i];
+                        for (j in cat.subcategories) {
+                            var subcat = cat.subcategories[j];
+                            if (subcat.id == params.subcat_id) {
+                                success(subcat);
+                                if (callback) {
+                                    callback();
+                                }
+                                return;
+                            }
+                        }
+                    }
+                    if (callback) {
+                        callback();
+                    }
+                }, error);
+            }
+        };
+
+        if (self.got_array) {
+            run();
+        } else {
+            run(back);
         }
 
     },
@@ -201,14 +245,24 @@ $.Model("Category", {
 }, {
 
     // Instance methods
-    setup: function(data) {
-        this.id = parseInt($(data).attr("id"));
-        this.code = $(data).find("code").text();
-        this.name = $(data).find("name").text();
-        if ($(data).find("category_id").length) {
-            this.parent_id = parseInt($(data).find("category_id").text());
+    setup: function(data, json) {
+        if (!json) {
+            this.code = $(data).find("code").text();
+            this.name = $(data).find("name").text();
+            if ($(data).find("category_id").length) {
+                this.parent_id = parseInt($(data).find("category_id").text());
+            }
+            this.subcategories = [];
+            this.id = parseInt($(data).attr("id"));
+        } else {
+            this.code = data.code;
+            this.name = data.name;
+            this.parent_id = data.parent_id;
+            this.subcategories = $.map(data.subcategories, function(e) {
+               return new Category(e, true);
+            });
+            this.id = data.id;
         }
-        this.subcategories = [];
     }
     ,
     toString: function() {
@@ -223,7 +277,8 @@ $.Model("Category", {
             array.push({
                 url:"#categories/show&subcat_id=" + current.id.toString(),
                 refname:current.name
-            });                                              }
+            });
+        }
         else {
             array.push({
                 url:"#categories/show&cat_id=" + current.id.toString(),
@@ -251,10 +306,6 @@ $.Model("Category", {
                 }
             }
         }
-        array.push({
-            url:"#categories",
-            refname:"Categorias"
-        });
         return array.reverse();
     }
 });
