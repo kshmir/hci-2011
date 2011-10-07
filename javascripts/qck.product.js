@@ -24,7 +24,9 @@ $.Controller("ProductsController", {
         });
     },
     list: function(products_list, title, filter) {
-
+        if (!filter) {
+            filter = '.box'; // Isotope doesn't like having an undefined filter.
+        }
         if (!$.browser.mozilla) {
             if (!$(".items").length) {
                 $(this.element).html($.View("views/product_list.ejs", {products : products_list, title:title}));
@@ -69,7 +71,10 @@ $.Controller("ProductsController", {
                 }
                 dom_add_items = $(dom_add_items);
 
-                $('.items').isotope('remove', $(dom_delete_items).parent()).isotope('insert', dom_add_items, function() {
+                if (dom_delete_items.length) {
+                    $('.items').isotope('remove', $(dom_delete_items).parent());
+                }
+                $('.items').isotope('insert', dom_add_items, function() {
                     $('.items').isotope({
                         filter: filter
                     }).isotope('reLayout');
