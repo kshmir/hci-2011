@@ -262,6 +262,8 @@ $.Controller("UserController", {
 
 // Model Definition.
 
+// Model Definition.
+
 $.Model("User", {
     // Static Methods
 
@@ -302,6 +304,8 @@ $.Model("User", {
     //account: is a mandatory param
     //this method receives an account and creates an User
     createAccount : function(params, success, error) {
+
+
         params.method = "CreateAccount";
         params.account = $.View("xml_renders/user.ejs", params);
 
@@ -330,7 +334,17 @@ $.Model("User", {
     //authentication_token : is a mandatory param
     //this method validates de user and token, and construct a User.
     getAccount : function(params, success, error) {
+        //validates user field is not empty
+        if (params.username == "") {
+            error:("4");
+        }
+
+        //validates token field is not empty
+        if (params.token == "") {
+            error:("6");
+        }
         params.method = "GetAccount";
+
         $.ajax({
             url: Qck.services.security,
             data: params,
@@ -363,6 +377,32 @@ $.Model("User", {
     //account: is a mandatory param
     //this method receives an account and updates an User.
     updateAccount : function(params, success, error) {
+        //validates user field is not empty
+        if (params.username == "") {
+            error:("4");
+        }
+
+        //validates token field is not empty
+        if (params.token == "") {
+            error:("6");
+        }
+        //validates account field is not empty
+        if (params === 'undifined' || params == null) {
+            error:("7");
+        }
+        //validates de amount of characters in the field name
+        if ($.Model.validateLengthOf(param.name, 1, 80) === 'undifined') {
+            error:("109");
+        }
+        //validates de amount of characters in the field email
+        if ($.Model.validateLengthOf(param.email, 1, 128) === 'undifined') {
+            error:("110");
+        }
+        //validates de Date format
+        if ($.Model.validateFormatOf(param.name, "^(19|20)[0-9][0-9]([-])(0[1-9]|1[012])\2(0[1-9]|[12][0-9]|3[01])$") === 'undifined') {
+            error:("111");
+        }
+
         params.method = "UpdateAccount";
         params.account = $.View("xml_renders/user.ejs", params.account);
         $.ajax({
@@ -453,6 +493,10 @@ $.Model("User", {
         this.last_login_date = new Date($(data.user).find("last_login_date").text());
         this.last_password_change = $(data.user).find("last_password_change").text();
     }
+
+
+
+
 }
         )
         ;
