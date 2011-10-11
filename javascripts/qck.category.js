@@ -35,6 +35,7 @@ $.Controller("CategoriesController", {
     show: function(data) {
         var self = this;
         Category.findOne({cat_id : data.cat_id, subcat_id : data.subcat_id}, function(cat) {
+            self.last_category = self.current_category;
             self.current_category = cat;
         });
         if (self.current_category != undefined) {
@@ -68,6 +69,7 @@ $.Controller("CategoriesController", {
     item_toggle : function(id, clickd) {
         // Hides all categories expanded.
 
+
         var el = $("#category-" + id.toString() + "-subcats");
         if ($(el).css("display") != "none") {
             $(el).hide("slow");
@@ -79,6 +81,7 @@ $.Controller("CategoriesController", {
             $(clickd).parent().find('.ui-icon').removeClass("ui-icon-triangle-1-e")
                     .addClass("ui-icon-triangle-1-s");
         }
+
 
     }
 });
@@ -259,7 +262,7 @@ $.Model("Category", {
             this.name = data.name;
             this.parent_id = data.parent_id;
             this.subcategories = $.map(data.subcategories, function(e) {
-               return new Category(e, true);
+                return new Category(e, true);
             });
             this.id = data.id;
         }

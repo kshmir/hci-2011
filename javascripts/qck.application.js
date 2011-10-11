@@ -3,12 +3,42 @@ $.Controller("ApplicationController", {
         this.guide_animation();
         var self = this;
 
+        var last_interval;
         $(this.element).find(".search").live('keypress', function(e) {
+            var _self = this;
             if (e.which == 13) {
                 $(this).blur();
                 self.search_submit($(this).val());
                 e.preventDefault();
+                $(_self).qtip('hide');
                 return false;
+            } else {
+                if (!Qck.current_user.helped || !Qck.current_user.helped.search) {
+                    clearTimeout(last_interval);
+                    last_interval = setTimeout(function() {
+                        $(_self).qtip({
+                            content: {
+                                text: 'Presione enter para una busqueda completa.'
+                            },
+                            position: {
+                                my: 'left center', // Use the corner...
+                                at: 'right center' // ...and opposite corner
+                            },show: false,
+                            hide: false, // Don't specify a hide event either!
+                            style: {
+                                classes: 'ui-tooltip-shadow ui-tooltip-' + 'blue'
+                            }
+                        });
+                        $(_self).qtip('show');
+                        Qck.current_user.helped = Qck.current_user.helped || {};
+                        Qck.current_user.helped.search = true;
+                        setTimeout(function() {
+                            $(_self).qtip('hide');
+                        }, 10000);
+
+                    }, 1000);
+                }
+
             }
         });
 

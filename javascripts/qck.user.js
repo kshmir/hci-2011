@@ -4,6 +4,11 @@ $.Controller("UserController", {
 
         this.sign_in_unique = false;
 
+        if ($.jStorage.get('current_user')) {
+            Qck.current_user = new User($.jStorage.get('current_user'), true);
+            $('.topbar').html($.View("views/logged.ejs", {username: Qck.current_user.name}));
+        }
+        $('.topbar').fadeIn("slow");
 
         $(".login-form input").live('keypress', function(e) {
             if (e.which == 13) {
@@ -14,7 +19,6 @@ $.Controller("UserController", {
             }
 
         });
-
     },
     "history.users.sign_up subscribe" : function(called, data) {
         $('#main-content').fadeOut("slow", function() {
@@ -33,6 +37,7 @@ $.Controller("UserController", {
             var user = $(".login-form").find('#username').val();
             var password = $(".login-form").find('#pass').val();
             var success = function(user) {
+                $.jStorage.set('current_user', user);
                 Qck.current_user = user;
                 $("#sign_in").qtip('hide');
                 $(el).html($.View("views/logged.ejs", {username: user.name}))
@@ -228,6 +233,7 @@ $.Controller("UserController", {
                         .fadeIn("slow");
             });
             Qck.current_user = undefined;
+            $.jStorage.deleteKey('current_user');
         }, function() {
         });
         return false;
@@ -256,8 +262,26 @@ $.Controller("UserController", {
             el.val(el.data("old"));
             el.addClass("soft");
         }
-    }
+    },
 
+    // User Settings
+    "history.users.settings subscribe":function(called, data){
+        $('#main-content').fadeOut("slow", function() {
+            $('#main-content')
+                    .html($.View("views/user_settings.ejs"))
+                    .fadeIn("slow");
+        });
+    },
+
+
+    // User Address
+    "history.users.create_address subscribe":function(called, data){
+        $('#main-content').fadeOut("slow", function() {
+            $('#main-content')
+                    .html($.View("views/address_register.ejs"))
+                    .fadeIn("slow");
+        });
+    }
 });
 
 // Model Definition.
@@ -481,17 +505,30 @@ $.Model("User", {
     ,
 
     //Constructor
-    setup: function(data) {
+    setup: function(data, json) {
 
-        this.token = data.param.authentication_token;
-        this.id = $(data.user).find("account").attr("id");
-        this.username = $(data.user).find("username").text();
-        this.name = $(data.user).find("name").text();
-        this.email = $(data.user).find("email").text();
-        this.birth_date = new Date($(data.user).find("birth_date").text());
-        this.created_date = new Date($(data.user).find("created_date").text());
-        this.last_login_date = new Date($(data.user).find("last_login_date").text());
-        this.last_password_change = $(data.user).find("last_password_change").text();
+        if (!json) {
+            this.token = data.param.authentication_token;
+            this.id = $(data.user).find("account").attr("id");
+            this.username = $(data.user).find("username").text();
+            this.name = $(data.user).find("name").text();
+            this.email = $(data.user).find("email").text();
+            this.birth_date = new Date($(data.user).find("birth_date").text());
+            this.created_date = new Date($(data.user).find("created_date").text());
+            this.last_login_date = new Date($(data.user).find("last_login_date").text());
+            this.last_password_change = $(data.user).find("last_password_change").text();
+        } else {
+            this.token = data.token;
+            this.id = data.id;
+            this.username = data.username;
+            this.name = data.name;
+            this.email = data.email;
+            this.birth_date = data.birth_date;
+            this.created_date = data.created_date;
+            this.last_login_date = data.last_login_date;
+            this.last_password_change = data.last_password_change;
+            this.helped = data.helped;
+        }
     }
 
 

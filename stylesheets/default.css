@@ -80,7 +80,7 @@ body a {;
  	background: #0099f7 url(../images/top_gradient.png) repeat-x 0 bottom;
  	color: white;
 }
-#header a, #header a:visited, #header:a:hover {
+#header a, #header a:visited, #header a:hover {
 	color: white!important;
 }
 
@@ -105,6 +105,11 @@ body a {;
 
 #header .logo {
 	padding: 20px 0;
+}
+
+#header .logo a {
+	text-decoration:none;
+    font-weight:bold;
 }
 
 #header .search {
@@ -172,6 +177,10 @@ p.first {
 
 #header .localization span {
 	float:left;
+}
+
+#header .topbar {
+    display:none;
 }
 
 #header .localization ul li{
@@ -508,7 +517,7 @@ h1,h2,h3,h4,h5,h6 {
 .form hr {
 	border-top: 1px dashed #ccc;
 	margin: 10px 0;
-	height: 0px;
+	height: 0;
 }
 
 .form .form_item .form_text, .form .form_item .input {
@@ -590,6 +599,11 @@ h1,h2,h3,h4,h5,h6 {
 	background-color: #063d66;
 }
 
+#navigation {
+    width: 460px;
+    height: 31px;
+}
+
 
 /******************* LOADER               ******************/ 
 
@@ -610,7 +624,6 @@ h1,h2,h3,h4,h5,h6 {
   z-index: 1;
   display:none;
   opacity:0;
-  visibility:none;
 }
 
 /**** Isotope CSS3 transitions ****/
@@ -689,4 +702,23 @@ h1,h2,h3,h4,h5,h6 {
 .autocomplete-item img {
     float:left;
     margin-right:5px;
+}
+
+.settings-content {
+
+    width: 400px;
+    margin: 20px auto;
+}
+
+.address-list li {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.bordered {
+    border:1px solid #EEE;
+}
+
+.content {
+    margin-bottom: 10px;
 }
