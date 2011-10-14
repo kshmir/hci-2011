@@ -43,7 +43,8 @@ $.Controller("UserController", {
                 $(el).html($.View("views/logged.ejs", {username: user.name}))
                         .fadeIn("slow");
                 $(".login-form").remove();
-
+                Qck.cart_controller.on_login();
+                window.location.hash = "#";
             };
             var error = function(error_number) {
                 var msg = '';
@@ -177,7 +178,7 @@ $.Controller("UserController", {
             }
 
                     , function() {
-                        alert('usuario creado');
+                        window.location.hash = "#"
                     }, function() {
                         alert('usuario no creado');
                     });
@@ -187,58 +188,58 @@ $.Controller("UserController", {
 
     "#sign_in click": function(called, data) {
         var self = this;
-        if (!this.sign_in_unique) {
-            this.sign_in_unique = true;
-
-            $("#sign_in").removeData('qtip')
-                    .qtip({
-                              content: {
-                                  text: $.View("views/login.ejs"),
-                                  title: {
-                                      text: 'Sign in:',
-                                      button: true
-                                  }
-                              },
-                              events: {
-                                  hide: function(event, api) {
-                                      self.sign_in_unique = false;
-                                  }
-                              },
-                              position: {
-                                  my: 'top right', // Use the corner...
-                                  at: 'bottom center' // ...and opposite corner
-                              },
-                              show: {
-                                  event: false, // Don't specify a show event...
-                                  ready: true, // ... but show the tooltip when ready
-                                  effect: function(offset) {
-                                      $(this).slideDown(200); // "this" refers to the tooltip
-                                      $('#username').click();
-                                  }
-                              },
-                              hide: true, // Don't specify a hide event either!
-                              style: {
-                                  classes: 'ui-tooltip-shadow ui-tooltip-' + 'dark'
+        $("#sign_in").removeData('qtip')
+                .qtip({
+                          content: {
+                              text: $.View("views/login.ejs"),
+                              title: {
+                                  text: 'Sign in:',
+                                  button: true
                               }
-                          });
-        }
+                          },
+                          events: {
+                              hide: function(event, api) {
+                                  api.destroy();
+                              }
+                          },
+                          position: {
+                              my: 'top right', // Use the corner...
+                              at: 'bottom center' // ...and opposite corner
+                          },
+                          show: {
+                              event: false, // Don't specify a show event...
+                              ready: true, // ... but show the tooltip when ready
+                              effect: function(offset) {
+                                  $(this).slideDown(200); // "this" refers to the tooltip
+                                  $('#username').click();
+                              }
+                          },
+                          hide: false,
+                          style: {
+                              classes: 'ui-tooltip-shadow ui-tooltip-' + 'dark'
+                          }
+                      });
         return false;
     },
 
     "#sign_out click" : function() {
-        Qck.current_user.signOut(function() {
-            $('.topbar').fadeOut("slow", function() {
-                $('.topbar')
-                        .html($.View("views/sign_in.ejs"))
-                        .fadeIn("slow");
+        if (Qck.current_user) {
+            Qck.current_user.signOut(function() {
+                $('.topbar').fadeOut("slow", function() {
+                    $('.topbar')
+                            .html($.View("views/sign_in.ejs"))
+                            .fadeIn("slow");
+                });
+                Qck.current_user = undefined;
+                $.jStorage.deleteKey('current_user');
+                Qck.cart_controller.on_logout();
+                window.location.hash = "#";
+            }, function() {
             });
-            Qck.current_user = undefined;
-            $.jStorage.deleteKey('current_user');
-        }, function() {
-        });
+        }
         return false;
     },
-    ".login-form input focus": function(el) {
+    ".login-form input[type!=button] focus": function(el) {
         el = $(el);
         if (!(el.attr("id") == "pass")) {
             if (el.attr("id") == "password") {
@@ -265,24 +266,167 @@ $.Controller("UserController", {
     },
 
     // User Settings
-    "history.users.settings subscribe":function(called, data){
+    "history.users.user_panel subscribe":function(called, data) {
+        var self = this;
+        Qck.app_controller.show_loader();
         $('#main-content').fadeOut("slow", function() {
             $('#main-content')
-                    .html($.View("views/user_settings.ejs"))
-                    .fadeIn("slow");
+                    .html($.View("views/user_settings.ejs"));
+            Address.getAddressList({
+                username: Qck.current_user.username,
+                authentication_token: Qck.current_user.token
+            }, function(data) {
+                Order.getOrderList({
+                    username: Qck.current_user.username,
+                    authentication_token: Qck.current_user.token
+                }, function(data) {
+                    if (data.length > 0) {
+                        var cont = 0;
+                        var len = data.length - 1;
+                        $.each(data, function(i, order) {
+                            var _addr_callback = function(address) {
+                                $("ul.order-list").prepend(
+                                        $.View('views/order_item.ejs', {
+                                            order: order,
+                                            address: address
+                                        }));
+                                if (cont == len) {
+                                    Qck.app_controller.hide_loader();
+                                    $('#main-content').fadeIn('slow');
+                                }
+                                else {
+                                    cont++;
+                                }
+                            };
+                            if (order.address_id) {
+                                Address.getAddress({
+                                    address_id : order.address_id,
+                                    username : Qck.current_user.username,
+                                    authentication_token: Qck.current_user.token
+                                }, _addr_callback);
+                            } else {
+                                _addr_callback();
+                            }
+                        });
+                    } else {
+                        $('#main-content').fadeIn('slow');
+                        Qck.app_controller.hide_loader();
+                    }
+                });
+
+                $(data).each(function(index, el) {
+                    $("ul.address-list").prepend(
+                            $.View('views/address_item.ejs', el)
+                            );
+                });
+
+            });
         });
     },
 
 
     // User Address
-    "history.users.create_address subscribe":function(called, data){
+    "history.users.create_address subscribe":function(called, data) {
+        Qck.current_language = Qck.current_language || 1;
+        Qck.app_controller.show_loader();
         $('#main-content').fadeOut("slow", function() {
             $('#main-content')
-                    .html($.View("views/address_register.ejs"))
-                    .fadeIn("slow");
+                    .html($.View("views/address_register.ejs"));
+            Country.getCountryList({language_id:Qck.current_language}, function(data) {
+                $(data).each(function(index, e) {
+                    $("#reg-country-select").append("<option value=\"" + e.country_id + "\">" + e.name + "</option>");
+                    if (index == 0) {
+                        $("#reg-country-select option:first").attr("selected", "selected");
+                    }
+                });
+                $("#reg-country-select").change();
+                Qck.app_controller.hide_loader();
+                $('#main-content').fadeIn('slow');
+            });
+        });
+    },
+    "history.users.edit_address subscribe":function(called, data) {
+        Qck.current_language = Qck.current_language || 1;
+        Qck.app_controller.show_loader();
+
+        $('#main-content').fadeOut("slow", function() {
+            Address.getAddress({
+                address_id : data.id,
+                username : Qck.current_user.username,
+                authentication_token: Qck.current_user.token
+            }, function(addr) {
+                $('#main-content')
+                        .html($.View("views/address_register.ejs"));
+
+                Country.getCountryList({language_id:Qck.current_language}, function(data) {
+                    $(data).each(function(index, e) {
+                        $("#reg-country-select").append("<option value=\"" + e.country_id + "\">" + e.name + "</option>");
+                        if (e.country_id == addr.country_id) {
+                            $("#reg-country-select option:first").attr("selected", "selected");
+                        }
+                    });
+
+                    $('#reg-full_name').val(addr.full_name);
+                    $('#reg-address-1').val(addr.address_line_1);
+                    $('#reg-address-2').val(addr.address_line_2);
+                    $('#reg-city').val(addr.city);
+                    $('#reg-zip').val(addr.zip_code);
+                    $('#reg-phone').val(addr.phone_number);
+
+                    $("#reg-country-select").change();
+                    $("#addr-button").data('edit', addr.address_id);
+                    $("#addr-button").val("Update Address");
+                    Qck.app_controller.hide_loader();
+                    $('#main-content').fadeIn('slow');
+                });
+            });
+        });
+
+    },
+    "#reg-country-select change" : function(el) {
+        State.getStateList({language_id:Qck.current_language, country_id:$(el).val()}, function(data) {
+            $("#reg-state-select option").remove();
+            $(data).each(function(index, e) {
+                $("#reg-state-select").append("<option value=\"" + e.state_id + "\">" + e.name + "</option>");
+                if (index == 0) {
+                    $("#reg-state-select option:first").attr("selected", "selected");
+                }
+            });
+            $('#main-content').fadeIn('slow');
         });
     }
-});
+    ,
+    "#addr-button click": function(el) {
+        var params = {
+            address :{
+                full_name:      $('#reg-full_name').val(),
+                address_line_1: $('#reg-address-1').val(),
+                address_line_2: $('#reg-address-2').val(),
+                country_id:     $('#reg-country-select').val(),
+                state_id:       $('#reg-state-select').val(),
+                city:           $('#reg-city').val(),
+                zip_code:       $('#reg-zip').val(),
+                phone_number:   $('#reg-phone').val()
+            },
+            username: Qck.current_user.username,
+            authentication_token: Qck.current_user.token
+        };
+
+        if (!$("#addr-button").data('edit')) {
+            Address.createAddress(params, function(response) {
+                alert(response);
+                window.history.go(-1);
+            });
+        } else {
+            params.address.address_id = $(el).data('edit');
+            Address.updateAddress(params, function(response) {
+                alert(response);
+                window.history.go(-1);
+            });
+        }
+    }
+})
+        ;
 
 // Model Definition.
 
@@ -299,7 +443,7 @@ $.Model("User", {
 
     signIn : function(params, success, error) {
         params.method = "SignIn";
-        self = this;
+        var self = this;
         $.ajax({
             url: Qck.services.security,
             data: params,
@@ -360,12 +504,12 @@ $.Model("User", {
     getAccount : function(params, success, error) {
         //validates user field is not empty
         if (params.username == "") {
-            error:("4");
+            error("4");
         }
 
         //validates token field is not empty
         if (params.token == "") {
-            error:("6");
+            error("6");
         }
         params.method = "GetAccount";
 
@@ -403,28 +547,28 @@ $.Model("User", {
     updateAccount : function(params, success, error) {
         //validates user field is not empty
         if (params.username == "") {
-            error:("4");
+            error("4");
         }
 
         //validates token field is not empty
         if (params.token == "") {
-            error:("6");
+            error("6");
         }
         //validates account field is not empty
         if (params === 'undifined' || params == null) {
-            error:("7");
+            error("7");
         }
         //validates de amount of characters in the field name
-        if ($.Model.validateLengthOf(param.name, 1, 80) === 'undifined') {
-            error:("109");
+        if ($.Model.validateLengthOf(param.name, 1, 80) === undefined) {
+            error("109");
         }
         //validates de amount of characters in the field email
-        if ($.Model.validateLengthOf(param.email, 1, 128) === 'undifined') {
-            error:("110");
+        if ($.Model.validateLengthOf(param.email, 1, 128) === undefined) {
+            error("110");
         }
         //validates de Date format
-        if ($.Model.validateFormatOf(param.name, "^(19|20)[0-9][0-9]([-])(0[1-9]|1[012])\2(0[1-9]|[12][0-9]|3[01])$") === 'undifined') {
-            error:("111");
+        if ($.Model.validateFormatOf(param.name, "^(19|20)[0-9][0-9]([-])(0[1-9]|1[012])\2(0[1-9]|[12][0-9]|3[01])$") === undefined) {
+            error("111");
         }
 
         params.method = "UpdateAccount";
@@ -530,11 +674,5 @@ $.Model("User", {
             this.helped = data.helped;
         }
     }
-
-
-
-
-}
-        )
-        ;
+});
 

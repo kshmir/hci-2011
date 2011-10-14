@@ -77,7 +77,7 @@ $.Model("Address", {
                     success: function(data) {
                            if ($("response", data).attr("status") == "ok") {
                                     //it retrieves an Address
-                                     var address = new Address(item);
+                                     var address = new Address(data);
                                      success(address);
                                 }
                                 else {
@@ -89,22 +89,7 @@ $.Model("Address", {
                         } );
 
             }
-
-
- }
-,
-
-
-    {
-// Instance methods
-
-        //updateAddress method
-        //updateAddress params:
-        //username : is a mandatory param
-        //authentication_token : is a mandatory param
-        //address: is a mandatory param (the new address)
-        //this method transform the address param into a XML, and updates the address
-
+    ,
         updateAddress : function(params, success, error) {
                 params.method = "UpdateAddress";
                 params.address = $.View("xml_renders/address.ejs", params.address);
@@ -126,13 +111,28 @@ $.Model("Address", {
 
                         } );
 
-            } ,
+            }
+ }
+,
+
+
+    {
+// Instance methods
+
+        //updateAddress method
+        //updateAddress params:
+        //username : is a mandatory param
+        //authentication_token : is a mandatory param
+        //address: is a mandatory param (the new address)
+        //this method transform the address param into a XML, and updates the address
+
+
 
 
      //Constructor
      setup: function(data) {
 
-            this.address_id = $(data).find("address").attr("id");
+            this.address_id = $(data).find("address").attr("id") || $(data).attr("id");
             this.full_name = $(data).find("full_name").text();
             this.address_line_1 = $(data).find("address_line_1").text();
             this.address_line_2 = $(data).find("address_line_2").text();

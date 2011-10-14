@@ -51,7 +51,7 @@ $.Controller("CategoriesController", {
                 } else if (data.subcat_id) {
                     filter = ".subcategory-" + data.subcat_id;
                 }
-                $("#main-content").controller().list(products, (self.current_category) ? 'Category: ' + self.current_category.name : undefined, filter);
+                $("#main-content").controller().list(products, (self.current_category) ? 'Category: ' + self.current_category.name : undefined, filter, data.order);
                 callback($("#main-content").controller().fix_heights());
             });
         };

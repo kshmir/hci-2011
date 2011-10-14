@@ -1,4 +1,4 @@
-<li class="cart-item cart-item-<%=this.item.id%>">
+<li class="cart-item cart-item-<%=this.item.id%>" id="<%=(this.sp)? 'sp-' : ''%>cart-item-<%=this.item.id%>">
     <div class="cartlink">
         <img src="<%=this.item.image_url%>" alt="img" height="60"/>
 
@@ -23,5 +23,4 @@
         </div>
         <div class="clear"></div>
     </div>
-
 </li>

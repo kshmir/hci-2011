@@ -1,12 +1,10 @@
-
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<html xmlns='http://www.w3.org/1999/xhtml'>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Kwik-E-Mart</title>
     <meta content='text/html; charset=utf-8' http-equiv='Content-type'/>
+    <meta content='text/xml; charset=utf-8' http-equiv='Content-type'/>
     <link href="stylesheets/960_12_col.css?1316458914" media="screen" rel="stylesheet" type="text/css"/>
     <link href="stylesheets/default.css?1316490955" media="screen" rel="stylesheet" type="text/css"/>
     <link href="stylesheets/style.css?1316458914" media="screen" rel="stylesheet" type="text/css"/>
@@ -24,9 +22,9 @@
                     <a href="#">Kwik-E-Mart</a>
                 </h1>
 
-                <div class='topbar prefix_4 grid_5'>
+                <div class='topbar prefix_3 grid_6'>
                     <span id='sign_in'><a href="/">Sign in</a></span> or <span id='sign_up'><a href="#users/sign_up">Sign
-                    up</a><span/> | <a href="/languages">English ∆</a>
+                    up</a></span> | <a href="/languages">English ∆</a>
                 </div>
                 <div class='clear'></div>
 
@@ -56,7 +54,10 @@
                         <div class="list">
                             <ul>
                                 <li class="last cartlink">
-                                    Check my cart
+                                    <a href="#cart">Check my cart</a>
+                                </li>
+                                <li class="last cartlink">
+                                    <a href="#" class="clear-cart">Clear my cart</a>
                                 </li>
                             </ul>
                         </div>
@@ -88,49 +89,27 @@
 </div>
 <div id='footer'>
     <div class='container_12'>
-        <div class='grid_4'>
+        <div class='prefix_2 grid_8'>
             <h3>
-                Categorias:
+                Copyright Murcielagos - 2011
             </h3>
-            <ul>
-                <li>
-                    <a href="#!/books">Books</a>
-                </li>
-                <li>
-                    <a href="#!/music">Music</a>
-                </li>
-                <li>
-                    <a href="#!/electronics">Electronics</a>
-                </li>
-                <li>
-                    <a href="#!/movies">Movies</a>
-                </li>
-            </ul>
-        </div>
-        <div class='grid_4'>
-            <h3>
-                Usuario:
-            </h3>
-            <ul>
-                <li>
-                    <a href="#!/sign_in">Login</a>
-                </li>
-                <li>
-                    <a href="#!/sign_up">Register</a>
-                </li>
-            </ul>
-        </div>
-        <div class='grid_4'>
-            <h3>
-                About Us:
-            </h3>
-            <ul>
-                <li>
-                    <a href="#!/about_us">About Us</a>
-                </li>
-            </ul>
+            <div class="memberlist">
+                Ortiz, Ezequiel | Pereyra, Cristian | Videla, Máximo
+            </div>
         </div>
     </div>
+</div>
+<div class="alert-message" id="sync-message" title="Download complete">
+	<p>
+		<span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 50px 0;"></span>
+        <span class='sync-message-text'>You already have an unconfirmed cart. Would you like to add the selected items to the old cart, or would you like to forget them?</span>
+	</p>
+	<p>
+		The current cart contains <span class='current-cart-n'></span> items, totalling <span class='current-cart-value'></span>$.
+	</p>
+    <p>
+		The unconfirmed cart contains <span class='unconfirmed-cart-n'></span> items, totalling <span class='unconfirmed-cart-value'></span>$.
+	</p>
 </div>
 </body>
 </html>

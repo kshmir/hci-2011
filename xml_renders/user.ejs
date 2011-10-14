@@ -1,7 +1,7 @@
 <account>
-    <username><%= this.username %></username>
-    <name><%= this.name%></name>
-    <password><%= this.password%></password>
-    <email><%= this.email%></email>
-    <birth_date><%= this.birth_date%></birth_date>
+    <username><%= encodeURI(this.username) %></username>
+    <name><%= encodeURI(this.name) %></name>
+    <password><%= encodeURI(this.password) %></password>
+    <email><%= encodeURI(this.email) %></email>
+    <birth_date><%= encodeURI(this.birth_date) %></birth_date>
 </account>

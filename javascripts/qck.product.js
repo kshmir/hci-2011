@@ -23,7 +23,7 @@ $.Controller("ProductsController", {
             return false;
         });
     },
-    list: function(products_list, title, filter) {
+    list: function(products_list, title, filter, orderby) {
         if (!filter) {
             filter = '.box'; // Isotope doesn't like having an undefined filter.
         }
@@ -46,7 +46,10 @@ $.Controller("ProductsController", {
                     animationEngine:engine
                 });
 
-
+                // M*****ing fix
+                setTimeout(function() {
+                    $('.items').isotope('reLayout');
+                }, 100);
             } else {
 
                 var to_delete_products = ([].union(this.products, Product.comparer)).subtract(products_list, Product.comparer);
@@ -79,6 +82,9 @@ $.Controller("ProductsController", {
                         filter: filter
                     }).isotope('reLayout');
                 });
+                if (orderby) {
+                    $('.items').isotope({ sortBy: 'name', sortAscending: (orderby == 'ASC')});
+                }
             }
 
         } else {

@@ -3,17 +3,21 @@ $.Controller("ApplicationController", {
         this.guide_animation();
         var self = this;
 
+        this.hides = 0;
+
         var last_interval;
+
+        var changed = false;
         $(this.element).find(".search").live('keypress', function(e) {
             var _self = this;
-            if (e.which == 13) {
+            if (e.which == 13 && !changed) {
                 $(this).blur();
-                self.search_submit($(this).val());
+                window.location.hash = '#products/search&criteria=' + $(this).val();
                 e.preventDefault();
                 $(_self).qtip('hide');
                 return false;
             } else {
-                if (!Qck.current_user.helped || !Qck.current_user.helped.search) {
+                if (!Qck.current_user || !Qck.current_user.helped || !Qck.current_user.helped.search) {
                     clearTimeout(last_interval);
                     last_interval = setTimeout(function() {
                         $(_self).qtip({
@@ -30,8 +34,10 @@ $.Controller("ApplicationController", {
                             }
                         });
                         $(_self).qtip('show');
-                        Qck.current_user.helped = Qck.current_user.helped || {};
-                        Qck.current_user.helped.search = true;
+                        if (Qck.current_user) {
+                            Qck.current_user.helped = Qck.current_user.helped || {};
+                            Qck.current_user.helped.search = true;
+                        }
                         setTimeout(function() {
                             $(_self).qtip('hide');
                         }, 10000);
@@ -48,11 +54,13 @@ $.Controller("ApplicationController", {
                 return false;
             },
             change: function(event, ui) {
+                changed = true;
                 return false;
             },
             select: function(event, ui) {
+                changed = false;
                 self.change_view("#main-content", function(callback) {
-                    $("#main-content").controller().show(ui.item);
+                    window.location.hash = "#products/show&id=" + ui.item.id;
                     callback();
                 }, 'isotope');
                 return false;
@@ -126,14 +134,15 @@ $.Controller("ApplicationController", {
         }
     },
     change_view: function(selector, ajax, method) {
+        var self = this;
         if (!method || method == 'fade') {
 
             $(selector).fadeOut("slow", function() {
-                $(".loader").show();
+                self.show_loader();
                 $(selector).show().html($.View("views/loading.ejs"));
                 var appear_callback = function(post_callback) {
                     $(selector).hide().fadeIn("slow", function() {
-                        $(".loader").hide();
+                        self.hide_loader();
                         if (post_callback) {
                             post_callback();
                         }
@@ -142,9 +151,9 @@ $.Controller("ApplicationController", {
                 ajax(appear_callback);
             });
         } else if (method == 'isotope') {
-            $(".loader").show();
+            self.show_loader();
             var appear_callback = function(post_callback) {
-                $(".loader").hide();
+                self.hide_loader();
                 if (post_callback) {
                     post_callback();
                 }
@@ -153,6 +162,20 @@ $.Controller("ApplicationController", {
         }
     },
 
+    hide_loader: function() {
+        --this.hides;
+        console.log('hide');
+        if (this.hides == 0) {
+            $(".loader").hide();
+        } else if (this.hides < 0) {
+            this.hides = 1;
+        }
+    },
+    show_loader: function() {
+        console.log('show');
+        this.hides++;
+        $(".loader").show();
+    },
     search_submit: function(text) {
         window.location.hash = "products/search&criteria=" + text;
     },

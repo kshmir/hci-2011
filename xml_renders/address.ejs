@@ -1,10 +1,14 @@
-<address>
-    <full_name><%= this.full_name%></full_name>
-    <address_line_1><%= this.address_line_1%></address_line_1>
-    <address_line_2><%= this.address_line_2%></address_line_2>
-    <country_id><%= this.country_id%></country_id>
-    <state_id><%= this.state_id%></state_id>
-    <city><%= this.city%></city>
-    <zip_code><%= this.zip_code%></zip_code>
-    <phone_number><%= this.phone_number%></phone_number>
+<address
+        <% if (this.address_id) {%>
+            id="<%= this.address_id %>"
+        <% } %>
+        >
+    <full_name><%= encodeURI(this.full_name) %></full_name>
+    <address_line_1><%= encodeURI(this.address_line_1) %></address_line_1>
+    <address_line_2><%= encodeURI(this.address_line_2) %></address_line_2>
+    <country_id><%= encodeURI(this.country_id) %></country_id>
+    <state_id><%= encodeURI(this.state_id) %></state_id>
+    <city><%= encodeURI(this.city) %></city>
+    <zip_code><%= encodeURI(this.zip_code) %></zip_code>
+    <phone_number><%= encodeURI(this.phone_number) %></phone_number>
 </address>

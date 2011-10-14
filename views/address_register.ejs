@@ -1,33 +1,43 @@
 <div class="form box">
-    <h3 class="register-username-title">Address creation form</h3>
-
+    <h3 class="addr-address-title">Address creation form</h3>
     <form action="/" method="post">
         <div class="form_item">
-            <span class="label register-username-label">Username:</span>
-            <input type="text" id="reg-username" name="username" class="register-username-label input"/>
+            <label class="label addr-full_name-label" for="reg-full_name">Nombre:</label>
+            <input type="text" id="reg-full_name" name="full_name" class="addr-full_name input"/>
         </div>
         <div class="form_item">
-            <span class="label register-name-label">Name:</span>
-            <input type="text" id="reg-name" name="name" class="register-name-label input"/>
+            <label class="label addr-address-1-label" for="reg-address-1">Address Line 1:</label>
+            <input type="text" id="reg-address-1" name="address-1" class="addr-address-1 input"/>
         </div>
         <div class="form_item">
-            <span class="label register-password-label">Password:</span>
-            <input type="password" id="reg-password" name="password" class="register-name-label input"/>
+            <label class="label addr-address-2-label" for="reg-address-2">Address Line 2:</label>
+            <input type="text" id="reg-address-2" name="address-2" class="addr-address-2 input"/>
         </div>
         <div class="form_item">
-            <span class="label register-password-label">Password:</span>
-            <input type="password" id="reg-password2" name="password" class="register-name-label input"/>
+            <label class="label addr-country-label" for="reg-country-select">Country:</label>
+            <select name="country" id="reg-country-select" class="input">
+            </select>
         </div>
         <div class="form_item">
-            <span class="label register-email-label">Email:</span>
-            <input type="text" id="reg-email" name="email" class="register-email-label input"/>
+            <label class="label addr-state-label" for="reg-state-select">State:</label>
+            <select name="state" id="reg-state-select" class="input">
+            </select>
         </div>
         <div class="form_item">
-            <span class="label register-birth-date-label">Birth date:</span>
-            <input type="text" id="reg-birth-date" name="email" class="register-email-label input"/>
+            <label class="label addr-city-label" for="reg-city">City:</label>
+            <input type="text" id="reg-city" name="city" class="addr-city input"/>
         </div>
         <div class="form_item">
-            <input type="button" value="Register" class="register-button-label form_button"/>
+            <label class="label addr-city-label" for="reg-zip">ZIP Code:</label>
+            <input type="text" id="reg-zip" name="city" class="addr-zip input"/>
+        </div>
+        <div class="form_item">
+            <label class="label addr-phone-label" for="reg-phone">Phone Number:</label>
+            <input type="text" id="reg-phone" name="city" class="addr-phone input"/>
+        </div>
+        <div class="form_item">
+            <label for="addr-button"> </label>
+            <input type="button" value="Create Address" id='addr-button' class="addr-button-label form_button"/>
         </div>
     </form>
 </div>

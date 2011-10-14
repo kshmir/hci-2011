@@ -1,0 +1,27 @@
+<div class="form box cart-container">
+    <h3 class="cart-container-title">Order #<%=this.order.order_id%></h3>
+
+    <div class="settings-content">
+        <div class="bordered content">
+            <div class="order-map"></div>
+            <ul class="list">
+                <li>
+                    <span class="order-address-name-label">Address Name:</span>
+                    <span class="order-address-name"> <%= this.address.full_name %></span>
+                </li>
+                <li>
+                    <span class="order-address-addr1-label">Address Line 1:</span>
+                    <span class="order-address-addr1"><%= this.address.address_line_1 %></span>
+                </li>
+                <li>
+                    <span class="order-address-addr2-label">Address Line 2:</span>
+                    <span class="order-address-addr2"><%= this.address.address_line_2 %></span>
+                </li>
+                <li>
+                    <span class="order-status-label">Order Status:</span>
+                    <span class="order-status"><%= this.order.getStatus() %></span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

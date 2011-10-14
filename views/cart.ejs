@@ -1,0 +1,92 @@
+<div class="form box cart-container">
+    <h3 class="cart-container-title">My cart</h3>
+
+    <div class="settings-content bordered settings-content-form">
+        <h3>Items</h3>
+        <ul class="cart-container-list list">
+            <% for(var i = 0; i < this.items.length; i++) { %>
+                <%=$.View("views/cart_item.ejs", {item:this.items[i], amount:this.items[i].amount, sp:true})%>
+            <% } %>
+            <li>
+                <a href="#" class='create-address-link'>Go on Shopping</a>
+            </li>
+        </ul>
+        <div class="container">
+            <h4>Purchase Subtotal:</h4>
+
+            <p class="resume">
+                <span class="cart-container-n-items">0</span> items - <span class="cart-container-total-price">0</span>$
+            </p>
+        </div>
+    </div>
+    <div class="settings-content bordered settings-content-form">
+        <h3>Shipping Address</h3>
+
+        <div class="container">
+            <% if (this.addresses.length) { %>
+            <form action="">
+                <label for="cart-addresses">My address:</label>
+                <select name="cart-addresses" id="cart-addresses">
+                    <% for(var i = 0; i < this.addresses.length; i++) { %>
+                        <option value="<%=this.addresses[i].address_id%>"><%= this.addresses[i].full_name %></option>
+                    <% } %>
+                </select>
+            </form>
+            <% } else if (Qck.current_user) { %>
+            <span>You don't have any address registered, <a href="#users/create_address">click here</a> to register one.</span>
+            <% } else { %>
+            <span>You don' have any address registered, sign in to register one.</span>
+            <% } %>
+        </div>
+    </div>
+    <div class="ui-state-highlight ui-state-dialog settings-content cart-alert" id='not-confirmed-alert-login'>
+        <p class="ui-state-info-text">
+            <span class="ui-state-text">
+                <span class="ui-icon ui-icon-info">
+                    &nbsp;
+                </span>
+                Please log in to confirm your order.
+            </span>
+        </p>
+        <div class="clear"></div>
+    </div>
+    <div class="ui-state-highlight ui-state-dialog settings-content cart-alert" id='not-confirmed-alert-items'>
+        <p class="ui-state-info-text">
+            <span class="ui-state-text">
+                <span class="ui-icon ui-icon-info">
+                    &nbsp;
+                </span>
+                You need to add items to the cart to confirm your order.
+            </span>
+        </p>
+        <div class="clear"></div>
+    </div>
+    <div class="ui-state-highlight ui-state-dialog settings-content cart-alert" id='not-confirmed-alert-address'>
+        <p class="ui-state-info-text">
+            <span class="ui-state-text">
+                <span class="ui-icon ui-icon-info">
+                    &nbsp;
+                </span>
+                You need to register at least one address to confirm your order.
+            </span>
+        </p>
+        <div class="clear"></div>
+    </div>
+    <div class="ui-state-highlight ui-state-dialog settings-content cart-alert" id='not-confirmed-alert-processing'>
+        <p class="ui-state-info-text">
+            <span class="ui-state-text">
+                <span class="ui-icon ui-icon-info">
+                    &nbsp;
+                </span>
+                You must wait for the system to process before confirming your order.
+            </span>
+        </p>
+        <div class="clear"></div>
+    </div>
+    <div class="settings-content settings-content-form">
+        <form action="">
+            <button id="cart-confirm-button">Confirm Order</button>
+        </form>
+        <div class="clear"></div>
+    </div>
+</div>
