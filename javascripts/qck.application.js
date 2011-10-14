@@ -3,6 +3,8 @@ $.Controller("ApplicationController", {
         this.guide_animation();
         var self = this;
 
+        this.set_color();
+
         this.hides = 0;
 
         var last_interval;
@@ -76,6 +78,22 @@ $.Controller("ApplicationController", {
             el.find("*").data('item', item);
             return  el;
         };
+    },
+    set_color: function(color) {
+        if (!color) {
+            color = $.jStorage.get('color');
+        }
+
+        if (color == 'red') {
+            $("#header").css('background-color', '#931100');
+        } else if (color == 'blue') {
+            $("#header").css('background-color', '#0099f7');
+        } else if (color == 'green') {
+            $("#header").css('background-color', '#008e00');
+        }
+
+
+        $.jStorage.set('color', color);
     },
     guide_animation: function() {
         // Scroll Animation of guide... TODO: Put on application controller

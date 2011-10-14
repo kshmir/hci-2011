@@ -1,1 +1,10 @@
-<li><a href="#users/order&id=<%=this.order.order_id%>">Order #<%=this.order.order_id%></a> - Location: <%=(this.address) ? this.address.full_name : "Not Set" %> - <a href="#" class="select-order">Set as Current Order</a></li>
+<li
+        <% if (this.order.order_id == Qck.current_order.order_id) {%>
+             class="selected"
+        <% } %>
+        ><a href="#users/order&id=<%=this.order.order_id%>">Order #<%=this.order.order_id%></a> - Location: <%=(this.address) ? this.address.full_name : "Not Set" %>
+
+<% if (this.order.status == 1) {%>
+             <span class='set'> - <a href="#" class="select-order">Set as Current Order</a></span>
+        <% } %>
+</li>

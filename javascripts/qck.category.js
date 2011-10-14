@@ -94,7 +94,7 @@ $.Model("Category", {
             var array = $.jStorage.get('cached_categories');
             this.cached_array = $.map(array, function(e) {
                 return new Category(e, true);
-            })
+            });
             this.got_array = true;
         }
     },

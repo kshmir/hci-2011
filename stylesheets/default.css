@@ -780,7 +780,14 @@ h1,h2,h3,h4,h5,h6 {
 ul.list li.selected {
     background-color:#87cefa;
 }
+ul.list li.selected .set {
+    display:none;
+}
 
 .order-map {
     height:320px;
+}
+
+.color-list li{
+    cursor:pointer;
 }

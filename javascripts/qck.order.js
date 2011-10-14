@@ -275,8 +275,8 @@ $.Model("Order", {
             this.latitude =  data.latitude;
             this.longitude = data.longitude;
             this.items = [];
-            $.each(data.item,function(index, item) {
-                self.items.push(new Item(item));
+            $.each(data.items,function(index, item) {
+                self.items.push(new Item(item, true));
             });
         }
 

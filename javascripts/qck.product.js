@@ -49,7 +49,7 @@ $.Controller("ProductsController", {
                 // M*****ing fix
                 setTimeout(function() {
                     $('.items').isotope('reLayout');
-                }, 100);
+                }, 1000);
             } else {
 
                 var to_delete_products = ([].union(this.products, Product.comparer)).subtract(products_list, Product.comparer);

@@ -8,6 +8,11 @@ $.Controller("CartController", {
         this.update_items_label(false);
         this.operation_queue = [];
 
+        if ($.jStorage.get('current_cart')) {
+            var cart = $.jStorage.get('current_cart');
+            this.cached_cart = new Order(cart, true);
+        }
+
         this.selector = "#cart";
 
         setInterval(function() {
@@ -24,6 +29,7 @@ $.Controller("CartController", {
 
         this.queue_changed = false;
 
+        // Magic sauce... well... syncs the cart here with the online one.
         setInterval(function() {
             if (!self.queue_locked && self.operation_queue.length > 0 && Qck.current_user && self.current_order) {
                 self.allow_confirm(false, 'processing');
@@ -114,7 +120,7 @@ $.Controller("CartController", {
         this.list_products = [];
         this.update_labels();
     },
-    current_order_instance : function(){
+    current_order_instance : function() {
         return this.current_order;
     }
     ,
@@ -144,20 +150,17 @@ $.Controller("CartController", {
                         self.set_current_order(order);
                     });
                 }
-
             });
         }
     },
-    set_current_order: function(order) {
+    set_current_order: function(order, override_cache) {
         var self = this;
 
         Qck.app_controller.show_loader();
-        Order.getOrder({
-            username : Qck.current_user.username,
-            authentication_token : Qck.current_user.token,
-            order_id : order.order_id
-        }, function (data) {
 
+        var order_callback = function(data) {
+            $.jStorage.set('current_cart', data);
+            Qck.current_order = data;
             var len = data.items.length;
             var cont = 0;
 
@@ -240,11 +243,23 @@ $.Controller("CartController", {
                 self.current_order = data;
                 Qck.app_controller.hide_loader();
             }
+        };
 
-
-        });
-
-
+        if (!$.jStorage.get('current_cart') || override_cache) {
+            if (override_cache) {
+                this.list_products = [];
+                this.on_logout();
+            }
+            Order.getOrder({
+                username : Qck.current_user.username,
+                authentication_token : Qck.current_user.token,
+                order_id : order.order_id
+            }, order_callback);
+        } else {
+            var cart = $.jStorage.get('current_cart');
+            this.cached_cart = new Order(cart, true);
+            order_callback(this.cached_cart);
+        }
     },
     "#cart mouseover": function() {
         $(this.selector).addClass('hovered');
@@ -519,27 +534,29 @@ $.Controller("CartController", {
     ,
     ".clear-cart click" : function() {
         var self = this;
-        $.each(this.list_products, function(i,prod) {
+        $.each(this.list_products, function(i, prod) {
             self.operation_queue.push({
                 operation:'remove_product',
                 data: prod,
                 amount: prod.amount
             });
         });
+
+        $('.cart-item').slideUp('slow', function(el){
+            $(el).remove();
+        });
         this.list_products = [];
 
         this.update_labels();
 
         return false;
-
     }
 });
 
 
+// Use this plus an interval for tab sync... maybe some other day, it'd be a big hell.
 window.onfocus = function() {
-
 };
 
 window.onblur = function() {
-
 };

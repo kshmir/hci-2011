@@ -290,6 +290,8 @@ $.Controller("UserController", {
                                             order: order,
                                             address: address
                                         }));
+                                $('ul.order-list li:first').data('order', order);
+
                                 if (cont == len) {
                                     Qck.app_controller.hide_loader();
                                     $('#main-content').fadeIn('slow');
@@ -437,12 +439,14 @@ $.Controller("UserController", {
             }, function(order) {
                 Qck.app_controller.hide_loader();
                 order = {
-                    order_id : order
+                    order_id : order,
+                    status: 1
                 };
                 $("ul.order-list li:last").before(
                         $.View('views/order_item.ejs', {
                             order: order
                         }));
+                $("ul.order-list li:last").prev().data('order',order);
             });
         }
         return false;
@@ -462,6 +466,7 @@ $.Controller("UserController", {
                                     order: order,
                                     address: address
                                 }));
+                        $(".order-delete-button").data('order', order);
                         if (address) {
                             $(".order-map").gMap({
                                 zoom: 11,
@@ -493,6 +498,46 @@ $.Controller("UserController", {
             Qck.app_controller.change_view('#main-content', _call, 'isotope');
         }
     }
+    ,
+    ".order-delete-button click": function(el) {
+        if (Qck.current_user) {
+            var order = $(el).data('order');
+            var _confirm = confirm("Are you sure you want to delete the order?");
+            if (_confirm) {
+                Qck.app_controller.show_loader();
+                Order.deleteOrder({
+                    username : Qck.current_user.username,
+                    authentication_token : Qck.current_user.token,
+                    order_id : order.order_id
+                }, function(response) {
+                    Qck.app_controller.hide_loader();
+                    window.history.go(-1);
+                });
+            }
+        }
+        return false;
+    },
+    ".select-order click": function(el) {
+        if (Qck.current_user && Qck.current_order) {
+            $(el).parents('ul:first').find('li').removeClass('selected');
+            $(el).parents('li:first').addClass('selected');
+            var order = $(el).parents('li:first').data('order');
+            Order.getOrder({
+                username : Qck.current_user.username,
+                authentication_token : Qck.current_user.token,
+                order_id : order.order_id
+            }, function(order){
+
+                Qck.cart_controller.set_current_order(order, true);
+            });
+        }
+        return false;
+    },
+    '.color-list li click': function(el) {
+        var col = $(el).attr("class").replace(/color-/, '');
+        Qck.app_controller.set_color(col);
+    }
+
 });
 
 // Model Definition.
