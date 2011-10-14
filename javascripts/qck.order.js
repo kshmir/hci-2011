@@ -34,9 +34,7 @@ $.Model("Order", {
                 }
             },
             error: error
-
         });
-
     },
 
 

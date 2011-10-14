@@ -424,9 +424,76 @@ $.Controller("UserController", {
                 window.history.go(-1);
             });
         }
+    },
+
+
+    // Order ABM
+    ".create-order-link click" : function() {
+        if (Qck.current_user) {
+            Qck.app_controller.show_loader();
+            Order.createOrder({
+                username : Qck.current_user.username,
+                authentication_token : Qck.current_user.token
+            }, function(order) {
+                Qck.app_controller.hide_loader();
+                order = {
+                    order_id : order
+                };
+                $("ul.order-list li:last").before(
+                        $.View('views/order_item.ejs', {
+                            order: order
+                        }));
+            });
+        }
+        return false;
     }
-})
-        ;
+    ,
+    "history.users.order subscribe":function(called, data) {
+        if (Qck.current_user) {
+            var _call = function(fadeIn) {
+                Order.getOrder({
+                    username: Qck.current_user.username,
+                    authentication_token: Qck.current_user.token,
+                    order_id : data.id
+                }, function(order) {
+                    var _callback = function(address) {
+                        $('#main-content').html(
+                                $.View('views/order_show.ejs', {
+                                    order: order,
+                                    address: address
+                                }));
+                        if (address) {
+                            $(".order-map").gMap({
+                                zoom: 11,
+                                markers:[
+                                    {
+                                        address: address.address_line_1,
+                                        html: address.full_name
+                                    }
+                                ]});
+                        } else {
+                            $(".order-map").hide();
+                        }
+                        fadeIn();
+                    };
+
+                    if (order.address_id) {
+                        Address.getAddress({
+                            username: Qck.current_user.username,
+                            authentication_token: Qck.current_user.token,
+                            address_id: order.address_id
+                        }, _callback);
+                    } else {
+                        _callback();
+                    }
+
+                });
+            };
+
+            Qck.app_controller.change_view('#main-content', _call, 'isotope');
+        }
+    }
+});
 
 // Model Definition.
 

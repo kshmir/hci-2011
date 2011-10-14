@@ -7,20 +7,39 @@
             <ul class="list">
                 <li>
                     <span class="order-address-name-label">Address Name:</span>
-                    <span class="order-address-name"> <%= this.address.full_name %></span>
+                    <span class="order-address-name">
+                        <%=(this.address) ? this.address.full_name : "Not Set" %>
+                    </span>
                 </li>
                 <li>
                     <span class="order-address-addr1-label">Address Line 1:</span>
-                    <span class="order-address-addr1"><%= this.address.address_line_1 %></span>
+                    <span class="order-address-addr1">
+                        <%=(this.address) ? this.address.address_line_1 : "Not Set" %>
+                    </span>
                 </li>
                 <li>
                     <span class="order-address-addr2-label">Address Line 2:</span>
-                    <span class="order-address-addr2"><%= this.address.address_line_2 %></span>
+                    <span class="order-address-addr2">
+                        <%=(this.address) ? this.address.address_line_2 : "Not Set" %>
+                    </span>
                 </li>
                 <li>
                     <span class="order-status-label">Order Status:</span>
-                    <span class="order-status"><%= this.order.getStatus() %></span>
+                    <span class="order-status">
+                        <%= this.order.getStatus() %>
+                    </span>
                 </li>
+                <li>
+                    <span class="order-status-label">Kinds of items selected:</span>
+                    <span class="order-status">
+                        <%= this.order.items.length %>
+                    </span>
+                </li>
+                <% if (this.order.status == 1) { %>
+                    <li>
+                        <button class='order-delete-button'>Delete Order</button>
+                    </li>
+                <% } %>
             </ul>
         </div>
     </div>

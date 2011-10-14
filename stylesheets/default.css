@@ -88,10 +88,9 @@ body a {;
 	margin-bottom:10px;
 }
 
-#content, {
-	margin-top: 10px;
+#content {
 	background-color:white;
-    min-height:400px
+    min-height:400px;
 }
 
 #footer {
@@ -782,4 +781,6 @@ ul.list li.selected {
     background-color:#87cefa;
 }
 
-
+.order-map {
+    height:320px;
+}

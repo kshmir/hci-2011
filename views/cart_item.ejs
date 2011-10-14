@@ -1,10 +1,14 @@
 <li class="cart-item cart-item-<%=this.item.id%>" id="<%=(this.sp)? 'sp-' : ''%>cart-item-<%=this.item.id%>">
     <div class="cartlink">
-        <img src="<%=this.item.image_url%>" alt="img" height="60"/>
+        <a href="#products/show&id=<%=this.item.id%>">
+            <img src="<%=this.item.image_url%>" alt="img" height="60"/>
+        </a>
 
         <div class="left">
             <div class='cartname'>
-                <%=this.item.name%>
+                <a href="#products/show&id=<%=this.item.id%>">
+                    <%=this.item.name%>
+                </a>
             </div>
             <div class="cartprice">Precio:
                 <span class='cartprice-label'>Price:</span>
