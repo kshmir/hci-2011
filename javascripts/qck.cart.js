@@ -117,6 +117,7 @@ $.Controller("CartController", {
         $.each(this.list_products, function(index, e) {
             e.amount = undefined;
         });
+        $.jStorage.deleteKey('current_cart');
         this.list_products = [];
         this.update_labels();
     },
@@ -431,7 +432,7 @@ $.Controller("CartController", {
     "history.cart.index subscribe":function() {
         var self = this;
         Qck.app_controller.show_loader();
-        $('#main-content').fadeOut("slow", function() {
+        $('#main-content').hide();
 
             var _callback = function(addresses) {
                 $('#main-content').html($.View("views/cart.ejs", {
@@ -459,7 +460,7 @@ $.Controller("CartController", {
 
                 $('#cart-addresses').change();
 
-                $('#main-content').fadeIn('slow');
+                $('#main-content').show();
             };
 
             if (Qck.current_user) {
@@ -472,7 +473,6 @@ $.Controller("CartController", {
             } else {
                 _callback();
             }
-        });
     },
 
     allow_confirm: function(val, why) {

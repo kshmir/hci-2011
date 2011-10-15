@@ -11,7 +11,6 @@ $.Model("Order", {
         }
     },
     clear_cache : function() {
-
     },
     //createOrder method
     //createOrder params:

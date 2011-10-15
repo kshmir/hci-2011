@@ -122,7 +122,7 @@ $.Controller("ApplicationController", {
                                 .css("top", "0")
                                 .css("width", "100%")
                                 .css("z-index", "1000")
-                                .css("background-color", "transparent")
+                                .css("background-color", "transparent");
                         _onScroll = false;
                     }
                     else {
