@@ -10,12 +10,16 @@ $.Controller("ApplicationController", {
 
         var last_interval;
 
-        var changed = false;
         $(this.element).find(".search").live('keypress', function(e) {
             var _self = this;
-            if (e.which == 13 && !changed) {
+            if (e.which == 13 && !$('.ui-autocomplete .ui-state-hover').length) {
                 $(this).blur();
                 window.location.hash = '#products/search&criteria=' + $(this).val();
+                e.preventDefault();
+                $(_self).qtip('hide');
+                return false;
+            } else if (e.which == 13) {
+                $(this).blur();
                 e.preventDefault();
                 $(_self).qtip('hide');
                 return false;
@@ -46,6 +50,7 @@ $.Controller("ApplicationController", {
                         }, 10000);
 
                     }, 1000);
+
                 }
 
             }
@@ -57,11 +62,9 @@ $.Controller("ApplicationController", {
                 return false;
             },
             change: function(event, ui) {
-                changed = true;
                 return false;
             },
             select: function(event, ui) {
-                changed = false;
                 self.change_view("#main-content", function(callback) {
                     window.location.hash = "#products/show&id=" + ui.item.id;
                     callback();
@@ -80,6 +83,9 @@ $.Controller("ApplicationController", {
             return  el;
         };
 
+        this.updater();
+    },
+    updater: function() {
 
     },
     set_color: function(color) {
@@ -125,7 +131,7 @@ $.Controller("ApplicationController", {
                                 .css("top", "0")
                                 .css("width", "100%")
                                 .css("z-index", "1000")
-                                .css("background-color", "transparent")
+                                .css("background-color", "transparent");
                         _onScroll = false;
                     }
                     else {
@@ -202,7 +208,7 @@ $.Controller("ApplicationController", {
     },
     ".search focus": function(el) {
         el = $(el);
-        if (!el.data("old") || el.data("old") == el.val()) {
+        if (!el.data("old")) {
             el.data("old", el.val())
                     .val("");
         }

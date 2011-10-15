@@ -369,6 +369,25 @@ h1,h2,h3,h4,h5,h6 {
     border-left: 1px silver solid;
     height: 31px;
     padding: 0 0 0 10px;
+    z-index: 1000;
+    position:absolute;
+    cursor: pointer;
+
+}
+
+#cart .cart-n button{
+    position: static;
+    margin-bottom:-4px;
+}
+
+#cart .cart-n button .ui-button-text{
+    font-size:0;
+    display:none;
+}
+
+#cart .cart-n button .ui-icon{
+    margin: 0 auto;
+    position:static;
 }
 
 #cart .text {
@@ -382,10 +401,7 @@ h1,h2,h3,h4,h5,h6 {
     margin-right: 5px;
 }
 
-#cart {
-    z-index: 1000;
-    position:absolute;
-}
+
 
 #cart.hovered {
     border: 1px solid silver;
@@ -520,7 +536,7 @@ h1,h2,h3,h4,h5,h6 {
 
 
 
-/******************* FORM ******************/ 
+/******************* FORM ******************/
 
 
 .form .form_item {
@@ -563,7 +579,7 @@ h1,h2,h3,h4,h5,h6 {
 	margin: 5px;
 }
 
-/******************* CATEGORIES SIDEBAR ******************/ 
+/******************* CATEGORIES SIDEBAR ******************/
 
 #categories-sidebar p {
 	padding: 0;
@@ -594,7 +610,7 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 
-/******************* Guide               ******************/ 
+/******************* Guide               ******************/
 
 #search{
     padding:0 5px;
