@@ -529,7 +529,7 @@ $.Controller("UserController", {
                 authentication_token : Qck.current_user.token,
                 order_id : order.order_id
             }, function(order){
-
+                Qck.updater = false;
                 Qck.cart_controller.set_current_order(order, true);
             });
         }

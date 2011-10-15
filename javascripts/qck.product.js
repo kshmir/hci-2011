@@ -1,8 +1,5 @@
 // Controller Definition.
 $.Controller("ProductsController", {
-    init: function() {
-
-    },
     index : function(data) {
         var self = this;
         Product.findAll(data || {}, function(data) {
@@ -91,8 +88,6 @@ $.Controller("ProductsController", {
         }
 
 
-
-
         // Bind the product to the view for further use.
         for (var i = 0; i < this.products.length; i++) {
             var prod = this.products[i];
@@ -172,6 +167,7 @@ $.Controller("ProductsController", {
         var self = this;
         // TODO: Breadcrumbs
         var ajax_callback = function(callback) {
+            $(self.element).html("");
             Product.findOne({id: product.id}, function(data) {
                 $(self.element).html($.View(data.showView(), {product: data}));
                 $('.product_show', self.element).data('product', data);
@@ -199,11 +195,10 @@ $.Model("Product", {
         return p1.id - p2.id;
     },
     // Static Methods
-    // !!!!!! These ones are declared just for the JSON API of the Rails prototype app.
     // Look for encapsulation in http://javascriptmvc.com/docs.html#&who=jQuery.Model for XML compatibility
     findAll : function(params, success, error) {
         params.method = "GetProductListByName";
-        params.criteria = "a";
+        params.criteria = "a"; // It's a shame we have to do this...
         this.findByName(params, success, error);
     },
     findByName : function(params, success, error) {
@@ -213,7 +208,9 @@ $.Model("Product", {
             var prods = $("product", data);
             if (prods.length) {
                 prods.each(function(index, el) {
-                    resp.push(new Product(el));
+                    var _p = new Product(el);
+                    $.jStorage.set('product-' + _p.id, _p);
+                    resp.push(_p);
                 });
                 success(resp);
             }
@@ -227,47 +224,82 @@ $.Model("Product", {
         if (params.id && !params.product_id) {
             params.product_id = params.id;
         }
-        $.get(Qck.services.catalog, params, function(data) {
-            var prod = $("product", data);
-            if (prod.length) {
-                success(new Product(prod));
-            }
-            else {
-                success(undefined);
-            }
-        }, error);
+        if (!$.jStorage.get('product-' + params.product_id)) {
+            $.get(Qck.services.catalog, params, function(data) {
+                var prod = $("product", data);
+                if (prod.length) {
+                    var _p = new Product(prod);
+                    $.jStorage.set('product-' + _p.id, _p);
+                    success(_p);
+                }
+                else {
+                    success(undefined);
+                }
+            }, error);
+        } else {
+            var prod = new Product($.jStorage.get('product-' + params.product_id), true);
+            success(prod);
+        }
     }
 }, {
-    setup: function(data) {
-        this.id = $(data).attr("id");
-        this.category_id = $(data).find("category_id").text();
-        this.subcategory_id = $(data).find("subcategory_id").text();
-        this.name = $(data).find("name").text();
-        this.sales_rank = parseInt($(data).find("sales_rank").text());
-        this.price = parseFloat($(data).find("price").text());
-        this.image_url = $(data).find("image_url").text();
+    setup: function(data, json) {
 
-        // We couldn't find a way to make inheritance work on a model....
-        if ($(data).find("ISBN_10").length) {
-            this.authors = $(data).find("authors").text();
-            this.publisher = $(data).find("publisher").text();
-            this.published_date = $(data).find("published_date").text();
-            this.ISBN_10 = $(data).find("ISBN_10").text();
-            this.ISBN_13 = $(data).find("ISBN_13").text();
-            this.language = $(data).find("language").text();
-            this.type = "book";
-        } else if ($(data).find("ASIN").length) {
-            this.actors = $(data).find("actors").text();
-            this.format = $(data).find("format").text();
-            this.language = $(data).find("language").text();
-            this.subtitles = $(data).find("subtitles").text();
-            this.region = $(data).find("region").text();
-            this.aspect_ratio = $(data).find("aspect_ratio").text();
-            this.number_discs = $(data).find("number_discs").text();
-            this.release_date = $(data).find("release_date").text();
-            this.run_time = $(data).find("run_time").text();
-            this.ASIN = $(data).find("ASIN").text();
-            this.type = "movie";
+        if (!json) {
+            this.id = $(data).attr("id");
+            this.category_id = $(data).find("category_id").text();
+            this.subcategory_id = $(data).find("subcategory_id").text();
+            this.name = $(data).find("name").text();
+            this.sales_rank = parseInt($(data).find("sales_rank").text());
+            this.price = parseFloat($(data).find("price").text());
+            this.image_url = $(data).find("image_url").text();
+
+            // We couldn't find a way to make inheritance work on a model....
+            if ($(data).find("ISBN_10").length) {
+                this.authors = $(data).find("authors").text();
+                this.publisher = $(data).find("publisher").text();
+                this.published_date = $(data).find("published_date").text();
+                this.ISBN_10 = $(data).find("ISBN_10").text();
+                this.ISBN_13 = $(data).find("ISBN_13").text();
+                this.language = $(data).find("language").text();
+                this.type = "book";
+            } else if ($(data).find("ASIN").length) {
+                this.actors = $(data).find("actors").text();
+                this.format = $(data).find("format").text();
+                this.language = $(data).find("language").text();
+                this.subtitles = $(data).find("subtitles").text();
+                this.region = $(data).find("region").text();
+                this.aspect_ratio = $(data).find("aspect_ratio").text();
+                this.number_discs = $(data).find("number_discs").text();
+                this.release_date = $(data).find("release_date").text();
+                this.run_time = $(data).find("run_time").text();
+                this.ASIN = $(data).find("ASIN").text();
+                this.type = "movie";
+            }
+        } else {
+            this.id = data.id;
+            this.category_id = data.category_id;
+            this.subcategory_id = data.subcategory_id;
+            this.name = data.name;
+            this.sales_rank = data.sales_rank;
+            this.price = data.price;
+            this.image_url = data.image_url;
+            this.authors = data.authors;
+            this.publisher = data.publisher;
+            this.published_date = data.published_date;
+            this.ISBN_10 = data.ISBN_10;
+            this.ISBN_13 = data.ISBN_13;
+            this.language = data.language;
+            this.type = data.type;
+            this.actors = data.actors;
+            this.format = data.format;
+            this.language = data.language;
+            this.subtitles = data.subtitles;
+            this.region = data.region;
+            this.aspect_ratio = data.aspect_ratio;
+            this.number_discs = data.number_discs;
+            this.release_date = data.release_date;
+            this.run_time = data.run_time;
+            this.ASIN = data.ASIN;
         }
 
 

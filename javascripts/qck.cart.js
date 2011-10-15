@@ -49,6 +49,30 @@ $.Controller("CartController", {
                         Qck.app_controller.hide_loader();
                         self.allow_confirm(true);
                         self.queue_locked = false;
+
+
+                        var i;
+
+                        if (self.cached_cart) {
+                            if (self.cached_cart.items) {
+                                i = $.inArrayCust(action.data.id, self.cached_cart.items, function(id, item) {
+                                    return id - item.product_id;
+                                });
+                            } else {
+                                self.cached_cart.items = [];
+                            }
+
+                            if (i == -1) {
+                                self.cached_cart.items.push({
+                                    product_id:action.data.id,
+                                    count:action.amount
+                                });
+                            } else {
+                                self.cached_cart.items[i].count += action.amount;
+                            }
+                            $.jStorage.deleteKey('current_cart');
+                            $.jStorage.set('current_cart', self.cached_cart);
+                        }
                     }); //TODO: Place error handler
                 } else if (action.operation == 'remove_product') {
                     Qck.app_controller.show_loader();
@@ -64,6 +88,31 @@ $.Controller("CartController", {
                         self.queue_locked = false;
                         Qck.app_controller.hide_loader();
                         self.allow_confirm(true);
+
+
+                        var i;
+
+                        if (self.cached_cart) {
+                            if (self.cached_cart.items) {
+                                i = $.inArrayCust(action.data.id, self.cached_cart.items, function(id, item) {
+                                    return id - item.product_id;
+                                });
+                            } else {
+                                self.cached_cart.items = [];
+                            }
+
+                            if (i != -1) {
+                                self.cached_cart.items[i].count -= action.amount;
+
+                                if (!self.cached_cart.items[i].count) {
+                                    self.cached_cart.items.remove(i, i);
+                                }
+                            }
+                            $.jStorage.deleteKey('current_cart');
+                            $.jStorage.set('current_cart', self.cached_cart);
+                        }
+
+
                     });
                 }
                 // Shrinks the queue to minimize calls.
@@ -159,13 +208,14 @@ $.Controller("CartController", {
 
         Qck.app_controller.show_loader();
 
+
         var order_callback = function(data) {
             $.jStorage.set('current_cart', data);
             Qck.current_order = data;
             var len = data.items.length;
             var cont = 0;
 
-            if (len) {
+            if ((len || self.list_products.length)) {
 
                 var _call = function() {
 
@@ -190,7 +240,7 @@ $.Controller("CartController", {
                     });
                 };
 
-                if (self.list_products.length > 0) {
+                if (self.list_products.length > 0 && len > 0) {
 
                     var prods_value = 0;
                     var prods_count = 0;
@@ -208,6 +258,7 @@ $.Controller("CartController", {
 
 
                     $("#sync-message .current-cart-n").text(prods_count);
+
                     $("#sync-message .unconfirmed-cart-n").text(items_count);
 
                     $("#sync-message .current-cart-value").text(prods_value.toFixed(2));
@@ -241,6 +292,7 @@ $.Controller("CartController", {
 
 
             } else {
+
                 self.current_order = data;
                 Qck.app_controller.hide_loader();
             }
@@ -261,6 +313,9 @@ $.Controller("CartController", {
             this.cached_cart = new Order(cart, true);
             order_callback(this.cached_cart);
         }
+    },
+    "#cart .cartcont click": function() {
+        window.location.hash = 'cart';
     },
     "#cart mouseover": function() {
         $(this.selector).addClass('hovered');
@@ -434,45 +489,46 @@ $.Controller("CartController", {
         Qck.app_controller.show_loader();
         $('#main-content').hide();
 
-            var _callback = function(addresses) {
-                $('#main-content').html($.View("views/cart.ejs", {
-                    addresses : addresses || [], items : self.list_products.reverse() || []
-                }));
+        var _callback = function(addresses) {
+            $('#main-content').html("");
+            $('#main-content').html($.View("views/cart.ejs", {
+                addresses : addresses || [], items : self.list_products.reverse() || []
+            }));
 
-                $(".cart-item", '#main-content').each(function(index, el) {
-                    var id = parseInt($(el).attr('id').replace(/sp\-cart\-item\-/, ""));
-                    var prod = $.inArrayCust({id:id}, self.list_products, Product.comparer);
-                    if (prod != -1) {
-                        prod = self.list_products[prod];
-                    }
-                    $(el).data('product', prod);
-                });
+            $(".cart-item", '#main-content').each(function(index, el) {
+                var id = parseInt($(el).attr('id').replace(/sp\-cart\-item\-/, ""));
+                var prod = $.inArrayCust({id:id}, self.list_products, Product.comparer);
+                if (prod != -1) {
+                    prod = self.list_products[prod];
+                }
+                $(el).data('product', prod);
+            });
 
-                $(".cart-item .remove-btn").button({ icons: { secondary: "ui-icon-trash" } });
-                $(".cart-item .item-up-btn").button({ icons: { secondary: "ui-icon-plus" }, text: false });
-                $(".cart-item .item-down-btn").button({ icons: { secondary: "ui-icon-minus" }, text: false });
+            $(".cart-item .remove-btn").button({ icons: { secondary: "ui-icon-trash" } });
+            $(".cart-item .item-up-btn").button({ icons: { secondary: "ui-icon-plus" }, text: false });
+            $(".cart-item .item-down-btn").button({ icons: { secondary: "ui-icon-minus" }, text: false });
 
-                self.update_labels();
+            self.update_labels();
 
-                self.allow_confirm(Qck.current_user != undefined && self.list_products.length);
+            self.allow_confirm(Qck.current_user != undefined && self.list_products.length);
 
-                Qck.app_controller.hide_loader();
+            Qck.app_controller.hide_loader();
 
-                $('#cart-addresses').change();
+            $('#cart-addresses').change();
 
-                $('#main-content').show();
-            };
+            $('#main-content').show();
+        };
 
-            if (Qck.current_user) {
-                Address.getAddressList({
-                    username: Qck.current_user.username,
-                    authentication_token: Qck.current_user.token
-                }, function(addresses) {
-                    _callback(addresses);
-                });
-            } else {
-                _callback();
-            }
+        if (Qck.current_user) {
+            Address.getAddressList({
+                username: Qck.current_user.username,
+                authentication_token: Qck.current_user.token
+            }, function(addresses) {
+                _callback(addresses);
+            });
+        } else {
+            _callback();
+        }
     },
 
     allow_confirm: function(val, why) {
@@ -542,7 +598,7 @@ $.Controller("CartController", {
             });
         });
 
-        $('.cart-item').slideUp('slow', function(el){
+        $('.cart-item').slideUp('slow', function(el) {
             $(el).remove();
         });
         this.list_products = [];
@@ -550,13 +606,42 @@ $.Controller("CartController", {
         this.update_labels();
 
         return false;
+    },
+    ".cart-n .amount click": function(el) {
+        var product = $(el).parents(".cart-item:first").data('product');
+        if (product && product.amount >= 1) {
+
+            var new_amount;
+            try {
+                new_amount = parseInt(prompt("Inserte la cantidad de productos '" + product.name + "' que desea llevar"));
+            } catch(e) {
+                new_amount = -1;
+            }
+
+            if (new_amount > 0) {
+
+
+                var n = new_amount - product.amount;
+
+                var op = ((n > 0) ? 'add_product' : 'remove_product');
+
+                if (n < 0){
+                    n = n * -1;
+                }
+
+                $('.cart-item-' + product.id + ' .cart-n-value').text(product.amount);
+                this.operation_queue.push({
+                    operation: op,
+                    data: product,
+                    amount: n
+                });
+
+
+                product.amount = new_amount;
+                $('.cart-item-' + product.id + ' .cart-n-value').text(product.amount);
+                this.queue_changed = true;
+                this.update_labels();
+            }
+        }
     }
 });
-
-
-// Use this plus an interval for tab sync... maybe some other day, it'd be a big hell.
-window.onfocus = function() {
-};
-
-window.onblur = function() {
-};
