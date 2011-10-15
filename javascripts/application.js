@@ -37,10 +37,11 @@ function jStorage_timed() {
 
     $.jStorage.get = function(key) {
         var data = $.jStorage._get(key);
-        if (!data) {
+        var date = $.jStorage._get(key + '-date');
+        if (!data || !date) {
             return undefined;
         }
-        var date = $.jStorage._get(key + '-date');
+
         var now = new Date();
 
 
