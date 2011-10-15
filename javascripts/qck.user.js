@@ -448,7 +448,7 @@ $.Controller("UserController", {
                         $.View('views/order_item.ejs', {
                             order: order
                         }));
-                $("ul.order-list li:last").prev().data('order',order);
+                $("ul.order-list li:last").prev().data('order', order);
             });
         }
         return false;
@@ -528,7 +528,7 @@ $.Controller("UserController", {
                 username : Qck.current_user.username,
                 authentication_token : Qck.current_user.token,
                 order_id : order.order_id
-            }, function(order){
+            }, function(order) {
                 Qck.updater = false;
                 Qck.cart_controller.set_current_order(order, true);
             });
@@ -538,6 +538,23 @@ $.Controller("UserController", {
     '.color-list li click': function(el) {
         var col = $(el).attr("class").replace(/color-/, '');
         Qck.app_controller.set_color(col);
+    },
+    '.change-pass-button click': function(el) {
+        if (Qck.current_user) {
+            var old_pass = $("#panel-password").val();
+            var new_pass = $("#panel-password2").val();
+
+            Qck.current_user.changePassword({
+                username: Qck.current_user.username,
+                password: old_pass,
+                new_password: new_pass
+            }, function() {
+                alert("Password changed successfully");
+            }, function() {
+                alert('The password you specified didn\'t match the user\'s');
+            });
+
+        }
     }
 
 });

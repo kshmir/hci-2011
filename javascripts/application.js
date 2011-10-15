@@ -23,6 +23,36 @@ Qck.services = {
     order : Qck.api_path.replace(/\{servicio\}/, "Order")
 };
 
+// Modifies jStorage to have an expiry timeout.
+function jStorage_timed() {
+    $.jStorage._get = $.jStorage.get;
+    $.jStorage._set = $.jStorage.set;
+
+    $.jStorage.set = function(key, value) {
+        $.jStorage.deleteKey(key);
+        $.jStorage.deleteKey(key + '-date');
+        $.jStorage._set(key, value);
+        $.jStorage._set(key + '-date', new Date());
+    };
+
+    $.jStorage.get = function(key) {
+        var data = $.jStorage._get(key);
+        if (!data) {
+            return undefined;
+        }
+        var date = $.jStorage._get(key + '-date');
+        var now = new Date();
+
+
+        var secs = (now - new Date(date)) / 1000;
+        if (secs < 3600) {
+            return data;
+        } else {
+            return undefined;
+        }
+    };
+}
+
 
 head.js("javascripts/qck.address.js",
         "javascripts/qck.application.js",
@@ -35,7 +65,7 @@ head.js("javascripts/qck.address.js",
         "javascripts/qck.product.js",
         "javascripts/qck.state.js",
         "javascripts/qck.user.js", function() {
-
+            jStorage_timed();
 
             $("body").application({});
             Qck.app_controller = $("body").controller();
@@ -76,3 +106,5 @@ Array.prototype.remove = function(from, to) {
     this.length = from < 0 ? this.length + from : from;
     return this.push.apply(this, rest);
 };
+
+
