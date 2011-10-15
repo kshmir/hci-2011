@@ -24,7 +24,27 @@ $.Controller("UserController", {
         $('#main-content').fadeOut("slow", function() {
             $('#main-content')
                     .html($.View("views/register.ejs"))
-                    .fadeIn("slow");
+                    .fadeIn("slow",function(){
+                        var monthtext=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sept','Oct','Nov','Dec'];
+                        var today=new Date();
+                        var dayfield=document.getElementById('day_drop_down');
+                        var monthfield=document.getElementById('month_drop_down');
+                        var yearfield=document.getElementById('year_drop_down');
+                        for (var i=1; i<32; i++){
+                        dayfield.options[i-1]=new Option(i, i);
+                        }
+                        //dayfield.options[today.getDate()]=new Option(today.getDate(), today.getDate(), true, true) //select today's day
+                        for (var m=0; m<12; m++){
+                        monthfield.options[m]=new Option(monthtext[m], m+1);
+                        }
+                        //monthfield.options[today.getMonth()]=new Option(monthtext[today.getMonth()], monthtext[today.getMonth()], true, true) //select today's month
+                        var thisyear=today.getFullYear()-18;
+                        for (var y=0; y<125; y++){
+                        yearfield.options[y]=new Option(thisyear, thisyear);
+                        thisyear-=1;
+                        }
+                        //yearfield.options[0]=new Option(today.getFullYear(), today.getFullYear(), true, true) //select today's year
+                    });
         });
         Qck.bread_controller.loadHashes([
             { url: "#users/sign_up", refname : "Sign Up" }
@@ -174,13 +194,13 @@ $.Controller("UserController", {
                 name:$('#reg-name').val(),
                 password:$('#reg-password').val(),
                 email:$('#reg-email').val(),
-                birth_date: $('#reg-birth-date').val()
+                birth_date: $('#year_drop_down').val() + '-' + $('#month_drop_down').val() + '-' + $('#day_drop_down').val()
             }
 
                     , function() {
                         window.location.hash = "#"
-                    }, function() {
-                        alert('usuario no creado');
+                    }, function(error) {
+                        alert('usuario no creado: ' + error);
                     });
         }
         return false;
@@ -586,7 +606,6 @@ $.Model("User", {
     //account: is a mandatory param
     //this method receives an account and creates an User
     createAccount : function(params, success, error) {
-
 
         params.method = "CreateAccount";
         params.account = $.View("xml_renders/user.ejs", params);

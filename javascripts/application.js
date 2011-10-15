@@ -1,6 +1,7 @@
 var Qck = (Qck == undefined) ? {} : Qck;
 var current_user = null;
 var sign_in_unique = false;
+var current_language = 1;
 
 if (!window.console) {
     window.console = {
@@ -31,6 +32,7 @@ head.js("javascripts/qck.address.js",
         "javascripts/qck.category.js",
         "javascripts/qck.country.js",
         "javascripts/qck.item.js",
+        "javascripts/qck.language.js",
         "javascripts/qck.order.js",
         "javascripts/qck.product.js",
         "javascripts/qck.state.js",

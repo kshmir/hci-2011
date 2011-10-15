@@ -5,6 +5,7 @@ $.Controller("ApplicationController", {
 
         this.set_color();
 
+
         this.hides = 0;
 
         var last_interval;
@@ -78,6 +79,8 @@ $.Controller("ApplicationController", {
             el.find("*").data('item', item);
             return  el;
         };
+
+
     },
     set_color: function(color) {
         if (!color) {
@@ -197,7 +200,6 @@ $.Controller("ApplicationController", {
     search_submit: function(text) {
         window.location.hash = "products/search&criteria=" + text;
     },
-
     ".search focus": function(el) {
         el = $(el);
         if (!el.data("old") || el.data("old") == el.val()) {
