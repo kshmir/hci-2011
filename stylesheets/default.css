@@ -684,6 +684,7 @@ h1,h2,h3,h4,h5,h6 {
 
 .items{
     min-height:300px;
+    width:700px;
 }
 
 /******************ACCORDION*******************/

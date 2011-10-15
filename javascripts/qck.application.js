@@ -81,7 +81,7 @@ $.Controller("ApplicationController", {
     },
     set_color: function(color) {
         if (!color) {
-            color = $.jStorage.get('color');
+            color = $.jStorage.get('color') || 'blue';
         }
 
         if (color == 'red') {

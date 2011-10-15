@@ -231,8 +231,10 @@ $.Controller("UserController", {
                             .fadeIn("slow");
                 });
                 Qck.current_user = undefined;
+
                 $.jStorage.deleteKey('current_user');
                 Qck.cart_controller.on_logout();
+                Qck.app_controller.set_color('blue');
                 window.location.hash = "#";
             }, function() {
             });

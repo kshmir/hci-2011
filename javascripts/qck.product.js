@@ -27,80 +27,70 @@ $.Controller("ProductsController", {
         if (!filter) {
             filter = '.box'; // Isotope doesn't like having an undefined filter.
         }
-        if (!$.browser.mozilla) {
-            if (!$(".items").length) {
-                $(this.element).html($.View("views/product_list.ejs", {products : products_list, title:title}));
-                $("#radio").buttonset();
-                this.products = products_list;
-                this.title = title;
 
-                var engine = 'best-available';
-
-                $('.items').isotope({
-                    getSortData : {
-                        name : function ($elem) {
-                            return $elem.find('h3 a').text();
-                        }
-                    },
-                    sortBy: 'name', sortAscending: true,
-                    animationEngine:engine
-                });
-
-                // M*****ing fix
-                setTimeout(function() {
-                    $('.items').isotope('reLayout');
-                }, 1000);
-            } else {
-
-                var to_delete_products = ([].union(this.products, Product.comparer)).subtract(products_list, Product.comparer);
-                var to_add_products = ([].union(products_list, Product.comparer)).subtract(this.products, Product.comparer);
-                var remaining_products = ([].union(products_list, Product.comparer)).intersect(this.products, Product.comparer);
-                this.products = products_list;
-
-
-                var to_delete_products_ids = $.map(to_delete_products, function(item) {
-                    return item.id;
-                });
-                var dom_delete_items = [];
-                $(".items .product_item").each(function(index, item) {
-                    if ($.inArrayCust($(item).attr('id').split(/-/)[1], to_delete_products_ids) != -1) {
-                        dom_delete_items.push(item);
-                    }
-                });
-
-                var dom_add_items = "";
-                for (var i = 0; i < to_add_products.length; i++) {
-                    dom_add_items += $.View('views/product_item.ejs', {product:to_add_products[i]});
-                }
-                dom_add_items = $(dom_add_items);
-
-                if (dom_delete_items.length) {
-                    $('.items').isotope('remove', $(dom_delete_items).parent());
-                }
-                $('.items').isotope('insert', dom_add_items, function() {
-                    $('.items').isotope({
-                        filter: filter
-                    }).isotope('reLayout');
-                });
-                if (orderby) {
-                    $('.items').isotope({ sortBy: 'name', sortAscending: (orderby == 'ASC')});
-                }
-            }
-
-        } else {
-            if (!$(".items").length) {
-                $(this.element).html($.View("views/product_list.ejs", {products : products_list, title:title}));
-                $("#radio").buttonset();
-            }
-            else {
-                var items = "";
-                for (var i = 0; i < products_list.length; i++) {
-                    items += $.View('views/product_item.ejs', {product:products_list[i]});
-                }
-                $(".items").html(items);
-            }
+        if (!$(".items").length) {
+            $(this.element).html($.View("views/product_list.ejs", {products : products_list, title:title}));
+            $("#radio").buttonset();
             this.products = products_list;
+            this.title = title;
+
+            var engine = 'best-available';
+
+            $('.items').isotope({
+                getSortData : {
+                    name : function ($elem) {
+                        return $elem.find('h3 a').text();
+                    }
+                },
+                sortBy: 'name', sortAscending: true,
+                animationEngine:engine
+            });
+
+            // M*****ing fix
+            setTimeout(function() {
+                $('.items').isotope('reLayout');
+            }, 1000);
+        } else {
+
+            var to_delete_products = ([].union(this.products, Product.comparer)).subtract(products_list, Product.comparer);
+            var to_add_products = ([].union(products_list, Product.comparer)).subtract(this.products, Product.comparer);
+            var remaining_products = ([].union(products_list, Product.comparer)).intersect(this.products, Product.comparer);
+            this.products = products_list;
+
+
+            var to_delete_products_ids = $.map(to_delete_products, function(item) {
+                return item.id;
+            });
+            var dom_delete_items = [];
+            $(".items .product_item").each(function(index, item) {
+                if ($.inArrayCust($(item).attr('id').split(/-/)[1], to_delete_products_ids) != -1) {
+                    dom_delete_items.push(item);
+                }
+            });
+
+            var dom_add_items = "";
+            for (var i = 0; i < to_add_products.length; i++) {
+                dom_add_items += $.View('views/product_item.ejs', {product:to_add_products[i]});
+            }
+            dom_add_items = $(dom_add_items).filter('.box');
+
+            if (dom_delete_items.length) {
+                $('.items').isotope('remove', $(dom_delete_items).parent());
+            }
+            $('.items').isotope('insert', dom_add_items, function() {
+                $('.items').isotope({
+                    filter: filter
+                }).isotope('reLayout');
+            });
+            if (orderby) {
+                $('.items').isotope({ sortBy: 'name', sortAscending: (orderby == 'ASC')});
+            }
+            setTimeout(function() {
+                $('.items').isotope('reLayout');
+            }, 1000);
         }
+
+
 
 
         // Bind the product to the view for further use.
