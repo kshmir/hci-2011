@@ -603,7 +603,7 @@ $.Controller("UserController", {
                     });
         });
         Qck.bread_controller.loadHashes([
-            { url: "#users/sign_up", refname : "Sign Up" }
+            { url: "#users/update_user", refname : "Update User" }
         ]);
     },
     ".update-button-label.form_button click" : function () {
