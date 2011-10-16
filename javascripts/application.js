@@ -66,6 +66,7 @@ head.js("javascripts/qck.address.js",
         "javascripts/qck.language.js",
         "javascripts/qck.order.js",
         "javascripts/qck.product.js",
+        "javascripts/easytabs.js",
         "javascripts/qck.state.js",
         "javascripts/qck.user.js", function() {
             jStorage_timed();
