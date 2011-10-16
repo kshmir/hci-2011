@@ -703,15 +703,21 @@ $.Model("User", {
     //authentication_token : is a mandatory param
     //this method validates de user and token, and construct a User.
     getAccount : function(params, success, error) {
+
         //validates user field is not empty
+        var errors = [];
         if (params.username == "") {
-            error("4");
+            errors.push("4");
         }
 
         //validates token field is not empty
         if (params.token == "") {
-            error("6");
+            errors.push("6");
         }
+        if (errors.length() == 0){
+            error(errors);
+        }
+
         params.method = "GetAccount";
 
         $.ajax({
