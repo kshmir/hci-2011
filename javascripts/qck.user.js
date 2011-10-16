@@ -575,7 +575,58 @@ $.Controller("UserController", {
             });
 
         }
+    },
+     "history.users.update subscribe" : function(called, data) {
+        $('#main-content').fadeOut("slow", function() {
+            $('#main-content')
+                    .html($.View("views/update_user.ejs"))
+                    .fadeIn("slow",function(){
+                        var monthtext=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sept','Oct','Nov','Dec'];
+                        var today=new Date();
+                        var dayfield=document.getElementById('day_drop_down');
+                        var monthfield=document.getElementById('month_drop_down');
+                        var yearfield=document.getElementById('year_drop_down');
+                        for (var i=1; i<32; i++){
+                        dayfield.options[i-1]=new Option(i, i);
+                        }
+                        //dayfield.options[today.getDate()]=new Option(today.getDate(), today.getDate(), true, true) //select today's day
+                        for (var m=0; m<12; m++){
+                        monthfield.options[m]=new Option(monthtext[m], m+1);
+                        }
+                        //monthfield.options[today.getMonth()]=new Option(monthtext[today.getMonth()], monthtext[today.getMonth()], true, true) //select today's month
+                        var thisyear=today.getFullYear()-18;
+                        for (var y=0; y<125; y++){
+                        yearfield.options[y]=new Option(thisyear, thisyear);
+                        thisyear-=1;
+                        }
+                        //yearfield.options[0]=new Option(today.getFullYear(), today.getFullYear(), true, true) //select today's year
+                    });
+        });
+        Qck.bread_controller.loadHashes([
+            { url: "#users/sign_up", refname : "Sign Up" }
+        ]);
+    },
+    ".update-button-label.form_button click" : function () {
+
+         User.updateAccount({
+
+                //TODO donde se guarda el token
+                authentication_token: this.authentication_token,
+                username: this.username,
+                name:$('#reg-name').val(),
+                email:$('#reg-email').val(),
+                birth_date: $('#year_drop_down').val() + '-' + $('#month_drop_down').val() + '-' + $('#day_drop_down').val()
+            }
+
+                    , function() {
+                        window.location.hash = "#"
+                    }, function(error) {
+                        alert('usuario no creado: ' + error);
+                    });
+               return false;
     }
+
+
 
 });
 
@@ -696,33 +747,38 @@ $.Model("User", {
     //this method receives an account and updates an User.
     updateAccount : function(params, success, error) {
         //validates user field is not empty
+        var errors = [];
         if (params.username == "") {
-            error("4");
+            errors.push("4");
+
         }
 
         //validates token field is not empty
         if (params.token == "") {
-            error("6");
+            errors.push("6");
         }
         //validates account field is not empty
-        if (params === 'undifined' || params == null) {
-            error("7");
+        if (params === undifined || params == null) {
+            errors.push("7");
         }
         //validates de amount of characters in the field name
         if ($.Model.validateLengthOf(param.name, 1, 80) === undefined) {
-            error("109");
+            errors.push("109");
         }
         //validates de amount of characters in the field email
         if ($.Model.validateLengthOf(param.email, 1, 128) === undefined) {
-            error("110");
+            errors.push("110");
         }
         //validates de Date format
-        if ($.Model.validateFormatOf(param.name, "^(19|20)[0-9][0-9]([-])(0[1-9]|1[012])\2(0[1-9]|[12][0-9]|3[01])$") === undefined) {
-            error("111");
+        if ($.Model.validateFormatOf(param.date, "^(19|20)[0-9][0-9]([-])(0[1-9]|1[012])\2(0[1-9]|[12][0-9]|3[01])$") === undefined) {
+            errors.push("111");
         }
-
+        if (errors.length == 0){
+            error(errors);
+        }
+		params.account = $.View("xml_renders/user.ejs", params);
         params.method = "UpdateAccount";
-        params.account = $.View("xml_renders/user.ejs", params.account);
+        
         $.ajax({
             url: Qck.services.security,
             data: params,
