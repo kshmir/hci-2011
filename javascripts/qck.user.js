@@ -706,15 +706,18 @@ $.Model("User", {
 
         //validates user field is not empty
         var errors = [];
+        var bool = false;
         if (params.username == "") {
             errors.push("4");
+            bool = true;
         }
 
         //validates token field is not empty
         if (params.token == "") {
             errors.push("6");
+            bool = true;
         }
-        if (errors.length() == 0){
+        if (bool){
             error(errors);
         }
 
@@ -754,32 +757,39 @@ $.Model("User", {
     updateAccount : function(params, success, error) {
         //validates user field is not empty
         var errors = [];
+        var bool = false;
         if (params.username == "") {
             errors.push("4");
+            bool = true;
 
         }
 
         //validates token field is not empty
         if (params.token == "") {
             errors.push("6");
+            bool = true;
         }
         //validates account field is not empty
         if (params === undifined || params == null) {
             errors.push("7");
+            bool = true;
         }
         //validates de amount of characters in the field name
         if ($.Model.validateLengthOf(param.name, 1, 80) === undefined) {
             errors.push("109");
+            bool = true;
         }
         //validates de amount of characters in the field email
         if ($.Model.validateLengthOf(param.email, 1, 128) === undefined) {
             errors.push("110");
+            bool = true;
         }
         //validates de Date format
         if ($.Model.validateFormatOf(param.date, "^(19|20)[0-9][0-9]([-])(0[1-9]|1[012])\2(0[1-9]|[12][0-9]|3[01])$") === undefined) {
             errors.push("111");
+            bool = true;
         }
-        if (errors.length == 0){
+        if (bool){
             error(errors);
         }
 		params.account = $.View("xml_renders/user.ejs", params);
