@@ -1,0 +1,6 @@
+/*Example for a Menu Style*/
+.menu {background-color:#ececec; color:#272727; border-bottom:1px solid #d7d7d7; height:23px; font:11px Arial, Helvetica, sans-serif;}
+.menu ul {margin:0px; padding:0px; list-style:none; text-align:center;}
+.menu li {display:inline; line-height:23px;}
+.menu li a {color:#000000; text-decoration:none; padding:4px 5px 6px 5px;  border-left:1px solid #ececec; border-right:1px solid #ececec;}
+.menu li a.tabactive {border-left:1px solid #d7d7d7; border-right:1px solid #d7d7d7; background-color:#CCCCCC; font-weight:bold;  position:relative;}

@@ -1,7 +1,21 @@
 <div class="form box">
     <h2 class="settings-username-title">User Panel</h2>
 
-    <div class="settings-content">
+    <div class="menu">
+        <ul>
+            <li><a href="#" onmouseover="easytabs('1', '1');" onfocus="easytabs('1', '1');" onclick="return false;"  title="" id="tablink1">Settings</a></li>
+            <li><a href="#" onmouseover="easytabs('1', '2');" onfocus="easytabs('1', '2');" onclick="return false;"  title="" id="tablink2">User Info</a></li>
+        </ul>
+    </div>
+    <!--End of the Tabmenu -->
+
+
+    <!--Start Tabcontent 1 -->
+        <div id="tabcontent1">
+
+
+
+         <div class="settings-content">
         <div class="bordered content">
             <h3>Address' List</h3>
             <ul class="address-list list">
@@ -45,4 +59,39 @@
             </form>
         </div>
     </div>
+
+     </div>
+    <!--End Tabcontent 1-->
+    <!--Start Tabcontent 2-->
+        <div id="tabcontent2">
+           <div class="bordered content">
+            <h3>User Information</h3>
+
+            <form action="/" method="post">
+                <div class="form_item">
+                    <span class="label panel-new-name-label">Name:</span>
+                    <input type="text" id="panel-new-name" value="<%= Qck.current_user.name%>" name="new-name" class="input"/>
+                </div>
+                <div class="form_item">
+                    <span class="label panel-new-email-label">Email:</span>
+                    <input type="text" id="panel-new-email" value="<%= Qck.current_user.email%>" name="new-email" class="input"/>
+                </div>
+                <div class="form_item">
+                <span class="label update-birth-date-label">Birth date:</span>
+                <select id="day_drop_down">
+                </select>
+                <select id="month_drop_down">
+                </select>
+                <select id="year_drop_down">
+            </select>
+        </div>
+        <div class="form_item">
+                <div class="form_item">
+                    <input type="button" value="Submit Changes" class="change-pass-button form_button"/>
+                </div>
+            </form>
+          </div>
+        </div>
+    <!--End Tabcontent 2 -->
+
 </div>
