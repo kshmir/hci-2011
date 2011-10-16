@@ -2,7 +2,7 @@ $.Controller("ApplicationController", {
     init: function(params) {
         this.guide_animation();
         var self = this;
-
+        this.set_language(current_language);
         this.set_color();
 
 
@@ -86,6 +86,45 @@ $.Controller("ApplicationController", {
         this.updater();
     },
     updater: function() {
+
+    },
+    set_language: function(language){
+       if(languages==null){
+            languages=[];
+              var success2 = function(vara){
+                  languages=vara;
+                  $('#languages').html($.View("views/languages.ejs",languages));
+
+              };
+              var error2 = function(aux){
+                  alert(aux);
+              };
+                var aux={};
+              aux.method = "GetLanguageList";
+              $.ajax({
+                  url: Qck.services.common,
+                  data: aux,
+                  contentType: "text/xml; charset=utf-8",
+                  success: function(data) {
+
+                      if ($("response", data).attr("status") == "ok") {
+
+                          var language_list = [];
+                          $('language', data).each(function(index, item) {
+                              language_list.push(new Language(item));
+                          });
+                          success2(language_list);
+                      }
+                      else {
+
+                          error2($("error", data).attr("code"));
+                      }
+                  },
+                  error: error2
+
+              });
+       }
+
 
     },
     set_color: function(color) {
