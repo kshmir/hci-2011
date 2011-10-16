@@ -1,7 +1,8 @@
 var Qck = (Qck == undefined) ? {} : Qck;
 var current_user = null;
 var sign_in_unique = false;
-var current_language = 1;
+var current_language=1;
+var languages =null;
 
 if (!window.console) {
     window.console = {
@@ -80,7 +81,10 @@ head.js("javascripts/qck.address.js",
             $("#main-content").products({});
             $("#container").cart({});
             Qck.cart_controller = $("#container").controller();
-
+            if(languages == null){
+                languages= new Language2();
+                languages= languages.getLanguageList();
+            }
             $(window).hashchange();
 
 
