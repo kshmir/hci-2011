@@ -40,8 +40,20 @@
   </reg_labels>
 
   <my_cart_labels>
-    <items>Items</items>
+    <header_items>Items</header_items>
+    <header_item>Item</header_item>
     <go_on>Go On Shopping</go_on>
+    <purchase>Purchase Subtotal:</purchase>
+    <lower_case_items>items</lower_case_items>
+    <lower_case_item>item</lower_case_item>
+    <shipping_address>
+      <header>Shipping Address</header>
+      <error_part1>You don't have any address registered,</error_part1>
+      <error_clcick_here>click here</error_clcick_here>
+      <error_part2>to register one.</error_part2>
+    </shipping_address>
+    <loggin_error>Please Log in to confirm your order</loggin_error>
+    <checkout_button>Checkout Order</checkout_button>
   </my_cart_labels>
 
   <months>
