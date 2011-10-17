@@ -52,8 +52,8 @@
   <reg_labels>
     <username>Nombre de Usuario:</username>
     <name>Nombre:</name>
-    <password>Contrasena:</password>
-    <re_password>Re-escriba la contrasena:</re_password>
+    <password>Contraseña:</password>
+    <re_password>Re-escriba la contraseña:</re_password>
     <email>Correo electronico:</email>
     <birth_date>Fecha de nacimiento:</birth_date>
     <reg_button>Registrar</reg_button>
@@ -191,29 +191,29 @@
 		<error id='102'>El identificador de lenguaje suministrado es invalido.</error>
 		<error id='103'>El identificador de pais suministrado es invalido.</error>
 		<error id='104'>El usuario es invalido.</error>
-		<error id='105'>El token de autenticacio³n es invalido.</error>
+		<error id='105'>El token de autenticacion es invalido.</error>
 		<error id='106'></error>
-		<error id='107'>El nombre de usuario es invÃ¡lido (longitud mÃ­nima 1 y mÃ¡xima 15 caracteres).</error>
-		<error id='108'>La contraseÃ±a es invÃ¡lida (longitud mÃ­nima 8 y mÃ¡xima 15 caracteres).</error>
-		<error id='109'>El nombre es invÃ¡lido (longitud mÃ­nima 1 y mÃ¡xima 80 caracteres).</error>
-		<error id='110'>La direcciÃ³n de email es invÃ¡lida (longitud mÃ­nima 1 y mÃ¡xima 128 caracteres).</error>
-		<error id='111'>La fecha de nacimiento es invÃ¡lida.</error>
-		<error id='112'>El identificador de categorÃ­a suministrado es invÃ¡lido.</error>
-		<error id='113'>El identificador de sub-categorÃ­a suministrado es invÃ¡lido.</error>
-		<error id='114'>El identificador de producto suministrado es invÃ¡lido.</error>
-		<error id='115'>El identificador de orden suministrado es invÃ¡lido.</error>
-		<error id='116'>La operaciÃ³n solicitada es invÃ¡lida para el estado de la orden.</error>
-		<error id='117'>El identificador de la direcciÃ³n suministrado es invÃ¡lido.</error>
-		<error id='118'>El nombre de referencia suministrado es invÃ¡lido (longitud mÃ­nima 1 y mÃ¡xima 80 caracteres).</error>
-		<error id='119'>La direcciÃ³n principal suministrada es invÃ¡lida (longitud mÃ­nima 1 y mÃ¡xima 80 caracteres).</error>
-		<error id='120'>La direcciÃ³n secundaria suministrada es invÃ¡lida (longitud mÃ­nima 1 y mÃ¡xima 80 caracteres).</error>
-		<error id='121'>El identificador de estado suministrado es invÃ¡lido.</error>
-		<error id='122'>La ciudad suministrada es invÃ¡lida (longitud mÃ­nima 1 y mÃ¡xima 80 caracteres).</error>
-		<error id='123'>El cÃ³digo postal suministrado es invÃ¡lido (longitud mÃ­nima 1 y mÃ¡xima 8 caracteres).</error>
-		<error id='124'>El nÃºmero de telÃ©fono suministrado es invÃ¡lido (longitud mÃ­nima 1 y mÃ¡xima 25 caracteres).</error>
+		<error id='107'>El nombre de usuario es inválido (longitud mínima 1 y máxima 15 caracteres).</error>
+		<error id='108'>La contraseña es inválida (longitud mínima 8 y máxima 15 caracteres).</error>
+		<error id='109'>El nombre es inválido (longitud mínima 1 y máxima 80 caracteres).</error>
+		<error id='110'>La dirección de email es inválida (longitud mínima 1 y máxima 128 caracteres).</error>
+		<error id='111'>La fecha de nacimiento es inválida.</error>
+		<error id='112'>El identificador de categoría suministrado es inválido.</error>
+		<error id='113'>El identificador de sub-categoría suministrado es inválido.</error>
+		<error id='114'>El identificador de producto suministrado es inválido.</error>
+		<error id='115'>El identificador de orden suministrado es inválido.</error>
+		<error id='116'>La operación solicitada es inválida para el estado de la orden.</error>
+		<error id='117'>El identificador de la dirección suministrado es inválido.</error>
+		<error id='118'>El nombre de referencia suministrado es inválido (longitud mínima 1 y máxima 80 caracteres).</error>
+		<error id='119'>La dirección principal suministrada es inválida (longitud mínima 1 y máxima 80 caracteres).</error>
+		<error id='120'>La dirección secundaria suministrada es inválida (longitud mínima 1 y máxima 80 caracteres).</error>
+		<error id='121'>El identificador de estado suministrado es inválido.</error>
+		<error id='122'>La ciudad suministrada es inválida (longitud mínima 1 y máxima 80 caracteres).</error>
+		<error id='123'>El código postal suministrado es inválido (longitud mínima 1 y máxima 8 caracteres).</error>
+		<error id='124'>El número de teléfono suministrado es inválido (longitud mínima 1 y máxima 25 caracteres).</error>
 		<error id='125'></error>
 		<error id='201'>El nombre de usuario ya se encuentra en uso.</error>
-		<error id='202'>La direcciÃ³n ya se encuentra en uso.</error>
+		<error id='202'>La dirección ya se encuentra en uso.</error>
 		<error id='999'>Se produjo un error inesperado procesando la solicitud.</error>
         <passwords_must_match>Las contraseñas deben ser iguales</passwords_must_match>
         <input_error>Campos inválidos:</input_error>

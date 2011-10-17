@@ -175,7 +175,7 @@ $.Controller("ApplicationController", {
                 Qck.locale[current_language] = data;
             };
         var params;
-        if(!$.jStorage.get('current_language_data_' + current_language)){
+     //   if(!$.jStorage.get('current_language_data_' + current_language)){
             $.ajax({
                 url: 'languages/lang-' + current_language + '.xml',
                 data: params,
@@ -184,9 +184,9 @@ $.Controller("ApplicationController", {
                     change_labels($.jStorage.get('current_language_data_' + current_language));
                 }
             });
-        }else{
-            change_labels($.jStorage.get('current_language_data_' + current_language));
-        }
+//        }else{
+//            change_labels($.jStorage.get('current_language_data_' + current_language));
+//        }
 
 
 
