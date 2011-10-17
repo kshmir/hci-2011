@@ -119,7 +119,6 @@ $.Controller("UserController", {
                 },
                 show: {
                     event: false, // Don't specify a show event...
-                    ready: true, // ... but show the tooltip when ready
                     effect: function(offset) {
                         $(this).slideDown(200); // "this" refers to the tooltip
                         $('#username').click();
@@ -131,7 +130,7 @@ $.Controller("UserController", {
                 style: {
                     classes: 'ui-tooltip-shadow ui-tooltip-' + 'red'
                 }
-            });
+            }).qtip('show');
         };
         $('.label.register-password-label').qtip('hide');
         if ($('#reg-password').val() != $('#reg-password2').val()) {
