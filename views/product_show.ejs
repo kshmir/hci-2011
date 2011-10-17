@@ -5,7 +5,7 @@
     <img src="<%=this.product.image_url%>" alt=""/>
     <p class="attribute">
         <span id="sales_rank_label" class="sales_rank-label label">
-            Sales rank:
+            <%= $('product_label rank', Qck.locale[current_language]).text() %>
         </span>
         <span class="sales_rank">
             <%= this.product.sales_rank %>
@@ -13,14 +13,16 @@
     </p>
     <p class="attribute">
         <span id="price_label" class="price-lable label">
-            Price:
+            <%= $('product_label price', Qck.locale[current_language]).text() %>
         </span>
         <span class="price">
             <%= this.product.price %>
         </span>
     </p>
     <p class="attribute">
-      <a id="add_to_cart_label" href="#" class="addcart">Add to cart</a> - <a id="more_label"href="#products/show&id=<%=this.product.id%>" class="addcart">More</a>
+      <a id="add_to_cart_label" href="#" class="addcart">
+          <%= $('product_label add_to_cart', Qck.locale[current_language]).text() %>
+      </a>
     </p>
     <div class="clear"></div>
 </div>

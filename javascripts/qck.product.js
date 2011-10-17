@@ -7,7 +7,7 @@ $.Controller("ProductsController", {
         });
     },
     fix_heights: function() {
-
+        $("#main-content").removeClass('loading');
         $(".filter a").click(function() {
 
             $('.items').isotope({

@@ -83,22 +83,21 @@ $.Controller("ApplicationController", {
             return  el;
         };
 
-        $("#l_languages").change();
+        if ($.jStorage.get('current_language')) {
+            current_language = $.jStorage.get('current_language');
+            $('#l_languages').val(current_language).change();
+            this.load_language();
+        }
+
+
         this.updater();
     },
     updater: function() {
 
     },
     "#l_languages change" : function() {
-
-            if ($.jStorage.get('current_language')) {
-                current_language = $.jStorage.get('current_language');
-                $('#l_languages').val(current_language);
-            } else {
-                current_language = $('#l_languages').val();
-            }
-
-
+        current_language = $('#l_languages').val();
+        $.jStorage.set('current_language',current_language);
         Qck.app_controller.load_language();
     },
     set_language: function(language) {

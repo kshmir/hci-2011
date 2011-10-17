@@ -10,6 +10,7 @@ $.Controller("CategoriesController", {
         var ajax_callback = function(show_callback) {
             Category.findAll({}, function(data) {
                 self.render_list(data);
+                $("#sidebar").removeClass('loading');
                 show_callback();
             });
         };
