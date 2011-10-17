@@ -154,7 +154,7 @@ $.Controller("ApplicationController", {
                 $('#sign_up').text($('topbar sign_up',data).text());
                 $('#or').text($('topbar or',data).text());
                //#TODO: $('#quick_search').value($('guide search_box',data).text());
-                $('#categories').text($('guide search_box',data).text());
+                $('#categories').text($('sidebar categories',data).text());
                 $('#filter').text($('header filter',data).text());
                 $('#name_asc_label').text($('header ascending',data).text());
                 $('#name_desc_label').text($('header descending',data).text());

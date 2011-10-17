@@ -228,7 +228,7 @@ $.Controller("UserController", {
             Qck.current_user.signOut(function() {
                 $('.topbar').fadeOut("slow", function() {
                     $('.topbar')
-                            .html($.View("views/sign_in.ejs"))
+                            .html($.View("views/sign_in.ejs",Qck.locale[current_language]))
                             .fadeIn("slow",function(){
                             Qck.app_controller.set_language(current_language);
                         });
