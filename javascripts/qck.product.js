@@ -109,7 +109,7 @@ $.Controller("ProductsController", {
             item.data("loaded", true);
         }
 
-
+        Qck.app_controller.load_language();
         this.fix_heights();
     },
     "#name_asc click": function() {

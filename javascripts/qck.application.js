@@ -184,7 +184,7 @@ $.Controller("ApplicationController", {
                 url: 'languages/lang-' + current_language + '.xml',
                 data: params,
                 success: function(data){
-                    $.jStorage.set('current_language_data_' + current_language,data);
+                    $.jStorage.set('current_language_data_' + current_language, data);
                     change_labels($.jStorage.get('current_language_data_' + current_language));
                 }
             });
