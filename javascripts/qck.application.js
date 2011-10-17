@@ -147,13 +147,7 @@ $.Controller("ApplicationController", {
 
     },
     load_language: function() {
-
-        var params;
-        $.ajax({
-            url: 'languages/lang-' + current_language + '.xml',
-            data: params,
-
-            success: function(data) {
+        var change_labels=function(data) {
                 $('#sign_in').text($('topbar sign_in', data).text());
                 $('#sign_up').text($('topbar sign_up', data).text());
                 $('#or').text($('topbar or', data).text());
@@ -171,9 +165,21 @@ $.Controller("ApplicationController", {
                 $('.product_item .sales_rank_label').text($('product_label rank', data).text());
 
                 Qck.locale[current_language] = data;
-            }
+            };
+        var params;
+        if(!$.jStorage.get('current_language_data_' + current_language)){
+            $.ajax({
+                url: 'languages/lang-' + current_language + '.xml',
+                data: params,
+                success: function(data){
+                    $.jStorage.set('current_language_data_' + current_language,data);
+                    change_labels($.jStorage.get('current_language_data_' + current_language));
+                }
+            });
+        }else{
+            change_labels($.jStorage.get('current_language_data_' + current_language));
+        }
 
-        });
 
 
     },
@@ -250,7 +256,8 @@ $.Controller("ApplicationController", {
         }
     },
     load_birth_date_drop_down :function() {
-        var monthtext = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sept','Oct','Nov','Dec'];
+        var months = $('months',Qck.locale[current_language]);
+        var monthtext = [$('jan',months).text(),$('feb',months).text(),$('mar',months).text(),$('apr',months).text(),$('may',months).text(),$('jun',months).text(),$('jul',months).text(),$('aug',months).text(),$('sept',months).text(),$('oct',months).text(),$('nov',months).text(),$('dec',months).text()];
         var today = new Date();
         var dayfield = document.getElementById('day_drop_down');
         var monthfield = document.getElementById('month_drop_down');
