@@ -138,7 +138,8 @@ $.Model("Category", {
                             self.buildRecursively(el, 0, function(ret) {
                                 self.cached_array.push(ret);
                                 if (hits == 0) {
-                                    $.jStorage.set('cached_categories' + current_language, self.cached_array);
+                                    $.jStorage.set('cached_categories' + current_language , self.cached_array);
+
                                     self.got_array = true;
                                     success(self.cached_array);
                                 } else {

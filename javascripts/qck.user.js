@@ -135,96 +135,15 @@ $.Controller("UserController", {
         $('.label.register-password-label').qtip('hide');
         if ($('#reg-password').val() != $('#reg-password2').val()) {
             no_error = false;
-            $('.label.register-password-label').qtip('hide').removeData('qtip')
-                    .qtip({
-                              content: {
-                                  text: $('errors passwords_must_match',Qck.locale[current_language]).text(),
-                                  title: {
-                                      button: true
-                                  }
-                              },
-                              position: {
-                                  my: 'center right', // Use the corner...
-                                  at: 'center left' // ...and opposite corner
-                              },
-                              show: {
-                                  event: false, // Don't specify a show event...
-                                  ready: true, // ... but show the tooltip when ready
-                                  effect: function(offset) {
-                                      $(this).slideDown(200); // "this" refers to the tooltip
-                                      $('#username').click();
-                                  }
-                              },
-                              hide: function(event, api) {
-                                  self.sign_in_unique = true;
-                              }, // Don't specify a hide event either!
-                              style: {
-                                  classes: 'ui-tooltip-shadow ui-tooltip-' + 'red'
-                              }
-                          });
+            add_err_qtip($('.label.register-password-label'),$('errors passwords_must_match',Qck.locale[current_language]).text());
+
         } else {
             if ($('#reg-password').val() == "") {
                 no_error = false;
-                $('.label.register-password-label').qtip('hide').removeData('qtip')
-                        .qtip({
-                                  content: {
-                                      text: $('errors #108',Qck.locale[current_language]).text(),
-                                      title: {
-
-                                          button: true
-                                      }
-                                  },
-                                  position: {
-                                      my: 'center right', // Use the corner...
-                                      at: 'center left' // ...and opposite corner
-                                  },
-                                  show: {
-                                      event: false, // Don't specify a show event...
-                                      ready: true, // ... but show the tooltip when ready
-                                      effect: function(offset) {
-                                          $(this).slideDown(200); // "this" refers to the tooltip
-                                          $('#username').click();
-                                      }
-                                  },
-                                  hide: function(event, api) {
-                                      self.sign_in_unique = true;
-                                  }, // Don't specify a hide event either!
-                                  style: {
-                                      classes: 'ui-tooltip-shadow ui-tooltip-' + 'red'
-                                  }
-                              });
+                add_err_qtip($('.label.register-password-label'),$('errors #108',Qck.locale[current_language]).text());
             }
         }
-        if ($('#reg-password').val() != $('#reg-password2').val()) {
-            no_error = false;
-            $('.label.register-password-label').qtip('hide').removeData('qtip')
-                    .qtip({
-                              content: {
-                                  text: $('errors passwords_must_match',Qck.locale[current_language]).text(),
-                                  title: {
-                                      button: true
-                                  }
-                              },
-                              position: {
-                                  my: 'center right', // Use the corner...
-                                  at: 'center left' // ...and opposite corner
-                              },
-                              show: {
-                                  event: false, // Don't specify a show event...
-                                  ready: true, // ... but show the tooltip when ready
-                                  effect: function(offset) {
-                                      $(this).slideDown(200); // "this" refers to the tooltip
-                                      $('#username').click();
-                                  }
-                              },
-                              hide: function(event, api) {
-                                  self.sign_in_unique = true;
-                              }, // Don't specify a hide event either!
-                              style: {
-                                  classes: 'ui-tooltip-shadow ui-tooltip-' + 'red'
-                              }
-                          });
-        }
+
         if (no_error) {
 
             User.createAccount({
@@ -238,9 +157,8 @@ $.Controller("UserController", {
                     , function() {
                         window.location.hash = "#users/sign_in"
                     }, function(error) {
-                        $.each(error,function(index,item){
-                            //if(item=)
-                        });
+
+                        alert('usuario no creado: ' + error);
                     });
         }
         return false;
