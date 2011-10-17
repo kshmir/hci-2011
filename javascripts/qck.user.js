@@ -103,12 +103,27 @@ $.Controller("UserController", {
     ".register-button-label.form_button click" : function () {
         var no_error = true;
         var self = this;
+        var validate_date = function(dd,mm,yy){
+            var day = new Array(31,28,31,30,31,30,31,31,30,31,30,31);
+
+            dd = parseFloat(dd);
+            mm = parseFloat(mm);
+            yy = parseFloat(yy);
+            if (yy < 100) yy += 2000;
+            if (yy < 1582 || yy > 4881) return false;
+            if (mm == 2 && (yy%400 == 0 || (yy%4 == 0 && yy%100 != 0))) day[1]=29;else day[1]=28;
+            if (mm < 1 || mm > 12) return false;
+            if (dd < 1 || dd > day[mm-1]) return false;
+            return true;
+
+        };
         var add_err_qtip = function(el,msg){
             el.qtip('hide').removeData('qtip')
                     .qtip({
                               content: {
                                   text: msg,
                                   title: {
+                                      text: '',
                                       button: true
                                   }
                               },
@@ -133,6 +148,10 @@ $.Controller("UserController", {
                           });
         };
         $('.label.register-password-label').qtip('hide');
+        $('.label.register-username-label').qtip('hide');
+        $('.label.register-email-label').qtip('hide');
+        $('.label.register-name-label').qtip('hide');
+        $('.label.register-birth-date-label').qtip('hide');
         if ($('#reg-password').val() != $('#reg-password2').val()) {
             no_error = false;
             add_err_qtip($('.label.register-password-label'),$('errors passwords_must_match',Qck.locale[current_language]).text());
@@ -143,8 +162,16 @@ $.Controller("UserController", {
                 add_err_qtip($('.label.register-password-label'),$('errors #108',Qck.locale[current_language]).text());
             }
         }
+        if (!validate_date($('#day_drop_down').val(),$('#month_drop_down').val(),$('#year_drop_down').val())) {
+            no_error = false;
+            add_err_qtip($('.label.register-birth-date-label'),$('errors #111',Qck.locale[current_language]).text());
+        }
 
-        if (no_error) {
+
+        if (!no_error) {
+            $('#reg-password').val("");
+            $('#reg-password2').val("");
+        }
 
             User.createAccount({
                 username: $('#reg-username').val(),
@@ -157,10 +184,20 @@ $.Controller("UserController", {
                     , function() {
                         window.location.hash = "#users/sign_in"
                     }, function(error) {
-
-                        alert('usuario no creado: ' + error);
+                        $.each(error,function(index,item){
+                            if(item=="4"){
+                                add_err_qtip($('.label.register-username-label'),$('errors #4',Qck.locale[current_language]).text());
+                            }
+                            if(item=="109"){
+                                add_err_qtip($('.label.register-name-label'),$('errors #109',Qck.locale[current_language]).text());
+                            }
+                            if(item=="110"){
+                                add_err_qtip($('.label.register-email-label'),$('errors #110',Qck.locale[current_language]).text());
+                            }
+                        });
+                        add_err_qtip($('.register-button-label'),$('errors #4',Qck.locale[current_language]).text());
                     });
-        }
+
         return false;
     },
 
@@ -648,7 +685,27 @@ $.Model("User", {
     //account: is a mandatory param
     //this method receives an account and creates an User
     createAccount : function(params, success, error) {
+        var errors = [];
+        var bool = false;
+        if (params.username == "") {
+            errors.push("4");
+            bool = true;
 
+        }
+        //validates de amount of characters in the field name
+        if ($.Model.validateLengthOf(params.name, 1, 80) === undefined) {
+            errors.push("109");
+            bool = true;
+        }
+        //validates de amount of characters in the field email
+        if ($.Model.validateLengthOf(params.email, 1, 128) === undefined) {
+            errors.push("110");
+            bool = true;
+        }
+
+        if (bool){
+            error(errors);
+        }else{
         params.method = "CreateAccount";
         params.account = $.View("xml_renders/user.ejs", params);
 
@@ -668,6 +725,7 @@ $.Model("User", {
             error: error
 
         });
+        }
 
     },
 
@@ -759,13 +817,13 @@ $.Model("User", {
             bool = true;
         }
         //validates de Date format
-        if ($.Model.validateFormatOf(param.date, "^(19|20)[0-9][0-9]([-])(0[1-9]|1[012])\2(0[1-9]|[12][0-9]|3[01])$") === undefined) {
+        /*if ($.Model.validateFormatOf(param.date, "^(19|20)[0-9][0-9]([-])(0[1-9]|1[012])\2(0[1-9]|[12][0-9]|3[01])$") === undefined) {
             errors.push("111");
             bool = true;
-        }
+        } */
         if (bool){
             error(errors);
-        }
+        }else{
 		params.account = $.View("xml_renders/user.ejs", params);
         params.method = "UpdateAccount";
         
@@ -785,6 +843,7 @@ $.Model("User", {
             error: error
 
         });
+        }
 
     }
     ,

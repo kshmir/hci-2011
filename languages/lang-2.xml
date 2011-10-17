@@ -194,7 +194,7 @@
 		<error id='105'>El token de autenticacio³n es invalido.</error>
 		<error id='106'></error>
 		<error id='107'>El nombre de usuario es invÃ¡lido (longitud mÃ­nima 1 y mÃ¡xima 15 caracteres).</error>
-		<error id='108'>La contraseÃ±a es invÃ¡lida (longitud mÃ­nima 8 y mÃ¡xima 15 caracteres).</error>
+		<error id='108'>La contraseña es inválida (longitud mínima 8 y máxima 15 caracteres).</error>
 		<error id='109'>El nombre es invÃ¡lido (longitud mÃ­nima 1 y mÃ¡xima 80 caracteres).</error>
 		<error id='110'>La direcciÃ³n de email es invÃ¡lida (longitud mÃ­nima 1 y mÃ¡xima 128 caracteres).</error>
 		<error id='111'>La fecha de nacimiento es invÃ¡lida.</error>
