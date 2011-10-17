@@ -91,6 +91,7 @@ $.Controller("ApplicationController", {
     "#l_languages change" : function(){
         alert($('#l_languages').val());
         current_language=$('#l_languages').val();
+        Qck.app_controller.load_language();
     }
     ,
     "#languages load":function(){
@@ -133,7 +134,24 @@ $.Controller("ApplicationController", {
                   error: error2
 
               });
+       }else{
+           $('#languages').fadeOut('fast',function(){
+                      $('#languages').html($.View("views/languages.ejs",languages));
+                      $('#languages').fadeIn('slow');
+                });
        }
+
+
+    },
+     load_language: function(){
+         var datas;
+         $.getScript('languages/lang-' + current_language + '.js', function(){
+            datas=locale;
+
+            }
+
+          );
+          alert(datas.template.signIn.l_sign_in);
 
 
     },

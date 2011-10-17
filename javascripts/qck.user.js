@@ -7,6 +7,7 @@ $.Controller("UserController", {
         if ($.jStorage.get('current_user')) {
             Qck.current_user = new User($.jStorage.get('current_user'), true);
             $('.topbar').html($.View("views/logged.ejs", {username: Qck.current_user.name}));
+            Qck.app_controller.set_language(current_language);
         }
         $('.topbar').fadeIn("slow");
 
@@ -41,7 +42,7 @@ $.Controller("UserController", {
                 Qck.current_user = user;
                 $("#sign_in").qtip('hide');
                 $(el).html($.View("views/logged.ejs", {username: user.name}))
-                        .fadeIn("slow");
+                        .fadeIn("slow",function(){Qck.app_controller.set_language(current_language);});
                 $(".login-form").remove();
                 Qck.cart_controller.on_login();
                 window.location.hash = "#";
@@ -228,7 +229,9 @@ $.Controller("UserController", {
                 $('.topbar').fadeOut("slow", function() {
                     $('.topbar')
                             .html($.View("views/sign_in.ejs"))
-                            .fadeIn("slow");
+                            .fadeIn("slow",function(){
+                            Qck.app_controller.set_language(current_language);
+                        });
                 });
                 Qck.current_user = undefined;
 

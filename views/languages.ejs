@@ -1,4 +1,4 @@
-<form id='languages' action=''>
+<form id='form_languages' action=''>
     <select id='l_languages'>
         <% $.each(this,function(index, item) { %>
                         <option value='<%= item.id %>'<% if(item.id == current_language){%> selected='selected' <% }; %> ><%= item.name %></option>

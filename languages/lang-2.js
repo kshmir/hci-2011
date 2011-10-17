@@ -5,12 +5,12 @@
  * Time: 4:38 PM
  * To change this template use File | Settings | File Templates.
  */
-                              var locale = {
+var locale = {
 	id : "2",
 	code : "es",
 	web : {
-		l_loading: "Cargando, aguarde unos momentos por favor.",
-		l_success: "La operación ha sido exitosa.",
+		"l_loading1": "Cargando, aguarde unos momentos por favor.",
+		"l_success": "La operación ha sido exitosa.",
 		"l_search" : "Buscar",
 		"l_language" : "Cambiar idioma: ",
 		"b_asc" : "Ordenar Ascendente",
@@ -60,7 +60,7 @@
 			"b_to" : "a"
 		},
 		signIn : {
-			"l_signIn" : "Autenticarse",
+			"l_sign_in" : "Autenticarse",
 			"l_username" : "Usuario",
 			"l_password" : "Contraseña",
 			"b_login" : "Iniciar Sesión",

@@ -1,0 +1,22 @@
+<locale>
+  <index>
+
+  </index>
+  <topbar>
+    <sign_in>Sign in</sign_in>
+    <or>or</or>
+    <sign_out>Sign out</sign_out>
+  </topbar>
+  <guide>
+    <search_box>Quick search</search_box>
+  </guide>
+  <sidebar>
+    <categories>Categories</categories>
+  </sidebar>
+  <header>
+    <ascending>Ascending</ascending>
+  </header>
+  <erros>
+    <error id='1'></error>
+  </erros>
+</locale>

@@ -12,11 +12,11 @@
  * Time: 3:34 AM
  * To change this template use File | Settings | File Templates.
  */
-                              var locale = {
+var locale = {
 	id : "1",
 	code : "en",
 	web : {
-		"l_loading": "Please wait a moment, loading.",
+		"l_loading1": "Please wait a moment, loading.",
 		"l_success": "The operation  had ended successfully.",
 		"l_search" : "Search",
 		"l_language" : "Change language: ",
@@ -67,7 +67,7 @@
 			"b_to" : "to"
 		},
 		signIn : {
-			"l_signIn" : "Sign In",
+			"l_sign_in" : "Sign In",
 			"l_username" : "User",
 			"l_password" : "Password",
 			"b_login" : "Log In",
