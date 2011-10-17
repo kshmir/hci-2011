@@ -277,6 +277,10 @@ $.Controller("UserController", {
                     .html($.View("views/user_settings.ejs",usr)).fadeIn('slow',function(){
                     Qck.app_controller.load_birth_date_drop_down();
                     /*#TODO: completar fecha con la del usuaro.*/
+                    var today = new Date();
+                    $('#day_drop_down').val(5);
+                    $('#month_drop_down').val(5);
+                    $('#year_drop_down').val(1990);
                 });
             Address.getAddressList({
                 username: Qck.current_user.username,
@@ -593,7 +597,6 @@ $.Controller("UserController", {
         ]);
     },
     ".update-user-button click" : function () {
-            alert('hola');
          User.updateAccount({
 
                 //TODO donde se guarda el token
