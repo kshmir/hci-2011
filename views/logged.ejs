@@ -1,1 +1,1 @@
-<span id='welcome'>Bienvenido <%= this.username %></span> | <span id='settings'><a href="#users/user_panel">User Panel</a><span/>  | <span id='sign_out'><a href="/">Sign out</a><span/> | <span id="languages"></span>
+<span id='welcome'><%= $('topbar welcome',this.lang).text() %><%= this.username %></span> | <span id='settings'><a href="#users/user_panel"><%= $('topbar user_panel',this.lang).text() %></a><span/>  | <span id='sign_out'><a href="/"><%= $('topbar sign_out',this.lang).text() %></a><span/> | <span id="languages"></span>

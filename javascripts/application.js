@@ -4,6 +4,16 @@ var sign_in_unique = false;
 var current_language=1;
 var languages =null;
 
+Qck.locale = {};
+$.ajax({
+
+            url: 'languages/lang-' + current_language + '.xml',
+            success: function(data) {
+                Qck.locale[current_language]=data;
+            }
+
+        });
+
 if (!window.console) {
     window.console = {
         log: function() {

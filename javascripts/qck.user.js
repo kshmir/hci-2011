@@ -6,7 +6,7 @@ $.Controller("UserController", {
 
         if ($.jStorage.get('current_user')) {
             Qck.current_user = new User($.jStorage.get('current_user'), true);
-            $('.topbar').html($.View("views/logged.ejs", {username: Qck.current_user.name}));
+            $('.topbar').html($.View("views/logged.ejs", {username: Qck.current_user.name, lang: Qck.locale[current_language]}));
             Qck.app_controller.set_language(current_language);
         }
         $('.topbar').fadeIn("slow");
@@ -192,9 +192,9 @@ $.Controller("UserController", {
         $("#sign_in").removeData('qtip')
                 .qtip({
                           content: {
-                              text: $.View("views/login.ejs"),
+                              text: $.View("views/login.ejs",Qck.locale[current_language]),
                               title: {
-                                  text: 'Sign in:',
+                                  text: $('sign_in_qtip sign_in',Qck.locale[current_language]).text(),
                                   button: true
                               }
                           },
