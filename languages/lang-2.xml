@@ -1,21 +1,135 @@
 <locale>
+
   <index>
 
   </index>
+
   <topbar>
-    <sign_in>Iniciar sesión</sign_in>
-    <or>or</or>
-    <sign_out>Sign out</sign_out>
+    <sign_in>Iniciar Sesi&oacute;n</sign_in>
+    <or>o</or>
+    <sign_out>Cerrar Sesi&oacute;n</sign_out>
+    <welcome>Bienvenido </welcome>
+    <user_panel>Panel del Usuario</user_panel>
+    <sign_up>Crear Sesi&oacute;n</sign_up>
   </topbar>
+
   <guide>
-    <search_box>Quick search</search_box>
+    <search_box>B&uacute;squeda R&aacute;pida</search_box>
+    <search_advice>Presione enter para una b&uacute;squeda completa</search_advice>
   </guide>
+
+  <cart_merge>
+    <message>Usted posee un carrito no confirmado. ¿Quiere agregar los productos elegidos a su antiguo carrito, o prefiere ignorarlos?</message>
+    <current_cart_message>El carrito actual contiene </current_cart_message>
+    <current_cart_item>producto</current_cart_item>
+    <current_cart_items>productos</current_cart_items>
+    <current_cart_total>total</current_cart_total>
+    <unconfirmed_cart_message>El carrito no confirmado contiene </unconfirmed_cart_message>
+    <unconfirmed_cart_item>producto</unconfirmed_cart_item>
+    <unconfirmed_cart_items>producutos</unconfirmed_cart_items>
+    <unconfirmed_cart_total>total</unconfirmed_cart_total>
+    <forget_them_button>Descartalos</forget_them_button>
+    <add_them_button>Agregarlos</add_them_button>
+  </cart_merge>
+
   <sidebar>
-    <categories>Categories</categories>
+    <categories>Categor&iacute;as</categories>
   </sidebar>
+
   <header>
-    <ascending>Ascending</ascending>
+    <filter>Orden:</filter>
+    <ascending>Ascendente</ascending>
+    <descending>Descendente</descending>
+    <register>Crear un nuevo usuario</register>
+    <my_cart>Mi Carrito</my_cart>
+    <create_address>Crear una nueva Direcci&oacute;n</create_address>
+    <user_panel>Panel del Usuario</user_panel>
   </header>
+
+  <reg_labels>
+    <username>Nombre de Usuario:</username>
+    <name>Nombre:</name>
+    <password>Contrase&ntilde;a:</password>
+    <re_password>Re-escriba la contrase&ntilde;a:</re_password>
+    <email>Correo electr&oacute;nico:</email>
+    <birth_date>Fecha de nacimiento:</birth_date>
+    <reg_button>Registrar</reg_button>
+  </reg_labels>
+
+  <my_cart_labels>
+    <header_items>Productos</header_items>
+    <header_item>Producto</header_item>
+    <go_on>Continuar Comprando</go_on>
+    <purchase>Subtotal a pagar:</purchase>
+    <lower_case_items>productos</lower_case_items>
+    <lower_case_item>producto</lower_case_item>
+    <shipping_address>
+      <header>Direcci&oacute;n de entrega</header>
+      <error_part1>No hay ninguna direcci&oacute;n regitrada,</error_part1>
+      <error_clcick_here>presione aqui</error_clcick_here>
+      <error_part2>para registrar una.</error_part2>
+    </shipping_address>
+    <loggin_error>Por favor inicie sesi&oacute;n para confirmar &eacute;sta orden</loggin_error>
+    <no_item_error>Por favor agregue productos al carrito para confirmar &eacute;sta orden</no_item_error>
+    <checkout_button>Confirmar</checkout_button>
+  </my_cart_labels>
+
+   <create_address_label>
+     <name>Nombre:</name>
+     <address_line_1>Direcci&oacute;n de l&iacute;nea 1:</address_line_1>
+     <address_line_2>Direcci&oacute;n de l&iacute;nea 2:</address_line_2>
+     <country>Pa&iacute;s:</country>
+     <state>Provincia:</state>
+     <city>Ciudad:</city>
+     <zip_code>C&oacute;digo Postal:</zip_code>
+     <phone_number>N&uacute;mero Telef&oacute;nico:</phone_number>
+     <create_address_button>Crear Direcci&oacute;n</create_address_button>
+   </create_address_label>
+
+   <product_label>
+     <add_to_cart>Agregar al carrito</add_to_cart>
+     <more>m&aacute;s</more>
+   </product_label>
+
+  <months>
+    <jan>Ene</jan>
+    <feb>Feb</feb>
+    <mar>Mar</mar>
+    <apr>Abr</apr>
+    <may>May</may>
+    <jun>Jun</jun>
+    <jul>Jul</jul>
+    <aug>Ago</aug>
+    <sept>Sept</sept>
+    <oct>Oct</oct>
+    <nov>Nov</nov>
+    <dec>Dic</dec>
+  </months>
+
+  <sign_in_qtip>
+    <sign_in>Iniciar Sesi&oacute;n:</sign_in>
+    <username>Nombre de Usuario</username>
+    <password>Contrase&ntilde;a</password>
+    <log_button>Iniciar</log_button>
+  </sign_in_qtip>
+
+  <cart>
+    <check_cart>Chequear Mi Carrito</check_cart>
+    <clear_cart>Limpiar Mi Carrito</clear_cart>
+  </cart>
+
+  <item>
+    <welcome>Bienvenido </welcome>
+    <user_panel>Panel de Usuario</user_panel>
+    <logout>Cerrar Sesi&oacute;n</logout>
+  </item>
+
+  <user_panel_label>
+    <address_list>Lista de direcciones</address_list>
+    <create_address>Crear Direcci&oacute;n</create_address>
+
+  </user_panel_label>
+
   <erros>
     <error id='1'></error>
   </erros>
