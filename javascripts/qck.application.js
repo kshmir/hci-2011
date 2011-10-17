@@ -140,6 +140,20 @@ $.Controller("ApplicationController", {
                 $('.label.register-birth-date-label').text($('reg_labels birth_date',data).text());
                 $('.form_button.register-button-label').val($('reg_labels reg_button',data).text());
 
+                //BIRTH DATE
+                Qck.app_controller.load_birth_date_drop_down();
+
+                //USERPANEL
+                $('.label.panel-new-name-label').text($('header register',data).text());
+                $('.label.panel-new-email-label').text($('reg_labels username',data).text());
+                $('.label.update-birth-date-label').text($('reg_labels name',data).text());
+                $('.update-user-information').text($('reg_labels password',data).text());
+                $('.label.register-password2-label').text($('reg_labels re_password',data).text());
+                $('.label.register-email-label').text($('reg_labels email',data).text());
+                $('.label.register-birth-date-label').text($('reg_labels birth_date',data).text());                  $('.form_button.register-button-label').val($('reg_labels reg_button',data).text());
+
+
+
                 if(window.location.toString().match(/sign_up/)){
                     $('.label.register-password-label').qtip('hide');
                     $('.label.register-username-label').qtip('hide');
@@ -297,7 +311,6 @@ $.Controller("ApplicationController", {
                               },
                               show: {
                                   event: false, // Don't specify a show event...
-                                  ready: true, // ... but show the tooltip when ready
                                   effect: function(offset) {
                                       $(this).slideDown(200); // "this" refers to the tooltip
                                       $('#username').click();
@@ -309,7 +322,7 @@ $.Controller("ApplicationController", {
                               style: {
                                   classes: 'ui-tooltip-shadow ui-tooltip-' + 'red'
                               }
-                          });
+                          }).qtip('show');
 
     },
     load_birth_date_drop_down :function() {
