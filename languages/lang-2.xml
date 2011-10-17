@@ -8,7 +8,7 @@
     <sign_in>Iniciar Sesion</sign_in>
     <or>o</or>
     <sign_out>Cerrar Sesion</sign_out>
-    <welcome>Bienvenido </welcome>
+    <welcome>Bienvenido</welcome>
     <user_panel>Panel del Usuario</user_panel>
     <sign_up>Crear Sesion</sign_up>
   </topbar>
@@ -19,12 +19,14 @@
   </guide>
 
   <cart_merge>
-    <message>Usted posee un carrito no confirmado. ¿Quiere agregar los productos elegidos a su antiguo carrito, o prefiere ignorarlos?</message>
-    <current_cart_message>El carrito actual contiene </current_cart_message>
+    <message>Usted posee un carrito no confirmado. ¿Quiere agregar los productos elegidos a su antiguo carrito, o
+      prefiere ignorarlos?
+    </message>
+    <current_cart_message>El carrito actual contiene</current_cart_message>
     <current_cart_item>producto</current_cart_item>
     <current_cart_items>productos</current_cart_items>
     <current_cart_total>total</current_cart_total>
-    <unconfirmed_cart_message>El carrito no confirmado contiene </unconfirmed_cart_message>
+    <unconfirmed_cart_message>El carrito no confirmado contiene</unconfirmed_cart_message>
     <unconfirmed_cart_item>producto</unconfirmed_cart_item>
     <unconfirmed_cart_items>producutos</unconfirmed_cart_items>
     <unconfirmed_cart_total>total</unconfirmed_cart_total>
@@ -52,8 +54,8 @@
   <reg_labels>
     <username>Nombre de Usuario:</username>
     <name>Nombre:</name>
-    <password>Contrasena:</password>
-    <re_password>Re-escriba la contrasena:</re_password>
+    <password>Contraseña:</password>
+    <re_password>Re-escriba la contraseña:</re_password>
     <email>Correo electronico:</email>
     <birth_date>Fecha de nacimiento:</birth_date>
     <reg_button>Registrar</reg_button>
@@ -75,29 +77,30 @@
     </shipping_address>
     <login_error>Por favor inicie sesion para confirmar esta orden</login_error>
     <no_item_error>Por favor agregue productos al carrito para confirmar esta orden</no_item_error>
-    <no_log_address_error>No tiene ninguna direccion registrada, por favor inicie sesion para registrar una</no_log_address_error>
+    <no_log_address_error>No tiene ninguna direccion registrada, por favor inicie sesion para registrar una
+    </no_log_address_error>
     <checkout_button>Confirmar</checkout_button>
   </my_cart_labels>
 
-   <create_address_label>
-     <name>Nombre:</name>
-     <address_line_1>Direccion linea 1:</address_line_1>
-     <address_line_2>Direccion linea 2:</address_line_2>
-     <country>Pais:</country>
-     <state>Provincia:</state>
-     <city>Ciudad:</city>
-     <zip_code>Codigo Postal:</zip_code>
-     <phone_number>Telefono:</phone_number>
-     <create_address_button>Crear Direccion</create_address_button>
-   </create_address_label>
+  <create_address_label>
+    <name>Nombre:</name>
+    <address_line_1>Direccion linea 1:</address_line_1>
+    <address_line_2>Direccion linea 2:</address_line_2>
+    <country>Pais:</country>
+    <state>Provincia:</state>
+    <city>Ciudad:</city>
+    <zip_code>Codigo Postal:</zip_code>
+    <phone_number>Telefono:</phone_number>
+    <create_address_button>Crear Direccion</create_address_button>
+  </create_address_label>
 
-   <product_label>
-     <add_to_cart>Agregar al carrito</add_to_cart>
-     <more>mas</more>
-     <price>Precio:</price>
-     <amount>Cantidad:</amount>
-     <rank>Ranking:</rank>
-   </product_label>
+  <product_label>
+    <add_to_cart>Agregar al carrito</add_to_cart>
+    <more>mas</more>
+    <price>Precio:</price>
+    <amount>Cantidad:</amount>
+    <rank>Ranking:</rank>
+  </product_label>
 
   <months>
     <jan>Ene</jan>
@@ -117,7 +120,7 @@
   <sign_in_qtip>
     <sign_in>Iniciar Sesion:</sign_in>
     <username>Nombre de Usuario</username>
-    <password>Contrasena</password>
+    <password>Contraseña</password>
     <log_button>Iniciar</log_button>
   </sign_in_qtip>
 
@@ -127,7 +130,7 @@
   </cart>
 
   <item>
-    <welcome>Bienvenido </welcome>
+    <welcome>Bienvenido</welcome>
     <user_panel>Panel de Usuario</user_panel>
     <logout>Cerrar Sesion</logout>
   </item>
@@ -138,7 +141,7 @@
     <edit_address>Editar</edit_address>
     <order_list>Lista de ordenes</order_list>
     <create_order>Crear orden</create_order>
-    <order_location> Direccion:</order_location>
+    <order_location>Direccion:</order_location>
     <location_not_set>No Seteada</location_not_set>
     <set_order>Elegir como actual</set_order>
     <order_label>orden</order_label>
@@ -147,75 +150,85 @@
     <red>Colorado</red>
     <green>Verde</green>
     <blue>Azul</blue>
-    <change_password>Cambiar Contrasena</change_password>
-    <old_password_label>Contrasena Actual:</old_password_label>
-    <new_password_label>Contrasena Nueva:</new_password_label>
-    <change_password_button>Cambiar Contrasena</change_password_button>
+    <change_password>Cambiar Contraseña</change_password>
+    <old_password_label>Contraseña Actual:</old_password_label>
+    <new_password_label>Contraseña Nueva:</new_password_label>
+    <change_password_button>Cambiar Contraseña</change_password_button>
     <user_information_label>Informacion del Usuario</user_information_label>
     <name_label>Nombre:</name_label>
     <email_label>E-mail:</email_label>
     <birth_date_label>Fecha de Nacimiento:</birth_date_label>
     <submit_user_info_button>Grabar</submit_user_info_button>
- </user_panel_label>
+  </user_panel_label>
 
   <product_info>
-        <sales_rank>Ranking de ventas:</sales_rank>
-        <price>Precio:</price>
-        <authors>Autores:</authors>
-        <publisher>Publicado por:</publisher>
-        <published_date>Fecha de publicacion:</published_date>
-        <isbn_10>ISBN10:</isbn_10>
-        <isbn_13>ISBN13:</isbn_13>
-        <language>Idioma:</language>
+    <sales_rank>Ranking de ventas:</sales_rank>
+    <price>Precio:</price>
+    <authors>Autores:</authors>
+    <actors>Actores:</actors>
+    <format>Formato:</format>
+    <publisher>Publicado por:</publisher>
+    <published_date>Fecha de publicación:</published_date>
+    <isbn_10>ISBN10:</isbn_10>
+    <isbn_13>ISBN13:</isbn_13>
+    <language>Idioma:</language>
+    <subtitles>Subtitulos:</subtitles>
+    <region>Región:</region>
+    <aspect_ratio>Radio de aspecto:</aspect_ratio>
+    <number_of_discs>Número de discos:</number_of_discs>
+    <release_date>Fecha de lanzamiento:</release_date>
+    <run_time>Tiempo de corrida:</run_time>
+    <ASIN>ASIN:</ASIN>
   </product_info>
 
   <errors>
     <error id='1'>La solicitud requiere de un metodo el cual no fue provisto.</error>
     <error id='2'>La solicitud requiere de un identificador de lenguaje el cual no fue provisto.</error>
-		<error id='3'>La solicitud requiere de un identificador de pais el cual no fue provisto.</error>
-		<error id='4'>La solicitud requiere de usuario el cual no fue provisto.</error>
-		<error id='5'>La solicitud requiere la contrasena la cual no fue provista.</error>
-		<error id='6'>La solicitud requiere el token de autenticacion el cual no fue provisto.</error>
-		<error id='7'>La solicitud requiere la informacion de la cuenta de usuario la cual no fue provista.</error>
-		<error id='8'>La solicitud requiere la nueva contrasena la cual no fue provista.</error>
-		<error id='9'>La solicitud requiere de un identificador de categoria el cual no fue provisto.</error>
-		<error id='10'>La solicitud requiere de un identificador de sub-categoria el cual no fue provisto.</error>
-		<error id='11'>La solicitud requiere de un criterio de busqueda el cual no fue provisto.</error>
-		<error id='12'>La solicitud requiere de un identificador de producto el cual no fue provisto.</error>
-		<error id='13'>La solicitud requiere de un identificador de orden el cual no fue provisto.</error>
-		<error id='14'>La solicitud requiere de un identificador de direccion el cual no fue provisto.</error>
-		<error id='15'>La solicitud requiere la informacion del Item el cual no fue provisto.</error>
-		<error id='16'>La solicitud requiere la informacion de la direccion la cual no fue provista.</error>
-		<error id='17'>La solicitud requiere de un valor a almacenar que no fue provisto.</error>
-		<error id='101'>El metodo solicitado suministrado es invalido.</error>
-		<error id='102'>El identificador de lenguaje suministrado es invalido.</error>
-		<error id='103'>El identificador de pais suministrado es invalido.</error>
-		<error id='104'>El usuario es invalido.</error>
-		<error id='105'>El token de autenticacio³n es invalido.</error>
-		<error id='106'></error>
-		<error id='107'>El nombre de usuario es invÃ¡lido (longitud mÃ­nima 1 y mÃ¡xima 15 caracteres).</error>
-		<error id='108'>La contraseña es inválida (longitud mínima 8 y máxima 15 caracteres).</error>
-		<error id='109'>El nombre es invÃ¡lido (longitud mÃ­nima 1 y mÃ¡xima 80 caracteres).</error>
-		<error id='110'>La direcciÃ³n de email es invÃ¡lida (longitud mÃ­nima 1 y mÃ¡xima 128 caracteres).</error>
-		<error id='111'>La fecha de nacimiento es invÃ¡lida.</error>
-		<error id='112'>El identificador de categorÃ­a suministrado es invÃ¡lido.</error>
-		<error id='113'>El identificador de sub-categorÃ­a suministrado es invÃ¡lido.</error>
-		<error id='114'>El identificador de producto suministrado es invÃ¡lido.</error>
-		<error id='115'>El identificador de orden suministrado es invÃ¡lido.</error>
-		<error id='116'>La operaciÃ³n solicitada es invÃ¡lida para el estado de la orden.</error>
-		<error id='117'>El identificador de la direcciÃ³n suministrado es invÃ¡lido.</error>
-		<error id='118'>El nombre de referencia suministrado es invÃ¡lido (longitud mÃ­nima 1 y mÃ¡xima 80 caracteres).</error>
-		<error id='119'>La direcciÃ³n principal suministrada es invÃ¡lida (longitud mÃ­nima 1 y mÃ¡xima 80 caracteres).</error>
-		<error id='120'>La direcciÃ³n secundaria suministrada es invÃ¡lida (longitud mÃ­nima 1 y mÃ¡xima 80 caracteres).</error>
-		<error id='121'>El identificador de estado suministrado es invÃ¡lido.</error>
-		<error id='122'>La ciudad suministrada es invÃ¡lida (longitud mÃ­nima 1 y mÃ¡xima 80 caracteres).</error>
-		<error id='123'>El cÃ³digo postal suministrado es invÃ¡lido (longitud mÃ­nima 1 y mÃ¡xima 8 caracteres).</error>
-		<error id='124'>El nÃºmero de telÃ©fono suministrado es invÃ¡lido (longitud mÃ­nima 1 y mÃ¡xima 25 caracteres).</error>
-		<error id='125'></error>
-		<error id='201'>El nombre de usuario ya se encuentra en uso.</error>
-		<error id='202'>La direcciÃ³n ya se encuentra en uso.</error>
-		<error id='999'>Se produjo un error inesperado procesando la solicitud.</error>
-        <passwords_must_match>Las contraseñas deben ser iguales</passwords_must_match>
-        <input_error>Campos inválidos:</input_error>
+    <error id='3'>La solicitud requiere de un identificador de pais el cual no fue provisto.</error>
+    <error id='4'>La solicitud requiere de usuario el cual no fue provisto.</error>
+    <error id='5'>La solicitud requiere la Contraseña la cual no fue provista.</error>
+    <error id='6'>La solicitud requiere el token de autenticacion el cual no fue provisto.</error>
+    <error id='7'>La solicitud requiere la informacion de la cuenta de usuario la cual no fue provista.</error>
+    <error id='8'>La solicitud requiere la nueva Contraseña la cual no fue provista.</error>
+    <error id='9'>La solicitud requiere de un identificador de categoria el cual no fue provisto.</error>
+    <error id='10'>La solicitud requiere de un identificador de sub-categoria el cual no fue provisto.</error>
+    <error id='11'>La solicitud requiere de un criterio de busqueda el cual no fue provisto.</error>
+    <error id='12'>La solicitud requiere de un identificador de producto el cual no fue provisto.</error>
+    <error id='13'>La solicitud requiere de un identificador de orden el cual no fue provisto.</error>
+    <error id='14'>La solicitud requiere de un identificador de direccion el cual no fue provisto.</error>
+    <error id='15'>La solicitud requiere la informacion del Item el cual no fue provisto.</error>
+    <error id='16'>La solicitud requiere la informacion de la direccion la cual no fue provista.</error>
+    <error id='17'>La solicitud requiere de un valor a almacenar que no fue provisto.</error>
+    <error id='101'>El metodo solicitado suministrado es invalido.</error>
+    <error id='102'>El identificador de lenguaje suministrado es invalido.</error>
+    <error id='103'>El identificador de pais suministrado es invalido.</error>
+    <error id='104'>El usuario es invalido.</error>
+    <error id='105'>El token de autenticacion es invalido.</error>
+    <error id='106'></error>
+    <error id='107'>El nombre de usuario es inválido (longitud mínima 1 y máxima 15 caracteres).</error>
+    <error id='108'>La contraseña es inválida (longitud mínima 8 y máxima 15 caracteres).</error>
+    <error id='109'>El nombre es inválido (longitud mínima 1 y máxima 80 caracteres).</error>
+    <error id='110'>La dirección de email es inválida (longitud mínima 1 y máxima 128 caracteres).</error>
+    <error id='111'>La fecha de nacimiento es inválida.</error>
+    <error id='112'>El identificador de categoría suministrado es inválido.</error>
+    <error id='113'>El identificador de sub-categoría suministrado es inválido.</error>
+    <error id='114'>El identificador de producto suministrado es inválido.</error>
+    <error id='115'>El identificador de orden suministrado es inválido.</error>
+    <error id='116'>La operación solicitada es inválida para el estado de la orden.</error>
+    <error id='117'>El identificador de la dirección suministrado es inválido.</error>
+    <error id='118'>El nombre de referencia suministrado es inválido (longitud mínima 1 y máxima 80 caracteres).</error>
+    <error id='119'>La dirección principal suministrada es inválida (longitud mínima 1 y máxima 80 caracteres).</error>
+    <error id='120'>La dirección secundaria suministrada es inválida (longitud mínima 1 y máxima 80 caracteres).</error>
+    <error id='121'>El identificador de estado suministrado es inválido.</error>
+    <error id='122'>La ciudad suministrada es inválida (longitud mínima 1 y máxima 80 caracteres).</error>
+    <error id='123'>El código postal suministrado es inválido (longitud mínima 1 y máxima 8 caracteres).</error>
+    <error id='124'>El número de teléfono suministrado es inválido (longitud mínima 1 y máxima 25 caracteres).</error>
+    <error id='125'></error>
+    <error id='201'>El nombre de usuario ya se encuentra en uso.</error>
+    <error id='202'>La dirección ya se encuentra en uso.</error>
+    <error id='999'>Se produjo un error inesperado procesando la solicitud.</error>
+    <passwords_must_match>Las contraseñas deben ser iguales</passwords_must_match>
+    <input_error>Campos inválidos:</input_error>
+    <user_not_created>El usuario no fue creado, por favor corrija los errores</user_not_created>
   </errors>
 </locale>

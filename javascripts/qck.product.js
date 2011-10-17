@@ -221,6 +221,7 @@ $.Model("Product", {
         if (params.id && !params.product_id) {
             params.product_id = params.id;
         }
+        params.language_id = current_language;
         if (!$.jStorage.get('product-' + params.product_id) || params.nocache) {
             $.get(Qck.services.catalog, params, function(data) {
                 var prod = $("product", data);

@@ -152,6 +152,7 @@ $.Controller("UserController", {
         $('.label.register-email-label').qtip('hide');
         $('.label.register-name-label').qtip('hide');
         $('.label.register-birth-date-label').qtip('hide');
+        $('.register-button-label').qtip('hide');
         if ($('#reg-password').val() != $('#reg-password2').val()) {
             no_error = false;
             add_err_qtip($('.label.register-password-label'),$('errors passwords_must_match',Qck.locale[current_language]).text());
@@ -188,6 +189,9 @@ $.Controller("UserController", {
                             if(item=="4"){
                                 add_err_qtip($('.label.register-username-label'),$('errors #4',Qck.locale[current_language]).text());
                             }
+                            if(item=="201"){
+                                add_err_qtip($('.label.register-username-label'),$('errors #201',Qck.locale[current_language]).text());
+                            }
                             if(item=="109"){
                                 add_err_qtip($('.label.register-name-label'),$('errors #109',Qck.locale[current_language]).text());
                             }
@@ -195,7 +199,7 @@ $.Controller("UserController", {
                                 add_err_qtip($('.label.register-email-label'),$('errors #110',Qck.locale[current_language]).text());
                             }
                         });
-                        add_err_qtip($('.register-button-label'),$('errors #4',Qck.locale[current_language]).text());
+                        add_err_qtip($('input.register-button-label.form_button'),$('errors user_not_created',Qck.locale[current_language]).text());
                     });
 
         return false;

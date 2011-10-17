@@ -86,14 +86,7 @@ $.Controller("ApplicationController", {
         if ($.jStorage.get('current_language')) {
             current_language = $.jStorage.get('current_language');
             $('#l_languages').val(current_language).change();
-            this.load_language();
         }
-
-
-        this.updater();
-    },
-    updater: function() {
-
     },
     "#l_languages change" : function() {
         var oldlang = current_language;
@@ -147,6 +140,14 @@ $.Controller("ApplicationController", {
                 $('.label.register-birth-date-label').text($('reg_labels birth_date',data).text());
                 $('.form_button.register-button-label').val($('reg_labels reg_button',data).text());
 
+                if(window.location.toString().match(/sign_up/)){
+                    $('.label.register-password-label').qtip('hide');
+                    $('.label.register-username-label').qtip('hide');
+                    $('.label.register-email-label').qtip('hide');
+                    $('.label.register-name-label').qtip('hide');
+                    $('.label.register-birth-date-label').qtip('hide');
+                    $('input.register-button-label.form_button').qtip('hide');
+                }
 
                 $('#categories').text($('sidebar categories', data).text());
                 $('#filter').text($('header filter', data).text());
@@ -161,6 +162,23 @@ $.Controller("ApplicationController", {
                 $('.product_item .sales_rank_label, .product_show .sales_rank_label').text($('product_label rank', data).text());
                 $('.product_item .addcart, .product_show .addcart').text($('product_label add_to_cart', data).text());
 
+                $('.product_show .authors-label').text($('product_info authors',data).text());
+                $('.product_show .publisher-label').text($('product_info publisher',data).text());
+                $('.product_show .published_date-label').text($('product_info published_date',data).text());
+                $('.product_show .isbn10-label').text($('product_info isbn_10',data).text());
+                $('.product_show .isbn13-label').text($('product_info isbn_13',data).text());
+                $('.product_show .language-label').text($('product_info language',data).text());
+
+                $('.product_show .actors-label').text($('product_info actors',data).text());
+                $('.product_show .format-label').text($('product_info format',data).text());
+                $('.product_show .region-label').text($('product_info region',data).text());
+                $('.product_show .aspect_ratio-label').text($('product_info aspect_ratio',data).text());
+                $('.product_show .number_discs-label').text($('product_info number_of_discs',data).text());
+                $('.product_show .release_date-label').text($('product_info release_date',data).text());
+                $('.product_show .run_time-label').text($('product_info run_time',data).text());
+                $('.product_show .ASIN-label').text($('product_info ASIN',data).text());
+
+                $('.product_show .addcart').text($('product_label add_to_cart',data).text());
 
 
                 if (Qck.cats_controller) {
@@ -175,7 +193,7 @@ $.Controller("ApplicationController", {
                 Qck.locale[current_language] = data;
             };
         var params;
-        if(!$.jStorage.get('current_language_data_' + current_language)){
+     //   if(!$.jStorage.get('current_language_data_' + current_language)){
             $.ajax({
                 url: 'languages/lang-' + current_language + '.xml',
                 data: params,
@@ -184,9 +202,9 @@ $.Controller("ApplicationController", {
                     change_labels($.jStorage.get('current_language_data_' + current_language));
                 }
             });
-        }else{
-            change_labels($.jStorage.get('current_language_data_' + current_language));
-        }
+//        }else{
+//            change_labels($.jStorage.get('current_language_data_' + current_language));
+//        }
 
 
 
