@@ -43,6 +43,7 @@
     <register>Create a New User</register>
     <my_cart>My Cart</my_cart>
     <create_address>Create an Address</create_address>
+    <user_panel>User Panel</user_panel>
   </header>
 
   <reg_labels>
@@ -69,6 +70,7 @@
       <error_part2>to register one.</error_part2>
     </shipping_address>
     <loggin_error>Please Log in to confirm your order</loggin_error>
+    <no_item_error>You need to add items to the cart to confirm your order</no_item_error>
     <checkout_button>Checkout Order</checkout_button>
   </my_cart_labels>
 
@@ -121,6 +123,12 @@
     <user_panel>User Panel</user_panel>
     <logout>Sign Out</logout>
   </item>
+
+  <user_panel_label>
+    <address_list>Address List</address_list>
+    <create_address>Create Address</create_address>
+
+  </user_panel_label>
 
   <erros>
     <error id='1'></error>
