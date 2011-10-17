@@ -103,21 +103,21 @@ $.Controller("UserController", {
     ".register-button-label.form_button click" : function () {
         var no_error = true;
         var self = this;
-        $('#reg-password').qtip('hide');
+        $('.label.register-password-label').qtip('hide');
         if ($('#reg-password').val() != $('#reg-password2').val()) {
             no_error = false;
-            $('#reg-password').qtip('hide').removeData('qtip')
+            $('.label.register-password-label').qtip('hide').removeData('qtip')
                     .qtip({
                               content: {
-                                  text: 'Passwords are different',
+                                  text: $('errors passwords_must_match',Qck.locale[current_language]).text(),
                                   title: {
                                       text: 'Input error:',
                                       button: true
                                   }
                               },
                               position: {
-                                  my: 'center left', // Use the corner...
-                                  at: 'center right' // ...and opposite corner
+                                  my: 'center right', // Use the corner...
+                                  at: 'center left' // ...and opposite corner
                               },
                               show: {
                                   event: false, // Don't specify a show event...
@@ -137,18 +137,18 @@ $.Controller("UserController", {
         } else {
             if ($('#reg-password').val() == "") {
                 no_error = false;
-                $('#reg-password').qtip('hide').removeData('qtip')
+                $('.label.register-password-label').qtip('hide').removeData('qtip')
                         .qtip({
                                   content: {
-                                      text: 'You must write a password',
+                                      text: $('errors #108',Qck.locale[current_language]).text(),
                                       title: {
-                                          text: 'Input error:',
+
                                           button: true
                                       }
                                   },
                                   position: {
-                                      my: 'center left', // Use the corner...
-                                      at: 'center right' // ...and opposite corner
+                                      my: 'center right', // Use the corner...
+                                      at: 'center left' // ...and opposite corner
                                   },
                                   show: {
                                       event: false, // Don't specify a show event...
