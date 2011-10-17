@@ -1,21 +1,82 @@
 <locale>
+
   <index>
 
   </index>
+
   <topbar>
     <sign_in>Sign in</sign_in>
     <or>or</or>
     <sign_out>Sign out</sign_out>
+    <welcome>Welcome </welcome>
+    <user_panel>User Panel</user_panel>
+    <sign_up>Sign Up</sign_up>
   </topbar>
+
   <guide>
     <search_box>Quick search</search_box>
   </guide>
+
   <sidebar>
     <categories>Categories</categories>
   </sidebar>
+
   <header>
+    <filter>Order:</filter>
     <ascending>Ascending</ascending>
+    <descending>Descending</descending>
+    <register>Create a New User</register>
+    <my_cart>My Cart</my_cart>
   </header>
+
+  <reg_labels>
+    <username>Username:</username>
+    <name>Name:</name>
+    <password>Password:</password>
+    <re_password>Re-type Password:</re_password>
+    <email>E-mail:</email>
+    <birth_date>Date of Birth:</birth_date>
+    <reg_button>Register</reg_button>
+  </reg_labels>
+
+  <my_cart_labels>
+    <items>Items</items>
+    <go_on>Go On Shopping</go_on>
+  </my_cart_labels>
+
+  <months>
+    <jan>Jan</jan>
+    <feb>Feb</feb>
+    <mar>Mar</mar>
+    <apr>Apr</apr>
+    <may>May</may>
+    <jun>Jun</jun>
+    <jul>Jul</jul>
+    <aug>Aug</aug>
+    <sept>Sept</sept>
+    <oct>Oct</oct>
+    <nov>Nov</nov>
+    <dec>Dec</dec>
+  </months>
+
+  <sign_in_qtip>
+    <sign_in>Sign In:</sign_in>
+    <username>Username</username>
+    <password>Password</password>
+    <log_button>Log In</log_button>
+  </sign_in_qtip>
+
+  <cart>
+    <check_cart>Check My Cart</check_cart>
+    <clear_cart>Clear My Cart</clear_cart>
+  </cart>
+
+  <item>
+    <welcome>Welcome </welcome>
+    <user_panel>User Panel</user_panel>
+    <logout>Sign Out</logout>
+  </item>
+
   <erros>
     <error id='1'></error>
   </erros>
