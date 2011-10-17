@@ -120,37 +120,6 @@ $.Controller("UserController", {
             return true;
 
         };
-        var add_err_qtip = function(el,msg){
-            el.qtip('hide').removeData('qtip')
-                    .qtip({
-                              content: {
-                                  text: msg,
-                                  title: {
-                                      text: '',
-                                      button: true
-                                  }
-                              },
-                              position: {
-                                  my: 'center right', // Use the corner...
-                                  at: 'center left' // ...and opposite corner
-                              },
-                              show: {
-                                  event: false, // Don't specify a show event...
-                                  ready: true, // ... but show the tooltip when ready
-                                  effect: function(offset) {
-                                      $(this).slideDown(200); // "this" refers to the tooltip
-                                      $('#username').click();
-                                  }
-                              },
-                              hide: function(event, api) {
-                                  self.sign_in_unique = true;
-                              }, // Don't specify a hide event either!
-                              style: {
-                                  classes: 'ui-tooltip-shadow ui-tooltip-' + 'red'
-                              }
-                          });
-
-        };
         $('.label.register-password-label').qtip('hide');
         $('.label.register-username-label').qtip('hide');
         $('.label.register-email-label').qtip('hide');
@@ -159,17 +128,17 @@ $.Controller("UserController", {
         $('.register-button-label').qtip('hide');
         if ($('#reg-password').val() != $('#reg-password2').val()) {
             no_error = false;
-            add_err_qtip($('.label.register-password-label'), $('errors passwords_must_match', Qck.locale[current_language]).text());
+            Qck.app_controller.add_err_qtip($('.label.register-password-label'), $('errors passwords_must_match', Qck.locale[current_language]).text());
 
         } else {
             if ($('#reg-password').val() == "") {
                 no_error = false;
-                add_err_qtip($('.label.register-password-label'), $('errors #108', Qck.locale[current_language]).text());
+                Qck.app_controller.add_err_qtip($('.label.register-password-label'), $('errors #108', Qck.locale[current_language]).text());
             }
         }
         if (!validate_date($('#day_drop_down').val(),$('#month_drop_down').val(),$('#year_drop_down').val())) {
             no_error = false;
-            add_err_qtip($('.label.register-birth-date-label'),$('errors #111',Qck.locale[current_language]).text());
+            Qck.app_controller.add_err_qtip($('.label.register-birth-date-label'),$('errors #111',Qck.locale[current_language]).text());
         }
 
 
@@ -191,19 +160,19 @@ $.Controller("UserController", {
                     }, function(error) {
                         $.each(error,function(index,item){
                             if(item=="4"){
-                                add_err_qtip($('.label.register-username-label'),$('errors #4',Qck.locale[current_language]).text());
+                                Qck.app_controller.add_err_qtip($('.label.register-username-label'),$('errors #4',Qck.locale[current_language]).text());
                             }
                             if(item=="201"){
-                                add_err_qtip($('.label.register-username-label'),$('errors #201',Qck.locale[current_language]).text());
+                                Qck.app_controller.add_err_qtip($('.label.register-username-label'),$('errors #201',Qck.locale[current_language]).text());
                             }
                             if(item=="109"){
-                                add_err_qtip($('.label.register-name-label'),$('errors #109',Qck.locale[current_language]).text());
+                                Qck.app_controller.add_err_qtip($('.label.register-name-label'),$('errors #109',Qck.locale[current_language]).text());
                             }
                             if(item=="110"){
-                                add_err_qtip($('.label.register-email-label'),$('errors #110',Qck.locale[current_language]).text());
+                                Qck.app_controller.add_err_qtip($('.label.register-email-label'),$('errors #110',Qck.locale[current_language]).text());
                             }
                         });
-                        add_err_qtip($('input.register-button-label.form_button'),$('errors user_not_created',Qck.locale[current_language]).text());
+                        Qck.app_controller.add_err_qtip($('input.register-button-label.form_button'),$('errors user_not_created',Qck.locale[current_language]).text());
                     });
 
         return false;

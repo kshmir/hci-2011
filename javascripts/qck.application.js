@@ -281,6 +281,37 @@ $.Controller("ApplicationController", {
                     && (elemBottom <= docViewBottom) && (elemTop >= docViewTop) );
         }
     },
+    add_err_qtip: function(el,msg){
+            el.qtip('hide').removeData('qtip')
+                    .qtip({
+                              content: {
+                                  text: msg,
+                                  title: {
+                                      text: '',
+                                      button: true
+                                  }
+                              },
+                              position: {
+                                  my: 'center right', // Use the corner...
+                                  at: 'center left' // ...and opposite corner
+                              },
+                              show: {
+                                  event: false, // Don't specify a show event...
+                                  ready: true, // ... but show the tooltip when ready
+                                  effect: function(offset) {
+                                      $(this).slideDown(200); // "this" refers to the tooltip
+                                      $('#username').click();
+                                  }
+                              },
+                              hide: function(event, api) {
+                                  self.sign_in_unique = true;
+                              }, // Don't specify a hide event either!
+                              style: {
+                                  classes: 'ui-tooltip-shadow ui-tooltip-' + 'red'
+                              }
+                          });
+
+    },
     load_birth_date_drop_down :function() {
         var months = $('months',Qck.locale[current_language]);
         var monthtext = [$('jan',months).text(),$('feb',months).text(),$('mar',months).text(),$('apr',months).text(),$('may',months).text(),$('jun',months).text(),$('jul',months).text(),$('aug',months).text(),$('sept',months).text(),$('oct',months).text(),$('nov',months).text(),$('dec',months).text()];
