@@ -316,7 +316,11 @@ $.Controller("ApplicationController", {
         var months = $('months',Qck.locale[current_language]);
         var monthtext = [$('jan',months).text(),$('feb',months).text(),$('mar',months).text(),$('apr',months).text(),$('may',months).text(),$('jun',months).text(),$('jul',months).text(),$('aug',months).text(),$('sept',months).text(),$('oct',months).text(),$('nov',months).text(),$('dec',months).text()];
         var today = new Date();
+
         var dayfield = document.getElementById('day_drop_down');
+        if (!dayfield){
+            return;
+        }
         var monthfield = document.getElementById('month_drop_down');
         var yearfield = document.getElementById('year_drop_down');
         for (var i = 1; i < 32; i++) {
