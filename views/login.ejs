@@ -1,12 +1,12 @@
 <div class="login-container">
     <form action='/' class='login-form' method='post'>
         <p class="first">
-            <input type='text' id='username' value='Username' class="input soft"/>
+            <input type='text' id='username' value='<%= $('sign_in_qtip username',this).text() %>' class="input soft"/>
         </p>
         <p>
-            <input type='text' id='password' value='Password' class="input soft"/>
+            <input type='text' id='password' value='<%= $('sign_in_qtip password',this).text() %>' class="input soft"/>
             <input type='password' id='pass' class="input"/>
         </p>
-        <input type='button' id='login_submit' value="Login"/>
+        <input type='button' id='login_submit' value="<%= $('sign_in_qtip log_button',this).text() %>"/>
     </form>
 </div>

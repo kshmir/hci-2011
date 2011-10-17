@@ -89,13 +89,12 @@ $.Controller("ApplicationController", {
 
     },
     "#l_languages change" : function(){
-        alert($('#l_languages').val());
         current_language=$('#l_languages').val();
         Qck.app_controller.load_language();
     }
     ,
     "#languages load":function(){
-        alert('se invoca esto');
+
     },
     set_language: function(language){
        if(languages==null){
@@ -153,7 +152,13 @@ $.Controller("ApplicationController", {
             success: function(data) {
                 $('#sign_in').text($('topbar sign_in',data).text());
                 $('#sign_up').text($('topbar sign_up',data).text());
-
+                $('#or').text($('topbar or',data).text());
+               //#TODO: $('#quick_search').value($('guide search_box',data).text());
+                $('#categories').text($('guide search_box',data).text());
+                $('#filter').text($('header filter',data).text());
+                $('#name_asc_label').text($('header ascending',data).text());
+                $('#name_desc_label').text($('header descending',data).text());
+                Qck.locale[current_language]=data;
             }
 
         });

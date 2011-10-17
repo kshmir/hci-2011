@@ -4,7 +4,7 @@
     </h2>
     <img src="<%=this.product.image_url%>" alt=""/>
     <p class="attribute">
-        <span class="sales_rank-label label">
+        <span id="sales_rank_label" class="sales_rank-label label">
             Sales rank:
         </span>
         <span class="sales_rank">
@@ -12,7 +12,7 @@
         </span>
     </p>
     <p class="attribute">
-        <span class="price-lable label">
+        <span id="price_label" class="price-lable label">
             Price:
         </span>
         <span class="price">
@@ -20,7 +20,7 @@
         </span>
     </p>
     <p class="attribute">
-      <a href="#" class="addcart">Add to cart</a> - <a href="#products/show&id=<%=this.product.id%>" class="addcart">More</a>
+      <a id="add_to_cart_label" href="#" class="addcart">Add to cart</a> - <a id="more_label"href="#products/show&id=<%=this.product.id%>" class="addcart">More</a>
     </p>
     <div class="clear"></div>
 </div>
