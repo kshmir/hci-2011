@@ -501,6 +501,11 @@ $.Controller("UserController", {
                 }
             });
         };
+        if(!Qck.current_user){
+            alert($('errors must_be_logged',Qck.locale[current_language]).text());
+            window.location.hash="#";
+            return;
+        }
         var params = {
             address :{
                 full_name:      $('#reg-full_name').val(),
