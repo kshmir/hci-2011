@@ -90,7 +90,7 @@ $.Controller("ApplicationController", {
     },
     "#l_languages change" : function(){
         current_language=$('#l_languages').val();
-        Qck.app_controller.load_language();
+        Qck.app_controller.load_language(current_language);
     }
     ,
     "#languages load":function(){
@@ -142,14 +142,16 @@ $.Controller("ApplicationController", {
 
 
     },
-     load_language: function(){
-
+     load_language: function(curr){
+                                   alert(curr);
          var params;
          $.ajax({
-            url: 'languages/lang-' + current_language + '.xml',
+            url: 'languages/lang-' + curr + '.xml',
             data: params,
+             dataType:'xml',
 
             success: function(data) {
+                alert($('topbar sign_in',data).text());
                 $('#sign_in').text($('topbar sign_in',data).text());
                 $('#sign_up').text($('topbar sign_up',data).text());
                 $('#or').text($('topbar or',data).text());
@@ -158,7 +160,7 @@ $.Controller("ApplicationController", {
                 $('#filter').text($('header filter',data).text());
                 $('#name_asc_label').text($('header ascending',data).text());
                 $('#name_desc_label').text($('header descending',data).text());
-                Qck.locale[current_language]=data;
+                Qck.locale[curr]=data;
             }
 
         });
