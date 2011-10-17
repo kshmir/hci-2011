@@ -24,27 +24,7 @@ $.Controller("UserController", {
         $('#main-content').fadeOut("slow", function() {
             $('#main-content')
                     .html($.View("views/register.ejs"))
-                    .fadeIn("slow",function(){
-                        var monthtext=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sept','Oct','Nov','Dec'];
-                        var today=new Date();
-                        var dayfield=document.getElementById('day_drop_down');
-                        var monthfield=document.getElementById('month_drop_down');
-                        var yearfield=document.getElementById('year_drop_down');
-                        for (var i=1; i<32; i++){
-                        dayfield.options[i-1]=new Option(i, i);
-                        }
-                        //dayfield.options[today.getDate()]=new Option(today.getDate(), today.getDate(), true, true) //select today's day
-                        for (var m=0; m<12; m++){
-                        monthfield.options[m]=new Option(monthtext[m], m+1);
-                        }
-                        //monthfield.options[today.getMonth()]=new Option(monthtext[today.getMonth()], monthtext[today.getMonth()], true, true) //select today's month
-                        var thisyear=today.getFullYear()-18;
-                        for (var y=0; y<125; y++){
-                        yearfield.options[y]=new Option(thisyear, thisyear);
-                        thisyear-=1;
-                        }
-                        //yearfield.options[0]=new Option(today.getFullYear(), today.getFullYear(), true, true) //select today's year
-                    });
+                    .fadeIn("slow",Qck.app_controller.load_birth_date_drop_down);
         });
         Qck.bread_controller.loadHashes([
             { url: "#users/sign_up", refname : "Sign Up" }
@@ -290,10 +270,14 @@ $.Controller("UserController", {
     // User Settings
     "history.users.user_panel subscribe":function(called, data) {
         var self = this;
+        var usr = {name: Qck.current_user.name,email:Qck.current_user.email}
         Qck.app_controller.show_loader();
         $('#main-content').fadeOut("slow", function() {
             $('#main-content')
-                    .html($.View("views/user_settings.ejs"));
+                    .html($.View("views/user_settings.ejs",usr)).fadeIn('slow',function(){
+                    Qck.app_controller.load_birth_date_drop_down();
+                    /*#TODO: completar fecha con la del usuaro.*/
+                });
             Address.getAddressList({
                 username: Qck.current_user.username,
                 authentication_token: Qck.current_user.token
@@ -587,6 +571,7 @@ $.Controller("UserController", {
                         var monthfield=document.getElementById('month_drop_down');
                         var yearfield=document.getElementById('year_drop_down');
                         for (var i=1; i<32; i++){
+
                         dayfield.options[i-1]=new Option(i, i);
                         }
                         //dayfield.options[today.getDate()]=new Option(today.getDate(), today.getDate(), true, true) //select today's day
@@ -600,19 +585,20 @@ $.Controller("UserController", {
                         thisyear-=1;
                         }
                         //yearfield.options[0]=new Option(today.getFullYear(), today.getFullYear(), true, true) //select today's year
+
                     });
         });
         Qck.bread_controller.loadHashes([
             { url: "#users/update_user", refname : "Update User" }
         ]);
     },
-    ".update-button-label.form_button click" : function () {
-
+    ".update-user-button click" : function () {
+            alert('hola');
          User.updateAccount({
 
                 //TODO donde se guarda el token
-                authentication_token: this.authentication_token,
-                username: this.username,
+                authentication_token: Qck.current_user.authentication_token,
+                username: Qck.current_user.username,
                 name:$('#reg-name').val(),
                 email:$('#reg-email').val(),
                 birth_date: $('#year_drop_down').val() + '-' + $('#month_drop_down').val() + '-' + $('#day_drop_down').val()
@@ -621,7 +607,7 @@ $.Controller("UserController", {
                     , function() {
                         window.location.hash = "#"
                     }, function(error) {
-                        alert('usuario no creado: ' + error);
+                        alert('usuario no actualizado: ' + error);
                     });
                return false;
     }

@@ -70,11 +70,11 @@
             <form action="/" method="post">
                 <div class="form_item">
                     <span class="label panel-new-name-label">Name:</span>
-                    <input type="text" id="panel-new-name" value="<%= Qck.current_user.name%>" name="new-name" class="input"/>
+                    <input type="text" id="panel-new-name" value="<%= this.name%>" name="new-name" class="input"/>
                 </div>
                 <div class="form_item">
                     <span class="label panel-new-email-label">Email:</span>
-                    <input type="text" id="panel-new-email" value="<%= Qck.current_user.email%>" name="new-email" class="input"/>
+                    <input type="text" id="panel-new-email" value="<%= this.email%>" name="new-email" class="input"/>
                 </div>
                 <div class="form_item">
                 <span class="label update-birth-date-label">Birth date:</span>
@@ -87,7 +87,7 @@
         </div>
         <div class="form_item">
                 <div class="form_item">
-                    <input type="button" value="Submit Changes" class="change-pass-button form_button"/>
+                    <input type="button" value="Submit Changes" class="update-user-button form_button"/>
                 </div>
             </form>
           </div>
