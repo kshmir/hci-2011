@@ -65,6 +65,7 @@
     <lower_case_item>producto</lower_case_item>
     <shipping_address>
       <header>Direccion de entrega</header>
+      <my_address_label>Mi Direccion:</my_address_label>
       <error_part1>No hay ninguna direccion regitrada,</error_part1>
       <error_click_here>presione aqui</error_click_here>
       <error_part2>para registrar una.</error_part2>
@@ -130,8 +131,28 @@
   <user_panel_label>
     <address_list>Lista de direcciones</address_list>
     <create_address>Crear Direccion</create_address>
-
-  </user_panel_label>
+    <edit_address>Editar</edit_address>
+    <order_list>Lista de ordenes</order_list>
+    <create_order>Crear orden</create_order>
+    <order_location> Direccion:</order_location>
+    <location_not_set>No Seteada</location_not_set>
+    <set_order>Elegir como actual</set_order>
+    <order_label>orden</order_label>
+    <order_number>Orden #</order_number>
+    <site_theme>Tema del Lugar</site_theme>
+    <red>Colorado</red>
+    <green>Verde</green>
+    <blue>Azul</blue>
+    <change_password>Cambiar Contrasena</change_password>
+    <old_password_label>Contrasena Actual:</old_password_label>
+    <new_password_label>Contrasena Nueva:</new_password_label>
+    <change_password_button>Cambiar Contrasena</change_password_button>
+    <user_information_label>Informacion del Usuario</user_information_label>
+    <name_label>Nombre:</name_label>
+    <email_label>E-mail:</email_label>
+    <birth_date_label>Fecha de Nacimiento:</birth_date_label>
+    <submit_user_info_button>Grabar</submit_user_info_button>
+ </user_panel_label>
 
   <product_info>
         <sales_rank>Ranking de ventas:</sales_rank>

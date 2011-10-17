@@ -65,6 +65,7 @@
     <lower_case_item>item</lower_case_item>
     <shipping_address>
       <header>Shipping Address</header>
+      <my_address_label>My address:</my_address_label>
       <error_part1>You don't have any address registered,</error_part1>
       <error_click_here>click here</error_click_here>
       <error_part2>to register one.</error_part2>
@@ -141,7 +142,27 @@
   <user_panel_label>
     <address_list>Address List</address_list>
     <create_address>Create Address</create_address>
-
+    <edit_address>Edit</edit_address>
+    <order_list>Order list</order_list>
+    <create_order>Create order</create_order>
+    <order_location> Location:</order_location>
+    <location_not_set>not set</location_not_set>
+    <set_order>Set as current</set_order>
+    <order_label>order</order_label>
+    <order_number>Order #</order_number>
+    <site_theme>Site Theme</site_theme>
+    <red>Red</red>
+    <green>Green</green>
+    <blue>Blue</blue>
+    <change_password>Change Password</change_password>
+    <old_password_label>Old Password:</old_password_label>
+    <new_password_label>New PAssword:</new_password_label>
+    <change_password_button>Change Password</change_password_button>
+    <user_information_label>User information</user_information_label>
+    <name_label>Name:</name_label>
+    <email_label>Email:</email_label>
+    <birth_date_label>Birth Date:</birth_date_label>
+    <submit_user_info_button>Submit changes</submit_user_info_button>
   </user_panel_label>
 
   <erros>
