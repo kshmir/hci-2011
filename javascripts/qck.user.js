@@ -571,7 +571,7 @@ $.Controller("UserController", {
             $('#main-content')
                     .html($.View("views/update_user.ejs"))
                     .fadeIn("slow",function(){
-                        var monthtext=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sept','Oct','Nov','Dec'];
+                        var monthtext = [$('jan',months).text(),$('feb',months).text(),$('mar',months).text(),$('apr',months).text(),$('may',months).text(),$('jun',months).text(),$('jul',months).text(),$('aug',months).text(),$('sept',months).text(),$('oct',months).text(),$('nov',months).text(),$('dec',months).text()];
                         var today=new Date();
                         var dayfield=document.getElementById('day_drop_down');
                         var monthfield=document.getElementById('month_drop_down');
