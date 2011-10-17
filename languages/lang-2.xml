@@ -169,7 +169,7 @@
         <language>Idioma:</language>
   </product_info>
 
-  <erros>
+  <errors>
     <error id='1'>La solicitud requiere de un metodo el cual no fue provisto.</error>
     <error id='2'>La solicitud requiere de un identificador de lenguaje el cual no fue provisto.</error>
 		<error id='3'>La solicitud requiere de un identificador de pais el cual no fue provisto.</error>
@@ -215,5 +215,6 @@
 		<error id='201'>El nombre de usuario ya se encuentra en uso.</error>
 		<error id='202'>La direcciÃ³n ya se encuentra en uso.</error>
 		<error id='999'>Se produjo un error inesperado procesando la solicitud.</error>
-  </erros>
+        <passwords_must_match>Las contraseñas deben ser iguales</passwords_must_match>
+  </errors>
 </locale>

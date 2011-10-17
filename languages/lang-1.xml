@@ -169,7 +169,7 @@
     <submit_user_info_button>Submit changes</submit_user_info_button>
   </user_panel_label>
 
-  <erros>
+  <errors>
     <error id='1'>The method this application requires has not been provide.</error>
 		<error id='2'>The language identifier this application requires has not been provide.</error>
 		<error id='3'>The country identifier this application requires has not been provide.</error>
@@ -215,5 +215,6 @@
 		<error id='201'>The username already exists.</error>
 		<error id='202'>The address already exists.</error>
 		<error id='999'>An error occurs while processing your application.</error>
-  </erros>
+        <passwords_must_match>Passwords must match</passwords_must_match>
+  </errors>
 </locale>
