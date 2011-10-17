@@ -66,23 +66,23 @@
     <shipping_address>
       <header>Direccion de entrega</header>
       <error_part1>No hay ninguna direccion regitrada,</error_part1>
-      <error_clcick_here>presione aqui</error_clcick_here>
+      <error_click_here>presione aqui</error_click_here>
       <error_part2>para registrar una.</error_part2>
     </shipping_address>
-    <loggin_error>Por favor inicie sesion para confirmar esta orden</loggin_error>
+    <login_error>Por favor inicie sesion para confirmar esta orden</login_error>
     <no_item_error>Por favor agregue productos al carrito para confirmar esta orden</no_item_error>
     <checkout_button>Confirmar</checkout_button>
   </my_cart_labels>
 
    <create_address_label>
      <name>Nombre:</name>
-     <address_line_1>Direccion de linea 1:</address_line_1>
-     <address_line_2>Direccion de linea 2:</address_line_2>
+     <address_line_1>Direccion linea 1:</address_line_1>
+     <address_line_2>Direccion linea 2:</address_line_2>
      <country>Pais:</country>
      <state>Provincia:</state>
      <city>Ciudad:</city>
      <zip_code>Codigo Postal:</zip_code>
-     <phone_number>Numero Telefonico:</phone_number>
+     <phone_number>Telefono:</phone_number>
      <create_address_button>Crear Direccion</create_address_button>
    </create_address_label>
 

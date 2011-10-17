@@ -492,7 +492,7 @@ $.Controller("CartController", {
         var _callback = function(addresses) {
             $('#main-content').html("");
             $('#main-content').html($.View("views/cart.ejs", {
-                addresses : addresses || [], items : self.list_products.reverse() || []
+                lang: Qck.locale[current_language], addresses : addresses || [], items : self.list_products.reverse() || []
             }));
 
             $(".cart-item", '#main-content').each(function(index, el) {

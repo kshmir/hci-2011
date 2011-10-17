@@ -1,26 +1,26 @@
 <div class="form box cart-container">
-    <h3 class="cart-container-title">My cart</h3>
+    <h3 class="cart-container-title"><%= $('header my_cart',this.lang).text() %></h3>
 
     <div class="settings-content bordered settings-content-form">
-        <h3>Items</h3>
+        <h3><%= this.items.length>1?$('my_cart_labels header_items',this.lang).text():$('my_cart_labels header_item',this.lang).text() %></h3>
         <ul class="cart-container-list list">
             <% for(var i = 0; i < this.items.length; i++) { %>
-                <%=$.View("views/cart_item.ejs", {item:this.items[i], amount:this.items[i].amount, sp:true})%>
+                <%=$.View("views/cart_item.ejs", {item:this.items[i], amount:this.items[i].amount, sp:true, lang:this.lang})%>
             <% } %>
             <li>
-                <a href="#" class='create-address-link'>Go on Shopping</a>
+                <a href="#" class='create-address-link'><%= $('my_cart_labels go_on',this.lang).text() %></a>
             </li>
         </ul>
         <div class="container">
-            <h4>Purchase Subtotal:</h4>
+            <h4><%= $('my_cart_labels purchase',this.lang).text() %></h4>
 
             <p class="resume">
-                <span class="cart-container-n-items">0</span> items - <span class="cart-container-total-price">0</span>$
+                <span class="cart-container-n-items">0</span> <%= this.items.length>1?$('my_cart_labels lower_case_items',this.lang).text():$('my_cart_labels lower_case_item',this.lang).text() %> - <span class="cart-container-total-price">0</span>$
             </p>
         </div>
     </div>
     <div class="settings-content bordered settings-content-form">
-        <h3>Shipping Address</h3>
+        <h3><%= $('my_cart_labels shipping_address header',this.lang).text() %></h3>
 
         <div class="container">
             <% if (this.addresses.length) { %>
@@ -33,7 +33,7 @@
                 </select>
             </form>
             <% } else if (Qck.current_user) { %>
-            <span>You don't have any address registered, <a href="#users/create_address">click here</a> to register one.</span>
+            <span><%= $('my_cart_labels shipping_address error_part1',this.lang).text() %> <a href="#users/create_address"><%= $('my_cart_labels shipping_address error_click_here',this.lang).text() %></a> <%= $('my_cart_labels shipping_address error_part2',this.lang).text() %></span>
             <% } else { %>
             <span>You don' have any address registered, sign in to register one.</span>
             <% } %>
@@ -45,7 +45,7 @@
                 <span class="ui-icon ui-icon-info">
                     &nbsp;
                 </span>
-                Please log in to confirm your order.
+                <%= $('my_cart_labels login_error',this.lang).text() %>
             </span>
         </p>
         <div class="clear"></div>
@@ -85,7 +85,7 @@
     </div>
     <div class="settings-content settings-content-form">
         <form action="">
-            <button id="cart-confirm-button">Confirm Order</button>
+            <button id="cart-confirm-button"><%= $('my_cart_labels checkout_button',this.lang).text() %></button>
         </form>
         <div class="clear"></div>
     </div>

@@ -1,29 +1,29 @@
 <div class="form box">
-    <h3 class="register-username-title">Registro de Usuario</h3>
+    <h3 class="register-username-title"><%= $('header register',this).text() %></h3>
 
     <form action="/" method="post">
         <div class="form_item">
-            <span class="label register-username-label">Username:</span>
+            <span class="label register-username-label"><%= $('reg_labels username',this).text() %></span>
             <input type="text" id="reg-username" name="username" class="register-username-label input"/>
         </div>
         <div class="form_item">
-            <span class="label register-name-label">Name:</span>
+            <span class="label register-name-label"><%= $('reg_labels name',this).text() %></span>
             <input type="text" id="reg-name" name="name" class="register-name-label input"/>
         </div>
         <div class="form_item">
-            <span class="label register-password-label">Password:</span>
+            <span class="label register-password-label"><%= $('reg_labels password',this).text() %></span>
             <input type="password" id="reg-password" name="password" class="register-name-label input"/>
         </div>
         <div class="form_item">
-            <span class="label register-password-label">Password:</span>
+            <span class="label register-password-label"><%= $('reg_labels re_password',this).text() %></span>
             <input type="password" id="reg-password2" name="password" class="register-name-label input"/>
         </div>
         <div class="form_item">
-            <span class="label register-email-label">Email:</span>
+            <span class="label register-email-label"><%= $('reg_labels email',this).text() %></span>
             <input type="text" id="reg-email" name="email" class="register-email-label input"/>
         </div>
         <div class="form_item">
-            <span class="label register-birth-date-label">Birth date:</span>
+            <span class="label register-birth-date-label"><%= $('reg_labels birth_date',this).text() %></span>
             <select id="day_drop_down">
             </select>
             <select id="month_drop_down">
@@ -32,7 +32,7 @@
             </select>
         </div>
         <div class="form_item">
-            <input type="button" value="Register" class="register-button-label form_button"/>
+            <input type="button" value="<%= $('reg_labels reg_button',this).text() %>" class="register-button-label form_button"/>
         </div>
     </form>
 </div>

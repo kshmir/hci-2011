@@ -24,7 +24,7 @@ $.Controller("UserController", {
     "history.users.sign_up subscribe" : function(called, data) {
         $('#main-content').fadeOut("slow", function() {
             $('#main-content')
-                    .html($.View("views/register.ejs"))
+                    .html($.View("views/register.ejs",Qck.locale[current_language]))
                     .fadeIn("slow",Qck.app_controller.load_birth_date_drop_down);
         });
         Qck.bread_controller.loadHashes([
@@ -41,7 +41,7 @@ $.Controller("UserController", {
                 $.jStorage.set('current_user', user);
                 Qck.current_user = user;
                 $("#sign_in").qtip('hide');
-                $(el).html($.View("views/logged.ejs", {username: user.name}))
+                $(el).html($.View("views/logged.ejs", {username: user.name, lang: Qck.locale[current_language]}))
                         .fadeIn("slow",function(){Qck.app_controller.set_language(current_language);});
                 $(".login-form").remove();
                 Qck.cart_controller.on_login();
@@ -280,7 +280,6 @@ $.Controller("UserController", {
                     .html($.View("views/user_settings.ejs",usr)).fadeIn('slow',function(){
                     Qck.app_controller.load_birth_date_drop_down();
                     /*#TODO: completar fecha con la del usuaro.*/
-                    var today = new Date();
                     $('#day_drop_down').val(5);
                     $('#month_drop_down').val(5);
                     $('#year_drop_down').val(1990);
@@ -346,7 +345,7 @@ $.Controller("UserController", {
         Qck.app_controller.show_loader();
         $('#main-content').fadeOut("slow", function() {
             $('#main-content')
-                    .html($.View("views/address_register.ejs"));
+                    .html($.View("views/address_register.ejs",Qck.locale[current_language]));
             Country.getCountryList({language_id:Qck.current_language}, function(data) {
                 $(data).each(function(index, e) {
                     $("#reg-country-select").append("<option value=\"" + e.country_id + "\">" + e.name + "</option>");
