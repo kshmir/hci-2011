@@ -15,7 +15,22 @@
 
   <guide>
     <search_box>Quick search</search_box>
+    <search_advice>Press enter for a complete search</search_advice>
   </guide>
+
+  <cart_merge>
+    <message>You already have an unconfirmed cart. Would you like to add the selected items to the old cart, or would you like to forget them?</message>
+    <current_cart_message>The current cart contains </current_cart_message>
+    <current_cart_item>item</current_cart_item>
+    <current_cart_items>items</current_cart_items>
+    <current_cart_total>totalling</current_cart_total>
+    <unconfirmed_cart_message>The unconfirmed cart contains </unconfirmed_cart_message>
+    <unconfirmed_cart_item>item</unconfirmed_cart_item>
+    <unconfirmed_cart_items>items</unconfirmed_cart_items>
+    <unconfirmed_cart_total>totalling</unconfirmed_cart_total>
+    <forget_them_button>Forget Them</forget_them_button>
+    <add_them_button>Add Them</add_them_button>
+  </cart_merge>
 
   <sidebar>
     <categories>Categories</categories>
@@ -27,6 +42,7 @@
     <descending>Descending</descending>
     <register>Create a New User</register>
     <my_cart>My Cart</my_cart>
+    <create_address>Create an Address</create_address>
   </header>
 
   <reg_labels>
@@ -55,6 +71,23 @@
     <loggin_error>Please Log in to confirm your order</loggin_error>
     <checkout_button>Checkout Order</checkout_button>
   </my_cart_labels>
+
+   <create_address_label>
+     <name>Name:</name>
+     <address_line_1>Address Line 1:</address_line_1>
+     <address_line_2>Address Line 2:</address_line_2>
+     <country>Country:</country>
+     <state>State:</state>
+     <city>City:</city>
+     <zip_code>Zip Code:</zip_code>
+     <phone_number>Phone Number:</phone_number>
+     <create_address_button>Create Address</create_address_button>
+   </create_address_label>
+
+   <product_label>
+     <add_to_cart>Add to Cart</add_to_cart>
+     <more>more</more>
+   </product_label>
 
   <months>
     <jan>Jan</jan>
