@@ -29,7 +29,7 @@ $.Controller("ApplicationController", {
                     last_interval = setTimeout(function() {
                         $(_self).qtip({
                             content: {
-                                text: 'Presione enter para una busqueda completa.'
+                                text: $('guide search_advice', Qck.locale[current_language]).text()
                             },
                             position: {
                                 my: 'left center', // Use the corner...
@@ -147,10 +147,16 @@ $.Controller("ApplicationController", {
     },
     load_language: function() {
         var change_labels=function(data) {
+                //TOPBAR
                 $('#sign_in').text($('topbar sign_in', data).text());
                 $('#sign_up').text($('topbar sign_up', data).text());
                 $('#or').text($('topbar or', data).text());
+                $('#welcome').text($('topbar welcome', data).text());
+                $('#user_panel').text($('topbar user_panel', data).text());
+
+                //GUIDE
                 $('#quick_search').val($('guide search_box', data).text());
+
                 $('#categories').text($('sidebar categories', data).text());
                 $('#filter').text($('header filter', data).text());
                 $('#name_asc_label span').text($('header ascending', data).text());
@@ -163,6 +169,12 @@ $.Controller("ApplicationController", {
                 $('.product_item .price_label').text($('product_label price', data).text());
                 $('.product_item .sales_rank_label').text($('product_label rank', data).text());
 
+              /*
+            <guide>
+              <search_box>Quick search</search_box>
+              <search_advice>Press enter for a complete search</search_advice>
+            </guide>
+                */
                 Qck.locale[current_language] = data;
             };
         var params;
