@@ -5,7 +5,7 @@ $.Controller("CategoriesController", {
 
         // Starts by rendering all the categories.
         // We should cache this to speed this up.
-        this.load();
+        //this.load();
     },
     // We should cache this to speed this up.
     render_list: function(data) {
@@ -22,7 +22,7 @@ $.Controller("CategoriesController", {
                 show_callback();
             });
         };
-        Qck.app_controller.change_view(this.element, ajax_callback);
+        Qck.app_controller.change_view(this.element, ajax_callback, 'isotope');
     },
     // We should cache this to speed this up.
     "history.index subscribe" : function(called, data) {
@@ -93,7 +93,7 @@ $.Model("Category", {
 
     init: function() {
         if ($.jStorage.get('cached_categories' + current_language)) {
-            var array = $.jStorage.get('cached_categories');
+            var array = $.jStorage.get('cached_categories' + current_language);
             this.cached_array = $.map(array, function(e) {
                 return new Category(e, true);
             });
@@ -138,7 +138,7 @@ $.Model("Category", {
                             self.buildRecursively(el, 0, function(ret) {
                                 self.cached_array.push(ret);
                                 if (hits == 0) {
-                                    $.jStorage.set('cached_categories' + current_languagegit , self.cached_array);
+                                    $.jStorage.set('cached_categories' + current_language, self.cached_array);
                                     self.got_array = true;
                                     success(self.cached_array);
                                 } else {
@@ -148,6 +148,7 @@ $.Model("Category", {
                         });
                     }, error);
         } else {
+            this.init();
             if (self.got_array) {
                 success(self.cached_array);
             } else {
