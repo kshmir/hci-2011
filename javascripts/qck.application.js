@@ -162,6 +162,10 @@ $.Controller("ApplicationController", {
                 $('input.register-button-label.form_button').qtip('hide');
             }
 
+            if (window.location.toString().match(/user_panel/)) {
+                window.location.hash += "&reload"
+            }
+
 
             $('#categories').text($('sidebar categories', data).text());
             $('#filter').text($('header filter', data).text());

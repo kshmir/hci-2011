@@ -299,17 +299,18 @@ $.Controller("UserController", {
     // User Settings
     "history.users.user_panel subscribe":function(called, data) {
         var self = this;
-        var usr = {name: Qck.current_user.name,email:Qck.current_user.email}
+        var usr = {name: Qck.current_user.name,email:Qck.current_user.email};
         Qck.app_controller.show_loader();
         $('#main-content').fadeOut("slow", function() {
+            var view = $.View("views/user_settings.ejs", usr);
             $('#main-content')
-                    .html($.View("views/user_settings.ejs", usr)).fadeIn('slow', function() {
+                    .html(view).show();
                 Qck.app_controller.load_birth_date_drop_down();
                 /*#TODO: completar fecha con la del usuaro.*/
                 $('#day_drop_down').val(5);
                 $('#month_drop_down').val(5);
                 $('#year_drop_down').val(1990);
-            });
+
             Address.getAddressList({
                 username: Qck.current_user.username,
                 authentication_token: Qck.current_user.token
