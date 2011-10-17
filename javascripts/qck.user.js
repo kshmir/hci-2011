@@ -194,7 +194,7 @@ $.Controller("UserController", {
         $("#sign_in")
                 .qtip({
                           content: {
-                              text: $.View("views/login.ejs",Qck.locale[current_language]),
+                              text: $.View("views/login.ejs",{} ),
                               title: {
                                   text: $('sign_in_qtip sign_in',Qck.locale[current_language]).text(),
                                   button: true

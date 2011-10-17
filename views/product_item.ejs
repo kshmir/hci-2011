@@ -24,7 +24,9 @@
       </span>
     </p>
     <p class="attribute">
-      <a href="#" class="addcart">Add to cart</a>
+      <a href="#" class="addcart">
+          <%= $('product_label add_to_cart', Qck.locale[current_language]).text() %>
+      </a>
     </p>
     <div class="clear"></div>
   </div>
