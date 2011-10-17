@@ -165,7 +165,7 @@ $.Controller("ProductsController", {
         // TODO: Breadcrumbs
         var ajax_callback = function(callback) {
             $(self.element).html("");
-            Product.findOne({id: product.id}, function(data) {
+            Product.findOne({id: product.id, nocache:true}, function(data) {
                 $(self.element).html($.View(data.showView(), {product: data}));
                 $('.product_show', self.element).data('product', data);
                 var cat;
@@ -221,7 +221,7 @@ $.Model("Product", {
         if (params.id && !params.product_id) {
             params.product_id = params.id;
         }
-        if (!$.jStorage.get('product-' + params.product_id)) {
+        if (!$.jStorage.get('product-' + params.product_id) || params.nocache) {
             $.get(Qck.services.catalog, params, function(data) {
                 var prod = $("product", data);
                 if (prod.length) {

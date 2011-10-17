@@ -81,19 +81,22 @@ head.js("javascripts/qck.address.js",
         "javascripts/qck.user.js", function() {
             jStorage_timed();
 
+
             $("body").application({});
             Qck.app_controller = $("body").controller();
+            $("#sidebar").categories({});
+            Qck.cats_controller = $("#sidebar").controller();
             $("html").user({});
             Qck.user_controller = $("html").controller();
             $("#navigation").breadcrumb({});
             Qck.bread_controller = $("#navigation").controller();
-            $("#sidebar").categories({});
             $("#main-content").products({});
             $("#container").cart({});
             Qck.cart_controller = $("#container").controller();
             if(languages == null){
-                languages= new Language2();
-                languages= languages.getLanguageList();
+                Language.getLanguageList({}, function(data){
+                    languages= data;
+                });
             }
             $(window).hashchange();
 

@@ -1,27 +1,28 @@
 $.Controller("CategoriesController", {
     init: function() {
-        var self = this;
 
         Category.init();
 
         // Starts by rendering all the categories.
         // We should cache this to speed this up.
-
-        var ajax_callback = function(show_callback) {
-            Category.findAll({}, function(data) {
-                self.render_list(data);
-                $("#sidebar").removeClass('loading');
-                show_callback();
-            });
-        };
-        Qck.app_controller.change_view(this.element, ajax_callback);
-
+        this.load();
     },
     // We should cache this to speed this up.
     render_list: function(data) {
 
         $(this.element).html($.View("views/sidebar.ejs", {categories: data}));
 
+    },
+    load:function(nocache) {
+        var self = this;
+        var ajax_callback = function(show_callback) {
+            Category.findAll({nocache:nocache}, function(data) {
+                self.render_list(data);
+                $("#sidebar").removeClass('loading');
+                show_callback();
+            });
+        };
+        Qck.app_controller.change_view(this.element, ajax_callback);
     },
     // We should cache this to speed this up.
     "history.index subscribe" : function(called, data) {
@@ -91,7 +92,7 @@ $.Controller("CategoriesController", {
 $.Model("Category", {
 
     init: function() {
-        if ($.jStorage.get('cached_categories')) {
+        if ($.jStorage.get('cached_categories' + current_language)) {
             var array = $.jStorage.get('cached_categories');
             this.cached_array = $.map(array, function(e) {
                 return new Category(e, true);
@@ -106,7 +107,7 @@ $.Model("Category", {
         var _ret = new Category(node);
 
         if (depth == 0) {
-            $.get(Qck.services.catalog, { language_id : 1, method : "GetSubcategoryList", category_id: _ret.id },
+            $.get(Qck.services.catalog, { language_id : current_language || 1, method : "GetSubcategoryList", category_id: _ret.id },
                     function(data) {
                         $("subcategory", data).each(function(index, el) {
                             self.buildRecursively(el, 1, function(ret) {
@@ -127,18 +128,17 @@ $.Model("Category", {
     findAll : function(params, success, error) {
         var self = this;
 
-        if (!self.cached_array) {
+        if (!$.jStorage.get('cached_categories' + current_language)) {
             self.got_array = false;
-
             self.cached_array = [];
-            $.get(Qck.services.catalog, { language_id : 1, method : "GetCategoryList" },
+            $.get(Qck.services.catalog, { language_id : current_language || 1, method : "GetCategoryList" },
                     function(data) {
                         var hits = $("category", data).length - 1;
                         $("category", data).each(function(index, el) {
                             self.buildRecursively(el, 0, function(ret) {
                                 self.cached_array.push(ret);
                                 if (hits == 0) {
-                                    $.jStorage.set('cached_categories', self.cached_array);
+                                    $.jStorage.set('cached_categories' + current_language, self.cached_array);
                                     self.got_array = true;
                                     success(self.cached_array);
                                 } else {
@@ -221,14 +221,14 @@ $.Model("Category", {
         if (params.subcat_id) {
             p.method = "GetProductListBySubcategory";
             p.subcategory_id = params.subcat_id;
-            p.language_id = 1;
+            p.language_id = params.language_id || 1;
             self.findOne({subcat_id : params.subcat_id}, function(category) {
                 p.category_id = category.parent_id;
             });
         } else if (params.cat_id) {
             p.method = "GetProductListByCategory";
             p.category_id = params.cat_id;
-            p.language_id = 1;
+            p.language_id = params.language_id || 1;
         }
 
         p.order = params.order;

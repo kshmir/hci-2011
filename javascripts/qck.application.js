@@ -98,48 +98,24 @@ $.Controller("ApplicationController", {
     "#l_languages change" : function() {
         current_language = $('#l_languages').val();
         $.jStorage.set('current_language',current_language);
-        Qck.app_controller.load_language();
+        this.load_language();
     },
     set_language: function(language) {
         if (languages == null) {
             languages = [];
             var success2 = function(vara) {
                 languages = vara;
-                $('#languages').hide();
                 $('#languages').html($.View("views/languages.ejs", languages));
-                $('#languages').show();
             };
             var error2 = function(aux) {
                 console.log(aux);
             };
             var aux = {};
-            aux.method = "GetLanguageList";
-            $.ajax({
-                url: Qck.services.common,
-                data: aux,
-                contentType: "text/xml; charset=utf-8",
-                success: function(data) {
 
-                    if ($("response", data).attr("status") == "ok") {
+            Language.getLanguageList(aux, success2, error2);
 
-                        var language_list = [];
-                        $('language', data).each(function(index, item) {
-                            language_list.push(new Language(item));
-                        });
-                        success2(language_list);
-                    }
-                    else {
-
-                        error2($("error", data).attr("code"));
-                    }
-                },
-                error: error2
-
-            });
         } else {
-            $('#languages').hide();
             $('#languages').html($.View("views/languages.ejs", languages));
-            $('#languages').show();
 
         }
 
@@ -166,9 +142,15 @@ $.Controller("ApplicationController", {
                 $("#filter_name_label span").text($('header name', data).text());
                 $("#filter_rank_label span").text($('header rank', data).text());
                 $("#filter_price_label span").text($('header price', data).text());
-                $('.product_item .price_label').text($('product_label price', data).text());
-                $('.product_item .sales_rank_label').text($('product_label rank', data).text());
+                $('.product_item .price_label, .product_show .price_label').text($('product_label price', data).text());
+                $('.product_item .sales_rank_label, .product_show .sales_rank_label').text($('product_label rank', data).text());
+                $('.product_item .addcart, .product_show .addcart').text($('product_label add_to_cart', data).text());
 
+
+
+                if (Qck.cats_controller) {
+                    Qck.cats_controller.load(true);
+                }
               /*
             <guide>
               <search_box>Quick search</search_box>
