@@ -37,9 +37,12 @@
   </sidebar>
 
   <header>
-    <filter>Order:</filter>
+    <filter>Order By:</filter>
     <ascending>Ascending</ascending>
     <descending>Descending</descending>
+    <name>Name</name>
+    <rank>Rank</rank>
+    <price>Price</price>
     <register>Create a New User</register>
     <my_cart>My Cart</my_cart>
     <create_address>Create an Address</create_address>
@@ -93,6 +96,7 @@
      <more>more</more>
      <price>Price:</price>
      <amount>Amount:</amount>
+     <rank>Sales Rank:</rank>
    </product_label>
 
   <product_info>
@@ -188,7 +192,7 @@
 		<error id='103'>The country identifier is invalid.</error>
 		<error id='104'>The user is invalid.</error>
 		<error id='105'>The authentication token is invalid.</error>
-		<error id='106'></error>
+		<error id='106'> </error>
 		<error id='107'>The username is invalid (it must have between 1 and 15 characters).</error>
 		<error id='108'>The password is invalid (it must have between 8 and 15 characters).</error>
 		<error id='109'>The name is invalid (it must have between 1 and 80 characters).</error>
@@ -207,7 +211,7 @@
 		<error id='122'>The submitted city is invalid (it must have between 1 and 80 characters).</error>
 		<error id='123'>The submitted zip code is invalid (it must have between 1 and 8 characters).</error>
 		<error id='124'>The submitted telephone number is invalid (it must have between 1 and 25 characters).</error>
-		<error id='125'></error>
+		<error id='125'> </error>
 		<error id='201'>The username already exists.</error>
 		<error id='202'>The address already exists.</error>
 		<error id='999'>An error occurs while processing your application.</error>

@@ -551,10 +551,6 @@ $.Controller("CartController", {
             $('.cart-alert').slideUp('slow');
         }
     },
-    ".create-address-link click": function() {
-        history.go(-1);
-        return false;
-    },
 
     "#cart-addresses change": function() {
 

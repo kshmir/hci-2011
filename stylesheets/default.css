@@ -280,9 +280,19 @@ h1,h2,h3,h4,h5,h6 {
 
 
 .product_list .filter {
+    width: 600px;
     margin-top:15px;
     float:right;
 }
+
+.product_list #radio, .product_list #radio2 {
+    float:right;
+}
+
+.product_list #radio2 {
+    margin-right:10px;
+}
+
 
 .product_item {
     border: 1px solid #eee;
@@ -792,7 +802,7 @@ h1,h2,h3,h4,h5,h6 {
 #not-confirmed-alert-items, #not-confirmed-alert-address,
 #not-confirmed-alert-processing {
     display:none;
-}
+}                                               §
 
 ul.list li.selected {
     background-color:#87cefa;
@@ -807,4 +817,16 @@ ul.list li.selected .set {
 
 .color-list li{
     cursor:pointer;
+}
+
+#languages, .topbar .content {
+    float:right;
+}
+
+.topbar .content {
+    margin-right:5px;
+}
+
+.settings-content .form_item {
+    width: 370px;
 }

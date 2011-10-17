@@ -1,19 +1,16 @@
 <div class="product_list">
     <div class="header">
-        <% if (this.title) { %>
-        <div class="title">
-            <h2>
-              <%= this.title %>
-            </h2>
-        </div>
-        <% } %>
         <div class="filter">
-            <div id="filter" class="filter-order-text filter-text">
-                Order:
-            </div>
             <div id="radio" class="filter-sel">
-                <input type="radio" id="name_asc" name="radio" checked="checked"/><label id='name_asc_label' for="name_asc">Ascending</label>
-                <input type="radio" id="name_desc" name="radio"/><label id='name_desc_label' for="name_desc">Descending</label>
+
+                <input type="radio" id="name_asc" name="radio2" checked="checked"/><label id='name_asc_label' for="name_asc">Ascending</label>
+                <input type="radio" id="name_desc" name="radio2"/><label id='name_desc_label' for="name_desc">Descending</label>
+            </div>
+            <div id="radio2" class="filter-sel-type">
+                <span id="filter">Order By:</span>
+                <input type="radio" id="filter_name" name="radio" checked="checked"/><label id='filter_name_label' for="filter_name">Name</label>
+                <input type="radio" id="filter_rank" name="radio" /><label id='filter_rank_label' for="filter_rank">Rank</label>
+                <input type="radio" id="filter_price" name="radio"/><label id='filter_price_label' for="filter_price">Price</label>
             </div>
         </div>
         <div class="clear"></div>

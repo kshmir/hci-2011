@@ -83,88 +83,97 @@ $.Controller("ApplicationController", {
             return  el;
         };
 
+        $("#l_languages").change();
         this.updater();
     },
     updater: function() {
 
     },
-    "#l_languages change" : function(){
-        current_language=$('#l_languages').val();
+    "#l_languages change" : function() {
+
+            if ($.jStorage.get('current_language')) {
+                current_language = $.jStorage.get('current_language');
+                $('#l_languages').val(current_language);
+            } else {
+                current_language = $('#l_languages').val();
+            }
+
+
         Qck.app_controller.load_language();
-    }
-    ,
-    "#languages load":function(){
-
     },
-    set_language: function(language){
-       if(languages==null){
-            languages=[];
-              var success2 = function(vara){
-                  languages=vara;
-                  $('#languages').fadeOut('fast',function(){
-                      $('#languages').html($.View("views/languages.ejs",languages));
-                      $('#languages').fadeIn('slow');
-                });
-              };
-              var error2 = function(aux){
-                  alert(aux);
-              };
-                var aux={};
-              aux.method = "GetLanguageList";
-              $.ajax({
-                  url: Qck.services.common,
-                  data: aux,
-                  contentType: "text/xml; charset=utf-8",
-                  success: function(data) {
+    set_language: function(language) {
+        if (languages == null) {
+            languages = [];
+            var success2 = function(vara) {
+                languages = vara;
+                $('#languages').hide();
+                $('#languages').html($.View("views/languages.ejs", languages));
+                $('#languages').show();
+            };
+            var error2 = function(aux) {
+                console.log(aux);
+            };
+            var aux = {};
+            aux.method = "GetLanguageList";
+            $.ajax({
+                url: Qck.services.common,
+                data: aux,
+                contentType: "text/xml; charset=utf-8",
+                success: function(data) {
 
-                      if ($("response", data).attr("status") == "ok") {
+                    if ($("response", data).attr("status") == "ok") {
 
-                          var language_list = [];
-                          $('language', data).each(function(index, item) {
-                              language_list.push(new Language(item));
-                          });
-                          success2(language_list);
-                      }
-                      else {
+                        var language_list = [];
+                        $('language', data).each(function(index, item) {
+                            language_list.push(new Language(item));
+                        });
+                        success2(language_list);
+                    }
+                    else {
 
-                          error2($("error", data).attr("code"));
-                      }
-                  },
-                  error: error2
+                        error2($("error", data).attr("code"));
+                    }
+                },
+                error: error2
 
-              });
-       }else{
-           $('#languages').fadeOut('fast',function(){
-                      $('#languages').html($.View("views/languages.ejs",languages));
-                      $('#languages').fadeIn('slow');
-                });
-       }
+            });
+        } else {
+            $('#languages').hide();
+            $('#languages').html($.View("views/languages.ejs", languages));
+            $('#languages').show();
+
+        }
 
 
     },
-     load_language: function(){
+    load_language: function() {
 
-         var params;
-         $.ajax({
+        var params;
+        $.ajax({
             url: 'languages/lang-' + current_language + '.xml',
             data: params,
 
             success: function(data) {
-                $('#sign_in').text($('topbar sign_in',data).text());
-                $('#sign_up').text($('topbar sign_up',data).text());
-                $('#or').text($('topbar or',data).text());
-               //#TODO: $('#quick_search').value($('guide search_box',data).text());
-                $('#categories').text($('sidebar categories',data).text());
-                $('#filter').text($('header filter',data).text());
-                $('#name_asc_label').text($('header ascending',data).text());
-                $('#name_desc_label').text($('header descending',data).text());
-                $('#check_my_cart').text($('cart check_cart',data).text());
-                $('#clear_my_cart').text($('cart clear_cart',data).text());
-                Qck.locale[current_language]=data;
+                $('#sign_in').text($('topbar sign_in', data).text());
+                $('#sign_up').text($('topbar sign_up', data).text());
+                $('#or').text($('topbar or', data).text());
+                $('#quick_search').val($('guide search_box', data).text());
+                $('#categories').text($('sidebar categories', data).text());
+                $('#filter').text($('header filter', data).text());
+                $('#name_asc_label span').text($('header ascending', data).text());
+                $('#name_desc_label span').text($('header descending', data).text());
+                $('#check_my_cart').text($('cart check_cart', data).text());
+                $('#clear_my_cart').text($('cart clear_cart', data).text());
+                $("#filter_name_label span").text($('header name', data).text());
+                $("#filter_rank_label span").text($('header rank', data).text());
+                $("#filter_price_label span").text($('header price', data).text());
+                $('.product_item .price_label').text($('product_label price', data).text());
+                $('.product_item .sales_rank_label').text($('product_label rank', data).text());
+
+                Qck.locale[current_language] = data;
             }
 
         });
-
 
 
     },
@@ -240,27 +249,27 @@ $.Controller("ApplicationController", {
                     && (elemBottom <= docViewBottom) && (elemTop >= docViewTop) );
         }
     },
-    load_birth_date_drop_down :function(){
-                        var monthtext=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sept','Oct','Nov','Dec'];
-                        var today=new Date();
-                        var dayfield=document.getElementById('day_drop_down');
-                        var monthfield=document.getElementById('month_drop_down');
-                        var yearfield=document.getElementById('year_drop_down');
-                        for (var i=1; i<32; i++){
-                        dayfield.options[i-1]=new Option(i, i);
-                        }
-                        //dayfield.options[today.getDate()]=new Option(today.getDate(), today.getDate(), true, true) //select today's day
-                        for (var m=0; m<12; m++){
-                        monthfield.options[m]=new Option(monthtext[m], m+1);
-                        }
-                        //monthfield.options[today.getMonth()]=new Option(monthtext[today.getMonth()], monthtext[today.getMonth()], true, true) //select today's month
-                        var thisyear=today.getFullYear()-18;
-                        for (var y=0; y<125; y++){
-                        yearfield.options[y]=new Option(thisyear, thisyear);
-                        thisyear-=1;
-                        }
-                        //yearfield.options[0]=new Option(today.getFullYear(), today.getFullYear(), true, true) //select today's year
-                    },
+    load_birth_date_drop_down :function() {
+        var monthtext = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sept','Oct','Nov','Dec'];
+        var today = new Date();
+        var dayfield = document.getElementById('day_drop_down');
+        var monthfield = document.getElementById('month_drop_down');
+        var yearfield = document.getElementById('year_drop_down');
+        for (var i = 1; i < 32; i++) {
+            dayfield.options[i - 1] = new Option(i, i);
+        }
+        //dayfield.options[today.getDate()]=new Option(today.getDate(), today.getDate(), true, true) //select today's day
+        for (var m = 0; m < 12; m++) {
+            monthfield.options[m] = new Option(monthtext[m], m + 1);
+        }
+        //monthfield.options[today.getMonth()]=new Option(monthtext[today.getMonth()], monthtext[today.getMonth()], true, true) //select today's month
+        var thisyear = today.getFullYear() - 18;
+        for (var y = 0; y < 125; y++) {
+            yearfield.options[y] = new Option(thisyear, thisyear);
+            thisyear -= 1;
+        }
+        //yearfield.options[0]=new Option(today.getFullYear(), today.getFullYear(), true, true) //select today's year
+    },
     change_view: function(selector, ajax, method) {
         var self = this;
         if (!method || method == 'fade') {

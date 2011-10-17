@@ -37,9 +37,12 @@
   </sidebar>
 
   <header>
-    <filter>Orden:</filter>
+    <filter>Ordenar por:</filter>
     <ascending>Ascendente</ascending>
     <descending>Descendente</descending>
+    <name>Nombre</name>
+    <rank>Rango</rank>
+    <price>Precio</price>
     <register>Crear un nuevo usuario</register>
     <my_cart>Mi Carrito</my_cart>
     <create_address>Crear una nueva Direccion</create_address>
@@ -93,6 +96,7 @@
      <more>mas</more>
      <price>Precio:</price>
      <amount>Cantidad:</amount>
+     <rank>Ranking:</rank>
    </product_label>
 
   <months>

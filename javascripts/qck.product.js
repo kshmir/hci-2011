@@ -28,6 +28,7 @@ $.Controller("ProductsController", {
         if (!$(".items").length) {
             $(this.element).html($.View("views/product_list.ejs", {products : products_list, title:title}));
             $("#radio").buttonset();
+            $("#radio2").buttonset();
             this.products = products_list;
             this.title = title;
 
@@ -37,6 +38,12 @@ $.Controller("ProductsController", {
                 getSortData : {
                     name : function ($elem) {
                         return $elem.find('h3 a').text();
+                    },
+                    price : function ($elem) {
+                        return parseFloat($elem.find('.price').text().replace(/$/,""));
+                    },
+                    rank : function ($elem) {
+                        return parseInt($elem.find('.sales_rank').text());
                     }
                 },
                 sortBy: 'name', sortAscending: true,
@@ -106,29 +113,19 @@ $.Controller("ProductsController", {
         this.fix_heights();
     },
     "#name_asc click": function() {
-        var hash = window.location.hash.toString();
-        if (hash.indexOf("DESC") != -1) {
-            hash = hash.replace(/DESC/g, "ASC");
-        } else {
-            hash += "&order=ASC"
-        }
-        window.location.hash = hash;
-        if (!$.browser.mozilla) {
-            $('.items').isotope({ sortBy: 'name', sortAscending: true});
-        }
-
+        $('.items').isotope({ sortAscending: true});
     },
     "#name_desc click": function() {
-        var hash = window.location.hash.toString();
-        if (hash.indexOf("ASC") != -1) {
-            hash = hash.replace(/ASC/g, "DESC");
-        } else {
-            hash += "&order=DESC"
-        }
-        window.location.hash = hash;
-        if (!$.browser.mozilla) {
-            $('.items').isotope({ sortBy: 'name', sortAscending: false });
-        }
+        $('.items').isotope({  sortAscending: false });
+    },
+    "#filter_price click": function() {
+        $('.items').isotope({ sortBy: 'price' });
+    },
+    "#filter_rank click": function() {
+        $('.items').isotope({ sortBy: 'rank' });
+    },
+    "#filter_name click": function() {
+        $('.items').isotope({ sortBy: 'name' });
     },
 
     ".addcart click": function(e) {
