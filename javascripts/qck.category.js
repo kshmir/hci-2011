@@ -15,6 +15,7 @@ $.Controller("CategoriesController", {
     },
     load:function(nocache) {
         var self = this;
+
         var ajax_callback = function(show_callback) {
             Category.findAll({nocache:nocache}, function(data) {
                 self.render_list(data);
@@ -22,7 +23,19 @@ $.Controller("CategoriesController", {
                 show_callback();
             });
         };
-        Qck.app_controller.change_view(this.element, ajax_callback, 'isotope');
+
+        if (current_language != self.last_lang) {
+            Qck.app_controller.change_view(this.element, ajax_callback, 'isotope');
+            if (self.current_category) {
+                Category.findOne({cat_id : self.current_category.cat_id, subcat_id : self.current_category.subcat_id}, function(cat) {
+                    self.last_category = self.current_category;
+                    self.current_category = cat;
+                    Qck.bread_controller.loadHashes(self.current_category.buildBreadCrumbsHash());
+                });
+
+            }
+        }
+        self.last_lang = current_language;
     },
     // We should cache this to speed this up.
     "history.index subscribe" : function(called, data) {
