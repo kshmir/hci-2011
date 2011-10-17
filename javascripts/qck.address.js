@@ -44,7 +44,7 @@ $.Model("Address", {
                     success($("address", data).attr("id"));
                 }
                 else {
-                    error();
+                   error($("error", data).attr("code"));
                 }
             },
             error: error
