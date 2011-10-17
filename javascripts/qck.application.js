@@ -96,9 +96,11 @@ $.Controller("ApplicationController", {
 
     },
     "#l_languages change" : function() {
+        var oldlang = current_language;
+
         current_language = $('#l_languages').val();
         $.jStorage.set('current_language',current_language);
-        this.load_language();
+        this.load_language(oldlang != current_language);
     },
     set_language: function(language) {
         if (languages == null) {
@@ -121,7 +123,7 @@ $.Controller("ApplicationController", {
 
 
     },
-    load_language: function() {
+    load_language: function(nocache) {
         var change_labels=function(data) {
                 //TOPBAR
                 $('#sign_in').text($('topbar sign_in', data).text());
@@ -162,7 +164,7 @@ $.Controller("ApplicationController", {
 
 
                 if (Qck.cats_controller) {
-                    Qck.cats_controller.load(true);
+                    Qck.cats_controller.load(nocache);
                 }
               /*
             <guide>
