@@ -151,11 +151,24 @@ $.Controller("ApplicationController", {
                 $('#sign_in').text($('topbar sign_in', data).text());
                 $('#sign_up').text($('topbar sign_up', data).text());
                 $('#or').text($('topbar or', data).text());
-                $('#welcome').text($('topbar welcome', data).text());
+                if (Qck.current_user) {
+                $('#welcome').text($('topbar welcome', data).text()+' '+Qck.current_user.name);
+                    }
                 $('#user_panel').text($('topbar user_panel', data).text());
-
+                $('#sign_out').text($('topbar sign_out', data).text());
                 //GUIDE
                 $('#quick_search').val($('guide search_box', data).text());
+
+                //REGISTER
+                $('.register-username-title').text($('header register',data).text());
+                $('.label.register-username-label').text($('reg_labels username',data).text());
+                $('.label.register-name-label').text($('reg_labels name',data).text());
+                $('.label.register-password-label').text($('reg_labels password',data).text());
+                $('.label.register-password2-label').text($('reg_labels re_password',data).text());
+                $('.label.register-email-label').text($('reg_labels email',data).text());
+                $('.label.register-birth-date-label').text($('reg_labels birth_date',data).text());
+                $('.form_button.register-button-label').val($('reg_labels reg_button',data).text());
+
 
                 $('#categories').text($('sidebar categories', data).text());
                 $('#filter').text($('header filter', data).text());
