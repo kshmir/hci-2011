@@ -131,6 +131,50 @@
   </user_panel_label>
 
   <erros>
-    <error id='1'></error>
+    <error id='1'>The method this application requires has not been provide.</error>
+		<error id='2'>The language identifier this application requires has not been provide.</error>
+		<error id='3'>The country identifier this application requires has not been provide.</error>
+		<error id='4'>The user identifier this application requires has not been provide.</error>
+		<error id='5'>The password this application requires has not been provide.</error>
+		<error id='6'>The authentication token this application requires has not been provide.</error>
+		<error id='7'>The user account information this application requires has not been provide.</error>
+		<error id='8'>The new password this application requires has not been provide.</error>
+		<error id='9'>The category identifier this application requires has not been provide.</error>
+		<error id='10'>The subcategory identifier this application requires has not been provide.</error>
+		<error id='11'>The search criteria this application requires has not been provide.</error>
+		<error id='12'>The product identifier this application requires has not been provide.</error>
+		<error id='13'>The order identifier this application requires has not been provide.</error>
+		<error id='14'>The address identifier this application requires has not been provide.</error>
+		<error id='15'>The item information this application requires has not been provide.</error>
+		<error id='16'>The address information this application requires has not been provide.</error>
+		<error id='17'>The storage value this application requires has not been provide.</error>
+		<error id='101'>The submit provided method this application requires is invalid.</error>
+		<error id='102'>The Language identifier is invalid.</error>
+		<error id='103'>The country identifier is invalid.</error>
+		<error id='104'>The user is invalid.</error>
+		<error id='105'>The authentication token is invalid.</error>
+		<error id='106'></error>
+		<error id='107'>The username is invalid (it must have between 1 and 15 characters).</error>
+		<error id='108'>The password is invalid (it must have between 8 and 15 characters).</error>
+		<error id='109'>The name is invalid (it must have between 1 and 80 characters).</error>
+		<error id='110'>The email is invalid (it must have between 1 and 128 characters).</error>
+		<error id='111'>The date of birth is invalid.</error>
+		<error id='112'>The submitted category identifier is invalid.</error>
+		<error id='113'>The submitted subcategory identifier is invalid.</error>
+		<error id='114'>The submitted product identifier is invalid.</error>
+		<error id='115'>The submitted order identifier is invalid.</error>
+		<error id='116'>The operation request is invalid for that order status.</error>
+		<error id='117'>The submitted address identifier is invalid.</error>
+		<error id='118'>The submitted reference name is invalid (it must have between 1 and 80 characters).</error>
+		<error id='119'>The submitted first address is invalid (it must have between 1 and 80 characters).</error>
+		<error id='120'>The submitted second address is invalid (it must have between 1 and 80 characters).</error>
+		<error id='121'>The submitted status identifier is invalid.</error>
+		<error id='122'>The submitted city is invalid (it must have between 1 and 80 characters).</error>
+		<error id='123'>The submitted zip code is invalid (it must have between 1 and 8 characters).</error>
+		<error id='124'>The submitted telephone number is invalid (it must have between 1 and 25 characters).</error>
+		<error id='125'></error>
+		<error id='201'>The username already exists.</error>
+		<error id='202'>The address already exists.</error>
+		<error id='999'>An error occurs while processing your application.</error>
   </erros>
 </locale>
