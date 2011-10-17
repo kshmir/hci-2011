@@ -114,6 +114,7 @@ $.Controller("ApplicationController", {
         }
     },
     load_language: function(nocache) {
+
         var change_labels = function(data) {
             //TOPBAR
             $('#sign_in').text($('topbar sign_in', data).text());
@@ -137,6 +138,21 @@ $.Controller("ApplicationController", {
             $('.label.register-birth-date-label').text($('reg_labels birth_date', data).text());
             $('.form_button.register-button-label').val($('reg_labels reg_button', data).text());
 
+
+            //BIRTH DATE
+            Qck.app_controller.load_birth_date_drop_down();
+
+            //USERPANEL
+            $('.label.panel-new-name-label').text($('header register', data).text());
+            $('.label.panel-new-email-label').text($('reg_labels username', data).text());
+            $('.label.update-birth-date-label').text($('reg_labels name', data).text());
+            $('.update-user-information').text($('reg_labels password', data).text());
+            $('.label.register-password2-label').text($('reg_labels re_password', data).text());
+            $('.label.register-email-label').text($('reg_labels email', data).text());
+            $('.label.register-birth-date-label').text($('reg_labels birth_date', data).text());
+            $('.form_button.register-button-label').val($('reg_labels reg_button', data).text());
+
+
             if (window.location.toString().match(/sign_up/)) {
                 $('.label.register-password-label').qtip('hide');
                 $('.label.register-username-label').qtip('hide');
@@ -145,6 +161,7 @@ $.Controller("ApplicationController", {
                 $('.label.register-birth-date-label').qtip('hide');
                 $('input.register-button-label.form_button').qtip('hide');
             }
+
 
             $('#categories').text($('sidebar categories', data).text());
             $('#filter').text($('header filter', data).text());
@@ -282,6 +299,36 @@ $.Controller("ApplicationController", {
             return ((elemBottom >= docViewTop) && (elemTop <= docViewBottom) // 40: magic number
                     && (elemBottom <= docViewBottom) && (elemTop >= docViewTop) );
         }
+    },
+    add_err_qtip: function(el, msg) {
+        el.qtip('hide').removeData('qtip')
+                .qtip({
+                          content: {
+                              text: msg,
+                              title: {
+                                  text: '',
+                                  button: true
+                              }
+                          },
+                          position: {
+                              my: 'center right', // Use the corner...
+                              at: 'center left' // ...and opposite corner
+                          },
+                          show: {
+                              event: false, // Don't specify a show event...
+                              effect: function(offset) {
+                                  $(this).slideDown(200); // "this" refers to the tooltip
+                                  $('#username').click();
+                              }
+                          },
+                          hide: function(event, api) {
+                              self.sign_in_unique = true;
+                          }, // Don't specify a hide event either!
+                          style: {
+                              classes: 'ui-tooltip-shadow ui-tooltip-' + 'red'
+                          }
+                      }).qtip('show');
+
     },
     load_birth_date_drop_down :function() {
         var months = $('months', Qck.locale[current_language]);
