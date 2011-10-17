@@ -60,10 +60,38 @@ $.Model("Address", {
 
     getAddressList : function(params, success, error) {
         params.method = "GetAddressList";
+        var errors=[];
+        if(!params.username){
+            errors.push("4");
+        }
+         if(!params.authentication_token){
+            errors.push("6");
+         }
+        if(!params.address){
+            errors.push("16");
+        }
+
+        if(!params.address){
+            errors.push("118");
+        }
+        errors.push("119");
+        errors.push("120");
+        errors.push("121");
+        errors.push("122");
+        errors.push("123");
+        errors.push("124");
+
+        if (errors.length)
+        {
+            error: errors;
+        }
+
+
         if (!$.jStorage.get('user-' + params.username + '-addresses')) {
             $.ajax({
                 url: Qck.services.order,
                 data: params,
+
 
                 success: function(data) {
                     if ($("response", data).attr("status") == "ok") {
