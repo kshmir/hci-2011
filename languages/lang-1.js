@@ -12,7 +12,7 @@
  * Time: 3:34 AM
  * To change this template use File | Settings | File Templates.
  */
-var locale = {
+{
 	id : "1",
 	code : "en",
 	web : {

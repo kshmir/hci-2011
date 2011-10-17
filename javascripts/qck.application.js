@@ -144,14 +144,20 @@ $.Controller("ApplicationController", {
 
     },
      load_language: function(){
-         var datas;
-         $.getScript('languages/lang-' + current_language + '.js', function(){
-            datas=locale;
+
+         var params;
+         $.ajax({
+            url: 'languages/lang-' + current_language + '.xml',
+            data: params,
+
+            success: function(data) {
+                $('#sign_in').text($('topbar sign_in',data).text());
+                $('#sign_up').text($('topbar sign_up',data).text());
 
             }
 
-          );
-          alert(datas.template.signIn.l_sign_in);
+        });
+
 
 
     },
