@@ -32,6 +32,43 @@ $.Model("Address", {
         var self = this;
         var addr = params.address;
         params.method = "CreateAddress";
+        var errors=[];
+                if(!params.username){
+                    errors.push("4");
+                }
+                 if(!params.authentication_token){
+                    errors.push("6");
+                 }
+                if(!params.address){
+                    errors.push("16");
+                }
+                if (!(params.address.full_name && params.address.full_name.length > 0 && params.address.full_name.length <= 80))
+                {
+                    errors.push("118");
+                }
+                if (!(params.address.address_line_1 && params.address.address_line_1.length > 0 && params.address.address_line_1.length <= 80))
+                {
+                      errors.push("119");
+                }
+                if (!(params.address.address_line_2 && params.address.address_line_2.length > 0 && params.address.address_line_2.length <= 80))
+                {
+                    errors.push("120");
+                }
+                if (!(params.address.city && params.address.city.length > 0 && params.address.city.length <= 80))
+                {
+                    errors.push("122");
+                }
+                if (!(params.address.zip_code && params.address.zip_code.length > 0 && params.address.zip_code.length <= 8))
+                {
+                    errors.push("123");
+                }
+                if (!(params.address.phone_number && params.address.phone_number.length > 0 && params.address.phone_number.length <= 25))
+                {
+                    errors.push("124");
+                }
+        if (errors.length) {
+                         error(errors);
+        } else {
         params.address = $.View("xml_renders/address.ejs", params.address);
         $.ajax({
             url: Qck.services.order,
@@ -50,7 +87,7 @@ $.Model("Address", {
             error: error
 
         });
-
+      }
     },
     //getAddressList method
     //getAddressList params:
@@ -60,10 +97,23 @@ $.Model("Address", {
 
     getAddressList : function(params, success, error) {
         params.method = "GetAddressList";
+        var errors=[];
+        if(!params.username){
+             errors.push("4");
+        }
+        if(!params.authentication_token)
+        {
+            errors.push("6");
+        }
+         if (errors.length) {
+                         error(errors);
+        } else {
+
         if (!$.jStorage.get('user-' + params.username + '-addresses')) {
             $.ajax({
                 url: Qck.services.order,
                 data: params,
+
 
                 success: function(data) {
                     if ($("response", data).attr("status") == "ok") {
@@ -87,6 +137,7 @@ $.Model("Address", {
         } else {
             success($.jStorage.get('user-' + params.username + '-addresses'));
         }
+       }
     },
 
     //getAddress method
@@ -128,7 +179,44 @@ $.Model("Address", {
         var self = this;
         var addr = params.address;
         params.method = "UpdateAddress";
-        params.address = $.View("xml_renders/address.ejs", params.address);
+        var errors=[];
+                if(!params.username){
+                    errors.push("4");
+                }
+                 if(!params.authentication_token){
+                    errors.push("6");
+                 }
+                if(!params.address){
+                    errors.push("16");
+                }
+                if (!(params.address.full_name && params.address.full_name.length > 0 && params.address.full_name.length <= 80))
+                {
+                    errors.push("118");
+                }
+                if (!(params.address.address_line_1 && params.address.address_line_1.length > 0 && params.address.address_line_1.length <= 80))
+                {
+                      errors.push("119");
+                }
+                if (!(params.address.address_line_2 && params.address.address_line_2.length > 0 && params.address.address_line_2.length <= 80))
+                {
+                    errors.push("120");
+                }
+                if (!(params.address.city && params.address.city.length > 0 && params.address.city.length <= 80))
+                {
+                    errors.push("122");
+                }
+                if (!(params.address.zip_code && params.address.zip_code.length > 0 && params.address.zip_code.length <= 8))
+                {
+                    errors.push("123");
+                }
+                if (!(params.address.phone_number && params.address.phone_number.length > 0 && params.address.phone_number.length <= 25))
+                {
+                    errors.push("124");
+                }
+        if (errors.length) {
+                         error(errors);
+        } else {
+                params.address = $.View("xml_renders/address.ejs", params.address);
 
 
         $.ajax({
@@ -148,7 +236,7 @@ $.Model("Address", {
             error: error
 
         });
-
+        }
     }
 }
         ,

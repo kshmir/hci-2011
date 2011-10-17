@@ -438,6 +438,70 @@ $.Controller("UserController", {
     }
     ,
     "#addr-button click": function(el) {
+        $('#reg-full_name').qtip('hide');
+        $('#reg-address-1').qtip('hide');
+        $('#reg-address-2').qtip('hide');
+        $('#reg-country-select').qtip('hide');
+        $('#reg-state-select').qtip('hide');
+        $('#reg-city').qtip('hide');
+        $('#reg-zip').qtip('hide');
+        $('#reg-phone').qtip('hide');
+        $('#addr-button').qtip('hide');
+        var errors= function(errs){
+            $.each(errors,function(index,err){
+                if(err=="1"){ //missing method
+                    Qck.add_err_qtip($('#addr-button'),$('errors #1',Qck.locale[current_language]).text());
+                }
+                if(err=="4"){ //missing username
+                    Qck.add_err_qtip($('.addr-full_name-label'),$('errors #4',Qck.locale[current_language]).text());
+                }
+                if(err=="6"){ //missing authentication token
+                    Qck.add_err_qtip($('#addr-button'),$('errors #6',Qck.locale[current_language]).text());
+                }
+                if(err=="16"){ //missing address
+                    Qck.add_err_qtip($('.addr-address-1-label'),$('errors #16',Qck.locale[current_language]).text());
+                }
+                if(err=="101"){ //invalid method
+                    Qck.add_err_qtip($('#addr-button'),$('errors #101',Qck.locale[current_language]).text());
+                }
+                if(err=="103"){ //invalid country id
+                    Qck.add_err_qtip($('.addr-country-label'),$('errors #103',Qck.locale[current_language]).text());
+                }
+                if(err=="104"){ //invalid user
+                    Qck.add_err_qtip($('#addr-button'),$('errors #104',Qck.locale[current_language]).text());
+                }
+                if(err=="105"){ //Invalid token
+                    Qck.add_err_qtip($('#addr-button'),$('errors #105',Qck.locale[current_language]).text());
+                }
+                if(err=="118"){ //Invalid full name
+                    Qck.add_err_qtip($('#addr-button'),$('errors #118',Qck.locale[current_language]).text());
+                }
+                if(err=="119"){ //Invalid address line 1
+                    Qck.add_err_qtip($('.addr-address-1-label'),$('errors #119',Qck.locale[current_language]).text());
+                }
+                if(err=="120"){ //Invalid address line 2
+                    Qck.add_err_qtip($('.addr-address-2-label'),$('errors #120',Qck.locale[current_language]).text());
+                }
+                if(err=="121"){ //Invalid state id
+                    Qck.add_err_qtip($('.addr-state-label'),$('errors #121',Qck.locale[current_language]).text());
+                }
+                if(err=="122"){ //Invalid city
+                    Qck.add_err_qtip($('.addr-city-label'),$('errors #122',Qck.locale[current_language]).text());
+                }
+                if(err=="123"){ //Invalid zip code
+                    Qck.add_err_qtip($('.addr-zip-code-label'),$('errors #123',Qck.locale[current_language]).text());
+                }
+                if(err=="124"){ //Invalid phone number
+                    Qck.add_err_qtip($('.addr-phone-label'),$('errors #124',Qck.locale[current_language]).text());
+                }
+                if(err=="202"){ //address already exists
+                    Qck.add_err_qtip($('#addr-button'),$('errors #202',Qck.locale[current_language]).text());
+                }
+                if(err=="999"){ //Unknown
+                    Qck.add_err_qtip($('#addr-button'),$('errors #999',Qck.locale[current_language]).text());
+                }
+            });
+        };
         var params = {
             address :{
                 full_name:      $('#reg-full_name').val(),
@@ -457,7 +521,7 @@ $.Controller("UserController", {
             Address.createAddress(params, function(response) {
                 alert(response);
                 window.history.go(-1);
-            });
+            },errors);
         } else {
             params.address.address_id = $(el).data('edit');
             Address.updateAddress(params, function(response) {
