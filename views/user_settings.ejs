@@ -3,73 +3,78 @@
 
     <div class="settings-content">
         <div class="bordered content">
-            <h3>Address' List</h3>
+            <h3><%= $('user_panel_label address_list',Qck.locale[current_language]).text() %></h3>
             <ul class="address-list list">
                 <li>
-                    <a href="#users/create_address" class='create-address-link'>Create Address</a>
+                    <a href="#users/create_address" class='create-address-link'><%= $('user_panel_label create_address',Qck.locale[current_language]).text() %></a>
                 </li>
             </ul>
         </div>
         <div class="bordered content">
-            <h3>Order List</h3>
+            <h3><%= $('user_panel_label order_list',Qck.locale[current_language]).text() %></h3>
             <ul class="order-list list">
                 <li>
-                    <a href="#" class='create-order-link'>Create New Order</a>
+                    <a href="#" class='create-order-link'><%= $('user_panel_label create_order',Qck.locale[current_language]).text() %></a>
                 </li>
             </ul>
         </div>
         <div class="bordered content">
-            <h3>Site theme</h3>
+            <h3><%= $('user_panel_label site_theme',Qck.locale[current_language]).text() %></h3>
             <ul class="color-list list">
-                <li class="color-blue">Blue</li>
-                <li class="color-red">Red</li>
-                <li class="color-green">Green</li>
+                <li class="color-blue"><%= $('user_panel_label blue',Qck.locale[current_language]).text() %></li>
+                <li class="color-red"><%= $('user_panel_label red',Qck.locale[current_language]).text() %></li>
+                <li class="color-green"><%= $('user_panel_label green',Qck.locale[current_language]).text() %></li>
             </ul>
         </div>
 
         <div class="bordered content">
-            <h3>Password Change</h3>
+            <h3><%= $('user_panel_label change_password',Qck.locale[current_language]).text() %></h3>
 
             <form action="/" method="post">
                 <div class="form_item">
-                    <span class="label panel-old-password-label">Old Password:</span>
+                    <span class="label panel-old-password-label"><%= $('user_panel_label old_password_label',Qck.locale[current_language]).text() %></span>
                     <input type="password" id="panel-password" name="password" class="input"/>
                 </div>
                 <div class="form_item">
-                    <span class="label panel-new-password-label">New Password:</span>
+                    <span class="label panel-new-password-label"><%= $('user_panel_label new_password_label',Qck.locale[current_language]).text() %></span>
                     <input type="password" id="panel-password2" name="password" class="input"/>
                 </div>
                 <div class="form_item">
-                    <input type="button" value="Change Password" class="change-pass-button form_button"/>
+                    <input type="button" value="<%= $('user_panel_label change_password_button',Qck.locale[current_language]).text() %>" class="change-pass-button form_button"/>
                 </div>
             </form>
         </div>
 
         <div class="bordered content">
 
-            <h3 id="update-user-information"><%= $('header register',Qck.locale[current_language])).text()%></h3>
+            <h3 id="update-user-information"><%= $('header register',Qck.locale[current_language]).text() %></h3>
 
             <form action="/" method="post">
                 <div class="form_item">
-                    <span class="label panel-new-name-label">Name:</span>
-                    <input type="text" id="panel-new-name" value="<%= this.name%>" name="new-name" class="input"/>
+                    <span class="label panel-new-name-label"><%= $('user_panel_label name_label',Qck.locale[current_language]).text() %></span>
+                    <input type="text" id="panel-new-name" value="<%= Qck.current_user.name %>" name="new-name"
+                           class="input"/>
                 </div>
                 <div class="form_item">
-                    <span class="label panel-new-email-label">Email:</span>
-                    <input type="text" id="panel-new-email" value="<%= this.email%>" name="new-email" class="input"/>
+                    <span class="label panel-new-email-label"><%= $('user_panel_label email_label',Qck.locale[current_language]).text() %></span>
+                    <input type="text" id="panel-new-email" value="<%= Qck.current_user.email %>" name="new-email"
+                           class="input"/>
                 </div>
                 <div class="form_item">
-                <span class="label update-birth-date-label">Birth date:</span>
-                <select id="day_drop_down">
-                </select>
-                <select id="month_drop_down">
-                </select>
-                <select id="year_drop_down">
-            </select>
+                    <span class="label update-birth-date-label"><%= $('user_panel_label birth_date_label',Qck.locale[current_language]).text() %></span>
+                    <select id="day_drop_down">
+                    </select>
+                    <select id="month_drop_down">
+                    </select>
+                    <select id="year_drop_down">
+                    </select>
+                </div>
+            </form>
         </div>
         <div class="form_item">
+            <form action="/" method="post">
                 <div class="form_item">
-                    <input type="button" value="Submit Changes" class="update-user-button form_button"/>
+                    <input type="button" value="<%= $('user_panel_label submit_user_info_button',Qck.locale[current_language]).text() %>" class="update-user-button form_button"/>
                 </div>
             </form>
           </div>
