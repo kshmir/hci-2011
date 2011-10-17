@@ -1,7 +1,7 @@
 <div id='languages'></div>
                     <div class="content">
-                        <a href="#" id='sign_in'><%= $('topbar sign_in',this).text() %></a> <span id="or"><%= $('topbar or',this).text() %></span>
+                        <a href="#" id='sign_in'><%= $('topbar sign_in',Qck.locale[current_language]).text() %></a> <span id="or"><%= $('topbar or',Qck.locale[current_language]).text() %></span>
                         <a href="#users/sign_up">
-                        <span id='sign_up'><%= $('topbar sign_up',this).text() %></span></a> |
+                        <span id='sign_up'><%= $('topbar sign_up',Qck.locale[current_language]).text() %></span></a> |
                     </div>
                     <div class='clear'></div>

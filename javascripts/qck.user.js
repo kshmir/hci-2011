@@ -24,7 +24,7 @@ $.Controller("UserController", {
     "history.users.sign_up subscribe" : function(called, data) {
         $('#main-content').fadeOut("slow", function() {
             $('#main-content')
-                    .html($.View("views/register.ejs",Qck.locale[current_language]))
+                    .html($.View("views/register.ejs",{}))
                     .fadeIn("slow",Qck.app_controller.load_birth_date_drop_down);
         });
         Qck.bread_controller.loadHashes([
@@ -189,7 +189,9 @@ $.Controller("UserController", {
 
     "#sign_in click": function(called, data) {
         var self = this;
-        $("#sign_in").removeData('qtip')
+
+        try {
+        $("#sign_in")
                 .qtip({
                           content: {
                               text: $.View("views/login.ejs",Qck.locale[current_language]),
@@ -220,6 +222,10 @@ $.Controller("UserController", {
                               classes: 'ui-tooltip-shadow ui-tooltip-' + 'dark'
                           }
                       });
+        }
+        catch (e) {
+            console.log(e);
+        }
         return false;
     },
 
@@ -228,7 +234,7 @@ $.Controller("UserController", {
             Qck.current_user.signOut(function() {
                 $('.topbar').fadeOut("slow", function() {
                     $('.topbar')
-                            .html($.View("views/sign_in.ejs",Qck.locale[current_language]))
+                            .html($.View("views/sign_in.ejs",{}))
                             .fadeIn("slow",function(){
                             Qck.app_controller.set_language(current_language);
                         });
