@@ -92,7 +92,7 @@ $.Controller("ApplicationController", {
         var oldlang = current_language;
 
         current_language = $('#l_languages').val();
-        $.jStorage.set('current_language',current_language);
+        $.jStorage.set('current_language', current_language);
         this.load_language(oldlang != current_language);
     },
     set_language: function(language) {
@@ -111,115 +111,120 @@ $.Controller("ApplicationController", {
 
         } else {
             $('#languages').html($.View("views/languages.ejs", languages));
-
         }
-
-
     },
     load_language: function(nocache) {
-        var change_labels=function(data) {
-                //TOPBAR
-                $('#sign_in').text($('topbar sign_in', data).text());
-                $('#sign_up').text($('topbar sign_up', data).text());
-                $('#or').text($('topbar or', data).text());
-                if (Qck.current_user) {
-                $('#welcome').text($('topbar welcome', data).text()+' '+Qck.current_user.name);
-                    }
-                $('#user_panel').text($('topbar user_panel', data).text());
-                $('#sign_out').text($('topbar sign_out', data).text());
-                //GUIDE
-                $('#quick_search').val($('guide search_box', data).text());
 
-                //REGISTER
-                $('.register-username-title').text($('header register',data).text());
-                $('.label.register-username-label').text($('reg_labels username',data).text());
-                $('.label.register-name-label').text($('reg_labels name',data).text());
-                $('.label.register-password-label').text($('reg_labels password',data).text());
-                $('.label.register-password2-label').text($('reg_labels re_password',data).text());
-                $('.label.register-email-label').text($('reg_labels email',data).text());
-                $('.label.register-birth-date-label').text($('reg_labels birth_date',data).text());
-                $('.form_button.register-button-label').val($('reg_labels reg_button',data).text());
+        var change_labels = function(data) {
+            //TOPBAR
+            $('#sign_in').text($('topbar sign_in', data).text());
+            $('#sign_up').text($('topbar sign_up', data).text());
+            $('#or').text($('topbar or', data).text());
+            if (Qck.current_user) {
+                $('#welcome').text($('topbar welcome', data).text() + ' ' + Qck.current_user.name);
+            }
+            $('#user_panel').text($('topbar user_panel', data).text());
+            $('#sign_out').text($('topbar sign_out', data).text());
+            //GUIDE
+            $('#quick_search').val($('guide search_box', data).text());
 
-                //BIRTH DATE
-                Qck.app_controller.load_birth_date_drop_down();
-
-                //USERPANEL
-                $('.label.panel-new-name-label').text($('header register',data).text());
-                $('.label.panel-new-email-label').text($('reg_labels username',data).text());
-                $('.label.update-birth-date-label').text($('reg_labels name',data).text());
-                $('.update-user-information').text($('reg_labels password',data).text());
-                $('.label.register-password2-label').text($('reg_labels re_password',data).text());
-                $('.label.register-email-label').text($('reg_labels email',data).text());
-                $('.label.register-birth-date-label').text($('reg_labels birth_date',data).text());                  $('.form_button.register-button-label').val($('reg_labels reg_button',data).text());
+            //REGISTER
+            $('.register-username-title').text($('header register', data).text());
+            $('.label.register-username-label').text($('reg_labels username', data).text());
+            $('.label.register-name-label').text($('reg_labels name', data).text());
+            $('.label.register-password-label').text($('reg_labels password', data).text());
+            $('.label.register-password2-label').text($('reg_labels re_password', data).text());
+            $('.label.register-email-label').text($('reg_labels email', data).text());
+            $('.label.register-birth-date-label').text($('reg_labels birth_date', data).text());
+            $('.form_button.register-button-label').val($('reg_labels reg_button', data).text());
 
 
+            //BIRTH DATE
+            Qck.app_controller.load_birth_date_drop_down();
 
-                if(window.location.toString().match(/sign_up/)){
-                    $('.label.register-password-label').qtip('hide');
-                    $('.label.register-username-label').qtip('hide');
-                    $('.label.register-email-label').qtip('hide');
-                    $('.label.register-name-label').qtip('hide');
-                    $('.label.register-birth-date-label').qtip('hide');
-                    $('input.register-button-label.form_button').qtip('hide');
-                }
-
-                $('#categories').text($('sidebar categories', data).text());
-                $('#filter').text($('header filter', data).text());
-                $('#name_asc_label span').text($('header ascending', data).text());
-                $('#name_desc_label span').text($('header descending', data).text());
-                $('#check_my_cart').text($('cart check_cart', data).text());
-                $('#clear_my_cart').text($('cart clear_cart', data).text());
-                $("#filter_name_label span").text($('header name', data).text());
-                $("#filter_rank_label span").text($('header rank', data).text());
-                $("#filter_price_label span").text($('header price', data).text());
-                $('.product_item .price_label, .product_show .price_label').text($('product_label price', data).text());
-                $('.product_item .sales_rank_label, .product_show .sales_rank_label').text($('product_label rank', data).text());
-                $('.product_item .addcart, .product_show .addcart').text($('product_label add_to_cart', data).text());
-
-                $('.product_show .authors-label').text($('product_info authors',data).text());
-                $('.product_show .publisher-label').text($('product_info publisher',data).text());
-                $('.product_show .published_date-label').text($('product_info published_date',data).text());
-                $('.product_show .isbn10-label').text($('product_info isbn_10',data).text());
-                $('.product_show .isbn13-label').text($('product_info isbn_13',data).text());
-                $('.product_show .language-label').text($('product_info language',data).text());
-
-                $('.product_show .actors-label').text($('product_info actors',data).text());
-                $('.product_show .format-label').text($('product_info format',data).text());
-                $('.product_show .region-label').text($('product_info region',data).text());
-                $('.product_show .aspect_ratio-label').text($('product_info aspect_ratio',data).text());
-                $('.product_show .number_discs-label').text($('product_info number_of_discs',data).text());
-                $('.product_show .release_date-label').text($('product_info release_date',data).text());
-                $('.product_show .run_time-label').text($('product_info run_time',data).text());
-                $('.product_show .ASIN-label').text($('product_info ASIN',data).text());
-
-                $('.product_show .addcart').text($('product_label add_to_cart',data).text());
+            //USERPANEL
+            $('.label.panel-new-name-label').text($('header register', data).text());
+            $('.label.panel-new-email-label').text($('reg_labels username', data).text());
+            $('.label.update-birth-date-label').text($('reg_labels name', data).text());
+            $('.update-user-information').text($('reg_labels password', data).text());
+            $('.label.register-password2-label').text($('reg_labels re_password', data).text());
+            $('.label.register-email-label').text($('reg_labels email', data).text());
+            $('.label.register-birth-date-label').text($('reg_labels birth_date', data).text());
+            $('.form_button.register-button-label').val($('reg_labels reg_button', data).text());
 
 
-                if (Qck.cats_controller) {
-                    Qck.cats_controller.load(nocache);
-                }
-              /*
-            <guide>
-              <search_box>Quick search</search_box>
-              <search_advice>Press enter for a complete search</search_advice>
-            </guide>
-                */
-                Qck.locale[current_language] = data;
-            };
+            if (window.location.toString().match(/sign_up/)) {
+                $('.label.register-password-label').qtip('hide');
+                $('.label.register-username-label').qtip('hide');
+                $('.label.register-email-label').qtip('hide');
+                $('.label.register-name-label').qtip('hide');
+                $('.label.register-birth-date-label').qtip('hide');
+                $('input.register-button-label.form_button').qtip('hide');
+            }
+
+
+            $('#categories').text($('sidebar categories', data).text());
+            $('#filter').text($('header filter', data).text());
+            $('#name_asc_label span').text($('header ascending', data).text());
+            $('#name_desc_label span').text($('header descending', data).text());
+            $('#check_my_cart').text($('cart check_cart', data).text());
+            $('#clear_my_cart').text($('cart clear_cart', data).text());
+            $("#filter_name_label span").text($('header name', data).text());
+            $("#filter_rank_label span").text($('header rank', data).text());
+            $("#filter_price_label span").text($('header price', data).text());
+            $('.product_item .price_label, .product_show .price_label').text($('product_label price', data).text());
+            $('.product_item .sales_rank_label, .product_show .sales_rank_label').text($('product_label rank', data).text());
+            $('.product_item .addcart, .product_show .addcart').text($('product_label add_to_cart', data).text());
+
+            $('.product_show .authors-label').text($('product_info authors', data).text());
+            $('.product_show .publisher-label').text($('product_info publisher', data).text());
+            $('.product_show .published_date-label').text($('product_info published_date', data).text());
+            $('.product_show .isbn10-label').text($('product_info isbn_10', data).text());
+            $('.product_show .isbn13-label').text($('product_info isbn_13', data).text());
+            $('.product_show .language-label').text($('product_info language', data).text());
+
+            $('.product_show .actors-label').text($('product_info actors', data).text());
+            $('.product_show .format-label').text($('product_info format', data).text());
+            $('.product_show .region-label').text($('product_info region', data).text());
+            $('.product_show .aspect_ratio-label').text($('product_info aspect_ratio', data).text());
+            $('.product_show .number_discs-label').text($('product_info number_of_discs', data).text());
+            $('.product_show .release_date-label').text($('product_info release_date', data).text());
+            $('.product_show .run_time-label').text($('product_info run_time', data).text());
+            $('.product_show .ASIN-label').text($('product_info ASIN', data).text());
+
+            if (window.location.hash.match(/cart/)) {
+                window.location.hash += "&reload"
+            }
+
+            if (window.location.hash.match(/create_address/)) {
+                window.location.hash += "&reload"
+            }
+
+
+            if (Qck.cats_controller) {
+                Qck.cats_controller.load(nocache);
+            }
+            /*
+             <guide>
+             <search_box>Quick search</search_box>
+             <search_advice>Press enter for a complete search</search_advice>
+             </guide>
+             */
+            Qck.locale[current_language] = data;
+        };
         var params;
-     //   if(!$.jStorage.get('current_language_data_' + current_language)){
-            $.ajax({
-                url: 'languages/lang-' + current_language + '.xml',
-                data: params,
-                success: function(data){
-                    $.jStorage.set('current_language_data_' + current_language, data);
-                    change_labels($.jStorage.get('current_language_data_' + current_language));
-                }
-            });
+        //   if(!$.jStorage.get('current_language_data_' + current_language)){
+        $.ajax({
+            url: 'languages/lang-' + current_language + '.xml',
+            data: params,
+            success: function(data) {
+                $.jStorage.set('current_language_data_' + current_language, data);
+                change_labels($.jStorage.get('current_language_data_' + current_language));
+            }
+        });
 //        }else{
 //            change_labels($.jStorage.get('current_language_data_' + current_language));
 //        }
-
 
 
     },
@@ -295,43 +300,43 @@ $.Controller("ApplicationController", {
                     && (elemBottom <= docViewBottom) && (elemTop >= docViewTop) );
         }
     },
-    add_err_qtip: function(el,msg){
-            el.qtip('hide').removeData('qtip')
-                    .qtip({
-                              content: {
-                                  text: msg,
-                                  title: {
-                                      text: '',
-                                      button: true
-                                  }
-                              },
-                              position: {
-                                  my: 'center right', // Use the corner...
-                                  at: 'center left' // ...and opposite corner
-                              },
-                              show: {
-                                  event: false, // Don't specify a show event...
-                                  effect: function(offset) {
-                                      $(this).slideDown(200); // "this" refers to the tooltip
-                                      $('#username').click();
-                                  }
-                              },
-                              hide: function(event, api) {
-                                  self.sign_in_unique = true;
-                              }, // Don't specify a hide event either!
-                              style: {
-                                  classes: 'ui-tooltip-shadow ui-tooltip-' + 'red'
+    add_err_qtip: function(el, msg) {
+        el.qtip('hide').removeData('qtip')
+                .qtip({
+                          content: {
+                              text: msg,
+                              title: {
+                                  text: '',
+                                  button: true
                               }
-                          }).qtip('show');
+                          },
+                          position: {
+                              my: 'center right', // Use the corner...
+                              at: 'center left' // ...and opposite corner
+                          },
+                          show: {
+                              event: false, // Don't specify a show event...
+                              effect: function(offset) {
+                                  $(this).slideDown(200); // "this" refers to the tooltip
+                                  $('#username').click();
+                              }
+                          },
+                          hide: function(event, api) {
+                              self.sign_in_unique = true;
+                          }, // Don't specify a hide event either!
+                          style: {
+                              classes: 'ui-tooltip-shadow ui-tooltip-' + 'red'
+                          }
+                      }).qtip('show');
 
     },
     load_birth_date_drop_down :function() {
-        var months = $('months',Qck.locale[current_language]);
-        var monthtext = [$('jan',months).text(),$('feb',months).text(),$('mar',months).text(),$('apr',months).text(),$('may',months).text(),$('jun',months).text(),$('jul',months).text(),$('aug',months).text(),$('sept',months).text(),$('oct',months).text(),$('nov',months).text(),$('dec',months).text()];
+        var months = $('months', Qck.locale[current_language]);
+        var monthtext = [$('jan', months).text(),$('feb', months).text(),$('mar', months).text(),$('apr', months).text(),$('may', months).text(),$('jun', months).text(),$('jul', months).text(),$('aug', months).text(),$('sept', months).text(),$('oct', months).text(),$('nov', months).text(),$('dec', months).text()];
         var today = new Date();
 
         var dayfield = document.getElementById('day_drop_down');
-        if (!dayfield){
+        if (!dayfield) {
             return;
         }
         var monthfield = document.getElementById('month_drop_down');

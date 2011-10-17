@@ -1,7 +1,7 @@
 <div class="form box cart-container">
     <h3 class="cart-container-title"><%= $('header my_cart',this.lang).text() %></h3>
 
-    <div class="settings-content bordered settings-content-form">
+    <div class="settings-content bordered settings-content-form cart-items">
         <h3><%= this.items.length>1?$('my_cart_labels header_items',this.lang).text():$('my_cart_labels header_item',this.lang).text() %></h3>
         <ul class="cart-container-list list">
             <% for(var i = 0; i < this.items.length; i++) { %>
@@ -15,17 +15,19 @@
             <h4><%= $('my_cart_labels purchase',this.lang).text() %></h4>
 
             <p class="resume">
-                <span class="cart-container-n-items">0</span> <%= this.items.length>1?$('my_cart_labels lower_case_items',this.lang).text():$('my_cart_labels lower_case_item',this.lang).text() %> - <span class="cart-container-total-price">0</span>$
+                <span class="cart-container-n-items">0</span>
+                <span class="cart-container-n-items-label"><%= this.items.length>1?$('my_cart_labels lower_case_items',this.lang).text():$('my_cart_labels lower_case_item',this.lang).text() %></span>
+                 - <span class="cart-container-total-price">0</span>$
             </p>
         </div>
     </div>
-    <div class="settings-content bordered settings-content-form">
+    <div class="settings-content bordered settings-content-form .shipping">
         <h3><%= $('my_cart_labels shipping_address header',this.lang).text() %></h3>
 
         <div class="container">
             <% if (this.addresses.length) { %>
             <form action="">
-                <label for="cart-addresses">My address:</label>
+                <label for="cart-addresses" class='my-address'>My address:</label>
                 <select name="cart-addresses" id="cart-addresses">
                     <% for(var i = 0; i < this.addresses.length; i++) { %>
                         <option value="<%=this.addresses[i].address_id%>"><%= this.addresses[i].full_name %></option>
@@ -33,9 +35,9 @@
                 </select>
             </form>
             <% } else if (Qck.current_user) { %>
-            <span><%= $('my_cart_labels shipping_address error_part1',this.lang).text() %> <a href="#users/create_address"><%= $('my_cart_labels shipping_address error_click_here',this.lang).text() %></a> <%= $('my_cart_labels shipping_address error_part2',this.lang).text() %></span>
+            <span class="address-signin"><%= $('my_cart_labels shipping_address error_part1',this.lang).text() %> <a href="#users/create_address"><%= $('my_cart_labels shipping_address error_click_here',this.lang).text() %></a> <%= $('my_cart_labels shipping_address error_part2',this.lang).text() %></span>
             <% } else { %>
-            <span>You don' have any address registered, sign in to register one.</span>
+            <span class="address-nonreg">You don' have any address registered, sign in to register one.</span>
             <% } %>
         </div>
     </div>

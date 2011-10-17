@@ -134,17 +134,17 @@ $.Controller("UserController", {
             }).qtip('show');
         };
 
-        var validate_date = function(dd,mm,yy){
-            var day = new Array(31,28,31,30,31,30,31,31,30,31,30,31);
+        var validate_date = function(dd, mm, yy) {
+            var day = new Array(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31);
 
             dd = parseFloat(dd);
             mm = parseFloat(mm);
             yy = parseFloat(yy);
             if (yy < 100) yy += 2000;
             if (yy < 1582 || yy > 4881) return false;
-            if (mm == 2 && (yy%400 == 0 || (yy%4 == 0 && yy%100 != 0))) day[1]=29;else day[1]=28;
+            if (mm == 2 && (yy % 400 == 0 || (yy % 4 == 0 && yy % 100 != 0))) day[1] = 29; else day[1] = 28;
             if (mm < 1 || mm > 12) return false;
-            if (dd < 1 || dd > day[mm-1]) return false;
+            if (dd < 1 || dd > day[mm - 1]) return false;
             return true;
 
         };
@@ -165,7 +165,7 @@ $.Controller("UserController", {
                 Qck.app_controller.add_err_qtip($('.label.register-password-label'), $('errors #108', Qck.locale[current_language]).text());
             }
         }
-        if (!validate_date($('#day_drop_down').val(),$('#month_drop_down').val(),$('#year_drop_down').val())) {
+        if (!validate_date($('#day_drop_down').val(), $('#month_drop_down').val(), $('#year_drop_down').val())) {
             no_error = false;
             Qck.app_controller.add_err_qtip($('.label.register-birth-date-label'),$('errors #111',Qck.locale[current_language]).text());
         }
@@ -176,33 +176,33 @@ $.Controller("UserController", {
             $('#reg-password2').val("");
         }
 
-            User.createAccount({
-                username: $('#reg-username').val(),
-                name:$('#reg-name').val(),
-                password:$('#reg-password').val(),
-                email:$('#reg-email').val(),
-                birth_date: $('#year_drop_down').val() + '-' + $('#month_drop_down').val() + '-' + $('#day_drop_down').val()
-            }
-
-                    , function() {
-                        window.location.hash = "#users/sign_in"
-                    }, function(error) {
-                        $.each(error,function(index,item){
-                            if(item=="4"){
-                                Qck.app_controller.add_err_qtip($('.label.register-username-label'),$('errors #4',Qck.locale[current_language]).text());
-                            }
-                            if(item=="201"){
-                                Qck.app_controller.add_err_qtip($('.label.register-username-label'),$('errors #201',Qck.locale[current_language]).text());
-                            }
-                            if(item=="109"){
-                                Qck.app_controller.add_err_qtip($('.label.register-name-label'),$('errors #109',Qck.locale[current_language]).text());
-                            }
-                            if(item=="110"){
-                                Qck.app_controller.add_err_qtip($('.label.register-email-label'),$('errors #110',Qck.locale[current_language]).text());
-                            }
-                        });
-                        Qck.app_controller.add_err_qtip($('input.register-button-label.form_button'),$('errors user_not_created',Qck.locale[current_language]).text());
+        User.createAccount({
+            username: $('#reg-username').val(),
+            name:$('#reg-name').val(),
+            password:$('#reg-password').val(),
+            email:$('#reg-email').val(),
+            birth_date: $('#year_drop_down').val() + '-' + $('#month_drop_down').val() + '-' + $('#day_drop_down').val()
+        } , function() {
+                    window.location.hash = "#users/sign_in"
+                }, function(error) {
+                    $.each(error, function(index, item) {
+                        if (item == "4") {
+                            Qck.app_controller.add_err_qtip($('.label.register-username-label'), $('errors #4', Qck.locale[current_language]).text());
+                        }
+                        if (item == "201") {
+                            Qck.app_controller.add_err_qtip($('.label.register-username-label'), $('errors #201', Qck.locale[current_language]).text());
+                        }
+                        if (item == "109") {
+                            Qck.app_controller.add_err_qtip($('.label.register-name-label'), $('errors #109', Qck.locale[current_language]).text());
+                        }
+                        if (item == "110") {
+                            Qck.app_controller.add_err_qtip($('.label.register-email-label'), $('errors #110', Qck.locale[current_language]).text());
+                        }
                     });
+                    Qck.app_controller.add_err_qtip($('input.register-button-label.form_button'), $('errors user_not_created', Qck.locale[current_language]).text());
+
+
+                });
 
         return false;
     },
@@ -357,7 +357,7 @@ $.Controller("UserController", {
                 $(data).each(function(index, el) {
                     $("ul.address-list").prepend(
                             $.View('views/address_item.ejs', el)
-                            );
+                    );
                 });
 
             });
@@ -371,7 +371,7 @@ $.Controller("UserController", {
         Qck.app_controller.show_loader();
         $('#main-content').fadeOut("slow", function() {
             $('#main-content')
-                    .html($.View("views/address_register.ejs", {} ));
+                    .html($.View("views/address_register.ejs", {}));
             Country.getCountryList({language_id:Qck.current_language}, function(data) {
                 $(data).each(function(index, e) {
                     $("#reg-country-select").append("<option value=\"" + e.country_id + "\">" + e.name + "</option>");
@@ -756,45 +756,40 @@ $.Model("User", {
     //this method receives an account and creates an User
     createAccount : function(params, success, error) {
         var errors = [];
-        var bool = false;
         if (params.username == "") {
             errors.push("4");
-            bool = true;
-
         }
         //validates de amount of characters in the field name
-        if ($.Model.validateLengthOf(params.name, 1, 80) === undefined) {
+        if (!(params.name && params.name.length > 0 && params.name.length <= 80)) {
             errors.push("109");
-            bool = true;
         }
         //validates de amount of characters in the field email
-        if ($.Model.validateLengthOf(params.email, 1, 128) === undefined) {
+        if (!(params.email && params.email.length > 0 && params.email.length <= 80)) {
             errors.push("110");
-            bool = true;
         }
 
-        if (bool){
+        if (errors.length) {
             error(errors);
-        }else{
-        params.method = "CreateAccount";
-        params.account = $.View("xml_renders/user.ejs", params);
+        } else {
+            params.method = "CreateAccount";
+            params.account = $.View("xml_renders/user.ejs", params);
 
-        $.ajax({
-            url: Qck.services.security,
-            data: params,
-            type : "POST",
-            success: function(data) {
+            $.ajax({
+                url: Qck.services.security,
+                data: params,
+                type : "POST",
+                success: function(data) {
 
-                if ($("response", data).attr("status") == "ok") {
-                    success("OK"); // en caso de crear correctamente el usuario devuelve el string OK
-                }
-                else {
-                    error($("error", data).attr("code"));
-                }
-            },
-            error: error
+                    if ($("response", data).attr("status") == "ok") {
+                        success("OK"); // en caso de crear correctamente el usuario devuelve el string OK
+                    }
+                    else {
+                        error($("error", data).attr("code"));
+                    }
+                },
+                error: error
 
-        });
+            });
         }
 
     },
@@ -871,51 +866,43 @@ $.Model("User", {
         //validates token field is not empty
         if (params.token == "") {
             errors.push("6");
-            bool = true;
         }
         //validates account field is not empty
-        if (params === undefined || params == null) {
+        if (!params) {
             errors.push("7");
-            bool = true;
         }
+
         //validates de amount of characters in the field name
-        if ($.Model.validateLengthOf(params.name, 1, 80) === undefined) {
+        if (!(params.name && params.name.length > 0 && params.name.length <= 80)) {
             errors.push("109");
-            bool = true;
         }
         //validates de amount of characters in the field email
-        if ($.Model.validateLengthOf(params.email, 1, 128) === undefined) {
+        if (!(params.email && params.email.length > 0 && params.email.length <= 128)) {
             errors.push("110");
-            bool = true;
         }
-        //validates de Date format
-       /*if ($.Model.validateFormatOf(param.date, "^(19|20)[0-9][0-9]([-])(0[1-9]|1[012])\2(0[1-9]|[12][0-9]|3[01])$") === undefined) {
-            errors.push("111");
-            bool = true;
-        } */
-        if (bool){
+        if (errors.length) {
             error(errors);
-        }else{
-		params.account = $.View("xml_renders/user.ejs", params);
+        } else {
+            params.account = $.View("xml_renders/user.ejs", params);
 
-        params.method = "UpdateAccount";
+            params.method = "UpdateAccount";
 
-        $.ajax({
-            url: Qck.services.security,
-            data: params,
-            type : "POST",
-            success: function(data) {
+            $.ajax({
+                url: Qck.services.security,
+                data: params,
+                type : "POST",
+                success: function(data) {
 
-                if ($("response", data).attr("status") == "ok") {
-                    success("OK"); // en caso de crear correctamente el usuario devuelve el string OK
-                }
-                else {
-                    error($("error", data).attr("code"));
-                }
-            },
-            error: error
+                    if ($("response", data).attr("status") == "ok") {
+                        success("OK"); // en caso de crear correctamente el usuario devuelve el string OK
+                    }
+                    else {
+                        error($("error", data).attr("code"));
+                    }
+                },
+                error: error
 
-        });
+            });
         }
 
     }
