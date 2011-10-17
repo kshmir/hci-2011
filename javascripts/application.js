@@ -2,7 +2,8 @@ var Qck = (Qck == undefined) ? {} : Qck;
 var current_user = null;
 var sign_in_unique = false;
 var current_language=1;
-var languages =null;
+var languages = null;
+
 
 Qck.locale = {};
 $.ajax({
@@ -41,13 +42,20 @@ function jStorage_timed() {
     $.jStorage._set = $.jStorage.set;
 
     $.jStorage.set = function(key, value) {
+        try {
         $.jStorage.deleteKey(key);
         $.jStorage.deleteKey(key + '-date');
         $.jStorage._set(key, value);
         $.jStorage._set(key + '-date', new Date());
+        }   catch (e) {
+            printStackTrace();
+        }
+
+
     };
 
     $.jStorage.get = function(key) {
+
         var data = $.jStorage._get(key);
         var date = $.jStorage._get(key + '-date');
         if (!data || !date) {

@@ -1,43 +1,43 @@
 <div class="form box">
-    <h3 class="addr-address-title"><%= $('header create_address',this).text() %></h3>
+    <h3 class="addr-address-title"><%= $('header create_address',Qck.locale[current_language]).text() %></h3>
     <form action="/" method="post">
         <div class="form_item">
-            <label class="label addr-full_name-label" for="reg-full_name"><%= $('create_address_label name',this).text() %></label>
+            <label class="label addr-full_name-label" for="reg-full_name"><%= $('create_address_label name',Qck.locale[current_language]).text() %></label>
             <input type="text" id="reg-full_name" name="full_name" class="addr-full_name input"/>
         </div>
         <div class="form_item">
-            <label class="label addr-address-1-label" for="reg-address-1"><%= $('create_address_label address_line_1',this).text() %></label>
+            <label class="label addr-address-1-label" for="reg-address-1"><%= $('create_address_label address_line_1',Qck.locale[current_language]).text() %></label>
             <input type="text" id="reg-address-1" name="address-1" class="addr-address-1 input"/>
         </div>
         <div class="form_item">
-            <label class="label addr-address-2-label" for="reg-address-2"><%= $('create_address_label address_line_2',this).text() %></label>
+            <label class="label addr-address-2-label" for="reg-address-2"><%= $('create_address_label address_line_2',Qck.locale[current_language]).text() %></label>
             <input type="text" id="reg-address-2" name="address-2" class="addr-address-2 input"/>
         </div>
         <div class="form_item">
-            <label class="label addr-country-label" for="reg-country-select"><%= $('create_address_label country',this).text() %></label>
+            <label class="label addr-country-label" for="reg-country-select"><%= $('create_address_label country',Qck.locale[current_language]).text() %></label>
             <select name="country" id="reg-country-select" class="input">
             </select>
         </div>
         <div class="form_item">
-            <label class="label addr-state-label" for="reg-state-select"><%= $('create_address_label state',this).text() %></label>
+            <label class="label addr-state-label" for="reg-state-select"><%= $('create_address_label state',Qck.locale[current_language]).text() %></label>
             <select name="state" id="reg-state-select" class="input">
             </select>
         </div>
         <div class="form_item">
-            <label class="label addr-city-label" for="reg-city"><%= $('create_address_label city',this).text() %></label>
+            <label class="label addr-city-label" for="reg-city"><%= $('create_address_label city',Qck.locale[current_language]).text() %></label>
             <input type="text" id="reg-city" name="city" class="addr-city input"/>
         </div>
         <div class="form_item">
-            <label class="label addr-city-label" for="reg-zip"><%= $('create_address_label zip_code',this).text() %></label>
+            <label class="label addr-city-label" for="reg-zip"><%= $('create_address_label zip_code',Qck.locale[current_language]).text() %></label>
             <input type="text" id="reg-zip" name="city" class="addr-zip input"/>
         </div>
         <div class="form_item">
-            <label class="label addr-phone-label" for="reg-phone"><%= $('create_address_label phone_number',this).text() %></label>
+            <label class="label addr-phone-label" for="reg-phone"><%= $('create_address_label phone_number',Qck.locale[current_language]).text() %></label>
             <input type="text" id="reg-phone" name="city" class="addr-phone input"/>
         </div>
         <div class="form_item">
             <label for="addr-button"> </label>
-            <input type="button" value="<%= $('create_address_label create_address_button',this).text() %>" id='addr-button' class="addr-button-label form_button"/>
+            <input type="button" value="<%= $('create_address_label create_address_button',Qck.locale[current_language]).text() %>" id='addr-button' class="addr-button-label form_button"/>
         </div>
     </form>
 </div>

@@ -24,8 +24,8 @@ $.Controller("UserController", {
     "history.users.sign_up subscribe" : function(called, data) {
         $('#main-content').fadeOut("slow", function() {
             $('#main-content')
-                    .html($.View("views/register.ejs",{}))
-                    .fadeIn("slow",Qck.app_controller.load_birth_date_drop_down);
+                    .html($.View("views/register.ejs", {}))
+                    .fadeIn("slow", Qck.app_controller.load_birth_date_drop_down);
         });
         Qck.bread_controller.loadHashes([
             { url: "#users/sign_up", refname : "Sign Up" }
@@ -42,7 +42,9 @@ $.Controller("UserController", {
                 Qck.current_user = user;
                 $("#sign_in").qtip('hide');
                 $(el).html($.View("views/logged.ejs", {username: user.name, lang: Qck.locale[current_language]}))
-                        .fadeIn("slow",function(){Qck.app_controller.set_language(current_language);});
+                        .fadeIn("slow", function() {
+                    Qck.app_controller.set_language(current_language);
+                });
                 $(".login-form").remove();
                 Qck.cart_controller.on_login();
                 window.location.hash = "#";
@@ -103,9 +105,9 @@ $.Controller("UserController", {
     ".register-button-label.form_button click" : function () {
         var no_error = true;
         var self = this;
-        var add_err_qtip = function(el,msg){
-            el.qtip('hide').removeData('qtip')
-                    .qtip({
+        var add_err_qtip = function(el, msg) {
+
+                    el.qtip({
                               content: {
                                   text: msg,
                                   title: {
@@ -116,13 +118,8 @@ $.Controller("UserController", {
                                   my: 'center right', // Use the corner...
                                   at: 'center left' // ...and opposite corner
                               },
-                              show: {
-                                  event: false, // Don't specify a show event...
-                                  ready: true, // ... but show the tooltip when ready
-                                  effect: function(offset) {
-                                      $(this).slideDown(200); // "this" refers to the tooltip
-                                      $('#username').click();
-                                  }
+                              show: function() {
+                                  $('#username').click();
                               },
                               hide: function(event, api) {
                                   self.sign_in_unique = true;
@@ -130,17 +127,17 @@ $.Controller("UserController", {
                               style: {
                                   classes: 'ui-tooltip-shadow ui-tooltip-' + 'red'
                               }
-                          });
+                          }).qtip('show');
         };
         $('.label.register-password-label').qtip('hide');
         if ($('#reg-password').val() != $('#reg-password2').val()) {
             no_error = false;
-            add_err_qtip($('.label.register-password-label'),$('errors passwords_must_match',Qck.locale[current_language]).text());
+            add_err_qtip($('.label.register-password-label'), $('errors passwords_must_match', Qck.locale[current_language]).text());
 
         } else {
             if ($('#reg-password').val() == "") {
                 no_error = false;
-                add_err_qtip($('.label.register-password-label'),$('errors #108',Qck.locale[current_language]).text());
+                add_err_qtip($('.label.register-password-label'), $('errors #108', Qck.locale[current_language]).text());
             }
         }
 
@@ -168,37 +165,37 @@ $.Controller("UserController", {
         var self = this;
 
         try {
-        $("#sign_in")
-                .qtip({
-                          content: {
-                              text: $.View("views/login.ejs",{} ),
-                              title: {
-                                  text: $('sign_in_qtip sign_in',Qck.locale[current_language]).text(),
-                                  button: true
+            $("#sign_in")
+                    .qtip({
+                              content: {
+                                  text: $.View("views/login.ejs", {}),
+                                  title: {
+                                      text: $('sign_in_qtip sign_in', Qck.locale[current_language]).text(),
+                                      button: true
+                                  }
+                              },
+                              events: {
+                                  hide: function(event, api) {
+                                      api.destroy();
+                                  }
+                              },
+                              position: {
+                                  my: 'top right', // Use the corner...
+                                  at: 'bottom center' // ...and opposite corner
+                              },
+                              show: {
+                                  event: false, // Don't specify a show event...
+                                  ready: true, // ... but show the tooltip when ready
+                                  effect: function(offset) {
+                                      $(this).slideDown(200); // "this" refers to the tooltip
+                                      $('#username').click();
+                                  }
+                              },
+                              hide: false,
+                              style: {
+                                  classes: 'ui-tooltip-shadow ui-tooltip-' + 'dark'
                               }
-                          },
-                          events: {
-                              hide: function(event, api) {
-                                  api.destroy();
-                              }
-                          },
-                          position: {
-                              my: 'top right', // Use the corner...
-                              at: 'bottom center' // ...and opposite corner
-                          },
-                          show: {
-                              event: false, // Don't specify a show event...
-                              ready: true, // ... but show the tooltip when ready
-                              effect: function(offset) {
-                                  $(this).slideDown(200); // "this" refers to the tooltip
-                                  $('#username').click();
-                              }
-                          },
-                          hide: false,
-                          style: {
-                              classes: 'ui-tooltip-shadow ui-tooltip-' + 'dark'
-                          }
-                      });
+                          });
         }
         catch (e) {
             console.log(e);
@@ -211,10 +208,10 @@ $.Controller("UserController", {
             Qck.current_user.signOut(function() {
                 $('.topbar').fadeOut("slow", function() {
                     $('.topbar')
-                            .html($.View("views/sign_in.ejs",{}))
-                            .fadeIn("slow",function(){
-                            Qck.app_controller.set_language(current_language);
-                        });
+                            .html($.View("views/sign_in.ejs", {}))
+                            .fadeIn("slow", function() {
+                        Qck.app_controller.set_language(current_language);
+                    });
                 });
                 Qck.current_user = undefined;
 
@@ -260,13 +257,13 @@ $.Controller("UserController", {
         Qck.app_controller.show_loader();
         $('#main-content').fadeOut("slow", function() {
             $('#main-content')
-                    .html($.View("views/user_settings.ejs",usr)).fadeIn('slow',function(){
-                    Qck.app_controller.load_birth_date_drop_down();
-                    /*#TODO: completar fecha con la del usuaro.*/
-                    $('#day_drop_down').val(5);
-                    $('#month_drop_down').val(5);
-                    $('#year_drop_down').val(1990);
-                });
+                    .html($.View("views/user_settings.ejs", usr)).fadeIn('slow', function() {
+                Qck.app_controller.load_birth_date_drop_down();
+                /*#TODO: completar fecha con la del usuaro.*/
+                $('#day_drop_down').val(5);
+                $('#month_drop_down').val(5);
+                $('#year_drop_down').val(1990);
+            });
             Address.getAddressList({
                 username: Qck.current_user.username,
                 authentication_token: Qck.current_user.token
@@ -328,7 +325,7 @@ $.Controller("UserController", {
         Qck.app_controller.show_loader();
         $('#main-content').fadeOut("slow", function() {
             $('#main-content')
-                    .html($.View("views/address_register.ejs",Qck.locale[current_language]));
+                    .html($.View("views/address_register.ejs", {} ));
             Country.getCountryList({language_id:Qck.current_language}, function(data) {
                 $(data).each(function(index, e) {
                     $("#reg-country-select").append("<option value=\"" + e.country_id + "\">" + e.name + "</option>");
@@ -549,46 +546,45 @@ $.Controller("UserController", {
 
         }
     },
-     "history.users.update subscribe" : function(called, data) {
+    "history.users.update subscribe" : function(called, data) {
         $('#main-content').fadeOut("slow", function() {
             $('#main-content')
                     .html($.View("views/update_user.ejs"))
-                    .fadeIn("slow",function(){
-                        var monthtext = [$('jan',months).text(),$('feb',months).text(),$('mar',months).text(),$('apr',months).text(),$('may',months).text(),$('jun',months).text(),$('jul',months).text(),$('aug',months).text(),$('sept',months).text(),$('oct',months).text(),$('nov',months).text(),$('dec',months).text()];
-                        var today=new Date();
-                        var dayfield=document.getElementById('day_drop_down');
-                        var monthfield=document.getElementById('month_drop_down');
-                        var yearfield=document.getElementById('year_drop_down');
-                        for (var i=1; i<32; i++){
+                    .fadeIn("slow", function() {
+                var monthtext = [$('jan', months).text(),$('feb', months).text(),$('mar', months).text(),$('apr', months).text(),$('may', months).text(),$('jun', months).text(),$('jul', months).text(),$('aug', months).text(),$('sept', months).text(),$('oct', months).text(),$('nov', months).text(),$('dec', months).text()];
+                var today = new Date();
+                var dayfield = document.getElementById('day_drop_down');
+                var monthfield = document.getElementById('month_drop_down');
+                var yearfield = document.getElementById('year_drop_down');
+                for (var i = 1; i < 32; i++) {
 
-                        dayfield.options[i-1]=new Option(i, i);
-                        }
-                        //dayfield.options[today.getDate()]=new Option(today.getDate(), today.getDate(), true, true) //select today's day
-                        for (var m=0; m<12; m++){
-                        monthfield.options[m]=new Option(monthtext[m], m+1);
-                        }
-                        //monthfield.options[today.getMonth()]=new Option(monthtext[today.getMonth()], monthtext[today.getMonth()], true, true) //select today's month
-                        var thisyear=today.getFullYear()-18;
-                        for (var y=0; y<125; y++){
-                        yearfield.options[y]=new Option(thisyear, thisyear);
-                        thisyear-=1;
-                        }
-                        //yearfield.options[0]=new Option(today.getFullYear(), today.getFullYear(), true, true) //select today's year
+                    dayfield.options[i - 1] = new Option(i, i);
+                }
+                //dayfield.options[today.getDate()]=new Option(today.getDate(), today.getDate(), true, true) //select today's day
+                for (var m = 0; m < 12; m++) {
+                    monthfield.options[m] = new Option(monthtext[m], m + 1);
+                }
+                //monthfield.options[today.getMonth()]=new Option(monthtext[today.getMonth()], monthtext[today.getMonth()], true, true) //select today's month
+                var thisyear = today.getFullYear() - 18;
+                for (var y = 0; y < 125; y++) {
+                    yearfield.options[y] = new Option(thisyear, thisyear);
+                    thisyear -= 1;
+                }
+                //yearfield.options[0]=new Option(today.getFullYear(), today.getFullYear(), true, true) //select today's year
 
-                    });
+            });
         });
         Qck.bread_controller.loadHashes([
             { url: "#users/update_user", refname : "Update User" }
         ]);
     },
     ".update-user-button click" : function () {
-         User.updateAccount({
-
-                //TODO donde se guarda el token
-                authentication_token: Qck.current_user.authentication_token,
+        if (Qck.current_user) {
+            Qck.current_user.updateAccount({
+                authentication_token: Qck.current_user.token,
                 username: Qck.current_user.username,
-                name:$('#reg-name').val(),
-                email:$('#reg-email').val(),
+                name:$('#panel-new-name').val(),
+                email:$('#panel-new-email').val(),
                 birth_date: $('#year_drop_down').val() + '-' + $('#month_drop_down').val() + '-' + $('#day_drop_down').val()
             }
 
@@ -597,7 +593,8 @@ $.Controller("UserController", {
                     }, function(error) {
                         alert('usuario no actualizado: ' + error);
                     });
-               return false;
+        }
+        return false;
     }
 
 
@@ -691,7 +688,7 @@ $.Model("User", {
             errors.push("6");
             bool = true;
         }
-        if (bool){
+        if (bool) {
             error(errors);
         }
 
@@ -738,37 +735,39 @@ $.Model("User", {
 
         }
 
+        console.log(params);
+
         //validates token field is not empty
         if (params.token == "") {
             errors.push("6");
             bool = true;
         }
         //validates account field is not empty
-        if (params === undifined || params == null) {
+        if (params === undefined || params == null) {
             errors.push("7");
             bool = true;
         }
         //validates de amount of characters in the field name
-        if ($.Model.validateLengthOf(param.name, 1, 80) === undefined) {
+        if ($.Model.validateLengthOf(params.name, 1, 80) === undefined) {
             errors.push("109");
             bool = true;
         }
         //validates de amount of characters in the field email
-        if ($.Model.validateLengthOf(param.email, 1, 128) === undefined) {
+        if ($.Model.validateLengthOf(params.email, 1, 128) === undefined) {
             errors.push("110");
             bool = true;
         }
         //validates de Date format
-        if ($.Model.validateFormatOf(param.date, "^(19|20)[0-9][0-9]([-])(0[1-9]|1[012])\2(0[1-9]|[12][0-9]|3[01])$") === undefined) {
+        if ($.Model.validateFormatOf(params.date, "^(19|20)[0-9][0-9]([-])(0[1-9]|1[012])\2(0[1-9]|[12][0-9]|3[01])$") === undefined) {
             errors.push("111");
             bool = true;
         }
-        if (bool){
+        if (bool) {
             error(errors);
         }
-		params.account = $.View("xml_renders/user.ejs", params);
+        params.account = $.View("xml_renders/user.ejs", params);
         params.method = "UpdateAccount";
-        
+
         $.ajax({
             url: Qck.services.security,
             data: params,
