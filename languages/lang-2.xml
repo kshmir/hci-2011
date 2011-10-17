@@ -216,5 +216,6 @@
 		<error id='202'>La direcciÃ³n ya se encuentra en uso.</error>
 		<error id='999'>Se produjo un error inesperado procesando la solicitud.</error>
         <passwords_must_match>Las contraseñas deben ser iguales</passwords_must_match>
+        <input_error>Campos inválidos:</input_error>
   </errors>
 </locale>
