@@ -106,28 +106,32 @@ $.Controller("UserController", {
         var no_error = true;
         var self = this;
         var add_err_qtip = function(el, msg) {
-
-                    el.qtip({
-                              content: {
-                                  text: msg,
-                                  title: {
-                                      button: true
-                                  }
-                              },
-                              position: {
-                                  my: 'center right', // Use the corner...
-                                  at: 'center left' // ...and opposite corner
-                              },
-                              show: function() {
-                                  $('#username').click();
-                              },
-                              hide: function(event, api) {
-                                  self.sign_in_unique = true;
-                              }, // Don't specify a hide event either!
-                              style: {
-                                  classes: 'ui-tooltip-shadow ui-tooltip-' + 'red'
-                              }
-                          }).qtip('show');
+            el.qtip('hide').removeData('qtip').qtip({
+                content: {
+                    text: msg,
+                    title: {
+                        button: true
+                    }
+                },
+                position: {
+                    my: 'center right', // Use the corner...
+                    at: 'center left' // ...and opposite corner
+                },
+                show: {
+                    event: false, // Don't specify a show event...
+                    ready: true, // ... but show the tooltip when ready
+                    effect: function(offset) {
+                        $(this).slideDown(200); // "this" refers to the tooltip
+                        $('#username').click();
+                    }
+                },
+                hide: function(event, api) {
+                    self.sign_in_unique = true;
+                }, // Don't specify a hide event either!
+                style: {
+                    classes: 'ui-tooltip-shadow ui-tooltip-' + 'red'
+                }
+            });
         };
         $('.label.register-password-label').qtip('hide');
         if ($('#reg-password').val() != $('#reg-password2').val()) {
