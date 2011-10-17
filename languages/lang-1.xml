@@ -217,5 +217,6 @@
 		<error id='999'>An error occurs while processing your application.</error>
         <passwords_must_match>Passwords must match</passwords_must_match>
         <input_error>Input error</input_error>
+        <user_not_created>User was not created, please correct mistakes</user_not_created>
   </errors>
 </locale>

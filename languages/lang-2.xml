@@ -229,5 +229,6 @@
     <error id='999'>Se produjo un error inesperado procesando la solicitud.</error>
     <passwords_must_match>Las contraseñas deben ser iguales</passwords_must_match>
     <input_error>Campos inválidos:</input_error>
+    <user_not_created>El usuario no fue creado, por favor corrija los errores</user_not_created>
   </errors>
 </locale>
