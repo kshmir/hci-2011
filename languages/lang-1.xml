@@ -71,6 +71,7 @@
     </shipping_address>
     <login_error>Please Log in to confirm your order</login_error>
     <no_item_error>You need to add items to the cart to confirm your order</no_item_error>
+    <no_log_address_error>You don't have any address registered, sign in to register one.</no_log_address_error>
     <checkout_button>Checkout Order</checkout_button>
   </my_cart_labels>
 
@@ -89,7 +90,20 @@
    <product_label>
      <add_to_cart>Add to Cart</add_to_cart>
      <more>more</more>
+     <price>Price:</price>
+     <amount>Amount:</amount>
    </product_label>
+
+  <product_info>
+        <sales_rank>Sales Rank:</sales_rank>
+        <price>Price:</price>
+        <authors>Authors:</authors>
+        <publisher>Publisher:</publisher>
+        <published_date>Published Date:</published_date>
+        <isbn_10>ISBN10:</isbn_10>
+        <isbn_13>ISBN13:</isbn_13>
+        <language>Language:</language>
+  </product_info>
 
   <months>
     <jan>Jan</jan>
