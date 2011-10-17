@@ -216,5 +216,6 @@
 		<error id='202'>The address already exists.</error>
 		<error id='999'>An error occurs while processing your application.</error>
         <passwords_must_match>Passwords must match</passwords_must_match>
+        <input_error>Input error</input_error>
   </errors>
 </locale>
