@@ -86,14 +86,7 @@ $.Controller("ApplicationController", {
         if ($.jStorage.get('current_language')) {
             current_language = $.jStorage.get('current_language');
             $('#l_languages').val(current_language).change();
-            this.load_language();
         }
-
-
-        this.updater();
-    },
-    updater: function() {
-
     },
     "#l_languages change" : function() {
         var oldlang = current_language;
@@ -161,6 +154,23 @@ $.Controller("ApplicationController", {
                 $('.product_item .sales_rank_label, .product_show .sales_rank_label').text($('product_label rank', data).text());
                 $('.product_item .addcart, .product_show .addcart').text($('product_label add_to_cart', data).text());
 
+                $('.product_show .authors-label').text($('product_info authors',data).text());
+                $('.product_show .publisher-label').text($('product_info publisher',data).text());
+                $('.product_show .published_date-label').text($('product_info published_date',data).text());
+                $('.product_show .isbn10-label').text($('product_info isbn_10',data).text());
+                $('.product_show .isbn13-label').text($('product_info isbn_13',data).text());
+                $('.product_show .language-label').text($('product_info language',data).text());
+
+                $('.product_show .actors-label').text($('product_info actors',data).text());
+                $('.product_show .format-label').text($('product_info format',data).text());
+                $('.product_show .region-label').text($('product_info region',data).text());
+                $('.product_show .aspect_ratio-label').text($('product_info aspect_ratio',data).text());
+                $('.product_show .number_discs-label').text($('product_info number_of_discs',data).text());
+                $('.product_show .release_date-label').text($('product_info release_date',data).text());
+                $('.product_show .run_time-label').text($('product_info run_time',data).text());
+                $('.product_show .ASIN-label').text($('product_info ASIN',data).text());
+
+                $('.product_show .addcart').text($('product_label add_to_cart',data).text());
 
 
                 if (Qck.cats_controller) {

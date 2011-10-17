@@ -4,16 +4,16 @@
     </h2>
     <img src="<%=this.product.image_url%>" alt=""/>
     <p class="attribute">
-        <span class="sales-rank-label label">
-            Sales rank:
+        <span class="sales_rank_label label">
+            <%= $('product_label rank', Qck.locale[current_language]).text() %>
         </span>
         <span class="sales_rank">
             <%= this.product.sales_rank %>
         </span>
     </p>
     <p class="attribute">
-        <span class="price-label label">
-            Price:
+        <span class="price_label label">
+            <%= $('product_label price', Qck.locale[current_language]).text() %>
         </span>
         <span class="price">
             <%= this.product.price %>
@@ -21,7 +21,7 @@
     </p>
     <p class="attribute">
         <span class="authors-label label">
-            Authors:
+            <%= $('product_info authors', Qck.locale[current_language]).text() %>
         </span>
         <span class="authors">
             <%= this.product.authors %>
@@ -29,7 +29,7 @@
     </p>
     <p class="attribute">
         <span class="publisher-label label">
-            Publisher:
+            <%= $('product_info publisher', Qck.locale[current_language]).text() %>
         </span>
         <span class="publisher">
             <%= this.product.authors %>
@@ -37,7 +37,7 @@
     </p>
     <p class="attribute">
         <span class="published_date-label label">
-            Published Date:
+            <%= $('product_info published_date', Qck.locale[current_language]).text() %>
         </span>
         <span class="published_date">
             <%= this.product.published_date %>
@@ -45,7 +45,7 @@
     </p>
     <p class="attribute">
         <span class="isbn10-label label">
-            ISBN 10:
+            <%= $('product_info isbn_10', Qck.locale[current_language]).text() %>
         </span>
         <span class="isbn10">
             <%= this.product.ISBN_10 %>
@@ -53,7 +53,7 @@
     </p>
     <p class="attribute">
         <span class="isbn13-label label">
-            ISBN 13:
+            <%= $('product_info isbn_13', Qck.locale[current_language]).text() %>
         </span>
         <span class="isbn13">
             <%= this.product.ISBN_13 %>
@@ -61,7 +61,7 @@
     </p>
     <p class="attribute">
         <span class="language-label label">
-            Language:
+            <%= $('product_info language', Qck.locale[current_language]).text() %>
         </span>
         <span class="language">
             <%= this.product.language %>

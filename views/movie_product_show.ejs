@@ -4,16 +4,16 @@
     </h2>
     <img src="<%=this.product.image_url%>" alt=""/>
     <p class="attribute">
-        <span class="sales_rank-label label">
-            Sales Rank:
+        <span class="sales_rank_label label">
+            <%= $('product_label rank', Qck.locale[current_language]).text() %>
         </span>
         <span class="sales_rank">
             <%= this.product.sales_rank %>
         </span>
     </p>
     <p class="attribute">
-        <span class="price-label label">
-            Price:
+        <span class="price_label label">
+            <%= $('product_label price', Qck.locale[current_language]).text() %>
         </span>
         <span class="price">
             <%= this.product.price %>
@@ -21,7 +21,7 @@
     </p>
     <p class="attribute">
         <span class="actors-label label">
-            Actors:
+            <%= $('product_info actors', Qck.locale[current_language]).text() %>
         </span>
         <span class="actors">
             <%= this.product.actors %>
@@ -29,7 +29,7 @@
     </p>
     <p class="attribute">
         <span class="format-label label">
-            Format:
+            <%= $('product_info format', Qck.locale[current_language]).text() %>
         </span>
         <span class="format">
             <%= this.product.format %>
@@ -37,7 +37,7 @@
     </p>
     <p class="attribute">
         <span class="language-label label">
-            Language:
+            <%= $('product_info language', Qck.locale[current_language]).text() %>
         </span>
         <span class="language">
             <%= this.product.language %>
@@ -45,7 +45,7 @@
     </p>
     <p class="attribute">
         <span class="subtitles-label label">
-            Subtitles:
+            <%= $('product_info subtitles', Qck.locale[current_language]).text() %>
         </span>
         <span class="subtitles">
             <%= this.product.subtitles %>
@@ -53,7 +53,7 @@
     </p>
     <p class="attribute">
         <span class="region-label label">
-            Region:
+            <%= $('product_info region', Qck.locale[current_language]).text() %>
         </span>
         <span class="region">
             <%= this.product.region %>
@@ -61,7 +61,7 @@
     </p>
     <p class="attribute">
         <span class="aspect_ratio-label label">
-            Aspect ratio:
+            <%= $('product_info aspect_ratio', Qck.locale[current_language]).text() %>
         </span>
         <span class="aspect_ratio">
             <%= this.product.aspect_ratio %>
@@ -69,7 +69,7 @@
     </p>
     <p class="attribute">
         <span class="number_discs-label label">
-            Number of discs:
+            <%= $('product_info number_of_discs', Qck.locale[current_language]).text() %>
         </span>
         <span class="number_discs">
             <%= this.product.number_discs %>
@@ -77,7 +77,7 @@
     </p>
     <p class="attribute">
         <span class="release_date-label label date">
-            Release date:
+            <%= $('product_info release_date', Qck.locale[current_language]).text() %>
         </span>
         <span class="release_date">
             <%= this.product.release_date %>
@@ -85,7 +85,7 @@
     </p>
     <p class="attribute">
         <span class="run_time-label label date">
-            Run time:
+            <%= $('product_info run_time', Qck.locale[current_language]).text() %>
         </span>
         <span class="run_time">
             <%= this.product.run_time %>
@@ -93,14 +93,16 @@
     </p>
     <p class="attribute">
         <span class="ASIN-label label date">
-            ASIN:
+            <%= $('product_info ASIN', Qck.locale[current_language]).text() %>
         </span>
         <span class="run_time">
             <%= this.product.ASIN %>
         </span>
     </p>
     <p class="attribute">
-      <a href="#" class="addcart">Add to cart</a>
+      <a href="#" class="addcart">
+          <%= $('product_label add_to_cart', Qck.locale[current_language]).text() %>
+      </a>
     </p>
     <div class="clear"></div>
 </div>
