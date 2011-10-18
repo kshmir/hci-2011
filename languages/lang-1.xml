@@ -97,6 +97,7 @@
      <price>Price:</price>
      <amount>Amount:</amount>
      <rank>Sales Rank:</rank>
+     <go-back>Go back</go-back>
    </product_label>
 
   <product_info>
