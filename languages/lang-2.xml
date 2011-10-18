@@ -229,7 +229,10 @@
     <error id='999'>Se produjo un error inesperado procesando la solicitud.</error>
     <passwords_must_match>Las contraseñas deben ser iguales</passwords_must_match>
     <input_error>Campos inválidos:</input_error>
-    <must_be_logged>You must be logged to add an address</must_be_logged>
+    <must_be_logged>Debes estar logueado para ingresar una dirección nueva</must_be_logged>
     <user_not_created>El usuario no fue creado, por favor corrija los errores</user_not_created>
   </errors>
+  <messages>
+    <addr_created>La nueva dirección ha sido agregada</addr_created>
+  </messages>
 </locale>
