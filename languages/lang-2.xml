@@ -97,6 +97,9 @@
   <product_label>
     <add_to_cart>Agregar al carrito</add_to_cart>
     <more>mas</more>
+    <up>más</up>
+    <down>menos</down>
+    <remove>Remover</remove>
     <price>Precio:</price>
     <amount>Cantidad:</amount>
     <rank>Ranking:</rank>

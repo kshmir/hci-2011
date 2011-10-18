@@ -94,6 +94,9 @@
    <product_label>
      <add_to_cart>Add to Cart</add_to_cart>
      <more>more</more>
+     <up>más</up>
+     <down>menos</down>
+     <remove>Remove</remove>
      <price>Price:</price>
      <amount>Amount:</amount>
      <rank>Sales Rank:</rank>

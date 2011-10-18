@@ -10,22 +10,22 @@
                     <%=this.item.name%>
                 </a>
             </div>
-            <div class="cartprice">Precio:
-                <span class='cartprice-label'>Price:</span>
+            <div class="cartprice">
+                <span class='cartprice-label'><%= $('product_info price',Qck.locale[current_language]).text() %></span>
                 <span class='cartprice-value'><%=this.item.price%>$</span>
 
             </div>
             <div class="cart-n">
                 <a href="#" class="amount">
-                    <span class='cart-n-label'>Amount:</span>
+                    <span class='cart-n-label'><%= $('product_label amount',Qck.locale[current_language]).text() %></span>
                     <span class='cart-n-value'><%=this.amount%></span>
                 </a>
-                <button class='item-up-btn'>Up</button>
-                <button class='item-down-btn'>Down</button>
+                <button class='item-up-btn'><%= $('product_label up',Qck.locale[current_language]).text() %></button>
+                <button class='item-down-btn'><%= $('product_label down',Qck.locale[current_language]).text() %></button>
             </div>
         </div>
         <div class="right">
-            <button class="remove-btn">Remove</button>
+            <button class="remove-btn"><%= $('product_label down',Qck.locale[current_language]).text() %></button>
         </div>
         <div class="clear"></div>
     </div>
