@@ -218,6 +218,10 @@
 		<error id='999'>An error occurs while processing your application.</error>
         <passwords_must_match>Passwords must match</passwords_must_match>
         <input_error>Input error</input_error>
+        <must_be_logged>You must be logged to add an address</must_be_logged>
         <user_not_created>User was not created, please correct mistakes</user_not_created>
   </errors>
+  <messages>
+    <addr_created>The new address was added</addr_created>
+  </messages>
 </locale>
