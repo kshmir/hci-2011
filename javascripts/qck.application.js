@@ -167,6 +167,9 @@ $.Controller("ApplicationController", {
 
             $(".cart-item .cart-n-label").text($('product_label amount', Qck.locale[current_language]).text());
             $(".cart-item .cartprice-label").text($('product_label price', Qck.locale[current_language]).text());
+            $(".cart-item .item-up-btn .ui-button-text").text($('product_label up', Qck.locale[current_language]).text());
+            $(".cart-item .item-down-btn .ui-button-text").text($('product_label down', Qck.locale[current_language]).text());
+            $(".cart-item .remove-btn .ui-button-text").text($('product_label remove', Qck.locale[current_language]).text());
 
 
             if (window.location.toString().match(/user_panel/)) {
