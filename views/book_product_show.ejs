@@ -69,6 +69,10 @@
     </p>
     <p class="attribute">
       <a href="#" class="addcart">Add to cart</a>
+      &nbsp;-&nbsp;
+      <a href="javascript:window.history.go(-1);" class="go-back">
+          <%= $('product_label go-back', Qck.locale[current_language]).text() %>
+      </a>
     </p>
     <div class="clear"></div>
 </div>

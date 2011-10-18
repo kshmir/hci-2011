@@ -162,6 +162,13 @@ $.Controller("ApplicationController", {
                 $('input.register-button-label.form_button').qtip('hide');
             }
 
+
+            $(".go-back").text($('product_label go-back', Qck.locale[current_language]).text());
+
+            $(".cart-item .cart-n-label").text($('product_label amount', Qck.locale[current_language]).text());
+            $(".cart-item .cartprice-label").text($('product_label price', Qck.locale[current_language]).text());
+
+
             if (window.location.toString().match(/user_panel/)) {
                 window.location.hash += "&reload"
             }

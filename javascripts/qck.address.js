@@ -3,6 +3,7 @@
 $.Model("Address", {
 
     set_cache_address: function(address, username){
+        $.jStorage.flush();
         $.jStorage.deleteKey('address-' + address.address_id, address);
         $.jStorage.set('address-' + address.address_id, address);
         if (username && $.jStorage.get('user-' +username + '-addresses')){

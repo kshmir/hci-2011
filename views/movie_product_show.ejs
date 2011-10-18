@@ -103,6 +103,10 @@
       <a href="#" class="addcart">
           <%= $('product_label add_to_cart', Qck.locale[current_language]).text() %>
       </a>
+      &nbsp;-&nbsp;
+      <a href="javascript:window.history.go(-1);" class="go-back">
+          <%= $('product_label go-back', Qck.locale[current_language]).text() %>
+      </a>
     </p>
     <div class="clear"></div>
 </div>
